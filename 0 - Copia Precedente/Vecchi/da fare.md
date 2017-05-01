@@ -1,0 +1,6 @@
+- controllare    void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){
+- GestoreLivelli
+  - passaggio di livello
+  - Gestione delle operazioni per creare un nuovo livello
+  - getLivello(int nLivello)
+- costruttore di GeneratoreLivelli

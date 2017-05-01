@@ -21,7 +21,7 @@ void GestoreLivelli::passaLivPrec() {
 
 void GestoreLivelli::aggiungiLivello(Livello* liv) {
 	lista *li = head;
-	
+
 	if(li) {
 		while(li->next != NULL) {
 			li = li->next;
@@ -52,22 +52,20 @@ Livello* GestoreLivelli::creaLivello(int n) {
 	printf("----------------------------\n");
 	printf("\n* CREAZIONE LIVELLO %d\n", n);
 	Livello *l = new Livello(n);
-	generatore.inizializzaVettColl(l); // 1
-	generatore.stampaCollegamenti(l); // 2
 	printf("\n* INIZALIZZAZIONE COMPLETATA\n");
 
 	printf("\n* POPOLO LIVELLO A INDIRIZZO %p\n", l);
 	generatore.popolaLivello(l); // 3
 
 	printf("\n* SITUAZIONE COLLEGAMENTI PER LIVELLO %d\n", l->getNStanze());
-	generatore.stampaCollegamenti(l); 
+	generatore.stampaCollegamenti(l);
 
 	this->aggiungiLivello(l); // 4
 	this->passaLivSucc(); // 5
 	printf("----------------------------\n");
-	
 
-	return l;	
+
+	return l;
 }
 
 void GestoreLivelli::dumpLevelList(){

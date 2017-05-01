@@ -14,10 +14,19 @@ void Livello::setStanza(int id, Stanza* s){
 }
 
 void Livello::setCollegamento(int id, Collegamento* c){
-	vettColl[id].setId(c->getId());
-	int v[4];
-	c->getDirezioni(v);
-	vettColl[id].setDirezioni(v);
+	//vettColl[id].setId(c->getId());
+	vettColl[id]=Collegamento(id);
+	cout<<"Id: "<<vettColl[id].id<<"\n";
+	int v[4]={-1,-1,-1,-1};
+	for (int i=0;i<4;i++){
+		cout<<"Direzioni: "<<vettColl[id].direzioni[i]<<"\n";
+	}
+	//vettColl[id].setDirezioni(v);
+	int w[4];
+	vettColl[id].setNord(-1);
+	vettColl[id].setSud(-1);
+	vettColl[id].setOvest(-1);
+	vettColl[id].setEst(-1);
 }
 
 void Livello::getAdiacenze(int id, int adiacenze [4]){

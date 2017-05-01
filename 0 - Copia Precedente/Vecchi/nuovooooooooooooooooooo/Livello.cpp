@@ -32,10 +32,10 @@ int Livello::getNStanze(){
 }
 
 void Livello::setAdiacenze(int id, int a [4]) {
-	this->vettColl[id].setNord(a[0]);
-	this->vettColl[id].setSud(a[1]);
-	this->vettColl[id].setOvest(a[2]);
-	this->vettColl[id].setEst(a[3]);
+    this->vettColl[id].setNord(a[0]);
+    this->vettColl[id].setSud(a[1]);
+    this->vettColl[id].setOvest(a[2]);
+    this->vettColl[id].setEst(a[3]);
 }
 
 Stanza Livello::vaiNord(int id){
@@ -70,18 +70,18 @@ Stanza Livello::vaiEst(int id){
 
 void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){
 
-	if(direz==0){
-		this->vettColl[sPartenza].setNord(sArrivo);
-	}
-	else if(direz==1){
-		this->vettColl[sPartenza].setSud(sArrivo);
-	}
-	else if(direz==2){
-		this->vettColl[sPartenza].setOvest(sArrivo);
-	}
-	else if(direz==3){
-		this->vettColl[sPartenza].setEst(sArrivo);
-	}
+    if(direz==0){
+        this->vettColl[sPartenza].setNord(sArrivo);
+    }
+    else if(direz==1){
+        this->vettColl[sPartenza].setSud(sArrivo);
+    }
+    else if(direz==2){
+        this->vettColl[sPartenza].setOvest(sArrivo);
+    }
+    else if(direz==3){
+        this->vettColl[sPartenza].setEst(sArrivo);
+    }
 
 }
 

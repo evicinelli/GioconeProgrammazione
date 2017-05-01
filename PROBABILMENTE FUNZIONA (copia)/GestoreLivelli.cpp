@@ -43,7 +43,7 @@ void GestoreLivelli::aggiungiLivello(Livello* liv) {
 Livello* GestoreLivelli::creaLivello(int n) {
 	/*
 	Creazione di un nuovo livello:
-	1 - Inizializzazione dei collegamenti (tutti a -1)
+	0 - Inizializzazione dei collegamenti (tutti a -1) - lo fa popolaLivello()
 	2 - Costruzione di stanze e collegamenti tra le stanze
 	3 - Aggiunta alla lista dei livelli del gestore
 	4 - Si passa al livello appena creato aggiornando l'indicatore del livello in gestore
@@ -52,8 +52,8 @@ Livello* GestoreLivelli::creaLivello(int n) {
 	printf("----------------------------\n");
 	printf("\n* CREAZIONE LIVELLO %d\n", n);
 	Livello *l = new Livello(n);
-	generatore.inizializzaVettColl(l); // 1
-	generatore.stampaCollegamenti(l); // 2
+	//generatore.inizializzaVettColl(l); // 1
+	//generatore.stampaCollegamenti(l); // 2
 	printf("\n* INIZALIZZAZIONE COMPLETATA\n");
 
 	printf("\n* POPOLO LIVELLO A INDIRIZZO %p\n", l);
