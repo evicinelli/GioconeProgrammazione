@@ -21,7 +21,7 @@ void GestoreLivelli::passaLivPrec() {
 
 void GestoreLivelli::aggiungiLivello(Livello* liv) {
 	lista *li = head;
-	
+
 	if(li) {
 		while(li->next != NULL) {
 			li = li->next;
@@ -40,6 +40,15 @@ void GestoreLivelli::aggiungiLivello(Livello* liv) {
 }
 
 
+Livello* GestoreLivelli::getLevelById(int id) {
+	ptr_listaLiv out = this->head;
+	int i = 0;
+	while(i <= id && out) {
+		out = out->next;
+	}
+	return out->l;
+}
+
 Livello* GestoreLivelli::creaLivello(int n) {
 	/*
 	Creazione di un nuovo livello:
@@ -50,28 +59,33 @@ Livello* GestoreLivelli::creaLivello(int n) {
 	5 - Si ritorna il livello appena creato
 	*/
 	printf("----------------------------\n");
-	printf("\n* CREAZIONE LIVELLO %d\n", n);
+	printf("\n(*) CREAZIONE LIVELLO %d\n", n);
 	Livello *l = new Livello(n);
-	generatore.inizializzaVettColl(l); // 1
-	generatore.stampaCollegamenti(l); // 2
-	printf("\n* INIZALIZZAZIONE COMPLETATA\n");
+	printf("\n(*) INIZALIZZAZIONE COMPLETATA\n");
 
-	printf("\n* POPOLO LIVELLO A INDIRIZZO %p\n", l);
+	printf("\n(*) POPOLO LIVELLO A INDIRIZZO %p\n", l);
 	generatore.popolaLivello(l); // 3
 
-	printf("\n* SITUAZIONE COLLEGAMENTI PER LIVELLO %d\n", l->getNStanze());
-	generatore.stampaCollegamenti(l); 
+	printf("\n(*) SITUAZIONE COLLEGAMENTI PER LIVELLO %d\n", l->getNStanze());
+	generatore.stampaCollegamenti(l);
 
 	this->aggiungiLivello(l); // 4
 	this->passaLivSucc(); // 5
-	printf("----------------------------\n");
-	
+	printf("----------------------------------------\n");
 
-	return l;	
+	/**
+		GESTIONE DEI COLLEGAMENTI CON IL LIVELLO SUCCESSIVO E PRECEDENTE
+	*/
+
+	if (l->getNStanze() != 1) {
+		generatore.passaggioLivello(l, getLevelById(livCorrente--));
+	}
+
+	return l;
 }
 
 void GestoreLivelli::dumpLevelList(){
-	printf("\n\n\n * LISTA LIVELLI\n");
+	printf("\n\n\n(*) LISTA LIVELLI\n");
 	lista* list = this->head;
 	printf("%p %p\n",list, head );
 	int i = 0;
@@ -80,4 +94,9 @@ void GestoreLivelli::dumpLevelList(){
 		list = list->next;
 		++i;
 	}
+}
+
+
+int GestoreLivelli::getLevN(){
+	return this->maxLiv;
 }

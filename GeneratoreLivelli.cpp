@@ -11,7 +11,9 @@ void GeneratoreLivelli:: inizializzaVettColl(Livello* l){
 	for(i=0; i<l->getNStanze(); i++){
 		c= new Collegamento(i);
 		l->setCollegamento(i,c);
+
 	}
+
 
 }
 
@@ -19,6 +21,7 @@ void GeneratoreLivelli:: inizializzaVettColl(Livello* l){
 void GeneratoreLivelli::riempiVettStanze(Livello* l){
 	int i;
 	Stanza* s;
+	cout<<"STANZE"<<endl;
 	for(i=0; i<l->getNStanze()+2; i++){
 
 		if(i==l->getNStanze()||i==l->getNStanze()+1){
@@ -26,31 +29,92 @@ void GeneratoreLivelli::riempiVettStanze(Livello* l){
 			*/
 			s= new Stanza(-2);
 			l->setStanza(i,s);
-				//cout<< i << ":"<<(l->getStanza(i)).getS()<<endl;
+				cout<< i << ":"<<(l->getStanza(i)).getS()<<endl;
 		}
 		else{
 			s= new Stanza(i);
 			l->setStanza(i,s);
-				//cout<<i<<":"<<(l->getStanza(i)).getS()<<endl;
+				cout<<i<<":"<<(l->getStanza(i)).getS()<<endl;
 		}
+	}
+	cout<<endl;
+}
+
+void GeneratoreLivelli::controllaAvail(bool avail[4],Livello* l){
+    int a[4];
+    int neg;
+    //scorro le stanze
+    for(int i=0; i<l->getNStanze();i++){
+        neg=0;
+        l->getAdiacenze(i,a);
+        //conto quante direzioni sono occupate
+        for(int j=0;j<4;j++){
+            if(a[j]!=-1){
+                neg++;
+            }
+        }
+
+        //se le direzioni occupate sono 4 => setto a false
+        if(neg==4){
+            avail[i]=false;
+        }
+        //se le direzioni occupate sono 3 e si tratta o della prima o dell'ultima stanza => setto a false
+        else if(neg==3&&(i==0||i==l->getNStanze()-1)){
+                avail[i]=false;
+        }
+        //altrimenti setto a true;
+        else{
+                avail[i]=true;
+        }
+	}
+}
+
+void GeneratoreLivelli::controllaAvail2(bool avail[4],Livello* l){
+    int a[4];
+    int neg;
+
+    //scorro le stanze
+    for(int i=0; i<l->getNStanze();i++){
+        //se la stanza non è già settata a false faccio il controllo
+         if(avail[i]!=false){
+            neg=0;
+            l->getAdiacenze(i,a);
+
+            //conto quante direzioni sono occupate
+            for(int j=0;j<4;j++){
+                if(a[j]!=-1){
+                    neg++;
+                }
+            }
+
+            //se le direzioni occupate sono 4 => setto a false
+            if(neg==4){
+                avail[i]=false;
+            }
+            //se le direzioni occupate sono 3 e si tratta o della prima o dell'ultima stanza => setto a false
+            else if(neg==3&&(i==0||i==l->getNStanze()-1)){
+                avail[i]=false;
+            }
+        }
 	}
 }
 
 void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){
 
-	srand(time(NULL));
 	int p = 0;
 	int a = 0;
 	int stanze = l->getNStanze();
 	bool avail[stanze];
 
-	// Preparo vettore delle disponibilit
+	/**PRIMA PARTE*/
+	// Preparo vettore delle disponibilità
 	for (int i = 0; i < stanze; ++i){ avail[i] = true; }
 		avail[p] = false;
 
 	// Primo giro dei collegamenti
 	for (int i = 0; i < stanze - 1; ++i) {
-		// Scelgo la stanza 
+        for (int i = 0; i < stanze; ++i){ cout<<avail[i]; }cout<<endl;
+		// Scelgo la stanza
 		do {
 			a = rand() % stanze;
 		} while (avail[a] == false);
@@ -61,24 +125,46 @@ void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){
 		p = a;
 	}
 
-	// Abbiamo collegato tra loro tutte le stanze. Si 
+	// Abbiamo collegato tra loro tutte le stanze. Si
 	// rigenera il vettore delle disponibilità e poi...
-	for (int i = 0; i < stanze; ++i){ avail[i] = true; }
-		avail[p] = false;
-	printf("\t---\n");
+
+	/**SECONDA PARTE*/
+    //controlla adiacenze delle stanze e toglie le stanze piene per evitare di collegarle
+	controllaAvail(avail,l);
+
+	printf("_____________________________________________________________\n");
 
 	// Si collegano un'altra volta le stanze per garantire
 	// dei doppi collegamenti
-	for (int i = 0; i < maxLink - stanze + 1; ++i) {
-		// Scelgo la stanza a cui arrivare
-		do {
-			a = rand() % stanze;
-		} while (avail[a] == false);
 
-		// Collego le stanze
+	for (int i = 0; i < maxLink - stanze + 1; ++i) {
+        for (int i = 0; i < stanze; ++i){ cout<<avail[i]; }cout<<endl;
+        p = rand() % stanze; //inizializziamo p
+        a = rand() % stanze; //inizializziamo a
+
+ 		// Scelgo la stanza a cui arrivare in modo che sia accessibile
+		while (avail[a] == false){
+			a = rand() % stanze;
+		};
+
+        // Scelgo la stanza da cui partire in modo che sia accessibile
+        while (avail[p] == false){
+			p = rand() % stanze;
+		};
+
+		// se le due stanze sono uguali cambio la stanza di partenza
+		while (p==a){
+			p = rand() % stanze;
+		};
+
+        // Collego le stanze
 		link(p, a, l);
-		avail[a] = false;
-		p = a;
+
+		//setto a false la stanza da cui sono arrivata per toglierla dalle stanze accessibili
+		avail[a]=false;
+
+		//controlla adiacenze delle stanze e toglie le stanze piene per evitare di collegarle e in più
+		controllaAvail2(avail,l);
 	}
 }
 
@@ -90,57 +176,95 @@ void GeneratoreLivelli::link(int da, int a, Livello* l){
 			COLLEGAMENTO NELLA DIREZIONE SCELTA E' PARI A -1 POSSO COLLEGARE ALTRIMENTI DEVO SCEGLIERE SCEGLIERE
 			UN'ALTRA DIREZIONE CON IL RANDOM
 	   */
-	int stanze = l -> getNStanze() - 1;
-	int tmpDirDa[4];
-	int tmpDirA[4];
-	int dA = rand() % 4;
-	int dP = rand() % 4;
+   		int stanze = l -> getNStanze() - 1;
 
-	// Mi prendo le adiacenze della stanza da e a per i controlli
-	l->getAdiacenze(da, tmpDirDa);
-	l->getAdiacenze(a, tmpDirA);
+   		// direzione di arrivo da -> a
+   		int dA = rand() % 4;
 
-	// Ci si può collegare solamente se non ci si è già collegati a quella stanza nella stessa direzione. Se questo succede, bisogna ricalcolare la direzione alla quale attaccarsi
-	if(tmpDirDa[dP] != -1 || tmpDirA[dA] != -1){
-		while(tmpDirDa[dP] != -1 || tmpDirA[dA] != -1){
-			dA = rand() % 4;
-			dP = rand() % 4;
-		}
+   		// direzione di partenza a -> da
+   		int dP = rand() % 4;
+
+
+        int dirDa[4];
+        int dirA[4];
+
+        // Mi prendo le adiacenze della stanza da e a per i controlli
+        l->getAdiacenze(da, dirDa);
+        l->getAdiacenze(a, dirA);
+
+   		/** controlliamo nessuna direzione proibita nel collegamento da/a la prima e l'ultima stanza*/
+
+   		// se in da c'è l'ultima stanza e in dA c'è la direzione NORD (0) allora viene ricalcolato il random
+   		if(da == stanze&& dA==0){
+            while(dA==0){
+               dA = rand() % 4;
+            }
+   		}
+   		//se in a c'è l'ultima stanza e in dP c'è la direzione NORD (0) allora viene ricalcolato il random
+   		if(a == stanze&& dP==0){
+            while(dP==0){
+               dP = rand() % 4;
+            }
+   		}
+   		//se in da c'è la prima stanza e in dA c'è la direzione SUD (1) allora viene ricalcolato il random
+   		if(da == 0&& dA==1){
+            while(dA==1){
+               dA = rand() % 4;
+            }
+   		}
+
+   		//se in a c'è la prima stanza e in dP c'è la direzione SUD (1)allora viene ricalcolato il random
+   		if(a == 0&& dP==1){
+            while(dP==1){
+               dP = rand() % 4;
+            }
+   		}
+
+	/** controlliamo che la direzione scelta per le due stanze sia libera (cioè settata a -1) */
+
+    //se la direzione è occupata dA => faccio controllo che ne restituisce una giusta
+	if(dirDa[dA]!=-1){
+	    dA=controlloLink(da,dA,dirDa,stanze);
 	}
 
-	/** controlliamo nessuna direzione proibita nel collegamento da/a la prima e l'ultima stanza*/
-	// se in da c'è l'ultima stanza e in dA c'è la direzione NORD (0) allora viene ricalcolato il random
-	if(da == stanze&& dA==0){
-		while(dA==0){
-			dA = rand() % 4;
-		}
-	}
-	
-	//se in a c'è l'ultima stanza e in dP c'è la direzione NORD (0) allora viene ricalcolato il random
-	if(a == stanze&& dP==0){
-		while(dP==0){
-			dP = rand() % 4;
-		}
-	}
-	
-	//se in da c'è la prima stanza e in dA c'è la direzione SUD (1) allora viene ricalcolato il random
-	if(da == 0&& dA==1){
-		while(dA==1){
-			dA = rand() % 4;
-		}
+     //se la direzione è occupata dP => faccio controllo che ne restituisce una giusta
+	if(dirA[dP]!=-1){
+	    dP=controlloLink(a,dP,dirA,stanze);
 	}
 
-	//se in a c'è la prima stanza e in dP c'è la direzione SUD (1)allora viene ricalcolato il random
-	if(a == 0&& dP==1){
-		while(dP==1){
-			dP = rand() % 4;
-		}
-	}
-	printf("\t%d:%d -> %d:%d\n",da, dP, a, dA );
-	l->collegaStanza(da,a,dA);
-	l->collegaStanza(a,da,dP);
+	//adesso che sono sicura che le direzioni siano libere collego le due stanze
+	printf("\t%d:%d -> %d:%d\n",da, dA , a, dP );
+    l->collegaStanza(da,a,dA);
+    l->collegaStanza(a,da,dP);
 
 }
+
+
+int GeneratoreLivelli::controlloLink(int s,int direzione,int dir[4], int stanze){
+    do{
+        //cambio la direzione
+        direzione = rand() % 4;
+
+        //caso particolare dell'ultima stanza
+   		if(s == stanze&& direzione==0){
+           while(direzione==0){
+               direzione = rand() % 4;
+            }
+   		}
+
+        //caso particolare della prima stanza
+        else if(s == 0&& direzione==1){
+            while(direzione==1){
+               direzione = rand() % 4;
+            } ;
+   		}
+
+    }while(dir[direzione]!=-1);//fino a quando la direzione non è libera
+
+    return direzione;
+
+}
+
 
 void GeneratoreLivelli::stampaCollegamenti(Livello* l){
 	int a[4]={0,0,0,0};
@@ -160,6 +284,7 @@ void GeneratoreLivelli::popolaLivello (Livello* l){
 
 	int maxLink = 0;
 	inizializzaVettColl(l);
+    stampaCollegamenti(l);
 
 	int stanze = l->getNStanze();
 	if (stanze != 1) {
@@ -171,6 +296,18 @@ void GeneratoreLivelli::popolaLivello (Livello* l){
 	riempiVettStanze(l);
 	riempiVettCollegamenti(l, maxLink);
 
+}
+
+// l1 corrente
+// l2 precedente
+
+// ultima di l2 va collegata a nord alla prima di l1
+
+void GeneratoreLivelli::passaggioLivello(Livello* l1, Livello* l2) {
+	
+	// Aggiunta al vettore delle stanze
+	l1->setStanza(l1->getNStanze-1,l2->getStanza(0));
+	
 }
 
 

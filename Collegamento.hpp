@@ -3,35 +3,37 @@
 
 class Collegamento{
 protected:
-	int id;
+    int id;
 
-	/**
-		direzioni[0]->N
-		direzioni[1]->S
-		direzioni[2]->O
-		direzioni[3]->E
-	*/
-	int direzioni[4];
-	int link; //quante collegamenti a questa stanza sono stati fatti
+    /**
+        direzioni[0]->N
+        direzioni[1]->S
+        direzioni[2]->O
+        direzioni[3]->E
+    */
+    int direzioni[4];
 
 public:
-	Collegamento(int j);
+    Collegamento(int j);
 
-	int getId();
+    Collegamento();
 
-	void setId(int i);
+    int getId();
 
-	void getDirezioni(int a[4]);
+    void setId(int i);
 
-	void setDirezioni(int a[4]);
+    void getDirezioni(int a[4]);
 
-	void setNord(int idArrivo);
+    void setDirezioni(int a[4]);
 
-	void setSud(int idArrivo);
+    void setNord(int idArrivo);
 
-	void setOvest(int idArrivo);
+    void setSud(int idArrivo);
 
-	void setEst(int idArrivo);
+    void setOvest(int idArrivo);
+
+    void setEst(int idArrivo);
+
 
 };
 

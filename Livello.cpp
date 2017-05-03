@@ -1,8 +1,9 @@
 #include "Livello.hpp"
 Livello::Livello (int n){
 	nStanze=n;
-	vettStanze= (Stanza*) malloc(sizeof(Stanza*) * (nStanze+2));
-	vettColl= (Collegamento*) malloc(sizeof(Collegamento*) * (nStanze));
+	vettStanze= new Stanza [nStanze+2];
+	vettColl= new Collegamento[nStanze];
+	cout<<vettColl<<endl;
 }
 
 Stanza Livello::getStanza(int id){
@@ -15,9 +16,11 @@ void Livello::setStanza(int id, Stanza* s){
 
 void Livello::setCollegamento(int id, Collegamento* c){
 	vettColl[id].setId(c->getId());
-	int v[4];
-	c->getDirezioni(v);
+	int v[4]={-1,-1,-1,-1};
 	vettColl[id].setDirezioni(v);
+	int h[4];
+	vettColl[id].getDirezioni(h);
+
 }
 
 void Livello::getAdiacenze(int id, int adiacenze [4]){

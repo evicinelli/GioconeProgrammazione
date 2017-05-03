@@ -3,6 +3,8 @@
 Stanza::Stanza (int n){
 	s=n;
 }
+Stanza::Stanza (){
+}
 
 bool Stanza::isNull(){
 	bool ris=false;

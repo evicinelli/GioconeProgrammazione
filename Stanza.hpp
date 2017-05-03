@@ -6,12 +6,13 @@ class Stanza{
 protected:
 	int s;
 public:
-	
+
 	/**
 	Crea la stanza di id n
 	*/
 	Stanza(int n);
-	
+
+	Stanza();
 
 	/**
 	ritorna:
