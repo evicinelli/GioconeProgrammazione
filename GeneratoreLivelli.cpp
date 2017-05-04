@@ -303,11 +303,12 @@ void GeneratoreLivelli::popolaLivello (Livello* l){
 
 // ultima di l2 va collegata a nord alla prima di l1
 
-void GeneratoreLivelli::passaggioLivello(Livello* l1, Livello* l2) {
-	
+void GeneratoreLivelli::collegaLivelloPrec(Livello* l1, Livello* l2) {
+
 	// Aggiunta al vettore delle stanze
-	l1->setStanza(l1->getNStanze-1,l2->getStanza(0));
-	
+	l1->setStanza(l1->getNStanze()-1,l2->getStanza(0));
+	l1->collegaStanza(0,l1->getNStanze(),0);
+
 }
 
 
