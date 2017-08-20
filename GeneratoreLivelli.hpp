@@ -9,9 +9,8 @@ using namespace std;
 
 #ifndef GENERATORELIVELLI_HPP_INCLUDED
 #define GENERATORELIVELLI_HPP_INCLUDED
-class GeneratoreLivelli {
+class GeneratoreLivelli{
 private:
-     
      /**
 
      PRECONDIZIONE NON CONTROLLATA: PUNTATORE A LIVELLO NON NULLO
@@ -38,9 +37,9 @@ public:
     void popolaLivello (Livello* l);
     void stampaCollegamenti(Livello* l);
     void inizializzaVettColl(Livello* l);
+ // Logica del collegamento al livello precedente
+    void collegaLivelloPrec(Livello* l1, Livello* l2);
 
-    // Logica del collegamento inter-livello tra l1(corrente) e l2(precedente)
-    void passaggioLivello(Livello* l1, Livello* l2);
 };
 
 

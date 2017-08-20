@@ -1,0 +1,81 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+COLLEGAMENTO_HPP_INCLUDED	Collegamento.hpp	2;"	d
+Collegamento	Collegamento.cpp	/^Collegamento::Collegamento(){}$/;"	f	class:Collegamento
+Collegamento	Collegamento.cpp	/^Collegamento::Collegamento(int j){$/;"	f	class:Collegamento
+Collegamento	Collegamento.hpp	/^class Collegamento{$/;"	c
+GENERATORELIVELLI_HPP_INCLUDED	GeneratoreLivelli.hpp	11;"	d
+GESTORELIVELLI_HPP_INCLUDED	GestoreLivelli.hpp	5;"	d
+GeneratoreLivelli	GeneratoreLivelli.cpp	/^GeneratoreLivelli::GeneratoreLivelli(){$/;"	f	class:GeneratoreLivelli
+GeneratoreLivelli	GeneratoreLivelli.hpp	/^class GeneratoreLivelli{$/;"	c
+GestoreLivelli	GestoreLivelli.cpp	/^GestoreLivelli::GestoreLivelli() {$/;"	f	class:GestoreLivelli
+GestoreLivelli	GestoreLivelli.hpp	/^class GestoreLivelli{$/;"	c
+LIVELLO_HPP_INCLUDED	Livello.hpp	8;"	d
+Livello	Livello.cpp	/^Livello::Livello (int n){$/;"	f	class:Livello
+Livello	Livello.hpp	/^class Livello{$/;"	c
+STANZA_HPP_INCLUDED	Stanza.hpp	2;"	d
+Stanza	Stanza.cpp	/^Stanza::Stanza (){$/;"	f	class:Stanza
+Stanza	Stanza.cpp	/^Stanza::Stanza (int n){$/;"	f	class:Stanza
+Stanza	Stanza.hpp	/^class Stanza{$/;"	c
+aggiungiLivello	GestoreLivelli.cpp	/^void GestoreLivelli::aggiungiLivello(Livello* liv) {$/;"	f	class:GestoreLivelli
+collegaLivelloPrec	GeneratoreLivelli.cpp	/^    void GeneratoreLivelli::collegaLivelloPrec(Livello* corrente, Livello* precedente) {$/;"	f	class:GeneratoreLivelli
+collegaStanza	Livello.cpp	/^void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){$/;"	f	class:Livello
+controllaAvail	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::controllaAvail(bool avail[4],Livello* l){$/;"	f	class:GeneratoreLivelli
+controllaAvail2	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::controllaAvail2(bool avail[4],Livello* l){$/;"	f	class:GeneratoreLivelli
+controlloLink	GeneratoreLivelli.cpp	/^int GeneratoreLivelli::controlloLink(int s,int direzione,int dir[4], int stanze){$/;"	f	class:GeneratoreLivelli
+creaLivello	GestoreLivelli.cpp	/^Livello* GestoreLivelli::creaLivello(int n) {$/;"	f	class:GestoreLivelli
+direzioni	Collegamento.hpp	/^    int direzioni[4];$/;"	m	class:Collegamento
+dumpLevelList	GestoreLivelli.cpp	/^void GestoreLivelli::dumpLevelList(){$/;"	f	class:GestoreLivelli
+dumpRoomList	Livello.cpp	/^void Livello::dumpRoomList(){$/;"	f	class:Livello
+generatore	GestoreLivelli.hpp	/^	GeneratoreLivelli generatore;$/;"	m	class:GestoreLivelli
+getAdiacenze	Livello.cpp	/^void Livello::getAdiacenze(int id, int adiacenze [4]){$/;"	f	class:Livello
+getDirezioni	Collegamento.cpp	/^void Collegamento::getDirezioni(int a[4]){$/;"	f	class:Collegamento
+getId	Collegamento.cpp	/^int Collegamento::getId(){$/;"	f	class:Collegamento
+getLevN	GestoreLivelli.cpp	/^int GestoreLivelli::getLevN(){$/;"	f	class:GestoreLivelli
+getLevelById	GestoreLivelli.cpp	/^Livello* GestoreLivelli::getLevelById(int id) {$/;"	f	class:GestoreLivelli
+getNStanze	Livello.cpp	/^int Livello::getNStanze(){$/;"	f	class:Livello
+getPointerToStanza	Livello.cpp	/^Stanza* Livello::getPointerToStanza(int id){$/;"	f	class:Livello
+getS	Stanza.cpp	/^int Stanza::getS(){$/;"	f	class:Stanza
+getStanza	Livello.cpp	/^Stanza Livello::getStanza(int id){$/;"	f	class:Livello
+getVettColl	Livello.cpp	/^Collegamento* Livello:: getVettColl(){$/;"	f	class:Livello
+head	GestoreLivelli.hpp	/^	ptr_listaLiv head;$/;"	m	class:GestoreLivelli
+id	Collegamento.hpp	/^    int id;$/;"	m	class:Collegamento
+inizializzaVettColl	GeneratoreLivelli.cpp	/^void GeneratoreLivelli:: inizializzaVettColl(Livello* l){$/;"	f	class:GeneratoreLivelli
+isNull	Stanza.cpp	/^bool Stanza::isNull(){$/;"	f	class:Stanza
+l	GestoreLivelli.hpp	/^		Livello* l;$/;"	m	struct:GestoreLivelli::lista
+link	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::link(int da, int a, Livello* l){$/;"	f	class:GeneratoreLivelli
+lista	GestoreLivelli.hpp	/^	struct lista{$/;"	s	class:GestoreLivelli
+livCorrente	GestoreLivelli.hpp	/^	int livCorrente;$/;"	m	class:GestoreLivelli
+main	main.cpp	/^int main()$/;"	f
+maxLiv	GestoreLivelli.hpp	/^	int maxLiv;$/;"	m	class:GestoreLivelli
+nStanze	Livello.hpp	/^	int nStanze;$/;"	m	class:Livello
+next	GestoreLivelli.hpp	/^		lista* next;$/;"	m	struct:GestoreLivelli::lista
+passaLivPrec	GestoreLivelli.cpp	/^void GestoreLivelli::passaLivPrec() {$/;"	f	class:GestoreLivelli
+passaLivSucc	GestoreLivelli.cpp	/^void GestoreLivelli::passaLivSucc() {$/;"	f	class:GestoreLivelli
+popolaLivello	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::popolaLivello (Livello* l){$/;"	f	class:GeneratoreLivelli
+ptr_listaLiv	GestoreLivelli.hpp	/^	};typedef lista* ptr_listaLiv;$/;"	t	class:GestoreLivelli
+riempiVettCollegamenti	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){$/;"	f	class:GeneratoreLivelli
+riempiVettStanze	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::riempiVettStanze(Livello* l){$/;"	f	class:GeneratoreLivelli
+s	Stanza.hpp	/^	int s;$/;"	m	class:Stanza
+setAdiacenze	Livello.cpp	/^void Livello::setAdiacenze(int id, int a [4]) {$/;"	f	class:Livello
+setCollegamento	Livello.cpp	/^void Livello::setCollegamento(int id, Collegamento* c){$/;"	f	class:Livello
+setDirezioni	Collegamento.cpp	/^void Collegamento::setDirezioni(int a[4]){$/;"	f	class:Collegamento
+setEst	Collegamento.cpp	/^void Collegamento::setEst(int idArrivo){$/;"	f	class:Collegamento
+setId	Collegamento.cpp	/^void Collegamento::setId(int i){$/;"	f	class:Collegamento
+setNord	Collegamento.cpp	/^void Collegamento::setNord(int idArrivo){$/;"	f	class:Collegamento
+setOvest	Collegamento.cpp	/^void Collegamento::setOvest(int idArrivo){$/;"	f	class:Collegamento
+setS	Stanza.cpp	/^void Stanza::setS(int n){$/;"	f	class:Stanza
+setStanza	Livello.cpp	/^void Livello::setStanza(int id, Stanza* s){$/;"	f	class:Livello
+setSud	Collegamento.cpp	/^void Collegamento::setSud(int idArrivo){$/;"	f	class:Collegamento
+stampaCollegamenti	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::stampaCollegamenti(Livello* l){$/;"	f	class:GeneratoreLivelli
+stampaCollegamentiLivelli	GestoreLivelli.cpp	/^void GestoreLivelli::stampaCollegamentiLivelli(){$/;"	f	class:GestoreLivelli
+vaiEst	Livello.cpp	/^Stanza Livello::vaiEst(int id){$/;"	f	class:Livello
+vaiNord	Livello.cpp	/^Stanza Livello::vaiNord(int id){$/;"	f	class:Livello
+vaiOvest	Livello.cpp	/^Stanza Livello::vaiOvest(int id){$/;"	f	class:Livello
+vaiSud	Livello.cpp	/^Stanza Livello::vaiSud(int id){$/;"	f	class:Livello
+vettColl	Livello.hpp	/^	Collegamento* vettColl;$/;"	m	class:Livello
+vettStanze	Livello.hpp	/^	Stanza* vettStanze;$/;"	m	class:Livello

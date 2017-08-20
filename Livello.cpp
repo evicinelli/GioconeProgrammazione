@@ -1,9 +1,10 @@
 #include "Livello.hpp"
+#include "stdio.h"
 Livello::Livello (int n){
 	nStanze=n;
 	vettStanze= new Stanza [nStanze+2];
 	vettColl= new Collegamento[nStanze];
-	cout<<vettColl<<endl;
+	//cout<<vettColl<<endl;
 }
 
 Stanza Livello::getStanza(int id){
@@ -87,4 +88,20 @@ void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){
 	}
 
 }
+
+void Livello::dumpRoomList(){
+	for (int i = 0; i < getNStanze(); ++i)
+	{
+		printf("i: %p\n", vettStanze[i]);
+	}
+}
+Stanza* Livello::getPointerToStanza(int id){
+    return &(vettStanze[id]);
+}
+
+Collegamento* Livello:: getVettColl(){
+    return this->vettColl;
+};
+
+
 

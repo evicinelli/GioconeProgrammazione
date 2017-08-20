@@ -1,5 +1,5 @@
 all:
-	clear && g++ *.cpp
+	clear && g++ -g *.cpp
 	
 clean:
 	rm *.out && clear

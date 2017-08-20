@@ -80,8 +80,12 @@ public:
 		Ritorna il numero delle stanze del livello
 		*/
 	int getNStanze();
-
+    void dumpRoomList();
 	void collegaStanza(int sPartenza, int sArrivo, int direz);
+    Stanza* getPointerToStanza(int id);
+
+    Collegamento* getVettColl();
+
 };
 
 

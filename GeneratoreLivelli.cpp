@@ -13,28 +13,23 @@ void GeneratoreLivelli:: inizializzaVettColl(Livello* l){
 		l->setCollegamento(i,c);
 
 	}
-
-
 }
 
 
 void GeneratoreLivelli::riempiVettStanze(Livello* l){
 	int i;
 	Stanza* s;
-	cout<<"STANZE"<<endl;
+	//cout<<"STANZE"<<endl;
 	for(i=0; i<l->getNStanze()+2; i++){
-
-		if(i==l->getNStanze()||i==l->getNStanze()+1){
+        if(i==l->getNStanze()||i==l->getNStanze()+1){
 			/** NOTA: PER COMODITA' I COLLEGAMENTI AI LIVELLI PRECEDENTI E SUCCESSIVI SONO STATI MESSI A -1 CIOE' LE STANZE DEI LIVELLI PREC E SUCC HANNO COME NUMERO INTERNO -1
 			*/
 			s= new Stanza(-2);
 			l->setStanza(i,s);
-				cout<< i << ":"<<(l->getStanza(i)).getS()<<endl;
 		}
 		else{
 			s= new Stanza(i);
 			l->setStanza(i,s);
-				cout<<i<<":"<<(l->getStanza(i)).getS()<<endl;
 		}
 	}
 	cout<<endl;
@@ -113,7 +108,7 @@ void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){
 
 	// Primo giro dei collegamenti
 	for (int i = 0; i < stanze - 1; ++i) {
-        for (int i = 0; i < stanze; ++i){ cout<<avail[i]; }cout<<endl;
+        //for (int i = 0; i < stanze; ++i){ cout<<avail[i]; }cout<<endl;
 		// Scelgo la stanza
 		do {
 			a = rand() % stanze;
@@ -132,13 +127,13 @@ void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){
     //controlla adiacenze delle stanze e toglie le stanze piene per evitare di collegarle
 	controllaAvail(avail,l);
 
-	printf("_____________________________________________________________\n");
+	//printf("_____________________________________________________________\n");
 
 	// Si collegano un'altra volta le stanze per garantire
 	// dei doppi collegamenti
 
 	for (int i = 0; i < maxLink - stanze + 1; ++i) {
-        for (int i = 0; i < stanze; ++i){ cout<<avail[i]; }cout<<endl;
+        //for (int i = 0; i < stanze; ++i){ cout<<avail[i]; }cout<<endl;
         p = rand() % stanze; //inizializziamo p
         a = rand() % stanze; //inizializziamo a
 
@@ -173,7 +168,7 @@ void GeneratoreLivelli::link(int da, int a, Livello* l){
 
 	   /**
 			NOTA: IL CONTROLLO SU STANZA DI PARTENZA E STANZA FINALE VA BENE BISOGNA AGGIUNGERE IL FATTO CHE SE
-			COLLEGAMENTO NELLA DIREZIONE SCELTA E' PARI A -1 POSSO COLLEGARE ALTRIMENTI DEVO SCEGLIERE SCEGLIERE
+			COLLEGAMENTO NELLA DIREZIONE SCELTA E' PARI A -1 POSSO COLLEGARE ALTRIMENTI DEVO SCEGLIERE
 			UN'ALTRA DIREZIONE CON IL RANDOM
 	   */
    		int stanze = l -> getNStanze() - 1;
@@ -233,7 +228,7 @@ void GeneratoreLivelli::link(int da, int a, Livello* l){
 	}
 
 	//adesso che sono sicura che le direzioni siano libere collego le due stanze
-	printf("\t%d:%d -> %d:%d\n",da, dA , a, dP );
+	//printf("\t%d:%d -> %d:%d\n",da, dA , a, dP );
     l->collegaStanza(da,a,dA);
     l->collegaStanza(a,da,dP);
 
@@ -269,9 +264,12 @@ int GeneratoreLivelli::controlloLink(int s,int direzione,int dir[4], int stanze)
 void GeneratoreLivelli::stampaCollegamenti(Livello* l){
 	int a[4]={0,0,0,0};
 	cout<<endl;
+	Collegamento* vColl=new Collegamento[l->getNStanze()];
+	vColl=l->getVettColl();
 	for (int i=0; i<l->getNStanze();i++){
+        int id=vColl[i].getId();
 		l->getAdiacenze(i,a);
-		cout<<i<<":";
+		cout<<id<<":";
 		for (int j=0; j<4; j++){
 			cout<<"\t"<<a[j]<<" ";
 		}
@@ -284,32 +282,35 @@ void GeneratoreLivelli::popolaLivello (Livello* l){
 
 	int maxLink = 0;
 	inizializzaVettColl(l);
-    stampaCollegamenti(l);
+    //stampaCollegamenti(l);
 
 	int stanze = l->getNStanze();
 	if (stanze != 1) {
 		float hard = .3;
 		maxLink = stanze + (int)(hard * stanze);
 	}
-	printf("\tmLink: %d \t stanze: %d \n", maxLink, stanze );
+	//printf("\tmLink: %d \t stanze: %d \n", maxLink, stanze );
 
 	riempiVettStanze(l);
 	riempiVettCollegamenti(l, maxLink);
 
 }
 
-// l1 corrente
-// l2 precedente
+// ultima di precedente va collegata a nord alla prima di corrente
 
-// ultima di l2 va collegata a nord alla prima di l1
+    void GeneratoreLivelli::collegaLivelloPrec(Livello* corrente, Livello* precedente) {
 
-void GeneratoreLivelli::collegaLivelloPrec(Livello* l1, Livello* l2) {
+        cout<<"LIVELLO CORRENTE:"<<corrente->getNStanze()<<endl<<"LIVELLO PRECEDENTE:"<<precedente->getNStanze()<<endl<<endl;
 
-	// Aggiunta al vettore delle stanze
-	l1->setStanza(l1->getNStanze()-1,l2->getStanza(0));
-	l1->collegaStanza(0,l1->getNStanze(),0);
+        corrente->setStanza(corrente->getNStanze(),precedente->getPointerToStanza(precedente->getNStanze()-1));
 
-}
+        precedente->setStanza(precedente->getNStanze()+1,corrente->getPointerToStanza(0));
+
+        corrente->collegaStanza(0,corrente->getNStanze(),1);
+
+        precedente->collegaStanza(precedente->getNStanze()-1, precedente->getNStanze()+1,0);
+
+    }
 
 
 
