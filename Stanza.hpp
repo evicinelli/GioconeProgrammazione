@@ -1,35 +1,43 @@
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+#include <iostream>
+using namespace std;
+
 #ifndef STANZA_HPP_INCLUDED
+
 #define STANZA_HPP_INCLUDED
 
 class Stanza{
 
 protected:
-	int s;
+    int matrice [18][18];
+    int nMaxMostri;
+    int nMaxBauli;
+    int nMaxVenditori;
+    int nMaxMuri;
 public:
 
 	/**
 	Crea la stanza di id n
 	*/
-	Stanza(int n);
-
 	Stanza();
 
-	/**
-	ritorna:
-		- true se la stanza ha id -1 (considerata vuota)
-		- false altrimenti
-	*/
-	bool isNull();
 
-	/**
-	ritorna id della stanza
-	*/
-	int getS();
+    void inizializzaMatrice(int m[18][18]);
 
-	/**
-	risetta l'id di una stanza già esistente
-	*/
-	void setS(int n);
+    void stampaMatriceInizializzata (int m[18][18]);
+
+    void stampaMatrice (int m[18][18]);
+
+    void getMatrice(int m[18][18]);
+
+    void setMatrice(int m[18][18]);
+
+    void riempiMatrice(int nLiv, int coll [4]);
+
+private:
+
+    bool contrCorrettezzaMuri (int r, int c);
 
 };
 

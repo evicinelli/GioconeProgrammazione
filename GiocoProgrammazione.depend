@@ -1,0 +1,213 @@
+# depslib dependency file v1.0
+1504699855 source:e:\università\programmazione\progetto programmazione\giocoprogrammazione\generatorelivelli.cpp
+	"GeneratoreLivelli.hpp"
+
+1504703455 eLivelli.hpp"
+
+1492422116 e:\università\programmazione\progetto programmazione\giocoprogrammazione\livello.cpp
+	"Stanza.cpp"
+	<stdlib.h>
+	<cstddef>
+
+1499706580 
+
+1492421583 e:\università\programmazione\progetto programmazione\giocoprogrammazione\stanza.cpp
+
+1503151172 source:e:\università\programmazione\progetto programmazione\giocoprogrammazione\gestorelivelli.cpp
+	"GestoreLivelli.hpp"
+	"GeneratoreLivelli.hpp"
+	<stdio.h>
+	<stdlib.h>
+
+1505222417 source:e:\università\programmazione\progetto programmazione\giocoprogrammazione\main.cpp
+	<iostream>
+	"GeneratoreLivelli.hpp"
+	"GestoreLivelli.hpp"
+
+1503154772 velli.hpp"
+
+1493626255 source:e:\università\programmazione\progetto programmazione\giocoprogrammazione\stanza.cpp
+	"Stanza.hpp"
+
+1493629855 p"
+
+1499706580 source:e:\università\programmazione\progetto programmazione\giocoprogrammazione\livello.cpp
+	"Livello.hpp"
+	"stdio.h"
+
+1503154772 source:f:\università\programmazione\progetto programmazione\giocoprogrammazione\gestorelivelli.cpp
+	"GestoreLivelli.hpp"
+	"GeneratoreLivelli.hpp"
+	<stdio.h>
+	<stdlib.h>
+
+1492438843 f:\università\programmazione\progetto programmazione\giocoprogrammazione\livello.cpp
+	"Livello.hpp"
+
+1499677969 pp"
+
+1492439009 f:\università\programmazione\progetto programmazione\giocoprogrammazione\stanza.cpp
+	"Stanza.hpp"
+
+1503154772 source:f:\università\programmazione\progetto programmazione\giocoprogrammazione\main.cpp
+	<iostream>
+	"GeneratoreLivelli.hpp"
+	"GestoreLivelli.hpp"
+
+1504703455 source:f:\università\programmazione\progetto programmazione\giocoprogrammazione\generatorelivelli.cpp
+	"GeneratoreLivelli.hpp"
+
+1499710180 source:f:\università\programmazione\progetto programmazione\giocoprogrammazione\livello.cpp
+	"Livello.hpp"
+	"stdio.h"
+
+1499710180 f:\università\programmazione\progetto programmazione\giocoprogrammazione\livello.hpp
+	"Stanza.hpp"
+	"Collegamento.hpp"
+	<stdlib.h>
+	<iostream>
+
+1493629855 source:f:\università\programmazione\progetto programmazione\giocoprogrammazione\stanza.cpp
+	"Stanza.hpp"
+
+1493629869 f:\università\programmazione\progetto programmazione\giocoprogrammazione\stanza.hpp
+
+1499756387 f:\università\programmazione\progetto programmazione\giocoprogrammazione\generatorelivelli.hpp
+	"Stanza.hpp"
+	"Livello.hpp"
+	"Collegamento.hpp"
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1499752787 e:\università\programmazione\progetto programmazione\giocoprogrammazione\generatorelivelli.hpp
+	"Stanza.hpp"
+	"Livello.hpp"
+	"Collegamento.hpp"
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1493626269 e:\università\programmazione\progetto programmazione\giocoprogrammazione\stanza.hpp
+
+1499706580 e:\università\programmazione\progetto programmazione\giocoprogrammazione\livello.hpp
+	"Stanza.hpp"
+	"Collegamento.hpp"
+	<stdlib.h>
+	<iostream>
+
+1499674369 e:\università\programmazione\progetto programmazione\giocoprogrammazione\gestorelivelli.hpp
+	"GeneratoreLivelli.hpp"
+	"Livello.hpp"
+
+1499677969 f:\università\programmazione\progetto programmazione\giocoprogrammazione\gestorelivelli.hpp
+	"GeneratoreLivelli.hpp"
+	"Livello.hpp"
+
+1499704201 f:\università\programmazione\progetto programmazione\giocoprogrammazione\collegamento.hpp
+
+1499704201 source:f:\università\programmazione\progetto programmazione\giocoprogrammazione\collegamento.cpp
+	"Collegamento.hpp"
+
+1499700601 nto.hpp"
+
+1499700601 source:e:\università\programmazione\progetto programmazione\giocoprogrammazione\collegamento.cpp
+	"Collegamento.hpp"
+
+1499700601 e:\università\programmazione\progetto programmazione\giocoprogrammazione\collegamento.hpp
+
+1499707802 source:/home/giulia/Documenti/GiocoProgrammazione/Collegamento.cpp
+	"Collegamento.hpp"
+
+1499707802 /home/giulia/Documenti/GiocoProgrammazione/Collegamento.hpp
+
+1505893482 source:/home/giulia/Documenti/GiocoProgrammazione/GeneratoreLivelli.cpp
+	"GeneratoreLivelli.hpp"
+
+1499759988 /home/giulia/Documenti/GiocoProgrammazione/GeneratoreLivelli.hpp
+	"Stanza.hpp"
+	"Livello.hpp"
+	"Collegamento.hpp"
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1506005162 /home/giulia/Documenti/GiocoProgrammazione/Stanza.hpp
+	<stdlib.h>
+	<time.h>
+	<iostream>
+
+1499713782 /home/giulia/Documenti/GiocoProgrammazione/Livello.hpp
+	"Stanza.hpp"
+	"Collegamento.hpp"
+	<stdlib.h>
+	<iostream>
+
+1503158374 source:/home/giulia/Documenti/GiocoProgrammazione/GestoreLivelli.cpp
+	"GestoreLivelli.hpp"
+	"GeneratoreLivelli.hpp"
+	<stdio.h>
+	<stdlib.h>
+
+1499681570 /home/giulia/Documenti/GiocoProgrammazione/GestoreLivelli.hpp
+	"GeneratoreLivelli.hpp"
+	"Livello.hpp"
+
+1505811509 source:/home/giulia/Documenti/GiocoProgrammazione/Livello.cpp
+	"Livello.hpp"
+	"stdio.h"
+
+1505986781 source:/home/giulia/Documenti/GiocoProgrammazione/main.cpp
+	<iostream>
+	"GeneratoreLivelli.hpp"
+	"GestoreLivelli.hpp"
+
+1506006705 source:/home/giulia/Documenti/GiocoProgrammazione/Stanza.cpp
+	"Stanza.hpp"
+
+1506000190 source:/home/giulia/Documenti/GiocoProgrammazione/Arma.cpp
+	"Arma.hpp"
+
+1505999780 /home/giulia/Documenti/GiocoProgrammazione/Arma.hpp
+	<stdlib.h>
+	<time.h>
+	<string>
+
+1505964970 source:/home/giulia/Documenti/GiocoProgrammazione/Forziere.cpp
+	"Forziere.hpp"
+	"Arma.hpp"
+
+1505963952 /home/giulia/Documenti/GiocoProgrammazione/Forziere.hpp
+	<stdlib.h>
+	<time.h>
+	"Arma.hpp"
+
+1505873564 source:/home/giulia/Documenti/GiocoProgrammazione/Giocatore.cpp
+	"Giocatore.hpp"
+
+1505962830 /home/giulia/Documenti/GiocoProgrammazione/Giocatore.hpp
+	"Personaggio.hpp"
+
+1506000408 /home/giulia/Documenti/GiocoProgrammazione/Personaggio.hpp
+	<string>
+	"Arma.hpp"
+	<stdlib.h>
+
+1505965126 source:/home/giulia/Documenti/GiocoProgrammazione/Mostro.cpp
+	"Mostro.hpp"
+
+1505962932 /home/giulia/Documenti/GiocoProgrammazione/Mostro.hpp
+	"Personaggio.hpp"
+
+1506000514 source:/home/giulia/Documenti/GiocoProgrammazione/Personaggio.cpp
+	"Personaggio.hpp"
+
+1505938456 source:/home/giulia/Documenti/GiocoProgrammazione/Venditore.cpp
+	"Venditore.hpp"
+
+1506004203 /home/giulia/Documenti/GiocoProgrammazione/Venditore.hpp
+	"Arma.hpp"
+

@@ -17,22 +17,10 @@ void GeneratoreLivelli:: inizializzaVettColl(Livello* l){
 
 
 void GeneratoreLivelli::riempiVettStanze(Livello* l){
-	int i;
-	Stanza* s;
-	//cout<<"STANZE"<<endl;
-	for(i=0; i<l->getNStanze()+2; i++){
-        if(i==l->getNStanze()||i==l->getNStanze()+1){
-			/** NOTA: PER COMODITA' I COLLEGAMENTI AI LIVELLI PRECEDENTI E SUCCESSIVI SONO STATI MESSI A -1 CIOE' LE STANZE DEI LIVELLI PREC E SUCC HANNO COME NUMERO INTERNO -1
-			*/
-			s= new Stanza(-2);
-			l->setStanza(i,s);
-		}
-		else{
-			s= new Stanza(i);
-			l->setStanza(i,s);
-		}
-	}
-	cout<<endl;
+    /** A questo punto per ogni stanza tranne le ultime due del vettore va richiamato il metodo che riempe le stanze
+        per fare in modo di mettere le porte anche per il passaggio di livello prendiamo il vettore delle stanze del livello
+        e passiamo al metodo riempi matrice tale vettore con -2 nelle posizioni del cambio di livello e il numero del livello
+    */
 }
 
 void GeneratoreLivelli::controllaAvail(bool avail[4],Livello* l){
@@ -286,13 +274,14 @@ void GeneratoreLivelli::popolaLivello (Livello* l){
 
 	int stanze = l->getNStanze();
 	if (stanze != 1) {
-		float hard = .3;
+		float hard = .3;  //meglio come costante
 		maxLink = stanze + (int)(hard * stanze);
 	}
 	//printf("\tmLink: %d \t stanze: %d \n", maxLink, stanze );
 
-	riempiVettStanze(l);
+
 	riempiVettCollegamenti(l, maxLink);
+	riempiVettStanze(l);
 
 }
 

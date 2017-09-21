@@ -12,7 +12,9 @@ Stanza Livello::getStanza(int id){
 }
 
 void Livello::setStanza(int id, Stanza* s){
-	vettStanze[id].setS(s->getS());
+    int ma[18][18];
+    s->getMatrice(ma);
+	vettStanze[id].setMatrice(ma);
 }
 
 void Livello::setCollegamento(int id, Collegamento* c){
