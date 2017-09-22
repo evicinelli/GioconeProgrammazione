@@ -54,6 +54,8 @@ private:
 	void inserisciVia();
 	
 	void mettiMuri();
+	
+	void riempiMuri(int x, int y);
 
     bool contrCorrettezzaMuri (int r, int c);
 

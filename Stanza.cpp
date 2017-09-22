@@ -64,7 +64,9 @@ void Stanza:: stampaMatrice(int m[18][18]){
 			
 			else if(m[i][j]==-3) cout<<". ";
 			
-            else if(m[i][j]==-2) cout<<"  ";
+            else if(m[i][j]==-2) cout<<"X ";
+            
+            else if(m[i][j]==-1) cout<<"  ";
             
             else cout<<m[i][j]<<"   ";
 
@@ -203,6 +205,15 @@ void Stanza::mettiMuri(){
 	}
 }
 
+void Stanza::riempiMuri(int x, int y){
+		if (matrice[y][x]==-2 || matrice[y][x]==-3){
+			matrice[y][x]=-1;
+			riempiMuri(x+1,y);
+			riempiMuri(x-1,y);
+			riempiMuri(x,y+1);
+			riempiMuri(x,y-1);	
+		}
+}
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	 /**
 		-3 -> strada
@@ -220,8 +231,8 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiPorte(coll);
 	inserisciVia();
 	mettiMuri();
-	/*riempiMuri();
-	mettiMostri();
+	riempiMuri(1,getPorta(0));
+	/*mettiMostri();
 	mettiBauli();*/
 
 }
