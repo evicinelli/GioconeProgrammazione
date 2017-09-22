@@ -7,7 +7,8 @@ Stanza::Stanza (){
     this->nMaxBauli=0;
     this->nMaxVenditori=0;
     this->nMaxMuri=0;
-    stampaMatriceInizializzata(matrice);
+    this->nPorte=0;
+    //stampaMatrice(matrice);
 }
 
 
@@ -15,12 +16,12 @@ void Stanza:: inizializzaMatrice(int m[18][18]){
 
     for(int i=0; i<18; i++){
         for (int j=0; j<18; j++){
-            m[i][j]=-1;
+            m[i][j]=-2;
         }
 
     }
 }
-
+/*
 void Stanza:: stampaMatriceInizializzata(int m[18][18]){
 
      cout<<"    ";
@@ -52,17 +53,20 @@ void Stanza:: stampaMatriceInizializzata(int m[18][18]){
 
     }
 
-}
+}*/
 
 void Stanza:: stampaMatrice(int m[18][18]){
     for(int i=0; i<18; i++){
         for (int j=0; j<18; j++){
-            if(m[i][j]==-1){
-                cout<<m[i][j]<<"  ";
-            }
-            else{
-                cout<<m[i][j]<<"   ";
-            }
+			if (m[i][j]==0) cout<<"# ";
+			
+			else if (m[i][j]==4) cout<<"@ ";
+			
+			else if(m[i][j]==-3) cout<<". ";
+			
+            else if(m[i][j]==-2) cout<<"  ";
+            
+            else cout<<m[i][j]<<"   ";
 
         }
         cout<<endl;
@@ -91,8 +95,119 @@ void Stanza::setMatrice(int m[18][18]){
     }
 }
 
+void Stanza::mettiMuriContorno(){
+	for (int i=0; i<18; i++){
+		matrice[i][0]=0;
+		matrice[i][17]=0;
+		matrice[0][i]=0;
+		matrice[17][i]=0;
+	}
+}
+void Stanza::mettiPorte(int coll[4]){
+	// Ci penserà la Giulia, momentaneamente sono random
+	nPorte=rand()%4+1;
+	
+	for (int i=0; i<nPorte; i++)
+		porte[i]=rand()%15+1;
+		
+	matrice[porte[0]][0]=4;
+	if (nPorte>1) matrice[0][porte[1]]=4;
+	if (nPorte>2) matrice[porte[2]][17]=4;
+	if (nPorte>3) matrice[17][porte[3]]=4;
+	
+}
+
+bool Stanza::existPorta(int n){
+	return n<nPorte;
+}
+
+int Stanza::getPorta(int n){
+	return porte[n];
+}
+
+void Stanza::link(int partenza, int arrivo, int type){
+	int prec, posx, posy, arrivox, arrivoy, direzione; //1 E, 2 S, 3 W, 4N 
+	prec=7;//valore nullo 7-4=3>+-2
+	if (type==0){
+		posx=1;
+		posy=partenza;
+		arrivox=16;
+		arrivoy=arrivo;
+	}else{
+		posx=partenza;
+		posy=1;
+		arrivox=arrivo;
+		arrivoy=16;
+	}
+	matrice[posy][posx]=-3;
+	while ((posx != 16 && type==0) || (posy != 16 && type==1)){
+		do{
+			direzione=rand()%4+1;
+		}while((prec-direzione)==2 || (prec-direzione)==-2  || (direzione-type)==3);
+		if (direzione==1 && posx<16){
+			prec=direzione;
+			posx++;
+		}else if (direzione==2 && posy<16){
+			prec=direzione;
+			posy++;
+		}else if (direzione==3 && posx>1){
+			prec=direzione; 
+			posx--;
+		}else if (direzione==4 && posy>1){
+			prec=direzione; 
+			posy--;
+		}
+		matrice[posy][posx]=-3;
+	}
+	matrice[arrivoy][arrivox]=-3;
+	if (arrivoy<posy){ //type=1 non entra
+		int temp=arrivoy;
+		arrivoy=posy;
+		posy=temp;
+	}
+	if (arrivox<posx){ //type=0 non entra
+		int temp=arrivox;
+		arrivox=posx;
+		posx=temp;
+	}
+	
+	for (int i=posy;i<arrivoy;i++)
+		matrice[i][16]=-3;
+
+	for (int i=posx;i<arrivox;i++)
+		matrice[16][i]=-3;
+		
+}
+//Sono necessarie 4 porte e porta 0 deve essere opposta a porta 2 (quindi anche per 1 e 3)
+void Stanza::inserisciVia(){
+	int partenza[2], arrivo[2];
+	for (int i=0; i<2; i++){
+		if (existPorta(i)){partenza[i]=getPorta(i);}
+		else{ partenza[i]=rand()%15+1;}
+		
+		if (existPorta(i+2)){ arrivo[i]=getPorta(i+2);}
+		else{ arrivo[i]=rand()%15+1;}
+		link(partenza[i], arrivo[i], i);
+	}
+}
+
+void Stanza::mettiMuri(){
+	//lo farà Vicci, momentaneamente random
+	for (int i=1; i<17; i++){
+		for (int j=1; j<17; j++){
+			if (matrice[i][j]==-2){
+				int r=rand()%3;
+				if (r==0) matrice[i][j]=0;
+			}
+		}
+	}
+}
+
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
-    /**
+	 /**
+		-3 -> strada
+		-2 -> interno
+		-1 -> esterno
         0 -> muro : i muri non possono essere messi sulle porte e non possono essere lunghi quanto un lato della stanza perchè deve essere
                     possibile passare da una parte all'altra della stanza
         1 -> mostro : in base al numero max di mostri della stanza
@@ -101,7 +216,29 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
         4 -> porta : le posizioni delle porte (numero di porte è in base al numero di collegamenti) vengono scelte in base al lato dove sono
                      presenti i collegamenti, in qualsiasi riquadro del lato corrispondente
     */
+	mettiMuriContorno();
+	mettiPorte(coll);
+	inserisciVia();
+	mettiMuri();
+	/*riempiMuri();
+	mettiMostri();
+	mettiBauli();*/
 
+}
+
+void Stanza::riempiMatrice2(int nLiv, int coll [4]){
+    /**
+		-2 -> vuoto
+		-1 -> strada
+        0 -> muro : i muri non possono essere messi sulle porte e non possono essere lunghi quanto un lato della stanza perchè deve essere
+                    possibile passare da una parte all'altra della stanza
+        1 -> mostro : in base al numero max di mostri della stanza
+        2 -> venditore : raro
+        3 -> baule : raro
+        4 -> porta : le posizioni delle porte (numero di porte è in base al numero di collegamenti) vengono scelte in base al lato dove sono
+                     presenti i collegamenti, in qualsiasi riquadro del lato corrispondente
+    */
+	
     int p= (18*18)-200; //Sono da riempire 124 buchi al massimo
     int nPorte=0;
 
