@@ -11,6 +11,7 @@ class Stanza{
 
 protected:
     int matrice [18][18];
+    int dimensione;
     int nMaxMostri;
     int nMaxBauli;
     int nMaxVenditori;
@@ -37,7 +38,6 @@ public:
 	
     void riempiMatrice(int nLiv, int coll [4]);
     
-    void riempiMatrice2(int nLiv, int coll [4]);
 
 private:
 
@@ -56,8 +56,14 @@ private:
 	void mettiMuri();
 	
 	void riempiMuri(int x, int y);
-
-    bool contrCorrettezzaMuri (int r, int c);
+	
+	int nVicini(int y, int x);
+	
+	void mettiMostri(int livello);
+	
+	void mettiBauli(int livello);
+	
+	void mettiVenditori(int livello);
 
 };
 
