@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-/**
+/*
     //Creazione di un solo livello 3
 
 
@@ -34,8 +34,8 @@ int main()
     gestore.stampaCollegamentiLivelli();
 
     //cout<<gestore.getLevN();
-
 */
+
     Stanza* st= new Stanza();
     int c[4]={-1,2,9,-2};
     st->riempiMatrice(100,c);
