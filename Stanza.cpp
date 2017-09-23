@@ -36,7 +36,7 @@ void Stanza:: stampaMatrice(int m[18][18]){
 			
 			else if(m[i][j]==-3) cout<<". ";
 			
-            else if(m[i][j]==-2) cout<<"X ";
+            else if(m[i][j]==-2) cout<<"# ";
             
             else if(m[i][j]==-1) cout<<". ";
             
@@ -200,7 +200,7 @@ void Stanza::mettiMostri(int livello){
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1); j++){
 			if (matrice[i][j]==-1){
-				int den=150/(log(livello)+(livello/30.0)+1);
+				int den=1000/(log(livello)+14);
 				int r=rand()%den;
 				if (r==0) matrice[i][j]=1;
 			}
@@ -221,7 +221,7 @@ void Stanza::mettiBauli(int livello){
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1); j++){
 			if (matrice[i][j]==-1){
-				int den=2000/((livello/25.0)+1);
+				int den=2000/((livello/30.0)+1);
 				if (nVicini(i,j)!=0) den=den/nVicini(i,j);
 				int r=rand()%den;
 				if (r==0) matrice[i][j]=3;
