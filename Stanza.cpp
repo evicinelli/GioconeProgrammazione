@@ -4,9 +4,9 @@ Stanza::Stanza (){
     srand(time(0));
     this->dimensione=18;
     inizializzaMatrice(this->matrice);
-    this->nMaxMostri=0;
-    this->nMaxBauli=0;
-    this->nMaxVenditori=0;
+    this->nMaxMostri=6;
+    this->nMaxBauli=2;
+    this->nMaxVenditori=2;
     this->nMaxMuri=0;
     this->nPorte=0;
 }
@@ -198,11 +198,14 @@ int log(int n){
 void Stanza::mettiMostri(int livello){
 	
 	for(int i=0; i<(dimensione-1); i++){
-		for(int j=0; j<(dimensione-1); j++){
+		for(int j=0; j<(dimensione-1) && nMaxMostri>0; j++){
 			if (matrice[i][j]==-1){
 				int den=1000/(log(livello)+14);
 				int r=rand()%den;
-				if (r==0) matrice[i][j]=1;
+				if (r==0){
+					matrice[i][j]=1;
+					nMaxMostri--;
+				}
 			}
 		}
 	}
@@ -219,12 +222,15 @@ int Stanza::nVicini(int x, int y){
 void Stanza::mettiBauli(int livello){
 	
 	for(int i=0; i<(dimensione-1); i++){
-		for(int j=0; j<(dimensione-1); j++){
+		for(int j=0; j<(dimensione-1) && nMaxBauli>0; j++){
 			if (matrice[i][j]==-1){
 				int den=2000/((livello/30.0)+1);
 				if (nVicini(i,j)!=0) den=den/nVicini(i,j);
 				int r=rand()%den;
-				if (r==0) matrice[i][j]=3;
+				if (r==0){
+					matrice[i][j]=3;
+					nMaxBauli--;
+				}
 			}
 		}
 	}
@@ -234,11 +240,14 @@ void Stanza::mettiBauli(int livello){
 void Stanza::mettiVenditori(int livello){
 	
 	for(int i=0; i<(dimensione-1); i++){
-		for(int j=0; j<(dimensione-1); j++){
+		for(int j=0; j<(dimensione-1) && nMaxVenditori>0; j++){
 			if (matrice[i][j]==-1){
 				int den=3000/((livello/20.0)+2);
 				int r=rand()%den;
-				if (r==0) matrice[i][j]=2;
+				if (r==0){
+					matrice[i][j]=2;
+					nMaxVenditori--;
+				}
 			}
 		}
 	}

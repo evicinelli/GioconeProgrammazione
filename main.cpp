@@ -95,7 +95,7 @@ int main()
 		cout << i << " venditori:"<<v[i]<<"\n";
 		*/
 	
-	 Stanza* st= new Stanza();
+	Stanza* st= new Stanza();
     int c[4]={-1,2,9,-2};
     st->riempiMatrice(50,c);
     int m [18][18];
