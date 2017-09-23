@@ -1,4 +1,6 @@
 #include "Stanza.hpp"
+#include "NoiseGenerator.hpp"
+# define WALL_TRESHOLD 1.2
 
 Stanza::Stanza (){
     srand(time(0));
@@ -11,6 +13,10 @@ Stanza::Stanza (){
     this->nPorte=0;
 }
 
+int buildWall(double p)
+{
+	if (p > WALL_TRESHOLD) return 0; else return -2;
+}
 
 void Stanza:: inizializzaMatrice(int m[18][18]){
 
@@ -170,10 +176,11 @@ void Stanza::inserisciVia(){
 
 void Stanza::mettiMuri(){
 	//lo farà Vicci, momentaneamente random
+	int seed = rand() % 100000;
 	for (int i=1; i<(dimensione-1); i++){
 		for (int j=1; j<(dimensione-1); j++){
 			if (matrice[i][j]==-2){
-				int r=rand()%3;
+				int r = buildWall(descreteNoise(i, j, (dimensione - 1), 0));
 				if (r==0) matrice[i][j]=0;
 			}
 		}
