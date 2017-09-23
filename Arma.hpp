@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string>
+#include <stdio.h>
 class Arma
 {
     protected:
@@ -12,6 +13,7 @@ class Arma
         double strMult;      //moltiplicatore di forza     (quanto influisce sul danno)
         double dexMult;      //moltiplicatore di destrezza (quanto influisce sul danno)
         std::string tipologia;
+        std::string nome;
     public:
         Arma();
         Arma(int lev, std::string type);
@@ -23,7 +25,7 @@ class Arma
         double getStrMult();
         double getDexMult();
         double getDropRate();
-
+        std::string getNome();
 
 };
 

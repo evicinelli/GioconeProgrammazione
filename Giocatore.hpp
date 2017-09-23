@@ -7,14 +7,14 @@
 class Giocatore : public Personaggio
 {
     protected:
-        int lev, exp;               //livello, esperienza
+        int nextLevExp;               //esperienza per il livello successivo
         int pot;                    //numero di pozioni trasportate
+        int oro;                    //oro trasportato
         Arma inventario[MAX_ITEM];  //armi trasportate ma non equipaggiate
     public:
         Giocatore();
-        void setStats();            //dà i valori iniziali alle statistiche
-        void levelup();             //metodo da chiamare quando passa di livello il giocatore
-
+        void levelup(int stat);             //metodo da chiamare quando passa di livello il giocatore; "stat" viene passato da tastiera quando compare la schermata di passaggio di livello
+        void morte();                       //metodo forse non necessario; dovrebbe chiamare la schermata di sconfitta
 };
 
 #endif // GIOCATORE_HPP_INCLUDED

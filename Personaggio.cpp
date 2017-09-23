@@ -47,6 +47,10 @@ int Personaggio::getHp()
 {
     return hp;
 }
+int Personaggio::getHpmax()
+{
+    return hpmax;
+}
 Arma Personaggio::getEquip()
 {
     return equip;

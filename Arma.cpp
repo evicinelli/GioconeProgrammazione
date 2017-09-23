@@ -1,4 +1,5 @@
 #include "Arma.hpp"
+
 Arma::Arma()
 {
 }
@@ -34,7 +35,10 @@ Arma::Arma(int lev, std::string type)
         dexMin=4*lev;
     }
     int r=(int)rand()%n;
+    char buf[2];
+    sprintf(buf,"%d",r);
     maxdanno=mindanno+(3*r);
+    nome=type+" con random = "+buf;
 }
 int Arma::getMin()
 {
@@ -70,4 +74,7 @@ double Arma::getDropRate()
 {
     return droprate;
 }
-
+std::string Arma::getNome()
+{
+    return nome;
+}
