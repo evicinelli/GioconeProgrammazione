@@ -3,6 +3,7 @@
 #include <string>
 #include "Arma.hpp"
 #include <stdlib.h>
+#include <time.h>
 class Personaggio
 {
     protected:
@@ -22,6 +23,7 @@ class Personaggio
         int getLuck();
         int getHp();
         Arma getEquip();
+        void attacca(Personaggio p);
 
 };
 

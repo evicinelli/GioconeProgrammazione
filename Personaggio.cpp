@@ -51,3 +51,11 @@ Arma Personaggio::getEquip()
 {
     return equip;
 }
+void Personaggio::attacca(Personaggio p)
+{
+    srand(time(0));
+    int dannoArma=(int)((equip.getMin()+equip.getMax())/(1+(double)rand()/RAND_MAX));
+    int dannoTot=dannoArma+(equip.getStrMult()*str)+(equip.getDexMult()*dex);
+    int currHp=p.getHp();
+    p.setHp(currHp-dannoTot);
+}
