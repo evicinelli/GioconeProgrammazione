@@ -236,7 +236,7 @@ void Stanza::mettiVenditori(int livello){
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1); j++){
 			if (matrice[i][j]==-1){
-				int den=1500/((livello/25.0)+1);
+				int den=3000/((livello/20.0)+2);
 				int r=rand()%den;
 				if (r==0) matrice[i][j]=2;
 			}
