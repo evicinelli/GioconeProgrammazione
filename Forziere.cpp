@@ -16,8 +16,6 @@ Forziere::Forziere(int lev)
         case 2:
             interno=Arma(lev,"pugnale");
             break;
-        default:
-            interno=Arma(lev,"spada");
     }
 
 }
