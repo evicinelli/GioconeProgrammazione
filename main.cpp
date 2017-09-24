@@ -47,7 +47,7 @@ int main()
 	struct listaStanze *r;
 	int liv=0;
 	int c[4]={-1,2,9,-2};
-	int m [18][18];
+	int m [MAXDIM][MAXDIM];
 	int mo[15]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	int b[5]={0,0,0,0,0};
 	int v[10]={0,0,0,0,0,0,0,0,0,0};
@@ -93,12 +93,12 @@ int main()
 		cout << i << " bauli:"<<b[i]<<"\n";
 	for(int i=0; i<10; i++)
 		cout << i << " venditori:"<<v[i]<<"\n";
-		*/
-	
+		
+	*/
 	Stanza* st= new Stanza();
     int c[4]={-1,2,9,-2};
     st->riempiMatrice(50,c);
-    int m [18][18];
+    int m [MAXDIM][MAXDIM];
     st->getMatrice(m);
 	st->stampaMatrice(m);
 	return 0;

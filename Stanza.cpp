@@ -4,13 +4,15 @@
 
 Stanza::Stanza (){
     srand(time(0));
-    this->dimensione=18;
+    this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
     inizializzaMatrice(this->matrice);
     this->nMaxMostri=6;
     this->nMaxBauli=2;
     this->nMaxVenditori=2;
     this->nMaxMuri=0;
     this->nPorte=0;
+    for (int i=0; i<4; i++) 
+		this->porte[i]=-1;
 }
 
 int buildWall(double p)
@@ -18,7 +20,7 @@ int buildWall(double p)
 	if (p > WALL_TRESHOLD) return 0; else return -2;
 }
 
-void Stanza:: inizializzaMatrice(int m[18][18]){
+void Stanza:: inizializzaMatrice(int m[MAXDIM][MAXDIM]){
 
     for(int i=0; i<dimensione; i++){
         for (int j=0; j<dimensione; j++){
@@ -28,7 +30,7 @@ void Stanza:: inizializzaMatrice(int m[18][18]){
     }
 }
 
-void Stanza:: stampaMatrice(int m[18][18]){
+void Stanza:: stampaMatrice(int m[MAXDIM][MAXDIM]){
     for(int i=0; i<dimensione; i++){
         for (int j=0; j<dimensione; j++){
 			
@@ -42,7 +44,7 @@ void Stanza:: stampaMatrice(int m[18][18]){
 			
 			else if(m[i][j]==-3) cout<<". ";
 			
-            else if(m[i][j]==-2) cout<<"# ";
+            else if(m[i][j]==-2) cout<<"X ";
             
             else if(m[i][j]==-1) cout<<". ";
             
@@ -58,7 +60,7 @@ void Stanza:: stampaMatrice(int m[18][18]){
 
 
 
-void Stanza::getMatrice(int m[18][18]){
+void Stanza::getMatrice(int m[MAXDIM][MAXDIM]){
     for(int i=0; i<dimensione; i++){
         for (int j=0; j<dimensione; j++){
             m[i][j]=matrice[i][j];
@@ -68,7 +70,7 @@ void Stanza::getMatrice(int m[18][18]){
 }
 
 
-void Stanza::setMatrice(int m[18][18]){
+void Stanza::setMatrice(int m[MAXDIM][MAXDIM]){
     for(int i=0; i<dimensione; i++){
         for (int j=0; j<dimensione; j++){
             matrice[i][j]=m[i][j];
@@ -88,20 +90,22 @@ void Stanza::mettiMuriContorno(){
 
 void Stanza::mettiPorte(int coll[4]){
 	// Ci penserà la Giulia, momentaneamente sono random
-	nPorte=rand()%4+1;
+	for (int i=0; i<4; i++){
+		if (coll[i]!=-1){
+			nPorte++;
+			porte[i]=rand()%(dimensione-2)+1;
+		}
+	}
 	
-	for (int i=0; i<nPorte; i++)
-		porte[i]=rand()%(dimensione-2)+1;
-		
-	matrice[porte[0]][0]=4;
-	if (nPorte>1) matrice[0][porte[1]]=4;
-	if (nPorte>2) matrice[porte[2]][dimensione-1]=4;
-	if (nPorte>3) matrice[dimensione-1][porte[3]]=4;
+	if (coll[0]!=-1) matrice[porte[0]][0]=4;
+	if (coll[1]!=-1) matrice[0][porte[1]]=4;
+	if (coll[2]!=-1) matrice[porte[2]][dimensione-1]=4;
+	if (coll[3]!=-1) matrice[dimensione-1][porte[3]]=4;
 	
 }
 
 bool Stanza::existPorta(int n){
-	return n<nPorte;
+	return porte[n]!=-1;
 }
 
 int Stanza::getPorta(int n){
@@ -114,6 +118,7 @@ void Stanza::link(int partenza, int arrivo, int type){
 	if (!type){
 		posx=1;
 		posy=partenza;
+		libero=posy;
 		arrivox=dimensione-2;
 		arrivoy=arrivo;
 	}else{
@@ -176,7 +181,7 @@ void Stanza::inserisciVia(){
 
 void Stanza::mettiMuri(){
 	//lo farà Vicci, momentaneamente random
-	int seed = rand() % 100000;
+	//int seed = rand() % 100000;
 	for (int i=1; i<(dimensione-1); i++){
 		for (int j=1; j<(dimensione-1); j++){
 			if (matrice[i][j]==-2){
@@ -195,6 +200,15 @@ void Stanza::riempiMuri(int x, int y){
 			riempiMuri(x,y+1);
 			riempiMuri(x,y-1);	
 		}
+}
+
+void Stanza::trasformaInterni(){
+	for (int i=1; i<dimensione-1; i++){
+		for (int j=1; j<dimensione-1; j++){
+			if (matrice[i][j]==-2)
+				matrice[i][j]=0;
+		}
+	}
 }
 
 int log(int n){
@@ -277,10 +291,10 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiPorte(coll);
 	inserisciVia();
 	mettiMuri();
-	riempiMuri(1,getPorta(0));
+	riempiMuri(1, libero);
+	trasformaInterni();
 	mettiMostri(nLiv);
 	mettiBauli(nLiv);
 	mettiVenditori(nLiv);
-
 }
 

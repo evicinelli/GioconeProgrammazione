@@ -12,7 +12,7 @@ Stanza Livello::getStanza(int id){
 }
 
 void Livello::setStanza(int id, Stanza* s){
-    int ma[18][18];
+    int ma[MAXDIM][MAXDIM];
     s->getMatrice(ma);
 	vettStanze[id].setMatrice(ma);
 }
