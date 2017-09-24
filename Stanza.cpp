@@ -10,7 +10,7 @@ Stanza::Stanza (){
     this->nMaxBauli=2;
     this->nMaxVenditori=2;
     this->nMaxMuri=0;
-    this->nPorte=0;
+    //this->nPorte=0;
     for (int i=0; i<4; i++) 
 		this->porte[i]=-1;
 }
@@ -91,16 +91,14 @@ void Stanza::mettiMuriContorno(){
 void Stanza::mettiPorte(int coll[4]){
 	// Ci penserà la Giulia, momentaneamente sono random
 	for (int i=0; i<4; i++){
-		if (coll[i]!=-1){
-			nPorte++;
+		if (coll[i]!=-1)
 			porte[i]=rand()%(dimensione-2)+1;
-		}
 	}
 	
-	if (coll[0]!=-1) matrice[porte[0]][0]=4;
-	if (coll[1]!=-1) matrice[0][porte[1]]=4;
-	if (coll[2]!=-1) matrice[porte[2]][dimensione-1]=4;
-	if (coll[3]!=-1) matrice[dimensione-1][porte[3]]=4;
+	if (coll[0]!=-1) matrice[0][porte[0]]=4;
+	if (coll[1]!=-1) matrice[dimensione-1][porte[1]]=4;
+	if (coll[2]!=-1) matrice[porte[2]][0]=4;
+	if (coll[3]!=-1) matrice[porte[3]][dimensione-1]=4;
 	
 }
 
@@ -112,7 +110,7 @@ int Stanza::getPorta(int n){
 	return porte[n];
 }
 
-void Stanza::link(int partenza, int arrivo, int type){
+void Stanza::link(int partenza, int arrivo, bool type){ //type=0:2->3, type=1:0->1
 	int prec, posx, posy, arrivox, arrivoy, direzione; //1 E, 2 S, 3 W, 4N 
 	prec=7;//valore nullo 7-4=3>+-2
 	if (!type){
@@ -166,16 +164,17 @@ void Stanza::link(int partenza, int arrivo, int type){
 		matrice[dimensione-2][i]=-3;
 		
 }
-//Sono necessarie 4 porte e porta 0 deve essere opposta a porta 2 (quindi anche per 1 e 3)
+//Sono necessarie 4 porte e porta 0 deve essere opposta a porta 1 (quindi anche per 2 e 3)
 void Stanza::inserisciVia(){
 	int partenza[2], arrivo[2];
-	for (int i=0; i<2; i++){
-		if (existPorta(i)) partenza[i]=getPorta(i);
-		else partenza[i]=rand()%(dimensione-2)+1;
+	for (int i=0; i<=2; i+=2){
+		if (existPorta(i)) partenza[i/2]=getPorta(i);
+		else partenza[i/2]=rand()%(dimensione-2)+1;
 		
-		if (existPorta(i+2)) arrivo[i]=getPorta(i+2);
-		else arrivo[i]=rand()%(dimensione-2)+1;
-		link(partenza[i], arrivo[i], i);
+		if (existPorta(i+1)) arrivo[i/2]=getPorta(i+1);
+		else arrivo[i/2]=rand()%(dimensione-2)+1;
+		link(partenza[i/2], arrivo[i/2], (i==0));
+		//cout << "ciao";
 	}
 }
 

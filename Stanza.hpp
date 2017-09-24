@@ -18,7 +18,6 @@ protected:
     int nMaxBauli;
     int nMaxVenditori;
     int nMaxMuri;
-    int nPorte; 
     int porte[4]; //Giulia se per te è scomodo gestire le porte così (lo è anche per me), lo tolgo e lo metto come dici tu
     int libero; //mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri 
 public:
@@ -52,7 +51,7 @@ private:
 	
 	int getPorta(int n);
 	
-	void link(int partenza, int arrivo, int type);
+	void link(int partenza, int arrivo, bool type);
 	
 	void inserisciVia();
 	
