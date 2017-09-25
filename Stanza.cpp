@@ -4,14 +4,13 @@
 
 Stanza::Stanza (){
     srand(time(0));
-    this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
-    inizializzaMatrice(this->matrice);
+
     this->nMaxMostri=6;
     this->nMaxBauli=2;
     this->nMaxVenditori=2;
     this->nMaxMuri=0;
     //this->nPorte=0;
-    for (int i=0; i<4; i++) 
+    for (int i=0; i<4; i++)
 		this->porte[i]=-1;
 }
 
@@ -33,23 +32,23 @@ void Stanza:: inizializzaMatrice(int m[MAXDIM][MAXDIM]){
 void Stanza:: stampaMatrice(int m[MAXDIM][MAXDIM]){
     for(int i=0; i<dimensione; i++){
         for (int j=0; j<dimensione; j++){
-			
+
 			if (m[i][j]==4) cout<<"@ ";
-			
+
 			else if (m[i][j]==3) cout<<"B ";
-			
+
 			else if (m[i][j]==2) cout<<"V ";
-			
+
 			else if (m[i][j]==1) cout<<"M ";
-			
+
 			else if(m[i][j]==-3) cout<<". ";
-			
+
             else if(m[i][j]==-2) cout<<"X ";
-            
+
             else if(m[i][j]==-1) cout<<". ";
-            
+
 			else if (m[i][j]==0) cout<<"# ";
-            
+
             else cout<<m[i][j]<<"   ";
 
         }
@@ -94,12 +93,12 @@ void Stanza::mettiPorte(int coll[4]){
 		if (coll[i]!=-1)
 			porte[i]=rand()%(dimensione-2)+1;
 	}
-	
+
 	if (coll[0]!=-1) matrice[0][porte[0]]=4;
 	if (coll[1]!=-1) matrice[dimensione-1][porte[1]]=4;
 	if (coll[2]!=-1) matrice[porte[2]][0]=4;
 	if (coll[3]!=-1) matrice[porte[3]][dimensione-1]=4;
-	
+
 }
 
 bool Stanza::existPorta(int n){
@@ -111,7 +110,7 @@ int Stanza::getPorta(int n){
 }
 
 void Stanza::link(int partenza, int arrivo, bool type){ //type=0:2->3, type=1:0->1
-	int prec, posx, posy, arrivox, arrivoy, direzione; //1 E, 2 S, 3 W, 4N 
+	int prec, posx, posy, arrivox, arrivoy, direzione; //1 E, 2 S, 3 W, 4N
 	prec=7;//valore nullo 7-4=3>+-2
 	if (!type){
 		posx=1;
@@ -137,10 +136,10 @@ void Stanza::link(int partenza, int arrivo, bool type){ //type=0:2->3, type=1:0-
 			prec=direzione;
 			posy++;
 		}else if (direzione==3 && posx>1){
-			prec=direzione; 
+			prec=direzione;
 			posx--;
 		}else if (direzione==4 && posy>1){
-			prec=direzione; 
+			prec=direzione;
 			posy--;
 		}
 		matrice[posy][posx]=-3;
@@ -156,13 +155,13 @@ void Stanza::link(int partenza, int arrivo, bool type){ //type=0:2->3, type=1:0-
 		arrivox=posx;
 		posx=temp;
 	}
-	
+
 	for (int i=posy;i<arrivoy;i++)
 		matrice[i][dimensione-2]=-3;
 
 	for (int i=posx;i<arrivox;i++)
 		matrice[dimensione-2][i]=-3;
-		
+
 }
 //Sono necessarie 4 porte e porta 0 deve essere opposta a porta 1 (quindi anche per 2 e 3)
 void Stanza::inserisciVia(){
@@ -170,7 +169,7 @@ void Stanza::inserisciVia(){
 	for (int i=0; i<=2; i+=2){
 		if (existPorta(i)) partenza[i/2]=getPorta(i);
 		else partenza[i/2]=rand()%(dimensione-2)+1;
-		
+
 		if (existPorta(i+1)) arrivo[i/2]=getPorta(i+1);
 		else arrivo[i/2]=rand()%(dimensione-2)+1;
 		link(partenza[i/2], arrivo[i/2], (i==0));
@@ -197,7 +196,7 @@ void Stanza::riempiMuri(int x, int y){
 			riempiMuri(x+1,y);
 			riempiMuri(x-1,y);
 			riempiMuri(x,y+1);
-			riempiMuri(x,y-1);	
+			riempiMuri(x,y-1);
 		}
 }
 
@@ -216,7 +215,7 @@ int log(int n){
 }
 
 void Stanza::mettiMostri(int livello){
-	
+
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxMostri>0; j++){
 			if (matrice[i][j]==-1){
@@ -240,7 +239,7 @@ int Stanza::nVicini(int x, int y){
 }
 
 void Stanza::mettiBauli(int livello){
-	
+
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxBauli>0; j++){
 			if (matrice[i][j]==-1){
@@ -254,11 +253,11 @@ void Stanza::mettiBauli(int livello){
 			}
 		}
 	}
-	
+
 }
 
 void Stanza::mettiVenditori(int livello){
-	
+
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxVenditori>0; j++){
 			if (matrice[i][j]==-1){
@@ -271,7 +270,7 @@ void Stanza::mettiVenditori(int livello){
 			}
 		}
 	}
-	
+
 }
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	 /**
@@ -286,6 +285,9 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
         4 -> porta : le posizioni delle porte (numero di porte è in base al numero di collegamenti) vengono scelte in base al lato dove sono
                      presenti i collegamenti, in qualsiasi riquadro del lato corrispondente
     */
+    this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
+    inizializzaMatrice(this->matrice);
+
 	mettiMuriContorno();
 	mettiPorte(coll);
 	inserisciVia();
@@ -295,5 +297,7 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiMostri(nLiv);
 	mettiBauli(nLiv);
 	mettiVenditori(nLiv);
+
+	this->stampaMatrice(this->matrice);
 }
 
