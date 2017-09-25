@@ -14,6 +14,7 @@ class Arma
         double dexMult;      //moltiplicatore di destrezza (quanto influisce sul danno)
         std::string tipologia;
         std::string nome;
+        bool disponibile;
     public:
         Arma();
         Arma(int lev, std::string type);
@@ -26,6 +27,8 @@ class Arma
         double getDexMult();
         double getDropRate();
         std::string getNome();
+        void scarta();
+        bool isAvailable();
 
 };
 

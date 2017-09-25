@@ -1,5 +1,6 @@
 #ifndef PERSONAGGIO_HPP_INCLUDED
 #define PERSONAGGIO_HPP_INCLUDED
+#define AZIONE 5
 #include <string>
 #include "Arma.hpp"
 #include <stdlib.h>
@@ -18,12 +19,14 @@ class Personaggio
         void setCon(int x);
         void setLuck(int x);
         void setHp(int x);
+        void setAct(int x);
         int getStr();
         int getDex();
         int getCon();
         int getLuck();
         int getHp();
         int getHpmax();
+        int getAct();
         Arma getEquip();
         void attacca(Personaggio p);
 

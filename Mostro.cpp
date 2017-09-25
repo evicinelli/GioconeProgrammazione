@@ -2,7 +2,7 @@
 
 Mostro::Mostro(int level, std::string race)
 {
-    act=5;
+    act=AZIONE;
     lev=level;
     srand(time(0));
     double n;               //fattore casuale nelle statistiche del mostro
@@ -63,7 +63,25 @@ char Mostro::getId()
 }
 
 
-void morte(Personaggio p)
+void Mostro::morte(Giocatore g)
 {
-
+        //da implementare drop, esperienza e oro
+        double prob=100*((double)rand()/RAND_MAX);
+        int gold=lev*15+(int)(g.getLuck()*3.5);
+        double drop=equip.getDropRate()+(0.2*g.getLuck());
+        int expGain=lev*30+g.getLuck()*5;
+        g.addOro(gold);
+        g.addExp(expGain);
+        if (prob<=drop)                         //da controllare il funzionamento nel gioco reale
+        {
+            int i=0;
+            while (g.getInv(i).isAvailable())
+            {
+                i++;
+            }
+            if (i<MAX_ITEM)
+            {
+                g.setInv(i,equip);
+            }
+        }
 }

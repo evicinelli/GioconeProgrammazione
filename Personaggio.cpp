@@ -27,6 +27,10 @@ void Personaggio::setHp(int x)
 {
     hp=x;
 }
+void Personaggio::setAct(int x)
+{
+    act=x;
+}
 int Personaggio::getStr()
 {
     return str;
@@ -54,6 +58,10 @@ int Personaggio::getHpmax()
 Arma Personaggio::getEquip()
 {
     return equip;
+}
+int Personaggio::getAct()
+{
+    return act;
 }
 void Personaggio::attacca(Personaggio p)
 {

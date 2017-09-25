@@ -2,6 +2,7 @@
 
 Arma::Arma()
 {
+    disponibile=false;
 }
 Arma::Arma(int lev, std::string type)
 {
@@ -39,6 +40,9 @@ Arma::Arma(int lev, std::string type)
     sprintf(buf,"%d",r);
     maxdanno=mindanno+(3*r);
     nome=type+" con random = "+buf;
+    disponibile=true;
+    droprate=30;
+
 }
 int Arma::getMin()
 {
@@ -77,4 +81,12 @@ double Arma::getDropRate()
 std::string Arma::getNome()
 {
     return nome;
+}
+void Arma::scarta()
+{
+    disponibile=false;
+}
+bool Arma::isAvailable()
+{
+    return disponibile;
 }

@@ -1,7 +1,7 @@
 #ifndef MOSTRO_HPP
 #define MOSTRO_HPP
 
-#include "Personaggio.hpp"
+#include "Giocatore.hpp"
 
 class Mostro : public Personaggio
 {
@@ -11,7 +11,7 @@ class Mostro : public Personaggio
     public:
         Mostro(int lev, std::string race);
         char getId();
-        void morte(Personaggio p);    //metodo chiamato quando p uccide il mostro
+        void morte(Giocatore g);    //metodo chiamato quando g uccide il mostro
 };
 
 #endif // MOSTRO_HPP
