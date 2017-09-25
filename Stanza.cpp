@@ -4,13 +4,12 @@
 
 Stanza::Stanza (){
     srand(time(0));
-
     this->nMaxMostri=6;
     this->nMaxBauli=2;
     this->nMaxVenditori=2;
     this->nMaxMuri=0;
     //this->nPorte=0;
-    for (int i=0; i<4; i++)
+    for (int i=0; i<4; i++) 
 		this->porte[i]=-1;
 }
 
@@ -287,7 +286,7 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
     */
     this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
     inizializzaMatrice(this->matrice);
-
+    
 	mettiMuriContorno();
 	mettiPorte(coll);
 	inserisciVia();
@@ -295,8 +294,7 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	riempiMuri(1, libero);
 	trasformaInterni();
 	mettiMostri(nLiv);
-	mettiBauli(nLiv);
-	mettiVenditori(nLiv);
+	mettiBauli(nLiv);	
 
 	this->stampaMatrice(this->matrice);
 }
