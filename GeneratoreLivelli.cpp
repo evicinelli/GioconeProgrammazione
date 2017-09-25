@@ -21,6 +21,10 @@ void GeneratoreLivelli::riempiVettStanze(Livello* l){
         per fare in modo di mettere le porte anche per il passaggio di livello prendiamo il vettore delle stanze del livello
         e passiamo al metodo riempi matrice tale vettore con -2 nelle posizioni del cambio di livello e il numero del livello
     */
+    
+    for(int i=0; i<l->getNStanze(); i++){
+        l->setMatriceStanza(i);
+    }
 }
 
 void GeneratoreLivelli::controllaAvail(bool avail[4],Livello* l){

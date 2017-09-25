@@ -7,6 +7,29 @@ Livello::Livello (int n){
 	//cout<<vettColl<<endl;
 }
 
+void Livello::setMatriceStanza(int id){
+    int vett [4];
+    this->getAdiacenze(id,vett);
+    if(this->getNStanze()==1){
+        vett[0]=-2;
+    }
+    else{
+        if(id==0){
+            vett[1]=-2;
+        }
+        else if(id==this->getNStanze()-1){
+            vett[0]=-2;
+        }
+    }
+
+    for(int i=0; i<4; i++){
+        cout<<vett[i]<<"  ";
+    }
+    cout<<endl;
+
+    vettStanze[id].riempiMatrice(this->nStanze, vett);
+}
+
 Stanza Livello::getStanza(int id){
 	return vettStanze[id];
 }

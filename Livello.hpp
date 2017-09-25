@@ -34,6 +34,9 @@ public:
 		Metodo che restituisce il puntatore alla stanza in base all'intero passato
 		come parametro
 		*/
+        
+        void setMatriceStanza(int id);
+        
 	Stanza getStanza(int id);
 
 	void setStanza(int id, Stanza* s);
