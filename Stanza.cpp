@@ -4,6 +4,7 @@
 
 Stanza::Stanza (){
     srand(time(0));
+    this->dimensione=0;
     this->nMaxMostri=6;
     this->nMaxBauli=2;
     this->nMaxVenditori=2;
@@ -11,6 +12,10 @@ Stanza::Stanza (){
     //this->nPorte=0;
     for (int i=0; i<4; i++) 
 		this->porte[i]=-1;
+}
+
+int Stanza::getDimensione(){
+	return this->dimensione;
 }
 
 int buildWall(double p)
@@ -296,6 +301,6 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiMostri(nLiv);
 	mettiBauli(nLiv);	
 
-	this->stampaMatrice(this->matrice);
+	//this->stampaMatrice(this->matrice);
 }
 

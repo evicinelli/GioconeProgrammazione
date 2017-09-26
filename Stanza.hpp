@@ -27,6 +27,7 @@ public:
 	*/
 	Stanza();
 
+	int getDimensione();
 
     void inizializzaMatrice(int m[MAXDIM][MAXDIM]);
 

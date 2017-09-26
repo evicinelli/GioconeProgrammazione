@@ -42,8 +42,11 @@ int main()
 
     //cout<<gestore.getLevN();
 	*/
-	Drawer d = Drawer();
-	d.disegna();
+	
+	Stanza* st= new Stanza();
+    int c[4]={-1,2,9,-2};
+    st->riempiMatrice(50,c);
+	Drawer d = Drawer(st);
 	
 	
 	return 0;
