@@ -1,8 +1,8 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <iostream>
-#define MAXDIM 20
-#define MINDIM 14
+#define MAXDIM 24
+#define MINDIM 20
 using namespace std;
 
 #ifndef STANZA_HPP_INCLUDED
@@ -12,7 +12,7 @@ using namespace std;
 class Stanza{
 
 protected:
-    int matrice [20][20];
+    int matrice [MAXDIM][MAXDIM];
     int dimensione;
     int nMaxMostri;
     int nMaxBauli;

@@ -1,4 +1,7 @@
 #include "Drawer.hpp"
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <stdio.h>
 
 Drawer::Drawer(Stanza* s){
 	disegna(s);
@@ -39,24 +42,31 @@ void Drawer::disegnaStanza(Stanza* s, WINDOW* win){
 
 void Drawer::disegna(Stanza* s){
 	
+    struct winsize w;
+    int centerx, centery;
 	WINDOW *win1, *win2, *win3, *win4, *win5;
 	
 	initscr();
 	raw();
 	noecho();
 	refresh();
-	
-	win1 = creaWin(12+MAXDIM, 20, 0, 0);
-	win2 = creaWin(5, 22+MAXDIM , 0, 20);
-	win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , 5, 20);
-	win4 = creaWin(5, 22+MAXDIM , 27, 20);
-	win5 = creaWin(12+MAXDIM, 20, 0, 62);
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    
+	centery=w.ws_row/2-1;
+	centerx=w.ws_col/2-1;
+	win1 = creaWin(12+MAXDIM, 20, centery-(MAXDIM/2+5), centerx-(MAXDIM+20));
+	win2 = creaWin(5, 2*MAXDIM+2 , centery-(MAXDIM/2+5), centerx-MAXDIM);
+	win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
+	win4 = creaWin(5, 2*MAXDIM+2, centery+MAXDIM/2+2, centerx-MAXDIM);
+	win5 = creaWin(12+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
 	
 	disegnaStanza(s, win3);
 	
 	char c=getch();
 	endwin();
-	
+
+    printf ("lines %d\n", w.ws_row);
+    printf ("columns %d\n", w.ws_col);
 }
 
 
