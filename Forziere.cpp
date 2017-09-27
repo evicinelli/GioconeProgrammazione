@@ -7,15 +7,15 @@ Forziere::Forziere(int lev)
     int r=(int)rand()%3;
     switch (r)
     {
-        case 0:
-            interno=Arma(lev,"spada");
-            break;
-        case 1:
-            interno=Arma(lev,"mazza");
-            break;
-        case 2:
-            interno=Arma(lev,"pugnale");
-            break;
+    case 0:
+        interno=Arma(lev,"spada");
+        break;
+    case 1:
+        interno=Arma(lev,"mazza");
+        break;
+    case 2:
+        interno=Arma(lev,"pugnale");
+        break;
     }
 
 }

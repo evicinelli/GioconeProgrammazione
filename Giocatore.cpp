@@ -56,19 +56,19 @@ void Giocatore::levelup(int stat)
 {
     switch(stat)
     {
-        case 1:
-            str++;
-            break;
-        case 2:
-            dex++;
-            break;
-        case 3:
-            con++;
-            hpmax+=20;
-            break;
-        case 4:
-            luck++;
-            break;
+    case 1:
+        str++;
+        break;
+    case 2:
+        dex++;
+        break;
+    case 3:
+        con++;
+        hpmax+=20;
+        break;
+    case 4:
+        luck++;
+        break;
     }
     hp=hpmax;
     lev++;

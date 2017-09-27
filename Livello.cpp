@@ -2,7 +2,7 @@
 #include "stdio.h"
 Livello::Livello (int n){
 	nStanze=n;
-	vettStanze= new Stanza [nStanze+2];
+    vettStanze= new Stanza [nStanze+2];
 	vettColl= new Collegamento[nStanze];
 	//cout<<vettColl<<endl;
 }

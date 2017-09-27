@@ -17,6 +17,9 @@ int main()
 
 	/*
     GestoreLivelli gestore = GestoreLivelli();
+  /*  GestoreLivelli gestore = GestoreLivelli();
+
+>>>>>>> Stashed changes
 	cout<<"Livello 2"<<endl;
 	gestore.creaLivello(gestore.getLevN() + 1);
 	cout<<"Livello 3"<<endl;
@@ -27,6 +30,7 @@ int main()
 
 	gestore.creaLivello(gestore.getLevN() + 1);
 
+<<<<<<< Updated upstream
 	gestore.creaLivello(gestore.getLevN() + 1);
 
 	gestore.creaLivello(gestore.getLevN() + 1);
@@ -52,3 +56,4 @@ int main()
 	
 	return 0;
 }
+
