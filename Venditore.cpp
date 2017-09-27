@@ -21,15 +21,15 @@ void Venditore::riempi(int a, int lev)
     int r=(int)rand()%3;
     switch (r)
     {
-        case 0:
-            vendita[a]=Arma(lev,"spada");
-            break;
-        case 1:
-            vendita[a]=Arma(lev,"mazza");
-            break;
-        case 2:
-            vendita[a]=Arma(lev,"pugnale");
-            break;
+    case 0:
+        vendita[a]=Arma(lev,"spada");
+        break;
+    case 1:
+        vendita[a]=Arma(lev,"mazza");
+        break;
+    case 2:
+        vendita[a]=Arma(lev,"pugnale");
+        break;
     }
 }
 
@@ -58,7 +58,8 @@ void Venditore::vendi(Giocatore g, int n)
             }
 
         }
-    } else if (n==3)
+    }
+    else if (n==3)
     {
         if (gold>costopot)
         {

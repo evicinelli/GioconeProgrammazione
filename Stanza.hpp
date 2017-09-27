@@ -9,7 +9,8 @@ using namespace std;
 
 #define STANZA_HPP_INCLUDED
 
-class Stanza{
+class Stanza
+{
 
 protected:
     int matrice [MAXDIM][MAXDIM];
@@ -40,38 +41,37 @@ public:
 
     void setMatrice(int m[MAXDIM][MAXDIM]);
 
-	int getColl(int n);
-	
+    int getColl(int n);
     void riempiMatrice(int nLiv, int coll [4]);
-    
+
 
 private:
 
-	void mettiMuriContorno();
-	
-	void mettiPorte(int coll[4]);
-	
-	bool existPorta(int n);
-	
-	int getPorta(int n);
-	
-	void link(int partenza, int arrivo, bool type);
-	
-	void inserisciVia();
-	
-	void mettiMuri();
-	
-	void riempiMuri(int x, int y);
-	
-	void trasformaInterni();
-	
-	int nVicini(int y, int x);
-	
-	void mettiMostri(int livello);
-	
-	void mettiBauli(int livello);
-	
-	void mettiVenditori(int livello);
+    void mettiMuriContorno();
+
+    void mettiPorte(int coll[4]);
+
+    bool existPorta(int n);
+
+    int getPorta(int n);
+
+    void link(int partenza, int arrivo, bool type);
+
+    void inserisciVia();
+
+    void mettiMuri();
+
+    void riempiMuri(int x, int y);
+
+    void trasformaInterni();
+
+    int nVicini(int y, int x);
+
+    void mettiMostri(int livello);
+
+    void mettiBauli(int livello);
+
+    void mettiVenditori(int livello);
 
 };
 

@@ -9,11 +9,12 @@ using namespace std;
 
 #ifndef GENERATORELIVELLI_HPP_INCLUDED
 #define GENERATORELIVELLI_HPP_INCLUDED
-class GeneratoreLivelli{
+class GeneratoreLivelli
+{
 private:
-     /**
+    /**
 
-     PRECONDIZIONE NON CONTROLLATA: PUNTATORE A LIVELLO NON NULLO
+    PRECONDIZIONE NON CONTROLLATA: PUNTATORE A LIVELLO NON NULLO
     -crea vettore delle stanze
     -crea collegamenti
     */
@@ -29,15 +30,15 @@ private:
 
 public:
     GeneratoreLivelli();
-	/**
-	Costruisce il livello, inizializzando in maniera coerente
-	le strutture dati del livello
-	*/
+    /**
+    Costruisce il livello, inizializzando in maniera coerente
+    le strutture dati del livello
+    */
 
     void popolaLivello (Livello* l);
     void stampaCollegamenti(Livello* l);
     void inizializzaVettColl(Livello* l);
- // Logica del collegamento al livello precedente
+// Logica del collegamento al livello precedente
     void collegaLivelloPrec(Livello* l1, Livello* l2);
 
 };
