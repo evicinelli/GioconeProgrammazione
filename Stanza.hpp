@@ -1,7 +1,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <iostream>
-#define MAXDIM 24
+#define MAXDIM 24	
 #define MINDIM 20
 using namespace std;
 
@@ -19,6 +19,7 @@ protected:
     int nMaxVenditori;
     int nMaxMuri;
     int porte[4]; //Giulia se per te è scomodo gestire le porte così (lo è anche per me), lo tolgo e lo metto come dici tu
+    int collegamento[4];
     int libero; //mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri 
 public:
 
@@ -38,6 +39,8 @@ public:
     void getMatrice(int m[MAXDIM][MAXDIM]);
 
     void setMatrice(int m[MAXDIM][MAXDIM]);
+
+	int getColl(int n);
 	
     void riempiMatrice(int nLiv, int coll [4]);
     

@@ -92,7 +92,7 @@ void Stanza::mettiMuriContorno(){
 }
 
 void Stanza::mettiPorte(int coll[4]){
-	// Ci penserà la Giulia, momentaneamente sono random
+	
 	for (int i=0; i<4; i++){
 		if (coll[i]!=-1)
 			porte[i]=rand()%(dimensione-2)+1;
@@ -103,6 +103,9 @@ void Stanza::mettiPorte(int coll[4]){
 	if (coll[2]!=-1) matrice[porte[2]][0]=4;
 	if (coll[3]!=-1) matrice[porte[3]][dimensione-1]=4;
 
+	//riempie collegamento
+	for (int i=0; i<4; i++)
+		collegamento[i]=coll[i];
 }
 
 bool Stanza::existPorta(int n){
@@ -223,7 +226,7 @@ void Stanza::mettiMostri(int livello){
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxMostri>0; j++){
 			if (matrice[i][j]==-1){
-				int den=1000/(log(livello)+14);
+				int den=1500/(log(livello)+14);
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=1;
@@ -260,6 +263,7 @@ void Stanza::mettiBauli(int livello){
 
 }
 
+
 void Stanza::mettiVenditori(int livello){
 
 	for(int i=0; i<(dimensione-1); i++){
@@ -276,6 +280,11 @@ void Stanza::mettiVenditori(int livello){
 	}
 
 }
+
+int Stanza::getColl(int n){
+	return collegamento[n];
+}
+
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	 /**
 		-3 -> strada
