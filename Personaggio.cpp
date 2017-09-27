@@ -59,10 +59,19 @@ Arma Personaggio::getEquip()
 {
     return equip;
 }
+int Personaggio::getLev()
+{
+    return lev;
+}
+int Personaggio::getExp() 
+{
+	return exp;
+}
 int Personaggio::getAct()
 {
     return act;
 }
+
 void Personaggio::attacca(Personaggio p)
 {
     srand(time(0));

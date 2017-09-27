@@ -3,6 +3,7 @@
 #define MAX_ITEM 3
 #define MAX_POTION 10
 #include "Personaggio.hpp"
+#include "Giocatore.hpp"
 
 class Giocatore : public Personaggio
 {
@@ -14,6 +15,7 @@ class Giocatore : public Personaggio
     public:
         Giocatore();
         int getOro();
+        int getNextExp();
         int getPot();
         void addPot();
         Arma getInv(int n);

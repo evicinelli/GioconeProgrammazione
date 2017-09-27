@@ -27,6 +27,8 @@ class Personaggio
         int getHp();
         int getHpmax();
         int getAct();
+        int getLev();
+        int getExp();
         Arma getEquip();
         void attacca(Personaggio p);
 

@@ -3,8 +3,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
-Drawer::Drawer(Stanza* s, Personaggio* p){
-	disegna(s, p);
+Drawer::Drawer(Stanza* s, Giocatore* g){
+	disegna(s, g);
 }
 
 
@@ -16,62 +16,98 @@ WINDOW* creaWin(int height, int width, int starty, int startx){
 }
 
 void Drawer::disegnaStanza(Stanza* s, WINDOW* win){
+  
+    int posy;
+    int posx;
 	int dim=s->getDimensione();
 	int m[MAXDIM][MAXDIM], in;
 	double inizio;
+	
+	wprintw(win, "STANZA");
 	s->getMatrice(m);
 	inizio=(MAXDIM-dim)/2.0;
-    for(int i=(int)inizio; i<dim+(int)inizio; i++){
-        for (int j=(int)(2.0*inizio); j<(int)(2.0*(dim+inizio)); j+=2){
-			in=(int)inizio;	
-			switch(m[i-in][(j-2*in)/2])
+	posy=(int)inizio+1;
+	posx=(int)(2*inizio)+1;
+    for (int i=0; i<dim; i++){
+		for (int j=0; j<dim; j++){
+			wmove(win, posy, posx);
+			switch(m[i][j])
 			{
 				case(-3):
-					mvwaddch(win, i+1, j+1, '.');
+					waddch(win, ' ');
 					break;
 				case(-2):
-					mvwaddch(win, i+1, j+1, 'X');
+					waddch(win, 'X');
 					break;
 				case(-1):
-					mvwaddch(win, i+1, j+1, '.');
+					waddch(win, ' ');
 					break;
 				case(0):
-					mvwaddch(win, i+1, j+1, (char)198);
-					mvwaddch(win, i+1, j+2, (char)198);
+					//waddch(win, '#');
+					waddch(win, (char)198);
+					waddch(win, (char)198);
 					break;
 				case(1):
-					mvwaddch(win, i+1, j+1, 'M');
+					waddch(win, 'M');
 					break;
 				case(2):
-					mvwaddch(win, i+1, j+1, 'V');
+					waddch(win, 'V');
 					break;
 				case(3):
-					mvwaddch(win, i+1, j+1, 'B');
+					waddch(win, 'B');
 					break;
 				case(4):
 					int p; //in quale porta sono?
-					if (i-in==0) p=0;
-					else if (i-in==(s->getDimensione()-1)) p=1;
-					else if ((j-2*in)==0) p=2;
+					//p=0;
+					if (i==0) p=0;
+					else if (i==(s->getDimensione()-1)) p=1;
+					else if (j==0) p=2;
 					else p=3;
 					if (s->getColl(p)!=-2)
-						mvwaddch(win, i+1, j+1, (char)(s->getColl(p)+48));
+						waddch(win, (char)(s->getColl(p)+48));
 					else
-						mvwaddch(win, i+1, j+1, 'L');
+						waddch(win, 'L');
 					break;
 				default:
 					break;
-			}
-        }
-    }
+				}
+				posx+=2;
+		}
+		posx=(int)(2*inizio)+1;
+		posy++;
+	}
     wrefresh(win);
 	
 }
-void Drawer::disegnaStat(Personaggio* p, WINDOW* win){
-	
+void Drawer::disegnaStat(Giocatore* g, WINDOW* win){
+	int posy=2;
+	wprintw(win, "PERSONAGGIO");
+	wmove(win,posy,2);
+	wprintw(win, "LIVELLO %d", g->getLev()); wmove(win,posy+=3,2);
+	wprintw(win, "HP %d/%d", g->getHp(), g->getHpmax()); wmove(win,posy+=2,2);
+	wprintw(win, "GOLD %d", g->getOro()); wmove(win,posy+=2,2);
+	wprintw(win, "STR %d", g->getStr()); wmove(win,posy+=2,2);
+	wprintw(win, "DEX %d", g->getDex()); wmove(win,posy+=2,2);
+	wprintw(win, "CON %d", g->getCon()); wmove(win,posy+=2,2);
+	wprintw(win, "LUCK %d", g->getLuck()); wmove(win,posy+=2,2);
+	wprintw(win, "EXP %d/%d", g->getExp(), g->getNextExp()); wmove(win,posy+=2,2);
+	wprintw(win, "ACT %d/%d", g->getAct(), AZIONE); wmove(win,posy+=2,2);
+	wrefresh(win);
 }
-
-void Drawer::disegna(Stanza* s, Personaggio* p){
+void Drawer::disegnaEquip(Giocatore* g, WINDOW* win){	
+	
+	wprintw(win, "ZAINO");
+	wmove(win,2,2);
+	wprintw(win, "EQUIPAGGIAMENTO");
+	for (int i=0; i<MAX_ITEM; i++){
+		wmove(win,2*i+3,2);
+		wprintw(win, g->getInv(i).getNome().c_str());
+	}
+	wmove(win,2*MAX_ITEM+3,2);
+	wprintw(win, "POZIONI %d", g->getPot());
+	wrefresh(win);
+}
+void Drawer::disegna(Stanza* s, Giocatore* g){
 	
     struct winsize w;
     int centerx, centery;
@@ -92,12 +128,10 @@ void Drawer::disegna(Stanza* s, Personaggio* p){
 	win5 = creaWin(12+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
 	
 	disegnaStanza(s, win3);
-	disegnaStat(p, win1);
+	disegnaStat(g, win1);
+	disegnaEquip(g, win5);
 	char c=getch();
 	endwin();
-
-    printf ("lines %d\n", w.ws_row);
-    printf ("columns %d\n", w.ws_col);
 }
 
 

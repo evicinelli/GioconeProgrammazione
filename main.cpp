@@ -44,7 +44,7 @@ int main()
 	*/
 	
 	Stanza* st= new Stanza();
-	Personaggio* player=new Personaggio();
+	Giocatore* player=new Giocatore();
     int c[4]={-1,2,9,-2};
     st->riempiMatrice(50,c);
 	Drawer d = Drawer(st, player);

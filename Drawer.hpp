@@ -1,7 +1,8 @@
 #include <iostream>
 #include <ncurses.h>
 #include "Stanza.hpp"
-#include "Personaggio.hpp"
+#include "Giocatore.hpp"
+#include "Arma.hpp"
 using namespace std;
 
 class Drawer{
@@ -9,9 +10,10 @@ class Drawer{
 		//Stanza* stanza;
 	
 	public:
-		Drawer(Stanza* s, Personaggio* p);
-		void disegna(Stanza* s, Personaggio* p);
+		Drawer(Stanza* s, Giocatore* g);
+		void disegna(Stanza* s, Giocatore* g);
 		void disegnaStanza(Stanza* s, WINDOW* win);
-		void disegnaStat(Personaggio* p, WINDOW* win);
+		void disegnaStat(Giocatore* g, WINDOW* win);
+		void disegnaEquip(Giocatore* g, WINDOW* win);
 	
 };
