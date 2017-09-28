@@ -126,11 +126,6 @@ void Drawer::disegna(int idStanza, Giocatore* g, Livello* l){
     struct winsize w;
     int centerx, centery;
 	WINDOW *win1, *win2, *win3, *win4, *win5;
-	
-	initscr();
-	raw();
-	noecho();
-	refresh();
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     
 	centery=w.ws_row/2-1;

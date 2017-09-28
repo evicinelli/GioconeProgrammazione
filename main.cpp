@@ -4,7 +4,7 @@
 #include <time.h>       /* time */
 #include "GeneratoreLivelli.hpp"
 #include "GestoreLivelli.hpp"
-#include "Drawer.hpp"
+#include "Controller.hpp"
 using namespace std;
 
 int main()
@@ -17,7 +17,6 @@ int main()
 
 	
     GestoreLivelli gestore = GestoreLivelli();
-    Livello* l = gestore.creaLivello(2);
   /*  GestoreLivelli gestore = GestoreLivelli();
 
 >>>>>>> Stashed changes
@@ -53,8 +52,9 @@ int main()
     //int c[4]={-1,2,9,-2};
     //st->riempiMatrice(50,c);
     //l->setStanza(1, st);
-	Drawer d = Drawer();
-	d.disegna(0, player, l);
+	Controller c = Controller(gestore, player);
+	c.gioca();
+	//d.disegna(0, player, l);
 	
 	return 0;
 }
