@@ -5,7 +5,30 @@
 #include "GeneratoreLivelli.hpp"
 #include "GestoreLivelli.hpp"
 #include "Controller.hpp"
+#include <string.h>
 using namespace std;
+
+void print_in_middle(WINDOW *win, int starty, int startx, int width, char *st)
+{	int length, x, y;
+	float temp;
+
+	if(win == NULL)
+		win = stdscr;
+	getyx(win, y, x);
+	if(startx != 0)
+		x = startx;
+	if(starty != 0)
+		y = starty;
+	if(width == 0)
+		width = 80;
+
+
+	length = strlen(st);
+	temp = (width - length)/ 2;
+	x = startx + (int)temp;
+	mvwprintw(win, y, x, "%s", st);
+
+}
 
 int main()
 {
@@ -15,7 +38,7 @@ int main()
 
     //Creazione e collegamento fino al terzo livello
 
-	
+
     GestoreLivelli gestore = GestoreLivelli();
   /*  GestoreLivelli gestore = GestoreLivelli();
 
@@ -46,7 +69,7 @@ int main()
 
     //cout<<gestore.getLevN();
 	*/
-	
+
 	//Stanza* st= new Stanza();
 	Giocatore* player=new Giocatore();
     //int c[4]={-1,2,9,-2};
@@ -55,7 +78,8 @@ int main()
 	Controller c = Controller(gestore, player);
 	c.gioca();
 	//d.disegna(0, player, l);
-	
+
 	return 0;
 }
+
 

@@ -31,6 +31,7 @@ class Personaggio
         int getExp();
         Arma getEquip();
         void attacca(Personaggio p);
+
 };
 
 #endif // PERSONAGGIO_HPP_INCLUDED

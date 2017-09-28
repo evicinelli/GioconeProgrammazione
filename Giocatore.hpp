@@ -29,6 +29,7 @@ class Giocatore : public Personaggio
         void usaPozione();
         void morte();                       //metodo forse non necessario; dovrebbe chiamare la schermata di sconfitta
 
+
 };
 
 #endif // GIOCATORE_HPP_INCLUDED

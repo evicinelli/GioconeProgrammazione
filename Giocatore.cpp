@@ -24,6 +24,7 @@ int Giocatore::getNextExp()
 {
 	return nextLevExp;
 }
+
 int Giocatore::getPot()
 {
     return pot;
