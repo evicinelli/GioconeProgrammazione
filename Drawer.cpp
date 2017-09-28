@@ -103,7 +103,7 @@ void Drawer::disegnaEquip(Giocatore* g, WINDOW* win){
 		wmove(win,2*i+3,2);
 		wprintw(win, g->getInv(i).getNome().c_str());
 	}
-	wmove(win,2*MAX_ITEM+3,2);
+	wmove(win,2*MAX_ITEM+3	,2);
 	wprintw(win, "POZIONI %d", g->getPot());
 	wrefresh(win);
 }
@@ -121,16 +121,17 @@ void Drawer::disegna(Stanza* s, Giocatore* g){
     
 	centery=w.ws_row/2-1;
 	centerx=w.ws_col/2-1	;
-	win1 = creaWin(12+MAXDIM, 20, centery-(MAXDIM/2+5), centerx-(MAXDIM+20));
+	win1 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx-(MAXDIM+20));
 	win2 = creaWin(5, 2*MAXDIM+2 , centery-(MAXDIM/2+5), centerx-MAXDIM);
 	win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
-	win4 = creaWin(5, 2*MAXDIM+2, centery+MAXDIM/2+2, centerx-MAXDIM);
-	win5 = creaWin(12+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
+	win4 = creaWin(5, 2*MAXDIM+42, centery+MAXDIM/2+2, centerx-(MAXDIM+20));
+	win5 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
 	
 	disegnaStanza(s, win3);
 	disegnaStat(g, win1);
 	disegnaEquip(g, win5);
-	char c=getch();
+	disegnaLiv();
+	getch();
 	endwin();
 }
 
