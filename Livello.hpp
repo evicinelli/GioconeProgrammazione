@@ -86,6 +86,7 @@ public:
     int getNStanze();
     void dumpRoomList();
     void collegaStanza(int sPartenza, int sArrivo, int direz);
+    void visitStanza(int id);
     Stanza* getPointerToStanza(int id);
 
     Collegamento* getVettColl();

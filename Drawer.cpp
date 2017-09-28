@@ -16,15 +16,14 @@ WINDOW* creaWin(int height, int width, int starty, int startx){
 
 void Drawer::disegnaStanza(int idStanza, Livello* l, WINDOW* win){
 	
-	Stanza stanza =l->getStanza(idStanza);
-	Stanza* s=&stanza;
+	Stanza* s=l->getPointerToStanza(idStanza);
     int posy;
     int posx;
 	int dim=s->getDimensione();
 	int m[MAXDIM][MAXDIM];
 	double inizio;
 	
-	s->visit();
+	l->visitStanza(idStanza);
 	wprintw(win, "STANZA %d", idStanza);
 	s->getMatrice(m);
 	inizio=(MAXDIM-dim)/2.0;
@@ -142,6 +141,7 @@ void Drawer::disegna(int idStanza, Giocatore* g, Livello* l){
 	win4 = creaWin(6, 2*MAXDIM+42, centery+MAXDIM/2+2, centerx-(MAXDIM+20));
 	win5 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
 	
+	l->getStanza(idStanza).visit();
 	disegnaStanza(idStanza, l, win3);
 	disegnaStat(g, win1);
 	disegnaEquip(g, win5);
