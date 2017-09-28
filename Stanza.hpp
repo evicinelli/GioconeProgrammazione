@@ -19,8 +19,9 @@ protected:
     int nMaxBauli;
     int nMaxVenditori;
     int nMaxMuri;
-    int porte[4]; //Giulia se per te è scomodo gestire le porte così (lo è anche per me), lo tolgo e lo metto come dici tu
+    int porte[4];
     int collegamento[4];
+    bool visited;
     int libero; //mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri 
 public:
 
@@ -31,6 +32,10 @@ public:
 
 	int getDimensione();
 
+	void visit();
+	
+	bool isVisited();
+	
     void inizializzaMatrice(int m[MAXDIM][MAXDIM]);
 
     void stampaMatriceInizializzata (int m[MAXDIM][MAXDIM]);

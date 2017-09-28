@@ -15,8 +15,9 @@ int main()
 
     //Creazione e collegamento fino al terzo livello
 
-	/*
+	
     GestoreLivelli gestore = GestoreLivelli();
+    Livello* l = gestore.creaLivello(2);
   /*  GestoreLivelli gestore = GestoreLivelli();
 
 >>>>>>> Stashed changes
@@ -47,12 +48,13 @@ int main()
     //cout<<gestore.getLevN();
 	*/
 	
-	Stanza* st= new Stanza();
+	//Stanza* st= new Stanza();
 	Giocatore* player=new Giocatore();
-    int c[4]={-1,2,9,-2};
-    st->riempiMatrice(50,c);
-	Drawer d = Drawer(st, player);
-	
+    //int c[4]={-1,2,9,-2};
+    //st->riempiMatrice(50,c);
+    //l->setStanza(1, st);
+	Drawer d = Drawer();
+	d.disegna(0, player, l);
 	
 	return 0;
 }

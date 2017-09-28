@@ -3,8 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-Drawer::Drawer(Stanza* s, Giocatore* g){
-	disegna(s, g);
+Drawer::Drawer(){
 }
 
 
@@ -15,15 +14,18 @@ WINDOW* creaWin(int height, int width, int starty, int startx){
 	return win;
 }
 
-void Drawer::disegnaStanza(Stanza* s, WINDOW* win){
-  
+void Drawer::disegnaStanza(int idStanza, Livello* l, WINDOW* win){
+	
+	Stanza stanza =l->getStanza(idStanza);
+	Stanza* s=&stanza;
     int posy;
     int posx;
 	int dim=s->getDimensione();
-	int m[MAXDIM][MAXDIM], in;
+	int m[MAXDIM][MAXDIM];
 	double inizio;
 	
-	wprintw(win, "STANZA");
+	s->visit();
+	wprintw(win, "STANZA %d", idStanza);
 	s->getMatrice(m);
 	inizio=(MAXDIM-dim)/2.0;
 	posy=(int)inizio+1;
@@ -100,14 +102,27 @@ void Drawer::disegnaEquip(Giocatore* g, WINDOW* win){
 	wmove(win,2,2);
 	wprintw(win, "EQUIPAGGIAMENTO");
 	for (int i=0; i<MAX_ITEM; i++){
-		wmove(win,2*i+3,2);
+		wmove(win,2*i+5,2);
 		wprintw(win, g->getInv(i).getNome().c_str());
 	}
-	wmove(win,2*MAX_ITEM+3	,2);
+	wmove(win,2*MAX_ITEM+5,2);
 	wprintw(win, "POZIONI %d", g->getPot());
 	wrefresh(win);
 }
-void Drawer::disegna(Stanza* s, Giocatore* g){
+void Drawer::disegnaLiv(Livello* l, WINDOW* win, int nLiv){
+	wprintw(win, "LIVELLO %d", nLiv);
+	wmove(win,1,2);
+	wprintw(win, "STANZE: ");
+	for (int i=0; i<l->getNStanze(); i++){
+		if ((l->getStanza(i)).isVisited())
+			wprintw(win, "X ");
+		else
+			wprintw(win, "%d ",i);
+	}
+	wrefresh(win);
+	
+}
+void Drawer::disegna(int idStanza, Giocatore* g, Livello* l){
 	
     struct winsize w;
     int centerx, centery;
@@ -124,13 +139,13 @@ void Drawer::disegna(Stanza* s, Giocatore* g){
 	win1 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx-(MAXDIM+20));
 	win2 = creaWin(5, 2*MAXDIM+2 , centery-(MAXDIM/2+5), centerx-MAXDIM);
 	win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
-	win4 = creaWin(5, 2*MAXDIM+42, centery+MAXDIM/2+2, centerx-(MAXDIM+20));
+	win4 = creaWin(6, 2*MAXDIM+42, centery+MAXDIM/2+2, centerx-(MAXDIM+20));
 	win5 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
 	
-	disegnaStanza(s, win3);
+	disegnaStanza(idStanza, l, win3);
 	disegnaStat(g, win1);
 	disegnaEquip(g, win5);
-	disegnaLiv();
+	disegnaLiv(l, win4, 2);
 	getch();
 	endwin();
 }

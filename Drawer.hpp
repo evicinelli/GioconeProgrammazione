@@ -3,6 +3,7 @@
 #include "Stanza.hpp"
 #include "Giocatore.hpp"
 #include "Arma.hpp"
+#include "Livello.hpp"
 using namespace std;
 
 class Drawer{
@@ -10,10 +11,17 @@ class Drawer{
 		//Stanza* stanza;
 	
 	public:
-		Drawer(Stanza* s, Giocatore* g);
-		void disegna(Stanza* s, Giocatore* g);
-		void disegnaStanza(Stanza* s, WINDOW* win);
+	
+		Drawer();
+		
+		void disegna(int idStanza, Giocatore* g, Livello* l);
+		
+		void disegnaStanza(int idStanza, Livello* l, WINDOW* win);
+		
 		void disegnaStat(Giocatore* g, WINDOW* win);
+		
 		void disegnaEquip(Giocatore* g, WINDOW* win);
+		
+		void disegnaLiv(Livello* l, WINDOW* win, int nLiv);
 	
 };

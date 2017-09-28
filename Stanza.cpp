@@ -10,7 +10,7 @@ Stanza::Stanza ()
     this->nMaxBauli=2;
     this->nMaxVenditori=2;
     this->nMaxMuri=0;
-    //this->nPorte=0;
+    this->visited=false;
     for (int i=0; i<4; i++) 
 		this->porte[i]=-1;
 }
@@ -18,7 +18,12 @@ Stanza::Stanza ()
 int Stanza::getDimensione(){
 	return this->dimensione;
 }
-
+void Stanza::visit(){
+	visited=true;
+}
+bool Stanza::isVisited(){
+	return visited;
+}
 int buildWall(double p)
 {
     if (p > WALL_TRESHOLD) return 0;
