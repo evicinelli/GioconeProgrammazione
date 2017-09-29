@@ -29,6 +29,14 @@ int Giocatore::getPot()
 {
     return pot;
 }
+int Giocatore::getPosX()
+{
+	return posx;
+}
+int Giocatore::getPosY()
+{
+	return posy;
+}
 void Giocatore::addPot()
 {
     pot++;
@@ -44,6 +52,14 @@ void Giocatore::setInv(int n, Arma a)
 void Giocatore::setOro(int o)
 {
     oro=o;
+}
+void Giocatore::setPosX(int x)
+{
+	posx=x;
+}
+void Giocatore::setPosY(int y)
+{
+	posy=y;
 }
 void Giocatore::addOro(int o)
 {

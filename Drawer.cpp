@@ -4,30 +4,46 @@
 #include <stdio.h>
 
 Drawer::Drawer(){
+
 }
 
-
-WINDOW* creaWin(int height, int width, int starty, int startx){
+WINDOW* Drawer::creaWin(int height, int width, int starty, int startx){
 	WINDOW* win = newwin(height, width, starty, startx);
 	box(win, 0 , 0);
 	wrefresh(win);
 	return win;
 }
+void Drawer::liberaPosizione(Stanza* s, int y, int x){
+	WINDOW* win=win3;
+	int posx, posy;
+	double inizio=(MAXDIM-s->getDimensione())/2.0;
+	posy=(int)inizio+1+y;
+	posx=(int)(2*(inizio+x))+1;
+	mvwaddch(win, posy, posx, ' ');
+	wrefresh(win);
+}
+void Drawer::posizionaGiocatore(Stanza* s, int y, int x){
+	WINDOW* win=win3;
+	int posx, posy;
+	double inizio=(MAXDIM-s->getDimensione())/2.0;
+	posy=(int)inizio+1+y;
+	posx=(int)(2*(inizio+x))+1;
+	mvwaddch(win, posy, posx, '@');
+	wrefresh(win);
+}
+void Drawer::disegnaStanza(Stanza* s, WINDOW* win){
 
-void Drawer::disegnaStanza(int idStanza, Livello* l, WINDOW* win){
-
-	Stanza* s=l->getPointerToStanza(idStanza);
+	//Stanza* s=l->getPointerToStanza(idStanza);
     int posy;
     int posx;
 	int dim=s->getDimensione();
 	int m[MAXDIM][MAXDIM];
 	double inizio;
 
-	l->visitStanza(idStanza);
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	wattron(win, COLOR_PAIR(1));
-	mvwprintw(win, 0, 19,"STANZA %d", idStanza);
+	mvwprintw(win, 0, 19, "STANZA %d", s->getId());
 	wattroff(win, COLOR_PAIR(1));
 	s->getMatrice(m);
 	inizio=(MAXDIM-dim)/2.0;
@@ -38,16 +54,6 @@ void Drawer::disegnaStanza(int idStanza, Livello* l, WINDOW* win){
 			wmove(win, posy, posx);
 			switch(m[i][j])
 			{
-				case(-3):
-					waddch(win, ' ');
-					break;
-				case(-2):
-					waddch(win, 'X');
-					break;
-				case(-1):
-					waddch(win, ' ');
-					break;
-
 				case(0):
 					//waddch(win, '#');
 					waddch(win, (char)198);
@@ -65,7 +71,8 @@ void Drawer::disegnaStanza(int idStanza, Livello* l, WINDOW* win){
 					waddch(win, 'V');
 					wattroff(win, COLOR_PAIR(4));
 					break;
-				case(3):                    init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+				case(3):                    
+					init_pair(3, COLOR_YELLOW, COLOR_BLACK);
                     wattron(win, COLOR_PAIR(3));
 					waddch(win, 'B');
 					wattroff(win, COLOR_PAIR(3));
@@ -88,6 +95,7 @@ void Drawer::disegnaStanza(int idStanza, Livello* l, WINDOW* win){
                     wattroff(win, COLOR_PAIR(5));
 					break;
 				default:
+					waddch(win, ' ');
 					break;
 				}
 				posx+=2;
@@ -163,7 +171,7 @@ void Drawer::disegnaMess(char msg[100], WINDOW* win){
 }
 
 void Drawer::disegnaLiv(Livello* l, WINDOW* win, int nLiv){
-	start_color();			/* Start color 			*/
+	start_color();	/* Start color 			*/
     init_pair(1, COLOR_RED, COLOR_BLACK);
     wattron(win, COLOR_PAIR(1));
     mvwprintw(win, 1, 35,"LIVELLO %d", nLiv);
@@ -173,7 +181,6 @@ void Drawer::disegnaLiv(Livello* l, WINDOW* win, int nLiv){
 
 	for (int i=0; i<l->getNStanze(); i++){
 		if ((l->getStanza(i)).isVisited()){
-            char str[100];
             mvwprintw(win, 3, 10+i, "%d", i);
 		}
 	}
@@ -202,41 +209,33 @@ void Drawer::disegnaEquip(Giocatore* g, WINDOW* win){
 	wrefresh(win);
 }
 
-void Drawer::disegna(int idStanza, Giocatore* g, Livello* l){
+void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 
-    struct winsize w;
+		
+	struct winsize w;
     int centerx, centery;
-	WINDOW *win1, *win2, *win3, *win4, *win5;
-
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
 	centery=w.ws_row/2-1;
-	centerx=w.ws_col/2-1	;
-	win1 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx-(MAXDIM+20));
-	win2 = creaWin(5, 2*MAXDIM+2 , centery-(MAXDIM/2+5), centerx-MAXDIM);
-	win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
-	win4 = creaWin(6, 2*MAXDIM+42, centery+MAXDIM/2+2, centerx-(MAXDIM+20));
-	win5 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
+	centerx=w.ws_col/2-1;	;
+	this->win1 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx-(MAXDIM+20));
+	this->win2 = creaWin(5, 2*MAXDIM+2 , centery-(MAXDIM/2+5), centerx-MAXDIM);
+	this->win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
+	this->win4 = creaWin(6, 2*MAXDIM+42, centery+MAXDIM/2+2, centerx-(MAXDIM+20));
+	this->win5 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
 
-	l->getStanza(idStanza).visit();
-	disegnaStanza(idStanza, l, win3);
+
+	l->visitStanza(s->getId());
+	disegnaStanza(s, win3);
 	disegnaStat(g, win1);
 	disegnaEquip(g, win5);
-	disegnaLiv(l, win4, 2);
-
+	disegnaLiv(l, win4, 1);
+	g->setPosX(s->getLibero());
+	g->setPosY(s->getDimensione()-2);
+	posizionaGiocatore(s, g->getPosY(), g->getPosX());
 	char msg[100];
 	sprintf (msg, "Iniziamo il gioco");
     disegnaMess(msg, win2);
 
-	getch();
-	endwin();
-
-
-
-
-
-    printf ("lines %d\n", w.ws_row);
-    printf ("columns %d\n", w.ws_col);
 }
-
-

@@ -10,15 +10,18 @@ using namespace std;
 
 class Drawer{
 	protected:
-		//Stanza* stanza;
-
+		WINDOW *win1;
+		WINDOW *win2;
+		WINDOW *win3;
+		WINDOW *win4;
+		WINDOW *win5;
 	public:
 
 		Drawer();
 
-		void disegna(int idStanza, Giocatore* g, Livello* l);
+		void disegnaStanza(Stanza* s, WINDOW* win);
 
-		void disegnaStanza(int idStanza, Livello* l, WINDOW* win);
+		void disegna(Giocatore* g, Livello* l, Stanza* s);
 
 		void disegnaStat(Giocatore* g, WINDOW* win);
 
@@ -27,5 +30,13 @@ class Drawer{
 		void disegnaLiv(Livello* l, WINDOW* win, int nLiv);
 
 		void disegnaMess(char msg[100], WINDOW* win);
+		
+		void liberaPosizione(Stanza* s, int y, int x);
+		
+		void posizionaGiocatore(Stanza* s, int y, int x);
+		
+	private:
+	
+		WINDOW* creaWin(int height, int width, int starty, int startx);
 
 };

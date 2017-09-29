@@ -11,16 +11,22 @@ class Giocatore : public Personaggio
         int nextLevExp;               //esperienza per il livello successivo
         int pot;                    //numero di pozioni trasportate
         int oro;                    //oro trasportato
+        int posx;
+        int posy;
         Arma inventario[MAX_ITEM];  //armi trasportate ma non equipaggiate
     public:
         Giocatore();
         int getOro();
         int getNextExp();
         int getPot();
+        int getPosX();
+        int getPosY();
         void addPot();
         Arma getInv(int n);
         void setOro(int o);
         void setInv(int n, Arma a);
+        void setPosX(int x);
+        void setPosY(int y);
         void addOro(int o);
         void addExp(int e);
         void levelup(int stat);             //metodo da chiamare quando passa di livello il giocatore; "stat" viene passato da tastiera quando compare la schermata di passaggio di livello

@@ -22,10 +22,11 @@ protected:
     int porte[4];
     int collegamento[4];
     bool visited;
+    int id;
     int libero; //mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri 
 public:
 
-	/**
+	/*
 	Crea la stanza di id n
 	*/
 	Stanza();
@@ -47,6 +48,13 @@ public:
     void setMatrice(int m[MAXDIM][MAXDIM]);
 
     int getColl(int n);
+    
+    void setId(int n);
+    
+    int getId();
+    
+    int getLibero();
+    
     void riempiMatrice(int nLiv, int coll [4]);
 
 

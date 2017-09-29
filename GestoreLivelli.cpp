@@ -66,7 +66,10 @@ Livello* GestoreLivelli::getLevelById(int id)
     }
     return out->l;
 }
-
+Livello* GestoreLivelli::getInizio()
+{
+	return head->l;
+}
 Livello* GestoreLivelli::creaLivello(int n)
 {
     /*
@@ -135,7 +138,10 @@ int GestoreLivelli::getLevN()
 {
     return this->maxLiv;
 }
-
+int GestoreLivelli::getLivello()
+{
+	return this->livCorrente;
+}
 void GestoreLivelli::stampaCollegamentiLivelli()
 {
     if(this->head==NULL)

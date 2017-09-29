@@ -24,6 +24,9 @@ void Stanza::visit(){
 bool Stanza::isVisited(){
 	return visited;
 }
+int Stanza::getLibero(){
+	return libero;
+}
 int buildWall(double p)
 {
     if (p > WALL_TRESHOLD) return 0;
@@ -74,7 +77,13 @@ void Stanza:: stampaMatrice(int m[MAXDIM][MAXDIM])
 
 }
 
+void Stanza::setId(int n){
+	id=n;
+}
 
+int Stanza::getId(){
+	return id; 
+}
 
 void Stanza::getMatrice(int m[MAXDIM][MAXDIM])
 {
@@ -148,7 +157,6 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
     {
         posx=1;
         posy=partenza;
-        libero=posy;
         arrivox=dimensione-2;
         arrivoy=arrivo;
     }
@@ -158,6 +166,7 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
         posy=1;
         arrivox=arrivo;
         arrivoy=dimensione-2;
+        libero=arrivox;
     }
     matrice[posy][posx]=-3;
     while (((posx != dimensione-2) && !type) || ((posy != dimensione-2) && type))
@@ -362,11 +371,11 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiPorte(coll);
 	inserisciVia();
 	mettiMuri();
-	riempiMuri(1, libero);
+	riempiMuri(libero, dimensione-2);
 	trasformaInterni();
 	mettiMostri(nLiv);
 	mettiBauli(nLiv);	
-
+	matrice[libero][dimensione-2]=-1;
 	//this->stampaMatrice(this->matrice);
 }
 

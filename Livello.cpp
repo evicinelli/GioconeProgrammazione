@@ -4,6 +4,8 @@ Livello::Livello (int n){
 	nStanze=n;
     vettStanze= new Stanza [nStanze+2];
 	vettColl= new Collegamento[nStanze];
+	for (int i=0; i<nStanze; i++)
+		vettStanze[i].setId(i);
 	//cout<<vettColl<<endl;
 }
 

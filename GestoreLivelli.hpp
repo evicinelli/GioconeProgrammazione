@@ -45,7 +45,10 @@ public:
 
     // Ritorna il massimo numero di livelli
     int getLevN();
-
+	
+	int getLivello();
+	
+	Livello* getInizio();
     /**
     Ritorna livello a partire da id
     */
@@ -53,9 +56,7 @@ public:
 
     void stampaCollegamentiLivelli();
 
-
 };
-
 
 
 #endif // GESTORELIVELLI_HPP_INCLUDED
