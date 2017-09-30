@@ -112,9 +112,9 @@ void Drawer::disegnaStanza(Stanza* s){
     wrefresh(win);
 
 }
-void Drawer::disegnaStat(Giocatore* p, WINDOW* win){
+void Drawer::disegnaStat(Giocatore* p){
        
-        
+        WINDOW* win=win1;
 		wclear(win);
 		box(win, 0 , 0);
         if(has_colors() == FALSE){
@@ -205,8 +205,13 @@ void Drawer::disegnaLiv(Livello* l, int nLiv){
 
 }
 
-void Drawer::disegnaEquip(Giocatore* g, WINDOW* win){
+void Drawer::disegnaEquip(Giocatore* g){
 
+
+		WINDOW* win=win5;
+		
+		wclear(win);
+		box(win, 0 , 0);
         start_color();			/* Start color 			*/
         init_pair(1, COLOR_RED, COLOR_BLACK);
 
@@ -245,8 +250,8 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 
 	l->visitStanza(s->getId());
 	disegnaStanza(s);
-	disegnaStat(g, win1);
-	disegnaEquip(g, win5);
+	disegnaStat(g);
+	disegnaEquip(g);
 	disegnaLiv(l, 1);
 	g->setPosX(s->getLibero());
 	g->setPosY(s->getDimensione()-2);

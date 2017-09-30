@@ -193,7 +193,7 @@ bool Controller::controllaMovimento(int posX, int posY){
     }
     else{
         char msg[100];
-        sprintf (msg, "Spostamento negato                          ");
+        sprintf (msg, "Spostamento negato");
         d->disegnaMess(msg);
     }
     return valido;

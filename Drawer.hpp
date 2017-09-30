@@ -23,9 +23,9 @@ class Drawer{
 
 		void disegna(Giocatore* g, Livello* l, Stanza* s);
 
-		void disegnaStat(Giocatore* g, WINDOW* win);
+		void disegnaStat(Giocatore* g);
 
-		void disegnaEquip(Giocatore* g, WINDOW* win);
+		void disegnaEquip(Giocatore* g);
 
 		void disegnaLiv(Livello* l, int nLiv);
 
