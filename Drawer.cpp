@@ -72,16 +72,16 @@ void Drawer::disegnaStanza(Stanza* s){
 					wattroff(win, COLOR_PAIR(2));
 					break;
 				case(2):
-                    init_pair(4, COLOR_GREEN, COLOR_BLACK);
-                    wattron(win, COLOR_PAIR(4));
+                    init_pair(3, COLOR_GREEN, COLOR_BLACK);
+                    wattron(win, COLOR_PAIR(3));
 					waddch(win, 'V');
-					wattroff(win, COLOR_PAIR(4));
+					wattroff(win, COLOR_PAIR(3));
 					break;
 				case(3):
-					init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-                    wattron(win, COLOR_PAIR(3));
+					init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+                    wattron(win, COLOR_PAIR(4));
 					waddch(win, 'B');
-					wattroff(win, COLOR_PAIR(3));
+					wattroff(win, COLOR_PAIR(4));
 					break;
 				case(4):
 					int p; //in quale porta sono?
@@ -93,18 +93,18 @@ void Drawer::disegnaStanza(Stanza* s){
 					else if (j==0) p=2;
 					else p=3;
 					if (s->getColl(p)!=-2)
-						waddch(win, (char)(s->getColl(p)+48));
+						//waddch(win, (char)(s->getColl(p)+48));
+						wprintw(win, "%d", s->getColl(p));
 					else
                         waddch(win, 'L');
-
-					waddch(win, ' ');
+					if (s->getColl(p)<10 ) waddch(win, ' ');
                     wattroff(win, COLOR_PAIR(5));
 					break;
 				default:
 					waddch(win, ' ');
 					break;
 				}
-				if (m[i][j]!=0) waddch(win, ' ');
+				if (m[i][j]!=0 && m[i][j]!=4) waddch(win, ' ');
 				posx+=2;
 		}
 		posx=(int)(2*inizio)+1;

@@ -203,7 +203,7 @@ void Controller::gioca(){
 	refresh();
 	d->disegna(p, gestore.getInizio(), &stanza);
 	while (p->getLev()<100 && p->getHp()>0&&c!='x'){
-		c=getch();
+		c=tolower(getch());
 		gestisciInput(c);
 		usleep(30000);
 	}

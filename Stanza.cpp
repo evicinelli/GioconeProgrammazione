@@ -127,7 +127,7 @@ void Stanza::mettiPorte(int coll[4])
     for (int i=0; i<4; i++)
     {
         if (coll[i]!=-1)
-            porte[i]=rand()%(dimensione-2)+1;
+            porte[i]=rand()%(dimensione-3)+2;
     }
     if (coll[0]!=-1) matrice[0][porte[0]]=4;
     if (coll[1]!=-1) matrice[dimensione-1][porte[1]]=4;
@@ -338,7 +338,7 @@ void Stanza::mettiVenditori(int livello){
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxVenditori>0; j++){
 			if (matrice[i][j]==-1){
-				int den=2000/((livello/20.0)+2);
+				int den=2500/((livello/20.0)+2);
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=2;
@@ -385,6 +385,7 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	trasformaInterni();
 	mettiMostri(nLiv);
 	mettiBauli(nLiv);
+	mettiVenditori(nLiv);
 	liberaPorte();
 	//this->stampaMatrice(this->matrice);
 }
