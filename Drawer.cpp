@@ -104,6 +104,7 @@ void Drawer::disegnaStanza(Stanza* s){
 					waddch(win, ' ');
 					break;
 				}
+				if (m[i][j]!=0) waddch(win, ' ');
 				posx+=2;
 		}
 		posx=(int)(2*inizio)+1;

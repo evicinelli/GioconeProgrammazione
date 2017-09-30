@@ -209,6 +209,7 @@ void Controller::gioca(){
 	while (p->getLev()<100 && p->getHp()>0&&c!='x'){
 		c=getch();
 		gestisciInput(c);
+		usleep(30000);
 	}
 	endwin();
 }
