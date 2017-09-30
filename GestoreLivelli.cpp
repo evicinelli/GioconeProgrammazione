@@ -114,6 +114,7 @@ Livello* GestoreLivelli::creaLivello(int n)
     return l;
 }
 
+/**
 void GestoreLivelli::dumpLevelList()
 {
     printf("\n\n\n(*) LISTA LIVELLI\n");
@@ -132,16 +133,17 @@ void GestoreLivelli::dumpLevelList()
         ++i;
     }
 }
-
-
+*/
 int GestoreLivelli::getLevN()
 {
     return this->maxLiv;
 }
+
 int GestoreLivelli::getLivello()
 {
 	return this->livCorrente;
 }
+
 void GestoreLivelli::stampaCollegamentiLivelli()
 {
     if(this->head==NULL)

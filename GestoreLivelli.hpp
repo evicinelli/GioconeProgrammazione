@@ -41,13 +41,13 @@ public:
     Livello* creaLivello(int n);
 
     // Stampa la lista dei livelli
-    void dumpLevelList();
+  //  void dumpLevelList();
 
     // Ritorna il massimo numero di livelli
     int getLevN();
-	
+
 	int getLivello();
-	
+
 	Livello* getInizio();
     /**
     Ritorna livello a partire da id

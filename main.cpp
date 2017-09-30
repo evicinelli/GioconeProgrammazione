@@ -8,28 +8,6 @@
 #include <string.h>
 using namespace std;
 
-void print_in_middle(WINDOW *win, int starty, int startx, int width, char *st)
-{	int length, x, y;
-	float temp;
-
-	if(win == NULL)
-		win = stdscr;
-	getyx(win, y, x);
-	if(startx != 0)
-		x = startx;
-	if(starty != 0)
-		y = starty;
-	if(width == 0)
-		width = 80;
-
-
-	length = strlen(st);
-	temp = (width - length)/ 2;
-	x = startx + (int)temp;
-	mvwprintw(win, y, x, "%s", st);
-
-}
-
 int main()
 {
 
@@ -71,12 +49,16 @@ int main()
 	*/
 
 	//Stanza* st= new Stanza();
-	Giocatore* player=new Giocatore();
+
     //int c[4]={-1,2,9,-2};
     //st->riempiMatrice(50,c);
     //l->setStanza(1, st);
+
+
+    Giocatore* player=new Giocatore();
 	Controller c = Controller(gestore, player);
 	c.gioca();
+
 	//d.disegna(0, player, l);
 
 	return 0;

@@ -28,11 +28,14 @@ void Drawer::posizionaGiocatore(Stanza* s, int y, int x){
 	double inizio=(MAXDIM-s->getDimensione())/2.0;
 	posy=(int)inizio+1+y;
 	posx=(int)(2*(inizio+x))+1;
+	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+    wattron(win, COLOR_PAIR(6));
 	mvwaddch(win, posy, posx, '@');
+	wattroff(win, COLOR_PAIR(6));
 	wrefresh(win);
 }
-void Drawer::disegnaStanza(Stanza* s, WINDOW* win){
-
+void Drawer::disegnaStanza(Stanza* s){
+    WINDOW* win=win3;
 	//Stanza* s=l->getPointerToStanza(idStanza);
     int posy;
     int posx;
@@ -43,7 +46,7 @@ void Drawer::disegnaStanza(Stanza* s, WINDOW* win){
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	wattron(win, COLOR_PAIR(1));
-	mvwprintw(win, 0, 19, "STANZA %d", s->getId());
+	mvwprintw(win, 0, 19, " STANZA %d ", s->getId());
 	wattroff(win, COLOR_PAIR(1));
 	s->getMatrice(m);
 	inizio=(MAXDIM-dim)/2.0;
@@ -71,7 +74,7 @@ void Drawer::disegnaStanza(Stanza* s, WINDOW* win){
 					waddch(win, 'V');
 					wattroff(win, COLOR_PAIR(4));
 					break;
-				case(3):                    
+				case(3):
 					init_pair(3, COLOR_YELLOW, COLOR_BLACK);
                     wattron(win, COLOR_PAIR(3));
 					waddch(win, 'B');
@@ -153,8 +156,8 @@ void Drawer::disegnaStat(Giocatore* p, WINDOW* win){
         wrefresh(win);
 }
 
-void Drawer::disegnaMess(char msg[100], WINDOW* win){
-
+void Drawer::disegnaMess(char msg[100]){
+        WINDOW* win=win2;
         start_color();			/* Start color 			*/
         init_pair(1, COLOR_RED, COLOR_BLACK);
 
@@ -211,10 +214,10 @@ void Drawer::disegnaEquip(Giocatore* g, WINDOW* win){
 
 void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 
-		
+
 	struct winsize w;
     int centerx, centery;
-	
+
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
 	centery=w.ws_row/2-1;
@@ -227,7 +230,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 
 
 	l->visitStanza(s->getId());
-	disegnaStanza(s, win3);
+	disegnaStanza(s);
 	disegnaStat(g, win1);
 	disegnaEquip(g, win5);
 	disegnaLiv(l, win4, 1);
@@ -235,7 +238,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	g->setPosY(s->getDimensione()-2);
 	posizionaGiocatore(s, g->getPosY(), g->getPosX());
 	char msg[100];
-	sprintf (msg, "Iniziamo il gioco");
-    disegnaMess(msg, win2);
+	sprintf (msg, "Iniziamo il gioco, clicca un pulsante (no x) ");
+    disegnaMess(msg);
 
 }

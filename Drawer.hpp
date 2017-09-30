@@ -19,7 +19,7 @@ class Drawer{
 
 		Drawer();
 
-		void disegnaStanza(Stanza* s, WINDOW* win);
+		void disegnaStanza(Stanza* s);
 
 		void disegna(Giocatore* g, Livello* l, Stanza* s);
 
@@ -29,14 +29,14 @@ class Drawer{
 
 		void disegnaLiv(Livello* l, WINDOW* win, int nLiv);
 
-		void disegnaMess(char msg[100], WINDOW* win);
-		
+		void disegnaMess(char msg[100]);
+
 		void liberaPosizione(Stanza* s, int y, int x);
-		
+
 		void posizionaGiocatore(Stanza* s, int y, int x);
-		
+
 	private:
-	
+
 		WINDOW* creaWin(int height, int width, int starty, int startx);
 
 };
