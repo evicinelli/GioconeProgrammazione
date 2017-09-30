@@ -94,7 +94,6 @@ void Controller::gestisciInput(char c){
         case ((char)KEY_UP):
         if(controllaMovimento(p->getPosX(), p->getPosY()-1)==true){
             this->vaiSu();
-            d->disegnaStanza(&stanza);
             d->posizionaGiocatore(&stanza, p);
         }
         break;
@@ -103,7 +102,6 @@ void Controller::gestisciInput(char c){
         case ((char)KEY_DOWN):
         if(controllaMovimento(p->getPosX(), p->getPosY()+1)==true){
             this->vaiGiu();
-            d->disegnaStanza(&stanza);
             d->posizionaGiocatore(&stanza, p);
         }
         break;
@@ -112,7 +110,6 @@ void Controller::gestisciInput(char c){
         case ((char)KEY_RIGHT):
         if(controllaMovimento(p->getPosX()+1, p->getPosY())==true){
             this->vaiDx();
-            d->disegnaStanza(&stanza);
             d->posizionaGiocatore(&stanza, p);
         }
         break;
@@ -121,7 +118,6 @@ void Controller::gestisciInput(char c){
         case ((char)KEY_LEFT):
         if(controllaMovimento(p->getPosX()-1, p->getPosY())==true){
             this->vaiSx();
-            d->disegnaStanza(&stanza);
             d->posizionaGiocatore(&stanza, p);
         }
         break;
