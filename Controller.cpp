@@ -29,7 +29,7 @@ void Controller::vaiSx(){
 void Controller::cambiaStanza(int direzione){
 	Livello* l=gestore.getLevelById(gestore.getLivello());
 	int coll[4], inizio=0;
-	int oldId=0;
+	int oldId=stanza.getId();
 	
 	for (int i=0; i<4; i++){
 		coll[i]=stanza.getColl(i);
