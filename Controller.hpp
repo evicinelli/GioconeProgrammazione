@@ -28,4 +28,8 @@ class Controller
 		void vaiSx();
 
 		bool controllaMovimento(int posX, int posY);
+		
+		void cambiaStanza(int direzione);
+		
+		bool isVicinoPorta(int &dir);
 };

@@ -27,13 +27,13 @@ class Drawer{
 
 		void disegnaEquip(Giocatore* g, WINDOW* win);
 
-		void disegnaLiv(Livello* l, WINDOW* win, int nLiv);
+		void disegnaLiv(Livello* l, int nLiv);
 
 		void disegnaMess(char msg[100]);
 
 		void liberaPosizione(Stanza* s, int y, int x);
 
-		void posizionaGiocatore(Stanza* s, int y, int x);
+		void posizionaGiocatore(Stanza* s, Giocatore* g);
 
 	private:
 

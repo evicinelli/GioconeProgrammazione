@@ -22,12 +22,12 @@ void Drawer::liberaPosizione(Stanza* s, int y, int x){
 	mvwaddch(win, posy, posx, ' ');
 	wrefresh(win);
 }
-void Drawer::posizionaGiocatore(Stanza* s, int y, int x){
+void Drawer::posizionaGiocatore(Stanza* s, Giocatore* g){
 	WINDOW* win=win3;
 	int posx, posy;
 	double inizio=(MAXDIM-s->getDimensione())/2.0;
-	posy=(int)inizio+1+y;
-	posx=(int)(2*(inizio+x))+1;
+	posy=(int)inizio+1+g->getPosY();
+	posx=(int)(2*(inizio+g->getPosX()))+1;
 	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
     wattron(win, COLOR_PAIR(6));
 	mvwaddch(win, posy, posx, '@');
@@ -43,6 +43,9 @@ void Drawer::disegnaStanza(Stanza* s){
 	int m[MAXDIM][MAXDIM];
 	double inizio;
 
+	
+	wclear(win);
+	box(win, 0 , 0);
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	wattron(win, COLOR_PAIR(1));
@@ -110,7 +113,10 @@ void Drawer::disegnaStanza(Stanza* s){
 
 }
 void Drawer::disegnaStat(Giocatore* p, WINDOW* win){
-        initscr();			/* Start curses mode 		*/
+       
+        
+		wclear(win);
+		box(win, 0 , 0);
         if(has_colors() == FALSE){
         endwin();
 		printf("Your terminal does not support color\n");
@@ -158,6 +164,9 @@ void Drawer::disegnaStat(Giocatore* p, WINDOW* win){
 
 void Drawer::disegnaMess(char msg[100]){
         WINDOW* win=win2;
+			
+		wclear(win);
+		box(win, 0 , 0);
         start_color();			/* Start color 			*/
         init_pair(1, COLOR_RED, COLOR_BLACK);
 
@@ -173,7 +182,12 @@ void Drawer::disegnaMess(char msg[100]){
 
 }
 
-void Drawer::disegnaLiv(Livello* l, WINDOW* win, int nLiv){
+void Drawer::disegnaLiv(Livello* l, int nLiv){
+	
+	WINDOW* win=win4;
+	
+	wclear(win);
+	box(win, 0 , 0);
 	start_color();	/* Start color 			*/
     init_pair(1, COLOR_RED, COLOR_BLACK);
     wattron(win, COLOR_PAIR(1));
@@ -184,7 +198,7 @@ void Drawer::disegnaLiv(Livello* l, WINDOW* win, int nLiv){
 
 	for (int i=0; i<l->getNStanze(); i++){
 		if ((l->getStanza(i)).isVisited()){
-            mvwprintw(win, 3, 10+i, "%d", i);
+            mvwprintw(win, 3, 10+2*i, "%d", i);
 		}
 	}
 	wrefresh(win);
@@ -233,10 +247,10 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	disegnaStanza(s);
 	disegnaStat(g, win1);
 	disegnaEquip(g, win5);
-	disegnaLiv(l, win4, 1);
+	disegnaLiv(l, 1);
 	g->setPosX(s->getLibero());
 	g->setPosY(s->getDimensione()-2);
-	posizionaGiocatore(s, g->getPosY(), g->getPosX());
+	posizionaGiocatore(s, g);
 	char msg[100];
 	sprintf (msg, "Iniziamo il gioco, clicca un pulsante (no x) ");
     disegnaMess(msg);

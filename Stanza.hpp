@@ -47,6 +47,8 @@ public:
 
     void setMatrice(int m[MAXDIM][MAXDIM]);
 
+    int getPorta(int n);
+    
     int getColl(int n);
     
     void setId(int n);
@@ -66,7 +68,6 @@ private:
 
     bool existPorta(int n);
 
-    int getPorta(int n);
 
     void link(int partenza, int arrivo, bool type);
 
@@ -86,6 +87,7 @@ private:
 
     void mettiVenditori(int livello);
 
+	void liberaPorte();
 };
 
 

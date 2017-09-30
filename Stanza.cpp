@@ -146,7 +146,10 @@ bool Stanza::existPorta(int n)
 
 int Stanza::getPorta(int n)
 {
-    return porte[n];
+	if (collegamento[n] != -1)
+		return porte[n];
+	else 
+		return -1;
 }
 
 void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0->1
@@ -351,6 +354,13 @@ int Stanza::getColl(int n){
 	return collegamento[n];
 }
 
+void Stanza::liberaPorte(){
+	matrice[libero][dimensione-2]=-1;
+	if (collegamento[0]!=-1) matrice[1][porte[0]]=-1;
+	if (collegamento[1]!=-1) matrice[dimensione-2][porte[1]]=-1;
+	if (collegamento[2]!=-1) matrice[porte[2]][1]=-1;
+	if (collegamento[3]!=-1) matrice[porte[3]][dimensione-2]=-1;
+}
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	 /**
 		-3 -> strada
@@ -374,8 +384,8 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	riempiMuri(libero, dimensione-2);
 	trasformaInterni();
 	mettiMostri(nLiv);
-	mettiBauli(nLiv);	
-	matrice[libero][dimensione-2]=-1;
+	mettiBauli(nLiv);
+	liberaPorte();
 	//this->stampaMatrice(this->matrice);
 }
 
