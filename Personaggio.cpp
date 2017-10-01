@@ -31,6 +31,22 @@ void Personaggio::setAct(int x)
 {
     act=x;
 }
+void Personaggio::setPosX(int x)
+{
+	posx=x;
+}
+void Personaggio::setPosY(int y)
+{
+	posy=y;
+}
+int Personaggio::getPosX()
+{
+	return posx;
+}
+int Personaggio::getPosY()
+{
+	return posy;
+}
 int Personaggio::getStr()
 {
     return str;

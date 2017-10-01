@@ -43,7 +43,7 @@ void Drawer::disegnaStanza(Stanza* s){
 	int m[MAXDIM][MAXDIM];
 	double inizio;
 
-	
+
 	wclear(win);
 	box(win, 0 , 0);
 	start_color();
@@ -114,7 +114,7 @@ void Drawer::disegnaStanza(Stanza* s){
 
 }
 void Drawer::disegnaStat(Giocatore* p){
-       
+
         WINDOW* win=win1;
 		wclear(win);
 		box(win, 0 , 0);
@@ -165,7 +165,7 @@ void Drawer::disegnaStat(Giocatore* p){
 
 void Drawer::disegnaMess(char msg[100]){
         WINDOW* win=win2;
-			
+
 		wclear(win);
 		box(win, 0 , 0);
         start_color();			/* Start color 			*/
@@ -184,9 +184,9 @@ void Drawer::disegnaMess(char msg[100]){
 }
 
 void Drawer::disegnaLiv(Livello* l, int nLiv){
-	
+
 	WINDOW* win=win4;
-	
+
 	wclear(win);
 	box(win, 0 , 0);
 	start_color();	/* Start color 			*/
@@ -210,7 +210,7 @@ void Drawer::disegnaEquip(Giocatore* g){
 
 
 		WINDOW* win=win5;
-		
+
 		wclear(win);
 		box(win, 0 , 0);
         start_color();			/* Start color 			*/
@@ -237,7 +237,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 
 	struct winsize w;
     int centerx, centery;
-
+    curs_set(0);
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
 	centery=w.ws_row/2-1;

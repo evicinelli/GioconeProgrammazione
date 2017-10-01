@@ -10,6 +10,8 @@ class Personaggio
     protected:
         int str, dex, con, luck, hp, hpmax;    //forza, destrezza, costituzione, fortuna, punti vita, punti vita massimi
         int lev, act, exp;                               //livello, punti azione per turno, punti esperienza attuali
+        int posx;
+        int posy;
         Arma equip;                     //arma equipaggiata
     public:
         Personaggio();
@@ -20,6 +22,10 @@ class Personaggio
         void setLuck(int x);
         void setHp(int x);
         void setAct(int x);
+        void setPosX(int x);
+        void setPosY(int y);
+        int getPosX();
+        int getPosY();
         int getStr();
         int getDex();
         int getCon();
