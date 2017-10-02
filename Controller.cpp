@@ -26,13 +26,17 @@ void Controller::vaiSx(){
 	d->liberaPosizione(&stanza, p->getPosY(), p->getPosX());
 	p->setPosX(p->getPosX()-1);
 }
+
+
 void Controller::cambiaStanza(int direzione){
 	Livello* l=gestore.getLevelById(gestore.getLivello());
-	int coll[4], inizio=0;
+	int coll[4];
+	int oldColl[4], inizio=0;
 	int oldId=stanza.getId();
 	
 	for (int i=0; i<4; i++){
 		coll[i]=stanza.getColl(i);
+		oldColl[i]=coll[i];
 	}
 	
 	if (coll[direzione]==-2){
@@ -56,11 +60,20 @@ void Controller::cambiaStanza(int direzione){
 		else if (direzione==2) stanza=l->vaiOvest(stanza.getId());
 		else stanza=l->vaiEst(stanza.getId());
 	}
+	int cont=0;
+	for (int i=0; i<direzione; i++){
+		if(oldColl[i]==stanza.getId())
+			cont++;
+	}
 	//STABILISCE LA MIA NUOVA POSIZIONE NELLA STANZA
 	for (int i=0; i<4; i++){
 		coll[i]=stanza.getColl(i);
-		if (coll[i]==oldId)
-			inizio=i;
+		if (coll[i]==oldId){
+			if (cont==0)
+				inizio=i;
+			cont--;
+			
+		}
 	}
 	if (inizio==0){
 		p->setPosX(stanza.getPorta(inizio));
@@ -85,6 +98,7 @@ void Controller::cambiaStanza(int direzione){
 	d->disegnaLiv(l, gestore.getLivello());
 	d->posizionaGiocatore(&stanza, p);
 }
+
 //Giulia's metodo
 void Controller::gestisciInput(char c){
     keypad(stdscr, true);
