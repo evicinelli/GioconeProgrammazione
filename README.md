@@ -15,3 +15,16 @@
 + Da aggiungere condizioni di vittoria (metodo del turno)
 + Verificare funzionamento e correttezza dei vari metodi di giocatore, mostro, arma e venditore
 + Gestire la rimozione dal gioco dei forzieri dopo l'utilizzo e dei mostri dopo la morte
+
+
+
+# Come farlo
+## Trent
++ PUNTI AZIONE: aggiornare switch in Controller@gestisciInput
++ VITTORIA: spostare nel gestore turni?
++ MOSTRI: differenziare razze
+
+## Vic
++ MOSTRO: muovi e insegui a seconda di dove si trova c/o al person.
++ PASSAGGIO LIVELLO GIOCATORE: Schermata passaggio di livello. Che stat potenziare? -- gestione input
++ VENDITORE: schermata per venditore. Gestione input venditore
