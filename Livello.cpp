@@ -97,8 +97,6 @@ Stanza Livello::vaiEst(int id){
 	return getStanza(a[3]);
 }
 
-
-
 void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){
 
 	if(direz==0){
@@ -116,12 +114,6 @@ void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){
 
 }
 
-void Livello::dumpRoomList(){
-	for (int i = 0; i < getNStanze(); ++i)
-	{
-		printf("i: %p\n", vettStanze[i]);
-	}
-}
 Stanza* Livello::getPointerToStanza(int id){
     return &(vettStanze[id]);
 }
