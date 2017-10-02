@@ -19,7 +19,10 @@ void Drawer::liberaPosizione(Stanza* s, int y, int x){
 	double inizio=(MAXDIM-s->getDimensione())/2.0;
 	posy=(int)inizio+1+y;
 	posx=(int)(2*(inizio+x))+1;
-	mvwaddch(win, posy, posx, ' ');
+    init_pair(7, COLOR_BLACK, COLOR_BLACK);
+    wattron(win, COLOR_PAIR(7));
+	mvwprintw(win, posy, posx,"  ");
+	wattroff(win, COLOR_PAIR(7));
 	wrefresh(win);
 }
 void Drawer::posizionaGiocatore(Stanza* s, Giocatore* g){
@@ -28,9 +31,9 @@ void Drawer::posizionaGiocatore(Stanza* s, Giocatore* g){
 	double inizio=(MAXDIM-s->getDimensione())/2.0;
 	posy=(int)inizio+1+g->getPosY();
 	posx=(int)(2*(inizio+g->getPosX()))+1;
-	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(6, COLOR_RED, COLOR_YELLOW);
     wattron(win, COLOR_PAIR(6));
-	mvwaddch(win, posy, posx, '@');
+    mvwprintw(win, posy, posx,"@ ");
 	wattroff(win, COLOR_PAIR(6));
 	wrefresh(win);
 }
@@ -61,9 +64,10 @@ void Drawer::disegnaStanza(Stanza* s){
 			switch(m[i][j])
 			{
 				case(0):
-					//waddch(win, '#');
-					waddch(win, (char)198);
-					waddch(win, (char)198);
+                    init_pair(9, COLOR_BLACK, COLOR_WHITE);
+                    wattron(win, COLOR_PAIR(9));
+					mvwprintw(win, posy, posx,"  ");
+					wattroff(win, COLOR_PAIR(9));
 					break;
 				case(1):
                     init_pair(2, COLOR_CYAN, COLOR_BLACK);
