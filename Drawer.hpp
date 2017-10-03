@@ -10,33 +10,41 @@ using namespace std;
 
 class Drawer{
 	protected:
-		WINDOW *win1;
-		WINDOW *win2;
-		WINDOW *win3;
-		WINDOW *win4;
-		WINDOW *win5;
+		WINDOW *win1; //Finestra statistiche
+		WINDOW *win2; //Finestra messaggi
+		WINDOW *win3; //Finestra stanza
+		WINDOW *win4; //Finestra livello
+		WINDOW *win5; //Finestra equipaggiamento
 	public:
 
 		Drawer();
 
+		//disegna la stanza nell'apposita finestra
 		void disegnaStanza(Stanza* s);
 
+		//disegno iniziale
 		void disegna(Giocatore* g, Livello* l, Stanza* s);
 
+		//disegna le statisctiche del personaggio nell'apposita finestra
 		void disegnaStat(Giocatore* g);
 
+		//disegna l'equipaggiamento del personaggio nell'apposita finestra
 		void disegnaEquip(Giocatore* g);
-
+		
+		//scrive le stanze già visitate nel livello nell'apposita finestra
 		void disegnaLiv(Livello* l, int nLiv);
 
+		//scrive il messaggio, dato in input, nell'apposita finestra
 		void disegnaMess(char msg[100]);
 
+		//mette uno spazio nelle coordinate della matrice della stanza
 		void liberaPosizione(Stanza* s, int y, int x);
 
+		//aggiorna la posizione del giocatore nella stanza
 		void posizionaGiocatore(Stanza* s, Giocatore* g);
 
 	private:
-
+		//date dimensioni e coordinate in input, viene creata e visualizzata la finestra 
 		WINDOW* creaWin(int height, int width, int starty, int startx);
 
 };
