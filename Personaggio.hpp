@@ -24,6 +24,11 @@ class Personaggio
         void setAct(int x);
         void setPosX(int x);
         void setPosY(int y);
+        bool actMuovi();
+        bool actUsa();
+        bool actApri();
+        bool actVend();
+        bool actAttacca();
         int getPosX();
         int getPosY();
         int getStr();

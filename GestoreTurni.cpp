@@ -1,5 +1,5 @@
 # include "GestoreTurni.hpp"
-# define ACTION_TRESHOLD 5
+# include <stdio.h>
 
 GestoreTurni::GestoreTurni()
 {
@@ -16,11 +16,16 @@ void GestoreTurni::play()
 {
     while(!victory && !defeat && !ctrl->hasEnded())
     {
-        if(player->getAct()>=0) {
+        /*if(player->getAct()>=0)
+        {
             ctrl->gioca();
-        } else {
-            // Mostro
         }
+        else
+        {
+            //while(Mostro->getAct()>=0)
+            player->setAct(5);
+        }*/
+        ctrl->gioca();
     }
 }
 

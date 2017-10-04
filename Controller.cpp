@@ -107,67 +107,95 @@ void Controller::gestisciInput(char c){
 
         //MOVIMENTO IN ALTO
         case ((char)KEY_UP):
-        if(controllaMovimento(p->getPosX(), p->getPosY()-1)==true){
-            this->vaiSu();
-            d->posizionaGiocatore(&stanza, p);
-        }
+            if (controllaMovimento(p->getPosX(), p->getPosY()-1)==true)
+            {
+                if(p->actMuovi()){
+                    this->vaiSu();
+                    d->posizionaGiocatore(&stanza, p);
+                    d->disegnaStat(p);
+                }
+            }
         break;
 
         //MOVIMENTO IN BASSO
         case ((char)KEY_DOWN):
-        if(controllaMovimento(p->getPosX(), p->getPosY()+1)==true){
-            this->vaiGiu();
-            d->posizionaGiocatore(&stanza, p);
-        }
+            if (controllaMovimento(p->getPosX(), p->getPosY()+1)==true)
+            {
+                if(p->actMuovi()){
+                    this->vaiGiu();
+                    d->posizionaGiocatore(&stanza, p);
+                    d->disegnaStat(p);
+                }
+            }
         break;
 
         //MOVIMENTO A DESTRA
         case ((char)KEY_RIGHT):
-        if(controllaMovimento(p->getPosX()+1, p->getPosY())==true){
-            this->vaiDx();
-            d->posizionaGiocatore(&stanza, p);
-        }
+            if (controllaMovimento(p->getPosX()+1, p->getPosY())==true)
+            {
+                if(p->actMuovi()){
+                    this->vaiDx();
+                    d->posizionaGiocatore(&stanza, p);
+                    d->disegnaStat(p);
+                }
+            }
         break;
 
         //MOVIMENTO A SINISTRA
         case ((char)KEY_LEFT):
-        if(controllaMovimento(p->getPosX()-1, p->getPosY())==true){
-            this->vaiSx();
-            d->posizionaGiocatore(&stanza, p);
-        }
+            if (controllaMovimento(p->getPosX()-1, p->getPosY())==true)
+            {
+                if(p->actMuovi()){
+                    this->vaiSx();
+                    d->posizionaGiocatore(&stanza, p);
+                    d->disegnaStat(p);
+
+                }
+            }
         break;
         //APRIRE PORTA
         case ((char)('a')):
-        int dir;
-        if(isVicinoPorta(dir)){
-			this->cambiaStanza(dir);
-			char msg[100];
-			sprintf (msg, "Stanza cambiata");
-			d->disegnaMess(msg);
-        }
+            int dir;
+            if(isVicinoPorta(dir)){
+                this->cambiaStanza(dir);
+                char msg[100];
+                sprintf (msg, "Stanza cambiata");
+                d->disegnaMess(msg);
+            }
         break;
         case((char)('x')):
             endwin();
             ended=true;
         break;
-        //COMPRARE DA VENDIORE
-
-        //ATTACCARE MOSTRO
-
-        //APRIRE BAULE
-
+        //COMPRARE DA VENDIORE  (B)
+        case((char)('b')):
+        break;
+        //ATTACCARE MOSTRO      (K)
+        case((char)('k')):
+        break;
+        //APRIRE BAULE          (O)
+        case((char)('o')):
+        break;
         //RACCOGLIERE OGGETTI LASCIATI DAL MOSTRO
 
-        //USA POZIONE
+        //USA POZIONE           (P)
+        case((char)('p')):
+        break;
+        //CAMBIA ARMA           (C)
+        case((char)('c')):
+        break;
+        //SCARTA ARMA           (S)
+        case((char)('s')):
+        break;
 
-        //CAMBIA ARMA
-
-        //SCARTA ARMA
+        //HELP                  (H)
+        case((char)('h')):
+        break;
 
         default:
-        char msg[100];
-        sprintf (msg, "Clicca un pulsante riconosciuto              ");
-        d->disegnaMess(msg);
+            char msg[100];
+            sprintf (msg, "Clicca un pulsante riconosciuto              ");
+            d->disegnaMess(msg);
     }
 
 }
@@ -226,10 +254,11 @@ void Controller::init()
     d->disegna(p, gestore.getInizio(), &stanza);
 }
 void Controller::gioca(){
-	char c=' ';
-	//while (p->getLev()<100 && p->getHp()>0&&c!='x'){
-    c=tolower(getch());
-	gestisciInput(c);
-	usleep(30000);
+
+        char c=' ';
+        c=tolower(getch());
+        //while (p->getLev()<100 && p->getHp()>0&&c!='x'){
+        gestisciInput(c);
+        usleep(30000);
 	//}
 }

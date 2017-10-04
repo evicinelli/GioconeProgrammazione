@@ -39,6 +39,52 @@ void Personaggio::setPosY(int y)
 {
 	posy=y;
 }
+bool Personaggio::actMuovi()
+{
+    if (act>=1)
+    {
+        act-=1;
+        return true;
+    }
+    return false;
+}
+bool Personaggio::actUsa()
+{
+    if (act>=3)
+    {
+        act-=3;
+        return true;
+    }
+    return false;
+}
+bool Personaggio::actApri()
+{
+    if (act>=2)
+    {
+        act-=2;
+        return true;
+    }
+    return false;
+}
+bool Personaggio::actVend()
+{
+    if (act>=1)
+    {
+        act-=1;
+        return true;
+    }
+    return false;
+}
+bool Personaggio::actAttacca()
+{
+    if (act>=4)
+    {
+        act-=4;
+        return true;
+    }
+    return false;
+
+}
 int Personaggio::getPosX()
 {
 	return posx;
@@ -90,8 +136,11 @@ int Personaggio::getAct()
 void Personaggio::attacca(Personaggio *p)
 {
     srand(time(0));
-    int dannoArma=(int)((equip.getMin()+equip.getMax())/(1+(double)rand()/RAND_MAX));
-    int dannoTot=dannoArma+(equip.getStrMult()*str)+(equip.getDexMult()*dex);
-    int currHp=p->getHp();
-    p->setHp(currHp-dannoTot);
+    if(actAttacca())
+    {
+        int dannoArma=(int)((equip.getMin()+equip.getMax())/(1+(double)rand()/RAND_MAX));
+        int dannoTot=dannoArma+(equip.getStrMult()*str)+(equip.getDexMult()*dex);
+        int currHp=p->getHp();
+        p->setHp(currHp-dannoTot);
+    }
 }

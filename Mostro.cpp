@@ -69,12 +69,12 @@ void Mostro::scanPlayer(Giocatore *g)
 
 void Mostro::muovi()
 {
-
+    //aggiorna punti azione
 }
 
 void Mostro::insegui(Giocatore *g)
 {
-
+    //aggiorna punti azione
 }
 
 void Mostro::morte(Giocatore *g)
