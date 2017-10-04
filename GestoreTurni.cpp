@@ -6,30 +6,21 @@ GestoreTurni::GestoreTurni()
 	gestoreLivelli = GestoreLivelli();
 	player = new Giocatore();
 	ctrl = new Controller(gestoreLivelli, player);
-	counter = 1;
-	actionPoint = 0;
+	victory=false;
+	defeat=false;
+	ctrl->init();
 }
 
-void GestoreTurni::init()
-{
-	// Schermata introduttiva al volo?
-	initscr();
-	raw();
-	noecho();
-	refresh();
-}
 
 void GestoreTurni::play()
 {
-	ctrl->gioca();
+    while(!victory && !defeat && !ctrl->hasEnded())
+    {
+        if(player->getAct()>=0) {
+            ctrl->gioca();
+        } else {
+            // Mostro
+        }
+    }
 }
 
-bool GestoreTurni::isPlayerTurn()
-{
-	return (counter % 2 != 0);
-}
-
-void GestoreTurni::changeTurn()
-{
-
-}

@@ -7,7 +7,6 @@ using namespace std;
 int main()
 {
     GestoreTurni gt=GestoreTurni();
-    gt.init();
     gt.play();
 	return 0;
 }

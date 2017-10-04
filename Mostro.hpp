@@ -8,11 +8,13 @@ class Mostro : public Personaggio
     protected:
         std::string razza;
         char id;           	//il carattere che rappresenta il mostro sulla mappa
-        int targetX, targetY;	/* Posizioni del giocatore che il mostro vuole inseguire */
+        void muovi();
+        void insegui(Giocatore *g);
     public:
         Mostro(int lev, std::string race);
         char getId();
-        void morte(Giocatore g);    //metodo chiamato quando g uccide il mostro
+        void scanPlayer(Giocatore *g);
+        void morte(Giocatore *g);    //metodo chiamato quando g uccide il mostro
 };
 
 #endif // MOSTRO_HPP

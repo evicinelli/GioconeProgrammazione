@@ -7,6 +7,7 @@ Controller::Controller(GestoreLivelli gl, Giocatore* player){
 	this->stanza = gestore.getInizio()->getStanza(0);
 	p->setPosX(stanza.getLibero());
 	p->setPosY(stanza.getDimensione()-2);
+	ended=false;
 }
 
 void Controller::vaiSu(){
@@ -145,6 +146,10 @@ void Controller::gestisciInput(char c){
 			d->disegnaMess(msg);
         }
         break;
+        case((char)('x')):
+            endwin();
+            ended=true;
+        break;
         //COMPRARE DA VENDIORE
 
         //ATTACCARE MOSTRO
@@ -208,18 +213,23 @@ bool Controller::controllaMovimento(int posX, int posY){
     }
     return valido;
 }
-
-void Controller::gioca(){
-	char c=' ';
-	/*initscr();
+bool Controller::hasEnded()
+{
+    return ended;
+}
+void Controller::init()
+{
+    initscr();
 	raw();
 	noecho();
-	refresh();*/
-	d->disegna(p, gestore.getInizio(), &stanza);
-	while (p->getLev()<100 && p->getHp()>0&&c!='x'){
-		c=tolower(getch());
-		gestisciInput(c);
-		usleep(30000);
-	}
-	endwin();
+	refresh();
+    d->disegna(p, gestore.getInizio(), &stanza);
+}
+void Controller::gioca(){
+	char c=' ';
+	//while (p->getLev()<100 && p->getHp()>0&&c!='x'){
+    c=tolower(getch());
+	gestisciInput(c);
+	usleep(30000);
+	//}
 }

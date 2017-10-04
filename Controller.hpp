@@ -11,13 +11,18 @@ class Controller
 		Giocatore* p;
 		Drawer* d;
 		Stanza stanza;
+		bool ended;
 
 	public:
 		Controller(GestoreLivelli gl, Giocatore* player);
 
 		void gestisciInput(char c);
 
+        void init();
+
 		void gioca();
+
+		bool hasEnded();
 
 	private:
 		void vaiSu();
@@ -29,8 +34,8 @@ class Controller
 		void vaiSx();
 
 		bool controllaMovimento(int posX, int posY);
-		
+
 		void cambiaStanza(int direzione);
-		
+
 		bool isVicinoPorta(int &dir);
 };

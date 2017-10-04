@@ -36,7 +36,7 @@ class Personaggio
         int getLev();
         int getExp();
         Arma getEquip();
-        void attacca(Personaggio p);
+        void attacca(Personaggio *p);
 
 };
 

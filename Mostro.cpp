@@ -62,26 +62,39 @@ char Mostro::getId()
     return id;
 }
 
-
-void Mostro::morte(Giocatore g)
+void Mostro::scanPlayer(Giocatore *g)
 {
-    //da implementare drop, esperienza e oro
+
+}
+
+void Mostro::muovi()
+{
+
+}
+
+void Mostro::insegui(Giocatore *g)
+{
+
+}
+
+void Mostro::morte(Giocatore *g)
+{
     double prob=100*((double)rand()/RAND_MAX);
-    int gold=lev*15+(int)(g.getLuck()*3.5);
-    double drop=equip.getDropRate()+(0.2*g.getLuck());
-    int expGain=lev*30+g.getLuck()*5;
-    g.addOro(gold);
-    g.addExp(expGain);
+    int gold=lev*15+(int)(g->getLuck()*3.5);
+    double drop=equip.getDropRate()+(0.2*g->getLuck());
+    int expGain=lev*30+g->getLuck()*5;
+    g->addOro(gold);
+    g->addExp(expGain);
     if (prob<=drop)                         //da controllare il funzionamento nel gioco reale
     {
         int i=0;
-        while (g.getInv(i).isAvailable())
+        while (g->getInv(i).isAvailable())
         {
             i++;
         }
         if (i<MAX_ITEM)
         {
-            g.setInv(i,equip);
+            g->setInv(i,equip);
         }
     }
 }
