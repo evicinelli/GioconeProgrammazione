@@ -1,12 +1,12 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <iostream>
+#include "Mostro.hpp"
 #define MAXDIM 24	
 #define MINDIM 20
 using namespace std;
 
 #ifndef STANZA_HPP_INCLUDED
-
 #define STANZA_HPP_INCLUDED
 
 class Stanza
@@ -21,6 +21,7 @@ protected:
     int nMaxMuri;
     int porte[4];
     int collegamento[4];
+    Mostro* monsters[5];
     bool visited;
     int id;
     int libero; //mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri 

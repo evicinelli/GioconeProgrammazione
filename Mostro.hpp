@@ -7,7 +7,8 @@ class Mostro : public Personaggio
 {
     protected:
         std::string razza;
-        char id;           //il carattere che rappresenta il mostro sulla mappa
+        char id;           	//il carattere che rappresenta il mostro sulla mappa
+        int targetX, targetY;	/* Posizioni del giocatore che il mostro vuole inseguire */
     public:
         Mostro(int lev, std::string race);
         char getId();

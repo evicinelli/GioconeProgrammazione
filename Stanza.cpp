@@ -294,6 +294,7 @@ void Stanza::mettiMostri(int livello){
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=1;
+                    monsters[nMaxMostri - 1] = new Mostro(10, "bandito");
 					nMaxMostri--;
 				}
 			}
