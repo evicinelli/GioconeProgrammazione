@@ -33,12 +33,12 @@ void Controller::cambiaStanza(int direzione){
 	int coll[4];
 	int oldColl[4], inizio=0;
 	int oldId=stanza.getId();
-	
+
 	for (int i=0; i<4; i++){
 		coll[i]=stanza.getColl(i);
 		oldColl[i]=coll[i];
 	}
-	
+
 	if (coll[direzione]==-2){
 		//CASO CAMBIO LIVELLO
 		oldId=-2;
@@ -53,7 +53,7 @@ void Controller::cambiaStanza(int direzione){
 			stanza=l->getStanza(l->getNStanze()-1);
 		}
 	}
-	else{ 
+	else{
 		//CASO STESSO LIVELLO
 		if (direzione==0) stanza=l->vaiNord(stanza.getId());
 		else if (direzione==1) stanza=l->vaiSud(stanza.getId());
@@ -72,7 +72,7 @@ void Controller::cambiaStanza(int direzione){
 			if (cont==0)
 				inizio=i;
 			cont--;
-			
+
 		}
 	}
 	if (inizio==0){
@@ -91,7 +91,7 @@ void Controller::cambiaStanza(int direzione){
 		p->setPosX(stanza.getDimensione()-2);
 		p->setPosY(stanza.getPorta(inizio));
 	}
-	
+
 	//DISEGNO
 	d->disegnaStanza(&stanza);
 	l->visitStanza(stanza.getId());
@@ -175,9 +175,9 @@ bool Controller::isVicinoPorta(int &dir){
 		if (x==stanza.getPorta(1) && y==stanza.getDimensione()-2) dir=1;
 		if (x==1 && y==stanza.getPorta(2)) dir=2;
 		if (x==stanza.getDimensione()-2 && y==stanza.getPorta(3)) dir=3;
-		
+
 		return (dir!=-1);
-		
+
 }
 
 bool Controller::controllaMovimento(int posX, int posY){
@@ -211,10 +211,10 @@ bool Controller::controllaMovimento(int posX, int posY){
 
 void Controller::gioca(){
 	char c=' ';
-	initscr();
+	/*initscr();
 	raw();
 	noecho();
-	refresh();
+	refresh();*/
 	d->disegna(p, gestore.getInizio(), &stanza);
 	while (p->getLev()<100 && p->getHp()>0&&c!='x'){
 		c=tolower(getch());
