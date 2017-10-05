@@ -123,25 +123,37 @@ void Controller::scriviIstruzioni(){
 
 void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	char msg[20][40], c;
-	int sel=2; //inizia da 2 perchè msg[0] e msg[1] non devono essere selezionati
+	int sel=2, nStringhe=1; //inizia da 2 perchè msg[0] e msg[1] non devono essere selezionati
 	sprintf (msg[0], "ARMA:");
 	sprintf (msg[1], "Invio per selezionare");
 	
+	//conta quante stringhe ci sono
 	for (int i=0; i<MAX_ITEM; i++){
-		sprintf (msg[i+2], p->getInv(i).getNome().c_str());
+		if (p->getInv(i).isAvailable()){
+			sprintf (msg[nStringhe+1], p->getInv(i).getNome().c_str());
+			nStringhe++;
+		}
 	}
-	d->disegnaPopUp(msg, sel, MAX_ITEM);
+	d->disegnaPopUp(msg, sel, nStringhe);
+	
 	do{
 		c=tolower(getch());
 		if (c==(char)KEY_UP && sel>2){
 			sel--;
-			d->disegnaPopUp(msg, sel, MAX_ITEM);	
+			d->disegnaPopUp(msg, sel, nStringhe);	
 		}
-		else if (c==(char)KEY_DOWN && sel<(MAX_ITEM+1)){
+		else if (c==(char)KEY_DOWN && sel<nStringhe){
 			sel++;
-			d->disegnaPopUp(msg, sel, MAX_ITEM);	
+			d->disegnaPopUp(msg, sel, nStringhe);	
 		}
 	}while(c!=(char)10); //char 10 = invio
+	
+	//imposta sel in modo che sia esattamente l'elemento in inventario 
+	for (int i=0; i<sel-2; i++){
+		if (!p->getInv(i).isAvailable())
+			sel++;
+	}
+	
 	if (opt) p->cambioArma(sel-2);
 	else p->scartaArma(sel-2);
 	d->disegnaStanza(&stanza);

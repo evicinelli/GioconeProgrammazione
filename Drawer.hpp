@@ -38,7 +38,7 @@ class Drawer{
 		//scrive il messaggio, dato in input, nell'apposita finestra
 		void disegnaMess(char msg[100]);
 		
-		//disegna la finestra pop up
+		//disegna la finestra pop up, con il messaggio da scrivere, l'elemento selezionato e il numero di stringhe escluso il titolo
 		void disegnaPopUp(char msg[20][40], int selected, int nStringhe);
 
 		//mette uno spazio nelle coordinate della matrice della stanza

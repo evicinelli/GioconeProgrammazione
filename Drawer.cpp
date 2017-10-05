@@ -45,8 +45,10 @@ void Drawer::posizionaGiocatore(Stanza* s, Giocatore* g){
 	wattroff(win, COLOR_PAIR(6));
 	wrefresh(win);
 }
+
 void Drawer::disegnaStanza(Stanza* s){
     WINDOW* win=win3;
+    int centerx=getmaxx(win)/2;
     int posy;
     int posx;
 	int dim=s->getDimensione(); //dimensione stanza
@@ -59,7 +61,7 @@ void Drawer::disegnaStanza(Stanza* s){
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	wattron(win, COLOR_PAIR(1));
-	mvwprintw(win, 0, 19, " STANZA %d ", s->getId());
+	mvwprintw(win, 0, centerx-4, " STANZA %d ", s->getId());
 	wattroff(win, COLOR_PAIR(1));
 	s->getMatrice(m);
 	//inizio assegnato in modo che la stanza venga centrata nella finestra a prescindere dalla sua dimensione
@@ -131,6 +133,7 @@ void Drawer::disegnaStanza(Stanza* s){
 void Drawer::disegnaStat(Giocatore* p){
 
         WINDOW* win=win1;
+        int centerx=getmaxx(win)/2;
 		wclear(win);
 		box(win, 0 , 0);
         if(has_colors() == FALSE){
@@ -142,9 +145,8 @@ void Drawer::disegnaStat(Giocatore* p){
         init_pair(1, COLOR_RED, COLOR_BLACK);
 
         wattron(win, COLOR_PAIR(1));
-        //print_in_middle(stdscr, LINES / 2, 0, 0, "Viola !!! In color ...");
 
-        mvwprintw(win, 3, 3, "%s", "STATISTICHE:");
+        mvwprintw(win, 3, centerx-6, "%s", "STATISTICHE:");
         wattroff(win, COLOR_PAIR(1));
 
 		//elencate statistiche giocatore, prelevate dalla classe Giocatore
@@ -184,7 +186,7 @@ void Drawer::disegnaMess(char msg[100]){
 
 		wclear(win);
 		box(win, 0 , 0);
-        start_color();			/* Start color 			*/
+        start_color();			/* Start color*/
         init_pair(1, COLOR_RED, COLOR_BLACK);
 
         wattron(win, COLOR_PAIR(1));
@@ -203,13 +205,14 @@ void Drawer::disegnaMess(char msg[100]){
 void Drawer::disegnaLiv(Livello* l, int nLiv){
 
 	WINDOW* win=win4;
-
+	int centerx=getmaxx(win)/2;
+	
 	wclear(win);
 	box(win, 0 , 0);
 	start_color();	/* Start color 			*/
     init_pair(1, COLOR_RED, COLOR_BLACK);
     wattron(win, COLOR_PAIR(1));
-    mvwprintw(win, 1, 35,"LIVELLO %d", nLiv);
+    mvwprintw(win, 1, centerx-5,"LIVELLO %d", nLiv);
     wattroff(win, COLOR_PAIR(1));
 
 	wmove(win, 3, 2);
@@ -228,14 +231,15 @@ void Drawer::disegnaLiv(Livello* l, int nLiv){
 void Drawer::disegnaEquip(Giocatore* g){
 
 	WINDOW* win=win5;
+	int centerx=getmaxx(win)/2;
 
 	wclear(win);
 	box(win, 0 , 0);
-	start_color();			/* Start color 			*/
+	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 
 	wattron(win, COLOR_PAIR(1));
-	mvwprintw(win,3 ,7, "%s","ZAINO:");
+	mvwprintw(win,3 ,centerx-3, "%s","ZAINO:");
 	wattroff(win, COLOR_PAIR(1));
 
 	mvwprintw(win,6,1, "Equipaggiamento: ");
@@ -252,6 +256,7 @@ void Drawer::disegnaEquip(Giocatore* g){
 void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){
 	
 	WINDOW* win=win6;
+	int centerx=getmaxx(win)/2;
 
 	wclear(win);
 	box(win, 0 , 0);
@@ -259,7 +264,7 @@ void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){
     init_pair(1, COLOR_RED, COLOR_BLACK);
     init_pair(2, COLOR_YELLOW, COLOR_BLACK);
         
-	wmove(win, 2, 10);
+	wmove(win, 2, centerx-4);
 	wattron(win, COLOR_PAIR(1));
 	wprintw(win, "%s", msg[0]); //titolo
 	wattroff(win, COLOR_PAIR(1));
@@ -267,6 +272,7 @@ void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){
 	wprintw(win, "%s", msg[1]); //consegna
 	for (int i=2; i<=nStringhe; i++){
 		wmove(win, 3+i, 2);
+		//se è selezionato è giallo
 		if (i==selected){
 			wattron(win, COLOR_PAIR(2));
 			wprintw(win, "%s", msg[i]);
