@@ -1,5 +1,5 @@
-#include "Stanza.hpp"
-#include "NoiseGenerator.hpp"
+# include "Stanza.hpp"
+# include "NoiseGenerator.hpp"
 # define WALL_TRESHOLD 1.2
 
 Stanza::Stanza ()
@@ -240,8 +240,6 @@ void Stanza::inserisciVia()
 
 void Stanza::mettiMuri()
 {
-    //lo farà Vicci, momentaneamente random
-    //int seed = rand() % 100000;
     for (int i=1; i<(dimensione-1); i++)
     {
         for (int j=1; j<(dimensione-1); j++)
@@ -286,7 +284,7 @@ int log(int n)
 }
 
 void Stanza::mettiMostri(int livello){
-
+    int mCounter = 0;
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxMostri>0; j++){
 			if (matrice[i][j]==-1){
@@ -294,12 +292,16 @@ void Stanza::mettiMostri(int livello){
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=1;
-                    monsters[nMaxMostri - 1] = new Mostro(10, "bandito");
+                    monsters[mCounter] = new Mostro(10, "bandito");
+                    printf("%d - %p\n", mCounter, monsters[mCounter]);
 					nMaxMostri--;
+                    mCounter++;
 				}
 			}
 		}
 	}
+
+    nRealMostri = mCounter;
 }
 int Stanza::nVicini(int x, int y)
 {
@@ -362,6 +364,7 @@ void Stanza::liberaPorte(){
 	if (collegamento[2]!=-1) matrice[porte[2]][1]=-1;
 	if (collegamento[3]!=-1) matrice[porte[3]][dimensione-2]=-1;
 }
+
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	 /**
 		-3 -> strada
@@ -391,3 +394,18 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	//this->stampaMatrice(this->matrice);
 }
 
+
+Mostro* Stanza::getMonster(int i)
+{
+    return monsters[i];
+}
+
+int Stanza::getHowManyMonsters()
+{
+    return nRealMostri;
+}
+
+int Stanza::getSpot(int i, int j)
+{
+    return matrice[i][j];
+}

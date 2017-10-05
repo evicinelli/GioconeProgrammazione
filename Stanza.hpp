@@ -16,28 +16,29 @@ protected:
     int matrice [MAXDIM][MAXDIM];
     int dimensione;
     int nMaxMostri;
+    int nRealMostri;
     int nMaxBauli;
     int nMaxVenditori;
     int nMaxMuri;
     int porte[4];
     int collegamento[4];
-    Mostro* monsters[5];
     bool visited;
     int id;
     int libero; //mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri 
+    Mostro* monsters[6]; /* Riferimenti ai mostri della stanza */
 public:
 
-	/*
-	Crea la stanza di id n
-	*/
-	Stanza();
+    /*
+    Crea la stanza di id n
+    */
+    Stanza();
 
-	int getDimensione();
+    int getDimensione();
 
-	void visit();
-	
-	bool isVisited();
-	
+    void visit();
+    
+    bool isVisited();
+    
     void inizializzaMatrice(int m[MAXDIM][MAXDIM]);
 
     void stampaMatriceInizializzata (int m[MAXDIM][MAXDIM]);
@@ -60,6 +61,11 @@ public:
     
     void riempiMatrice(int nLiv, int coll [4]);
 
+    Mostro* getMonster(int i);
+
+    int getHowManyMonsters();
+
+    int getSpot(int i, int j);
 
 private:
 
@@ -68,7 +74,6 @@ private:
     void mettiPorte(int coll[4]);
 
     bool existPorta(int n);
-
 
     void link(int partenza, int arrivo, bool type);
 
@@ -95,3 +100,16 @@ private:
 
 
 #endif // STANZA_HPP_INCLUDED
+
+ /**
+        -3 -> strada
+        -2 -> interno
+        -1 -> esterno
+        0 -> muro : i muri non possono essere messi sulle porte e non possono essere lunghi quanto un lato della stanza perchè deve essere
+                    possibile passare da una parte all'altra della stanza
+        1 -> mostro : in base al numero max di mostri della stanza
+        2 -> venditore : raro
+        3 -> baule : raro
+        4 -> porta : le posizioni delle porte (numero di porte è in base al numero di collegamenti) vengono scelte in base al lato dove sono
+                     presenti i collegamenti, in qualsiasi riquadro del lato corrispondente
+    */

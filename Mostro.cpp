@@ -2,6 +2,7 @@
 
 Mostro::Mostro(int level, std::string race)
 {
+    alive = true;
     act=AZIONE;
     lev=level;
     srand(time(0));
@@ -62,11 +63,6 @@ char Mostro::getId()
     return id;
 }
 
-void Mostro::scanPlayer(Giocatore *g)
-{
-
-}
-
 void Mostro::muovi()
 {
     //aggiorna punti azione
@@ -97,4 +93,26 @@ void Mostro::morte(Giocatore *g)
             g->setInv(i,equip);
         }
     }
+
+    alive = false;
+}
+
+void Mostro::takeAction(Giocatore* g)
+{
+   /* int dim = s->getDimensione();
+    int x = rand() % dim;
+    int y = rand() % dim;
+
+    while (s->getSpot(x, y) != -3) {
+        printf("scelgo ancora... \n");
+        x = rand() % dim;
+        y = rand() % dim;
+    }*/
+
+    //printf("yee\n");
+}
+
+bool Mostro::isAlive()
+{
+    return alive;
 }

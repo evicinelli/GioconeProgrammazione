@@ -241,7 +241,7 @@ bool Controller::controllaMovimento(int posX, int posY){
     }
     return valido;
 }
-bool Controller::hasEnded()
+bool Controller::hasGameEnded()
 {
     return ended;
 }
@@ -257,8 +257,20 @@ void Controller::gioca(){
 
         char c=' ';
         c=tolower(getch());
-        //while (p->getLev()<100 && p->getHp()>0&&c!='x'){
         gestisciInput(c);
         usleep(30000);
-	//}
+}
+
+
+void Controller::printDebugMsg(const char* s)
+{
+    char msg[100];
+    sprintf(msg, s);
+    d->disegnaMess(msg);
+}
+
+
+Stanza* Controller::getCurrentRoom()
+{
+    return &stanza;
 }

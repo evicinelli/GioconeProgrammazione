@@ -6,8 +6,8 @@ using namespace std;
 
 int main()
 {
-    GestoreTurni gt=GestoreTurni();
-    gt.play();
+    	GestoreTurni gt=GestoreTurni();
+    	gt.play();
 	return 0;
 }
 

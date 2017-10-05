@@ -18,11 +18,15 @@ class Controller
 
 		void gestisciInput(char c);
 
-        void init();
+       		void init();
 
 		void gioca();
 
-		bool hasEnded();
+		bool hasGameEnded();
+
+		void printDebugMsg(const char* s);
+
+		Stanza* getCurrentRoom();
 
 	private:
 		void vaiSu();
