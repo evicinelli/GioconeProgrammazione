@@ -22,6 +22,8 @@ class Controller
 
 		void gioca();
 
+		void aumentaLivello();
+		
 		bool hasGameEnded();
 
 		void printDebugMsg(const char* s);
@@ -40,6 +42,10 @@ class Controller
 		bool controllaMovimento(int posX, int posY);
 
 		void cambiaStanza(int direzione);
+		
+		void scriviIstruzioni();
+		
+		void scegliArma(bool opt);
 
 		bool isVicinoPorta(int &dir);
 };

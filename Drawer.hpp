@@ -15,6 +15,7 @@ class Drawer{
 		WINDOW *win3; //Finestra stanza
 		WINDOW *win4; //Finestra livello
 		WINDOW *win5; //Finestra equipaggiamento
+		WINDOW *win6; //Finestra pop up
 	public:
 
 		Drawer();
@@ -36,6 +37,9 @@ class Drawer{
 
 		//scrive il messaggio, dato in input, nell'apposita finestra
 		void disegnaMess(char msg[100]);
+		
+		//disegna la finestra pop up
+		void disegnaPopUp(char msg[20][40], int selected, int nStringhe);
 
 		//mette uno spazio nelle coordinate della matrice della stanza
 		void liberaPosizione(Stanza* s, int y, int x);

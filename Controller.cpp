@@ -100,6 +100,83 @@ void Controller::cambiaStanza(int direzione){
 	d->posizionaGiocatore(&stanza, p);
 }
 
+void Controller::scriviIstruzioni(){
+	char ins[20][40], c;
+	sprintf (ins[0], "ISTRUZIONI:");
+	sprintf (ins[1], "h per riprendere");
+	sprintf (ins[2], "X: Esci dal gioco");
+	sprintf (ins[3], "A: Apri porta ");
+	sprintf (ins[4], "Tasti direzionali: Movimento ");
+	sprintf (ins[5], "C: Cambia arma ");
+	sprintf (ins[6], "S: Scarta arma ");
+	sprintf (ins[7], "B: Compra da venditore ");
+	sprintf (ins[8], "K: Attacca mostro ");
+	sprintf (ins[9], "O: Apri baule ");
+	sprintf (ins[10], "P: Usa pozione ");
+	d->disegnaPopUp(ins, -1, 10);
+	do{
+		c=tolower(getch());
+	}while(c!='h');
+	d->disegnaStanza(&stanza);
+	d->posizionaGiocatore(&stanza, p);
+}
+
+void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
+	char msg[20][40], c;
+	int sel=2; //inizia da 2 perchè msg[0] e msg[1] non devono essere selezionati
+	sprintf (msg[0], "ARMA:");
+	sprintf (msg[1], "Invio per selezionare");
+	
+	for (int i=0; i<MAX_ITEM; i++){
+		sprintf (msg[i+2], p->getInv(i).getNome().c_str());
+	}
+	d->disegnaPopUp(msg, sel, MAX_ITEM);
+	do{
+		c=tolower(getch());
+		if (c==(char)KEY_UP && sel>2){
+			sel--;
+			d->disegnaPopUp(msg, sel, MAX_ITEM);	
+		}
+		else if (c==(char)KEY_DOWN && sel<(MAX_ITEM+1)){
+			sel++;
+			d->disegnaPopUp(msg, sel, MAX_ITEM);	
+		}
+	}while(c!=(char)10); //char 10 = invio
+	if (opt) p->cambioArma(sel-2);
+	else p->scartaArma(sel-2);
+	d->disegnaStanza(&stanza);
+	d->posizionaGiocatore(&stanza, p);
+	d->disegnaEquip(p);
+}
+
+void Controller::aumentaLivello(){
+	char msg[20][40], c;
+	int sel=2;
+	sprintf (msg[0], "LIVELLO %d:", p->getLev()+1);
+	sprintf (msg[1], "Invio per selezionare");
+	sprintf (msg[2], "Strength");
+	sprintf (msg[3], "Dexterity");
+	sprintf (msg[4], "Constitution");
+	sprintf (msg[5], "Luck");
+	d->disegnaPopUp(msg, sel, 5);
+	do{
+		c=tolower(getch());
+		if (c==(char)KEY_UP && sel>2){
+			sel--;
+			d->disegnaPopUp(msg, sel, 5);	
+		}
+		else if (c==(char)KEY_DOWN && sel<5){
+			sel++;
+			d->disegnaPopUp(msg, sel, 5);	
+		}
+	}while(c!=(char)10); //char 10 = invio
+	p->levelup(sel-1);
+	d->disegnaStanza(&stanza);
+	d->posizionaGiocatore(&stanza, p);
+	d->disegnaStat(p);
+}
+
+
 //Giulia's metodo
 void Controller::gestisciInput(char c){
     keypad(stdscr, true);
@@ -183,22 +260,29 @@ void Controller::gestisciInput(char c){
         break;
         //CAMBIA ARMA           (C)
         case((char)('c')):
+        scegliArma(1);
         break;
         //SCARTA ARMA           (S)
         case((char)('s')):
+        scegliArma(0);
         break;
-
+		//AUMENTA LIVELLO
+		case ((char)('l')):
+		aumentaLivello();
+		break;
         //HELP                  (H)
         case((char)('h')):
+        scriviIstruzioni();
         break;
 
         default:
             char msg[100];
-            sprintf (msg, "Clicca un pulsante riconosciuto              ");
+            sprintf (msg, "Clicca un pulsante riconosciuto");
             d->disegnaMess(msg);
     }
 
 }
+
 
 bool Controller::isVicinoPorta(int &dir){
 		int x=p->getPosX();
@@ -251,6 +335,10 @@ void Controller::init()
 	raw();
 	noecho();
 	refresh();
+	Arma* a1 = new Arma(1, "spada");
+	Arma* a2 = new Arma(2, "mazza");
+	p->setInv(0, *a1);
+	p->setInv(1, *a2);
     d->disegna(p, gestore.getInizio(), &stanza);
 }
 void Controller::gioca(){

@@ -10,7 +10,7 @@ Drawer::Drawer(){
 WINDOW* Drawer::creaWin(int height, int width, int starty, int startx){
 	WINDOW* win = newwin(height, width, starty, startx);
 	box(win, 0 , 0);
-	wrefresh(win);
+	//wrefresh(win);
 	return win;
 }
 
@@ -212,12 +212,13 @@ void Drawer::disegnaLiv(Livello* l, int nLiv){
     mvwprintw(win, 1, 35,"LIVELLO %d", nLiv);
     wattroff(win, COLOR_PAIR(1));
 
-    mvwprintw(win, 3, 2,"Stanze:");
+	wmove(win, 3, 2);
+    wprintw(win, "Stanze: ");
 	
 	//vengono elecate le stanze visitate (spaziate tra loro)
 	for (int i=0; i<l->getNStanze(); i++){
 		if ((l->getStanza(i)).isVisited()){
-            mvwprintw(win, 3, 10+2*i, "%d", i);
+            wprintw(win, "%d ", i);
 		}
 	}
 	wrefresh(win);
@@ -241,10 +242,41 @@ void Drawer::disegnaEquip(Giocatore* g){
 	
 	//viene elencato l'inventario
 	for (int i=0; i<MAX_ITEM; i++){
-		mvwprintw(win, 10+i,1, g->getInv(i).getNome().c_str());
+		mvwprintw(win, 8+i,1, g->getInv(i).getNome().c_str());
 	}
 
-	mvwprintw(win, 6+MAX_ITEM,1, "Pozioni: %d", g->getPot());
+	mvwprintw(win, 9+MAX_ITEM,1, "Pozioni: %d", g->getPot());
+	wrefresh(win);
+}
+
+void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){
+	
+	WINDOW* win=win6;
+
+	wclear(win);
+	box(win, 0 , 0);
+	start_color();
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+        
+	wmove(win, 2, 10);
+	wattron(win, COLOR_PAIR(1));
+	wprintw(win, "%s", msg[0]); //titolo
+	wattroff(win, COLOR_PAIR(1));
+	wmove(win, 3, 2); 
+	wprintw(win, "%s", msg[1]); //consegna
+	for (int i=2; i<=nStringhe; i++){
+		wmove(win, 3+i, 2);
+		if (i==selected){
+			wattron(win, COLOR_PAIR(2));
+			wprintw(win, "%s", msg[i]);
+			wattroff(win, COLOR_PAIR(2));
+		}
+		else{
+			wprintw(win, "%s", msg[i]);
+		}
+	}
+	
 	wrefresh(win);
 }
 
@@ -261,12 +293,14 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	centerx=w.ws_col/2-1;
 	
 	//creazione finestre
-	this->win1 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx-(MAXDIM+20));
+	this->win1 = creaWin(7+MAXDIM, 24, centery-(MAXDIM/2+5), centerx-(MAXDIM+24));
 	this->win2 = creaWin(5, 2*MAXDIM+2 , centery-(MAXDIM/2+5), centerx-MAXDIM);
 	this->win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
-	this->win4 = creaWin(6, 2*MAXDIM+42, centery+MAXDIM/2+2, centerx-(MAXDIM+20));
-	this->win5 = creaWin(7+MAXDIM, 20, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
+	this->win4 = creaWin(6, 2*MAXDIM+50, centery+MAXDIM/2+2, centerx-(MAXDIM+24));
+	this->win5 = creaWin(7+MAXDIM, 24, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
+	this->win6 = creaWin(16, 32, centery-8, centerx-16);
 
+	
 	//disegno finestre
 	l->visitStanza(s->getId());
 	disegnaStanza(s);
