@@ -107,7 +107,7 @@ void Controller::scriviIstruzioni(){
 	sprintf (ins[2], "X: Esci dal gioco");
 	sprintf (ins[3], "A: Apri porta ");
 	sprintf (ins[4], "Tasti direzionali: Movimento ");
-	sprintf (ins[5], "C: Cambia arma ");
+	sprintf (ins[5], "L: Cambia arma ");
 	sprintf (ins[6], "S: Scarta arma ");
 	sprintf (ins[7], "B: Compra da venditore ");
 	sprintf (ins[8], "K: Attacca mostro ");
@@ -176,8 +176,6 @@ void Controller::aumentaLivello(){
 	d->disegnaStat(p);
 }
 
-
-//Giulia's metodo
 void Controller::gestisciInput(char c){
     keypad(stdscr, true);
     switch(c){
@@ -258,8 +256,8 @@ void Controller::gestisciInput(char c){
         //USA POZIONE           (P)
         case((char)('p')):
         break;
-        //CAMBIA ARMA           (C)
-        case((char)('c')):
+        //CAMBIA ARMA           (L)
+        case((char)('l')):
         scegliArma(1);
         break;
         //SCARTA ARMA           (S)
@@ -267,7 +265,7 @@ void Controller::gestisciInput(char c){
         scegliArma(0);
         break;
 		//AUMENTA LIVELLO
-		case ((char)('l')):
+		case ((char)('i')):
 		aumentaLivello();
 		break;
         //HELP                  (H)
@@ -280,7 +278,6 @@ void Controller::gestisciInput(char c){
             sprintf (msg, "Clicca un pulsante riconosciuto");
             d->disegnaMess(msg);
     }
-
 }
 
 
@@ -302,21 +299,11 @@ bool Controller::controllaMovimento(int posX, int posY){
     int m [MAXDIM][MAXDIM];
     stanza.getMatrice(m);
 
-    if(m[posY][posX]==-3|| m[posY][posX]==-2|| m[posY][posX]==-1|| m[posY][posX]==4 ) {
-        if(m[posY][posX]==4){
-            //CAMBIO STANZA
-
-
-            //PASSAGGIO LIVELLO
-        }
-        else{
-            char msg[100];
-            sprintf (msg, "Spostamento effettuato                   ");
-            d->disegnaMess(msg);
-            valido=true;
-        }
-
-
+    if(m[posY][posX]==-3|| m[posY][posX]==-2|| m[posY][posX]==-1|| m[posY][posX]==4 ) {        
+		char msg[100];
+		sprintf (msg, "Spostamento effettuato");
+		d->disegnaMess(msg);
+		valido=true;
     }
     else{
         char msg[100];
@@ -342,9 +329,8 @@ void Controller::init()
     d->disegna(p, gestore.getInizio(), &stanza);
 }
 void Controller::gioca(){
-
-        char c=' ';
-        c=tolower(getch());
+	
+        char c=tolower(getch());
         gestisciInput(c);
         usleep(30000);
 }
