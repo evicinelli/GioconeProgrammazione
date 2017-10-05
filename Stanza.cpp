@@ -288,7 +288,7 @@ void Stanza::mettiMostri(int livello){
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxMostri>0; j++){
 			if (matrice[i][j]==-1){
-				int den=1500/(log(livello)+14);
+				int den=1700/(log(livello)+14);
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=1;
@@ -365,17 +365,6 @@ void Stanza::liberaPorte(){
 	if (collegamento[3]!=-1) matrice[porte[3]][dimensione-2]=-1;
 }
 
-void Stanza::trasformaStrada(){
-    for (int i=1; i<dimensione-1; i++)
-    {
-        for (int j=1; j<dimensione-1; j++)
-        {
-            if (matrice[i][j]==-3)
-                matrice[i][j]=-1;
-        }
-    }
-}
-
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	 /**
 		-3 -> strada
@@ -402,7 +391,6 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiBauli(nLiv);
 	mettiVenditori(nLiv);
 	liberaPorte();
-	trasformaStrada();
 	//this->stampaMatrice(this->matrice);
 }
 

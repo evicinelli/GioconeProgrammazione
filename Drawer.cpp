@@ -76,7 +76,7 @@ void Drawer::disegnaStanza(Stanza* s){
 				case(0): //MURO
                     init_pair(9, COLOR_BLACK, COLOR_WHITE);
                     wattron(win, COLOR_PAIR(9));
-					mvwprintw(win, posy, posx,"  ");
+					wprintw(win, "  ");
 					wattroff(win, COLOR_PAIR(9));
 					break;
 				case(1): //MOSTRO
