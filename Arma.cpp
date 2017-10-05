@@ -6,11 +6,11 @@ Arma::Arma()
 }
 Arma::Arma(int lev, std::string type)
 {
-    srand(time(0));
+    //srand(time(0));
     int n;
     if (type=="spada")
     {
-        mindanno=4+(int)(0.8*lev);
+        mindanno=4+(int)(2.1*lev);
         n=8;
         strMult=0.75;
         dexMult=0.75;
@@ -19,7 +19,7 @@ Arma::Arma(int lev, std::string type)
     }
     else if (type=="mazza")
     {
-        mindanno=4+(int)(1.1*lev);
+        mindanno=4+(int)(3.5*lev);
         n=5;
         strMult=1.25;
         dexMult=0.05;
@@ -28,7 +28,7 @@ Arma::Arma(int lev, std::string type)
     }
     else if (type=="pugnale")
     {
-        mindanno=3+(int)(0.5*lev);
+        mindanno=3+(int)(1.4*lev);
         n=15;
         strMult=0.05;
         dexMult=1.25;
@@ -36,10 +36,11 @@ Arma::Arma(int lev, std::string type)
         dexMin=4*lev;
     }
     int r=(int)rand()%n;
-    char buf[2];
-    sprintf(buf,"%d",r);
+    char buf[3], buf2[4];
     maxdanno=mindanno+(3*r);
-    nome=type+" con random = "+buf;
+    sprintf(buf,"%d",mindanno);
+    sprintf(buf2,"%d",maxdanno);
+    nome=type+": "+buf+"-"+buf2;
     disponibile=true;
     droprate=30;
 

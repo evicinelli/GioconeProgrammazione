@@ -126,7 +126,7 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	int sel=2, nStringhe=1; //inizia da 2 perchè msg[0] e msg[1] non devono essere selezionati
 	sprintf (msg[0], "ARMA:");
 	sprintf (msg[1], "Invio per selezionare");
-	
+
 	//conta quante stringhe ci sono
 	for (int i=0; i<MAX_ITEM; i++){
 		if (p->getInv(i).isAvailable()){
@@ -135,25 +135,25 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 		}
 	}
 	d->disegnaPopUp(msg, sel, nStringhe);
-	
+
 	do{
 		c=tolower(getch());
 		if (c==(char)KEY_UP && sel>2){
 			sel--;
-			d->disegnaPopUp(msg, sel, nStringhe);	
+			d->disegnaPopUp(msg, sel, nStringhe);
 		}
 		else if (c==(char)KEY_DOWN && sel<nStringhe){
 			sel++;
-			d->disegnaPopUp(msg, sel, nStringhe);	
+			d->disegnaPopUp(msg, sel, nStringhe);
 		}
 	}while(c!=(char)10); //char 10 = invio
-	
-	//imposta sel in modo che sia esattamente l'elemento in inventario 
+
+	//imposta sel in modo che sia esattamente l'elemento in inventario
 	for (int i=0; i<sel-2; i++){
 		if (!p->getInv(i).isAvailable())
 			sel++;
 	}
-	
+
 	if (opt) p->cambioArma(sel-2);
 	else p->scartaArma(sel-2);
 	d->disegnaStanza(&stanza);
@@ -175,11 +175,11 @@ void Controller::aumentaLivello(){
 		c=tolower(getch());
 		if (c==(char)KEY_UP && sel>2){
 			sel--;
-			d->disegnaPopUp(msg, sel, 5);	
+			d->disegnaPopUp(msg, sel, 5);
 		}
 		else if (c==(char)KEY_DOWN && sel<5){
 			sel++;
-			d->disegnaPopUp(msg, sel, 5);	
+			d->disegnaPopUp(msg, sel, 5);
 		}
 	}while(c!=(char)10); //char 10 = invio
 	p->levelup(sel-1);
@@ -311,7 +311,7 @@ bool Controller::controllaMovimento(int posX, int posY){
     int m [MAXDIM][MAXDIM];
     stanza.getMatrice(m);
 
-    if(m[posY][posX]==-1) {        
+    if(m[posY][posX]==-1) {
 		char msg[100];
 		sprintf (msg, "Spostamento effettuato");
 		d->disegnaMess(msg);
@@ -334,14 +334,14 @@ void Controller::init()
 	raw();
 	noecho();
 	refresh();
-	Arma* a1 = new Arma(1, "spada");
-	Arma* a2 = new Arma(2, "mazza");
+	Arma* a1 = new Arma(20, "mazza");
+	Arma* a2 = new Arma(20, "pugnale");
 	p->setInv(0, *a1);
 	p->setInv(1, *a2);
     d->disegna(p, gestore.getInizio(), &stanza);
 }
 void Controller::gioca(){
-	
+
         char c=tolower(getch());
         gestisciInput(c);
         usleep(30000);
