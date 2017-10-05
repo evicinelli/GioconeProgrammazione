@@ -92,6 +92,8 @@ private:
     void mettiBauli(int livello);
 
     void mettiVenditori(int livello);
+    
+    void trasformaStrada();
 
 	void liberaPorte();
 };

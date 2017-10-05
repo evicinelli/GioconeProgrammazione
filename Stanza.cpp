@@ -365,6 +365,17 @@ void Stanza::liberaPorte(){
 	if (collegamento[3]!=-1) matrice[porte[3]][dimensione-2]=-1;
 }
 
+void Stanza::trasformaStrada(){
+    for (int i=1; i<dimensione-1; i++)
+    {
+        for (int j=1; j<dimensione-1; j++)
+        {
+            if (matrice[i][j]==-3)
+                matrice[i][j]=-1;
+        }
+    }
+}
+
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	 /**
 		-3 -> strada
@@ -391,6 +402,7 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiBauli(nLiv);
 	mettiVenditori(nLiv);
 	liberaPorte();
+	trasformaStrada();
 	//this->stampaMatrice(this->matrice);
 }
 

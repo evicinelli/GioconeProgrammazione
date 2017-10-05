@@ -299,7 +299,7 @@ bool Controller::controllaMovimento(int posX, int posY){
     int m [MAXDIM][MAXDIM];
     stanza.getMatrice(m);
 
-    if(m[posY][posX]==-3|| m[posY][posX]==-2|| m[posY][posX]==-1|| m[posY][posX]==4 ) {        
+    if(m[posY][posX]==-1) {        
 		char msg[100];
 		sprintf (msg, "Spostamento effettuato");
 		d->disegnaMess(msg);
