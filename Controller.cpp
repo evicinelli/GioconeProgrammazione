@@ -1,5 +1,4 @@
 #include "Controller.hpp"
-
 Controller::Controller(GestoreLivelli gl, Giocatore* player){
 	this->gestore = gl;
 	this->p = player;
@@ -283,6 +282,18 @@ void Controller::gestisciInput(char c){
         //HELP                  (H)
         case((char)('h')):
         scriviIstruzioni();
+        break;
+
+        case ((char)KEY_RESIZE):
+            cout<<"Resized; ";
+            //endwin();
+            //refresh();
+            //clear();
+            d->disegnaStanza(&stanza);
+            d->posizionaGiocatore(&stanza, p);
+            d->disegnaStat(p);
+            d->disegnaEquip(p);
+            d->disegnaLiv(gestore.getLevelById(gestore.getLivello()), gestore.getLivello());
         break;
 
         default:
