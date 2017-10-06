@@ -48,6 +48,7 @@ class Drawer{
 		//aggiorna la posizione del giocatore nella stanza
 		void posizionaGiocatore(Stanza* s, Giocatore* g);
 
+		//disegna i mostri con le nuove posizioni nella stanza
 		void posizionaMostro(Stanza* s, Mostro* m);
 
 	private:

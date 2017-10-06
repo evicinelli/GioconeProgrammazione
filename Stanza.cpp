@@ -11,6 +11,7 @@ Stanza::Stanza ()
     this->nMaxVenditori=2;
     this->nMaxMuri=0;
     this->visited=false;
+    //inzialmente non ci sono porte
     for (int i=0; i<4; i++) 
 		this->porte[i]=-1;
 }
@@ -123,12 +124,13 @@ void Stanza::mettiMuriContorno()
 
 void Stanza::mettiPorte(int coll[4])
 {
-    // Ci penserà la Giulia, momentaneamente sono random
+    //Porte random
     for (int i=0; i<4; i++)
     {
         if (coll[i]!=-1)
             porte[i]=rand()%(dimensione-3)+2;
     }
+    //la porta solo se il collegamento nella direzione è != -1
     if (coll[0]!=-1) matrice[0][porte[0]]=4;
     if (coll[1]!=-1) matrice[dimensione-1][porte[1]]=4;
     if (coll[2]!=-1) matrice[porte[2]][0]=4;
@@ -154,8 +156,19 @@ int Stanza::getPorta(int n)
 
 void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0->1
 {
-    int prec, posx, posy, arrivox, arrivoy, direzione; //1 E, 2 S, 3 W, 4N
+	/* Il metodo crea una via casuale tra due porte delle 4 porte 
+	 * Per generare questa via ci sarà un immaginario cursore che si può muovere in tre diverse direzioni:
+	 * tutte fuorchè quella opposta a quella appena percorsa (inoltre non si potrà muovere nella direzione 
+	 * che lo riporterebbe vicino alla porta di partenza). Terminerà quando giungerà allo stesso lato della
+	 * porta di arrivo. 
+	 */ 
+	 
+	//posx e posy sono le coordinate del mio immaginario cursore
+	//prec mi indica la direzione verso la quale il cursore si è precedentemente spostato
+    int prec, posx, posy, arrivox, arrivoy, direzione; 
     prec=7;//valore nullo 7-4=3>+-2
+    
+    //setto le variabili a seconda del tipo di collegamento
     if (!type)
     {
         posx=1;
@@ -172,13 +185,19 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
         libero=arrivox;
     }
     matrice[posy][posx]=-3;
+    
+    //continua finchè non si arriva al lato opposto
     while (((posx != dimensione-2) && !type) || ((posy != dimensione-2) && type))
     {
+		//la direzione deve essere giusta, cioè non deve essere opposta alla precedente, 
+		//in più non deve essere W se vado verso E e non N se vado verso S
         do
         {
             direzione=rand()%4+1;
         }
-        while((prec-direzione)==2 || (prec-direzione)==-2  || (direzione-type)==3);
+        while((prec-direzione)==2 || (prec-direzione)==-2 || (direzione-type)==3);
+        
+        //se riesco mi sposto nella direzione
         if (direzione==1 && posx<dimensione-2)
         {
             prec=direzione;
@@ -201,7 +220,14 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
         }
         matrice[posy][posx]=-3;
     }
+    //il punto di arrivo fa parte della strada
     matrice[arrivoy][arrivox]=-3;
+    
+    /* Una volta arrivato al lato giusto devo arrivare fino alla porta
+     * che si troverà lungo il medesimo lato
+     */
+     
+    //faccio in modo che la pos sia < dell'arrivo (indipendentemente dal lato)
     if (arrivoy<posy)  //type=1 non entra
     {
         int temp=arrivoy;
@@ -215,6 +241,7 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
         posx=temp;
     }
 
+	//dalla posizione del cursore arrivo alla porta
     for (int i=posy; i<arrivoy; i++)
         matrice[i][dimensione-2]=-3;
 
@@ -226,15 +253,17 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
 void Stanza::inserisciVia()
 {
     int partenza[2], arrivo[2];
+    //partenza e arrivo contengono la coordinata variabile della porta di partenza e d arrivo
     for (int i=0; i<=2; i+=2)
-    {
+    {	
+		//se la porta esiste bene, altrimenti me la invento
         if (existPorta(i)) partenza[i/2]=getPorta(i);
         else partenza[i/2]=rand()%(dimensione-2)+1;
 
         if (existPorta(i+1)) arrivo[i/2]=getPorta(i+1);
         else arrivo[i/2]=rand()%(dimensione-2)+1;
+        
         link(partenza[i/2], arrivo[i/2], (i==0));
-        //cout << "ciao";
     }
 }
 
@@ -255,6 +284,7 @@ void Stanza::mettiMuri()
 
 void Stanza::riempiMuri(int x, int y)
 {
+	//se posso andarci allora imposto a -1
     if (matrice[y][x]==-2 || matrice[y][x]==-3)
     {
         matrice[y][x]=-1;
@@ -288,6 +318,7 @@ void Stanza::mettiMostri(int livello){
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxMostri>0; j++){
 			if (matrice[i][j]==-1){
+				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
 				int den=1700/(log(livello)+14);
 				int r=rand()%den;
 				if (r==0){
@@ -324,7 +355,9 @@ void Stanza::mettiBauli(int livello)
         {
             if (matrice[i][j]==-1)
             {
+				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
                 int den=2000/((livello/30.0)+1);
+                //la probabilità è moltiplicata per il numero di muri/mostri che la casella ha vicino
                 if (nVicini(i,j)!=0) den=den/nVicini(i,j);
                 int r=rand()%den;
                 if (r==0)
@@ -343,6 +376,7 @@ void Stanza::mettiVenditori(int livello){
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxVenditori>0; j++){
 			if (matrice[i][j]==-1){
+				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
 				int den=2500/((livello/20.0)+2);
 				int r=rand()%den;
 				if (r==0){
