@@ -371,3 +371,12 @@ Stanza* Controller::getCurrentRoom()
 {
     return &stanza;
 }
+
+void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m)
+{
+	d->liberaPosizione(&stanza, oldY, oldX);
+	stanza.setSpot(oldY, oldX, -1);
+	d->posizionaMostro(&stanza, m);
+	stanza.setSpot(m->getPosY(), m->getPosX(), 1);
+
+}

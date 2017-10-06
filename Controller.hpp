@@ -1,6 +1,7 @@
 #include "GestoreLivelli.hpp"
 #include "Giocatore.hpp"
 #include "Drawer.hpp"
+#include "Mostro.hpp"
 #include <unistd.h>
 
 class Controller
@@ -30,6 +31,7 @@ class Controller
 
 		Stanza* getCurrentRoom();
 
+		void updateMonsterCoordinates(int oldY, int oldX, Mostro* m);
 	private:
 		void vaiSu();
 

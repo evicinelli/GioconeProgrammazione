@@ -67,6 +67,8 @@ public:
 
     int getSpot(int i, int j);
 
+    void setSpot(int i, int j, int value);
+
 private:
 
     void mettiMuriContorno();
@@ -94,6 +96,9 @@ private:
     void mettiVenditori(int livello);
 
 	void liberaPorte();
+
+    /* Trasforma tutti i -3 (strada dovuta a liberaPorte) a -1 (vuoto)*/
+    void normalizza();
 };
 
 

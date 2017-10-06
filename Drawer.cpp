@@ -18,6 +18,7 @@ void Drawer::liberaPosizione(Stanza* s, int y, int x){
 	
 	WINDOW* win=win3;
 	int posx, posy;
+
 	double inizio=(MAXDIM-s->getDimensione())/2.0;
 	
 	//conversione in coordinate grafiche
@@ -320,4 +321,21 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	sprintf (msg, "Iniziamo il gioco, clicca un pulsante (no x) ");
     disegnaMess(msg);
 
+}
+
+void Drawer::posizionaMostro(Stanza* s, Mostro* m)
+{
+	WINDOW* win=win3;
+	int posx, posy;
+	double inizio=(MAXDIM-s->getDimensione())/2.0;
+	
+	//conversione coordinate giocatore con quelle grafiche
+	posy=(int)inizio+1+m->getPosY();
+	posx=(int)(2*(inizio+m->getPosX()))+1;
+	
+ 	init_pair(2, COLOR_CYAN, COLOR_BLACK);
+        wattron(win, COLOR_PAIR(2));
+    	mvwprintw(win, posy, posx,"M "); //deve occupare 2 px
+	wattroff(win, COLOR_PAIR(2));
+	wrefresh(win);
 }

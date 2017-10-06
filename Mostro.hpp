@@ -14,7 +14,7 @@ class Mostro : public Personaggio
         Mostro(int lev, std::string race);
         char getId();
         bool isAlive();
-        void takeAction(Giocatore* g);
+        void takeAction(Giocatore* g, int matrix[24][24], int dim);
         void morte(Giocatore *g);    //metodo chiamato quando g uccide il mostro
 };
 

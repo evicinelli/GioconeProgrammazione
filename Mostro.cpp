@@ -97,19 +97,29 @@ void Mostro::morte(Giocatore *g)
     alive = false;
 }
 
-void Mostro::takeAction(Giocatore* g)
+void Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 {
-   /* int dim = s->getDimensione();
-    int x = rand() % dim;
-    int y = rand() % dim;
+    int targetX = g->getPosX();
+    int targetY = g->getPosY();
 
-    while (s->getSpot(x, y) != -3) {
-        printf("scelgo ancora... \n");
-        x = rand() % dim;
-        y = rand() % dim;
-    }*/
+/*    for (int i = 0; i < dimensione; ++i) {
+        for (int j = 0; j < dimensione; ++j) {
+            printf("%d", m[i][j]);
+        }
+        printf("\n");
+    }
+*/
 
-    //printf("yee\n");
+    int x, y;
+    do {
+        x = (rand() % (dimensione -2)) + 1;
+        y = (rand() % (dimensione -2)) + 1;
+    } while(m[y][x] != -1 || (x == targetX && y == targetY));
+
+    this->setPosX(x);
+    this->setPosY(y);
+    --act;
+
 }
 
 bool Mostro::isAlive()

@@ -4,6 +4,7 @@
 #include "Giocatore.hpp"
 #include "Arma.hpp"
 #include "Livello.hpp"
+#include "Mostro.hpp"
 #include <string>
 
 using namespace std;
@@ -46,6 +47,8 @@ class Drawer{
 
 		//aggiorna la posizione del giocatore nella stanza
 		void posizionaGiocatore(Stanza* s, Giocatore* g);
+
+		void posizionaMostro(Stanza* s, Mostro* m);
 
 	private:
 		//date dimensioni e coordinate in input, viene creata e visualizzata la finestra 

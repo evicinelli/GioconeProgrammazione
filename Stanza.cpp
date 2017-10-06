@@ -293,6 +293,8 @@ void Stanza::mettiMostri(int livello){
 				if (r==0){
 					matrice[i][j]=1;
                     monsters[mCounter] = new Mostro(10, "bandito");
+                    monsters[mCounter]->setPosX(j);
+                    monsters[mCounter]->setPosY(i);
                     printf("%d - %p\n", mCounter, monsters[mCounter]);
 					nMaxMostri--;
                     mCounter++;
@@ -358,11 +360,23 @@ int Stanza::getColl(int n){
 }
 
 void Stanza::liberaPorte(){
-	matrice[libero][dimensione-2]=-1;
-	if (collegamento[0]!=-1) matrice[1][porte[0]]=-1;
-	if (collegamento[1]!=-1) matrice[dimensione-2][porte[1]]=-1;
-	if (collegamento[2]!=-1) matrice[porte[2]][1]=-1;
-	if (collegamento[3]!=-1) matrice[porte[3]][dimensione-2]=-1;
+	matrice[dimensione-2][libero]=-3;
+	if (collegamento[0]!=-1) matrice[1][porte[0]]=-3;
+	if (collegamento[1]!=-1) matrice[dimensione-2][porte[1]]=-3;
+	if (collegamento[2]!=-1) matrice[porte[2]][1]=-3;
+	if (collegamento[3]!=-1) matrice[porte[3]][dimensione-2]=-3;
+}
+
+void Stanza::normalizza()
+{
+    for (int i=1; i<dimensione-1; i++)
+        {
+            for (int j=1; j<dimensione-1; j++)
+            {
+                if (matrice[i][j]==-3)
+                    matrice[i][j]=-1;
+            }
+        }
 }
 
 void Stanza::riempiMatrice(int nLiv, int coll [4]){
@@ -385,12 +399,13 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiPorte(coll);
 	inserisciVia();
 	mettiMuri();
-	riempiMuri(libero, dimensione-2);
-	trasformaInterni();
-	mettiMostri(nLiv);
-	mettiBauli(nLiv);
-	mettiVenditori(nLiv);
+    riempiMuri(libero, dimensione-2);
+    trasformaInterni();
 	liberaPorte();
+    mettiMostri(nLiv);
+    mettiBauli(nLiv);
+    mettiVenditori(nLiv);
+    normalizza();
 	//this->stampaMatrice(this->matrice);
 }
 
@@ -408,4 +423,9 @@ int Stanza::getHowManyMonsters()
 int Stanza::getSpot(int i, int j)
 {
     return matrice[i][j];
+}
+
+void Stanza::setSpot(int i, int j, int value)
+{
+    matrice[i][j] = value;
 }
