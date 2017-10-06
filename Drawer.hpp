@@ -54,5 +54,11 @@ class Drawer{
 	private:
 		//date dimensioni e coordinate in input, viene creata e visualizzata la finestra 
 		WINDOW* creaWin(int height, int width, int starty, int startx);
+		
+		//pulisce finestra e ridisegna il bordo
+		void clearWin(WINDOW* win);
+		
+		//imposta tutti gli init_pair dei colori
+		void setColor();
 
 };
