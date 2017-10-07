@@ -42,6 +42,9 @@ class Controller
 		//true se il giocatore ha vicino una casella con value, (dir è la direzione dell'oggetto che ha vicino) 
 		bool isVicino(int value, int &dir);
 		
+		// Operazioni per concludere il gioco
+		void endGame();
+
 	private:
 
 		//A seconda del tasto premuto, fa una determinata cosa

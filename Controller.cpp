@@ -10,6 +10,11 @@ Controller::Controller(GestoreLivelli gl, Giocatore* player){
 	ended=false;
 }
 
+void Controller::endGame(){
+	ended = true;
+	d->quit();
+}
+
 void Controller::vaiSu(){
 	d->liberaPosizione(&stanza, p->getPosY(), p->getPosX());
 	p->setPosY(p->getPosY()-1);

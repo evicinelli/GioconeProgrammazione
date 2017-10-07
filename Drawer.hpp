@@ -51,6 +51,9 @@ class Drawer{
 		//disegna i mostri con le nuove posizioni nella stanza
 		void posizionaMostro(Stanza* s, Mostro* m);
 
+		// Schermata finale
+		void quit();
+
 	private:
 		//date dimensioni e coordinate in input, viene creata e visualizzata la finestra 
 		WINDOW* creaWin(int height, int width, int starty, int startx);

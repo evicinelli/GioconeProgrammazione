@@ -44,6 +44,11 @@ void GestoreTurni::play()
 			ctrl->getCurrentRoom()->getMonster(i)->setAct(5);
 		}
 	}
+
+	if (player->getHp() < 0) defeat = true;
+	if (defeat) { 
+		ctrl->endGame();
+	}
     }
 }
 

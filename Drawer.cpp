@@ -14,6 +14,12 @@ WINDOW* Drawer::creaWin(int height, int width, int starty, int startx){
 	return win;
 }
 
+void Drawer::quit()
+{
+	// CODICE PER PULIRE SCHERMO / FARE SCHERMATA FINALE
+	printf("Hai perso. Che peccato :)\n");
+}
+
 void Drawer::liberaPosizione(Stanza* s, int y, int x){
 	
 	WINDOW* win=win3;

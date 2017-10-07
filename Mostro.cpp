@@ -67,17 +67,17 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 {
 	int x = this->getPosX();
 	int y = this->getPosY();
-	int direzione;		/* Direzione in cui devo muovermi */
-	int oldDirezione;	/* Ultima direzione in cui mi sono mosso */
+	int direzione = 0;		/* Direzione in cui devo muovermi */
+	int oldDirezione = 0;	/* Ultima direzione in cui mi sono mosso */
 	int incX, incY;		/* Incrementi di posizione */
 //	int iter = 0;		/* Contatore delle iterazioni */
 
 	do {
 		incX = 0;
 		incY = 0;
-		do {
+		//do {
 			direzione = rand() % 4;
-		} while ((abs(direzione - oldDirezione) == 1) /* && iter < 200 */);
+		//} while ((abs(direzione - oldDirezione) == 1) /* && iter < 200 */);
 		
 		switch( direzione ) {
 			case 0:	/* BASSO */
