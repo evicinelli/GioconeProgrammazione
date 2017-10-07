@@ -19,7 +19,6 @@ void GestoreTurni::play()
 	if(player->getAct()>0) {
 		ctrl->gioca();
 	} else {
-
 		Mostro* m;
 		int mCounter = ctrl->getCurrentRoom()->getHowManyMonsters();
 		int mat[24][24];
@@ -28,17 +27,22 @@ void GestoreTurni::play()
 
 		for (int i = 0; i < mCounter; ++i) {
 			m = ctrl->getCurrentRoom()->getMonster(i);
-			
 			if (m && m->isAlive()) {
+				while (m->getAct() > 0) {
 					oX = m->getPosX();
 					oY = m->getPosY();
 					ctrl->getCurrentRoom()->getMatrice(mat);
 					m->takeAction(player, mat, ctrl->getCurrentRoom()->getDimensione());
-					ctrl->updateMonsterCoordinates(oY, oX, m);
+					ctrl->updateMonsterCoordinates(oY, oX, m, m->isChasing());
+					usleep(100000);
+				}
 			}
 		}
 
 		player->setAct(5);
+		for (int i = 0; i < mCounter; ++i) {
+			ctrl->getCurrentRoom()->getMonster(i)->setAct(5);
+		}
 	}
     }
 }

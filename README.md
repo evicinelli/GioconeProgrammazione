@@ -28,3 +28,7 @@
 + MOSTRO: muovi e insegui a seconda di dove si trova c/o al person.
 + PASSAGGIO LIVELLO GIOCATORE: Schermata passaggio di livello. Che stat potenziare? -- gestione input
 + VENDITORE: schermata per venditore. Gestione input venditore
+
+## Bug da risolvere
++ Personaggio sembra non morire quando attaccato dal mostro
++ Mostri non si cancellano per bene se ritorno nella stanza (BT)

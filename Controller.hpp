@@ -37,12 +37,13 @@ class Controller
 		Stanza* getCurrentRoom();
 
 		//dice al drawer di disegnare il mostro nella nuova posizione
-		void updateMonsterCoordinates(int oldY, int oldX, Mostro* m);
+		void updateMonsterCoordinates(int oldY, int oldX, Mostro* m, bool isChasing);
 		
 		//true se il giocatore ha vicino una casella con value, (dir è la direzione dell'oggetto che ha vicino) 
 		bool isVicino(int value, int &dir);
 		
 	private:
+
 		//A seconda del tasto premuto, fa una determinata cosa
 		void gestisciInput(char c);
 		
@@ -81,6 +82,9 @@ class Controller
 		
 		//restituisce la prima posizione libera di inventario, -1 se è piena
 		int libInventario();
+		
 		//viene chiesta la conferma della chiusura del gioco
 		bool chiudiGioco();
+
+
 };

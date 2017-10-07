@@ -436,13 +436,16 @@ Stanza* Controller::getCurrentRoom()
     return &stanza;
 }
 
-void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m)
+void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m, bool isChasing)
 {
-	d->liberaPosizione(&stanza, oldY, oldX);
+	// Pulisco le vecchie coordinate sulla matrice
 	stanza.setSpot(oldY, oldX, -1);
-	d->posizionaMostro(&stanza, m);
+	d->liberaPosizione(&stanza, oldY, oldX);
+	//printf("fatto pulizia\n");
+	
+	// Metto il mostro nella sua nuova posizione
 	stanza.setSpot(m->getPosY(), m->getPosX(), 1);
-
+	d->posizionaMostro(&stanza, m);
 }
 
 void Controller::init()

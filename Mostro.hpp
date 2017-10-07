@@ -1,6 +1,8 @@
-#ifndef MOSTRO_HPP
-#define MOSTRO_HPP
-#include "Giocatore.hpp"
+# ifndef MOSTRO_HPP
+# define MOSTRO_HPP
+# include "Giocatore.hpp"
+# define AGGRO 2 /* range di aggressività del mostro */ 
+# define SCAN_RANGE 3 /* Range entro il quale il mostro segue il giocatore */
 
 class Mostro : public Personaggio
 {
@@ -8,14 +10,21 @@ class Mostro : public Personaggio
         std::string razza;
         char id;           	//il carattere che rappresenta il mostro sulla mappa
         bool alive;
-        void muovi();
-        void insegui(Giocatore *g);
+        bool chasing;
+        void muovi(int targetX, int targetY, int matrix[24][24], int dimensione);
+        void insegui(int targetX, int targetY, int matrix[24][24], int dimensione);
     public:
         Mostro(int lev, std::string race);
         char getId();
         bool isAlive();
+        bool isChasing();
         void takeAction(Giocatore* g, int matrix[24][24], int dim);
         void morte(Giocatore *g);    //metodo chiamato quando g uccide il mostro
+
+    private:
+        /* Decide se il mostro deve attaccare */
+        bool needToAttack(Giocatore* g); 
+        bool needToChase(Giocatore* g);
 };
 
 #endif // MOSTRO_HPP
