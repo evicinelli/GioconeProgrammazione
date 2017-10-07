@@ -134,6 +134,29 @@ void Controller::cambiaStanza(int direzione){
 	d->posizionaGiocatore(&stanza, p);
 }
 
+void Controller::apriBaule(int dir){
+	int y, x; //coordinate baule
+	x=p->getPosX();
+	y=p->getPosY();
+	
+	Forziere* b =  stanza.getBaule();
+	//viene messo nell'inventario l'oggetto
+	p->setInv(libInventario(), b->getInterno());
+	
+	//impostate le coordinate del baule
+	if (dir==0) y--;
+	else if (dir==1) y++;
+	else if (dir==2) x--;
+	else if (dir==3) x++;
+	stanza.setSpot(y, x, -1);
+	//disegnato tutto
+	d->liberaPosizione(&stanza, y, x);
+	d->disegnaEquip(p);
+	d->disegnaStanza(&stanza);
+	d->posizionaGiocatore(&stanza, p);
+	
+}
+
 void Controller::scriviIstruzioni(){
 	char ins[20][40], c;
 	//Messaggio
@@ -225,66 +248,52 @@ bool Controller::chiudiGioco(){
 }
 
 void Controller::gestisciInput(char c){
+	
+    int dir; //direzione nella quale sono gli oggetti
     keypad(stdscr, true);
     switch(c){
 
         //MOVIMENTO IN ALTO
         case ((char)KEY_UP):
-            if (controllaMovimento(p->getPosX(), p->getPosY()-1)==true)
-            {
-                if(p->actMuovi()){
+            if (controllaMovimento(p->getPosX(), p->getPosY()-1)==true && p->actMuovi()){
                     this->vaiSu();
                     d->posizionaGiocatore(&stanza, p);
                     d->disegnaStat(p);
-                }
             }
         break;
 
         //MOVIMENTO IN BASSO
         case ((char)KEY_DOWN):
-            if (controllaMovimento(p->getPosX(), p->getPosY()+1)==true)
-            {
-                if(p->actMuovi()){
+            if (controllaMovimento(p->getPosX(), p->getPosY()+1)==true && p->actMuovi()){
                     this->vaiGiu();
                     d->posizionaGiocatore(&stanza, p);
                     d->disegnaStat(p);
-                }
             }
         break;
 
         //MOVIMENTO A DESTRA
         case ((char)KEY_RIGHT):
-            if (controllaMovimento(p->getPosX()+1, p->getPosY())==true)
-            {
-                if(p->actMuovi()){
-                    this->vaiDx();
-                    d->posizionaGiocatore(&stanza, p);
-                    d->disegnaStat(p);
-                }
+            if (controllaMovimento(p->getPosX()+1, p->getPosY())==true && p->actMuovi()){
+				this->vaiDx();
+				d->posizionaGiocatore(&stanza, p);
+				d->disegnaStat(p);
             }
         break;
 
         //MOVIMENTO A SINISTRA
         case ((char)KEY_LEFT):
-            if (controllaMovimento(p->getPosX()-1, p->getPosY())==true)
-            {
-                if(p->actMuovi()){
-                    this->vaiSx();
-                    d->posizionaGiocatore(&stanza, p);
-                    d->disegnaStat(p);
-
-                }
+            if (controllaMovimento(p->getPosX()-1, p->getPosY())==true && p->actMuovi()){
+				this->vaiSx();
+				d->posizionaGiocatore(&stanza, p);
+				d->disegnaStat(p);
             }
         break;
         //APRIRE PORTA
         case ((char)('a')):
-            int dir;
-            if(isVicinoPorta(dir)){
+            if(isVicino(4, dir))
                 this->cambiaStanza(dir);
-            }
-            else{
+            else
 				printMsg("Non hai una porta vicina");
-			}
 		break;
         case((char)('x')):
 			if (chiudiGioco()){
@@ -294,12 +303,21 @@ void Controller::gestisciInput(char c){
         break;
         //COMPRARE DA VENDIORE  (B)
         case((char)('b')):
+			
         break;
         //ATTACCARE MOSTRO      (K)
         case((char)('k')):
         break;
         //APRIRE BAULE          (O)
         case((char)('o')):
+			if (isVicino(3, dir) && (libInventario()!=-1)){
+				apriBaule(dir);
+				printMsg("Aperto baule");
+			}
+			else if (libInventario()==-1)
+				printMsg("Hai l'inventario pieno");
+			else
+				printMsg("Non sei vicino a un baule");
         break;
         //RACCOGLIERE OGGETTI LASCIATI DAL MOSTRO
 
@@ -363,14 +381,25 @@ bool Controller::thereisArma(){
 	return cond;
 }
 
-bool Controller::isVicinoPorta(int &dir){
+int Controller::libInventario(){
+	int pos=-1;
+	int i=0;
+	while ((pos==-1) && (i<MAX_ITEM)){
+		if (!p->getInv(i).isAvailable())
+			pos=i;
+		i++;
+	}
+	return pos;
+}
+
+bool Controller::isVicino(int value, int &dir){
 		int x=p->getPosX();
 		int y=p->getPosY();
 		dir=-1;
-		if (x==stanza.getPorta(0) && y==1) dir=0;
-		if (x==stanza.getPorta(1) && y==stanza.getDimensione()-2) dir=1;
-		if (x==1 && y==stanza.getPorta(2)) dir=2;
-		if (x==stanza.getDimensione()-2 && y==stanza.getPorta(3)) dir=3;
+		if (stanza.getSpot(y-1, x)==value) dir=0;
+		if (stanza.getSpot(y+1, x)==value) dir=1;
+		if (stanza.getSpot(y, x-1)==value) dir=2;
+		if (stanza.getSpot(y, x+1)==value) dir=3;
 
 		return (dir!=-1);
 
@@ -426,10 +455,6 @@ void Controller::init()
 	noecho();
 	refresh();
 	start_color();
-	Arma* a1 = new Arma(20, "mazza");
-	Arma* a2 = new Arma(20, "pugnale");
-	p->setInv(0, *a1);
-	p->setInv(1, *a2);
     d->disegna(p, gestore.getInizio(), &stanza);
 }
 
@@ -439,4 +464,3 @@ void Controller::gioca(){
 	gestisciInput(c);
 	usleep(30000);
 }
-

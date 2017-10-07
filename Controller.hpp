@@ -39,6 +39,9 @@ class Controller
 		//dice al drawer di disegnare il mostro nella nuova posizione
 		void updateMonsterCoordinates(int oldY, int oldX, Mostro* m);
 		
+		//true se il giocatore ha vicino una casella con value, (dir è la direzione dell'oggetto che ha vicino) 
+		bool isVicino(int value, int &dir);
+		
 	private:
 		//A seconda del tasto premuto, fa una determinata cosa
 		void gestisciInput(char c);
@@ -64,6 +67,9 @@ class Controller
 		//chiede a gestore livelli una nuova stanza e dice al drawer di disegnarla
 		void cambiaStanza(int direzione);
 		
+		//apre il baule
+		void apriBaule(int dir);
+		
 		//dice al drawer di disegnare le struzioni
 		void scriviIstruzioni();
 		
@@ -73,9 +79,8 @@ class Controller
 		//dice se c'è un arma nell'inventario
 		bool thereisArma();
 		
-		//true se è vicino alla porta e in dir mette la direzione della porta
-		bool isVicinoPorta(int &dir);
-		
+		//restituisce la prima posizione libera di inventario, -1 se è piena
+		int libInventario();
 		//viene chiesta la conferma della chiusura del gioco
 		bool chiudiGioco();
 };

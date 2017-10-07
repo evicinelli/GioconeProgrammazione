@@ -86,6 +86,12 @@ int Stanza::getId(){
 	return id; 
 }
 
+Forziere* Stanza::getBaule(){
+	nRealBauli--;
+	if (nRealBauli>=0)
+		return bauli[nRealBauli];
+}
+
 void Stanza::getMatrice(int m[MAXDIM][MAXDIM])
 {
     for(int i=0; i<dimensione; i++)
@@ -319,7 +325,7 @@ void Stanza::mettiMostri(int livello){
 		for(int j=0; j<(dimensione-1) && nMaxMostri>0; j++){
 			if (matrice[i][j]==-1){
 				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
-				int den=1700/(log(livello)+14);
+				int den=2000/(log(livello)+14);
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=1;
@@ -348,7 +354,7 @@ int Stanza::nVicini(int x, int y)
 
 void Stanza::mettiBauli(int livello)
 {
-
+	nRealBauli = 0;
     for(int i=0; i<(dimensione-1); i++)
     {
         for(int j=0; j<(dimensione-1) && nMaxBauli>0; j++)
@@ -363,6 +369,8 @@ void Stanza::mettiBauli(int livello)
                 if (r==0)
                 {
                     matrice[i][j]=3;
+                    bauli[nRealBauli] = new Forziere(livello);
+					nRealBauli++;
                     nMaxBauli--;
                 }
             }
