@@ -1,7 +1,10 @@
 #include "Collegamento.hpp"
+
 Collegamento::Collegamento(int j){
+        //inizializzazione id del collegamento
         this->id=j;
 
+        //inizializzazione dei collegamenti tutti a -1
         int i;
         for(i=0;i<4;i++){
             this->direzioni[i]=-1;
