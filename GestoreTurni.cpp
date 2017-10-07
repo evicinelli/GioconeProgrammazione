@@ -16,39 +16,40 @@ GestoreTurni::GestoreTurni()
 void GestoreTurni::play()
 {
     while(!victory && !defeat && !ctrl->hasGameEnded()) {
-	if(player->getAct()>0) {
-		ctrl->gioca();
-	} else {
-		Mostro* m;
-		int mCounter = ctrl->getCurrentRoom()->getHowManyMonsters();
-		int mat[24][24];
-		int oX = -1;
-		int oY = -1;
+        if(player->getAct()>0) {
+            ctrl->gioca();
+        } else {
+            Mostro* m;
+            int mCounter = ctrl->getCurrentRoom()->getHowManyMonsters();
+            int mat[24][24];
+            int oX = -1;
+            int oY = -1;
 
-		for (int i = 0; i < mCounter; ++i) {
-			m = ctrl->getCurrentRoom()->getMonster(i);
-			if (m && m->isAlive()) {
-				while (m->getAct() > 0) {
-					oX = m->getPosX();
-					oY = m->getPosY();
-					ctrl->getCurrentRoom()->getMatrice(mat);
-					m->takeAction(player, mat, ctrl->getCurrentRoom()->getDimensione());
-					ctrl->updateMonsterCoordinates(oY, oX, m, m->isChasing());
-					usleep(100000);
-				}
-			}
-		}
+            for (int i = 0; i < mCounter; ++i) {
+                m = ctrl->getCurrentRoom()->getMonster(i);
+                if (m && m->isAlive()) {
+                    while (m->getAct() > 0) {
+                        oX = m->getPosX();
+                        oY = m->getPosY();
+                        ctrl->getCurrentRoom()->getMatrice(mat);
+                        m->takeAction(player, mat, ctrl->getCurrentRoom()->getDimensione());
+                        ctrl->updateMonsterCoordinates(oY, oX, m, m->isChasing());
+                        usleep(100000);
+                    }
+                }
+            }
 
-		player->setAct(5);
-		for (int i = 0; i < mCounter; ++i) {
-			ctrl->getCurrentRoom()->getMonster(i)->setAct(5);
-		}
-	}
+            player->setAct(5);
+            for (int i = 0; i < mCounter; ++i) {
+                ctrl->getCurrentRoom()->getMonster(i)->setAct(5);
+            }
+        }
 
-	if (player->getHp() < 0) defeat = true;
-	if (defeat) { 
-		ctrl->endGame();
-	}
+        if (player->getHp() <= 0)
+            defeat = true;
+        if (defeat) {
+            ctrl->endGame();
+        }
     }
 }
 
