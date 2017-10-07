@@ -294,7 +294,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	this->win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
 	this->win4 = creaWin(6, 2*MAXDIM+50, centery+MAXDIM/2+2, centerx-(MAXDIM+24));
 	this->win5 = creaWin(7+MAXDIM, 24, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
-	this->win6 = creaWin(16, 32, centery-8, centerx-16);
+	this->win6 = creaWin(16, 36, centery-8, centerx-18);
 
 	
 	//disegno finestre

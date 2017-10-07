@@ -28,6 +28,27 @@ void Controller::vaiSx(){
 	p->setPosX(p->getPosX()-1);
 }
 
+int Controller::selPopUp(char msg[20][40], int sel, int nStringhe){
+	
+	char c;
+	d->disegnaPopUp(msg, sel, nStringhe);
+	
+	do{
+		c=tolower(getch());
+		//vado in su, a meno che non ci siano più elementi sopra
+		if (c==(char)KEY_UP && sel>2){
+			sel--;
+			d->disegnaPopUp(msg, sel, nStringhe);
+		}
+		//vado in giù a meno che non ci siano più elementi sotto
+		else if (c==(char)KEY_DOWN && sel<nStringhe){
+			sel++;
+			d->disegnaPopUp(msg, sel, nStringhe);
+		}
+	}while(c!=(char)10); //char 10 = invio
+
+	return sel;
+}
 
 void Controller::cambiaStanza(int direzione){
 	
@@ -49,12 +70,18 @@ void Controller::cambiaStanza(int direzione){
 			gestore.creaLivello(gestore.getLivello() + 1);
 			l=gestore.getLevelById(gestore.getLivello());
 			stanza=l->getStanza(0);
+			
+			//comunicazione passaggio di livello
+			printMsg("Passato al livello successivo");
 		}
 		//LIVELLO PRECEDENTE
 		else{
 			gestore.passaLivPrec();
 			l=gestore.getLevelById(gestore.getLivello());
 			stanza=l->getStanza(l->getNStanze()-1);
+			
+			//comunicazione passaggio di livello
+			printMsg("Passato al livello precedente");
 		}
 	}
 	else{
@@ -63,6 +90,9 @@ void Controller::cambiaStanza(int direzione){
 		else if (direzione==1) stanza=l->vaiSud(stanza.getId());
 		else if (direzione==2) stanza=l->vaiOvest(stanza.getId());
 		else stanza=l->vaiEst(stanza.getId());
+		
+		//comunicazione passaggio di livello
+		printMsg("Stanza cambiata");
 	}
 	//cont mi dice in quale delle porte con l'id della mia vecchia stanza devo riapparire (alla cont-esima)
 	int cont=0;
@@ -129,7 +159,7 @@ void Controller::scriviIstruzioni(){
 }
 
 void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
-	char msg[20][40], c;
+	char msg[20][40];
 	int sel=2, nStringhe=1; //inizia da 2 perchè msg[0] e msg[1] non devono essere selezionati
 	sprintf (msg[0], "ARMA:");
 	sprintf (msg[1], "Invio per selezionare");
@@ -141,22 +171,8 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 			nStringhe++;
 		}
 	}
-	d->disegnaPopUp(msg, sel, nStringhe);
+	sel=selPopUp(msg, sel, nStringhe);
 	
-	do{
-		c=tolower(getch());
-		//vado in su, a meno che non ci siano più elementi sopra
-		if (c==(char)KEY_UP && sel>2){
-			sel--;
-			d->disegnaPopUp(msg, sel, nStringhe);
-		}
-		//vado in giù a meno che non ci siano più elementi sotto
-		else if (c==(char)KEY_DOWN && sel<nStringhe){
-			sel++;
-			d->disegnaPopUp(msg, sel, nStringhe);
-		}
-	}while(c!=(char)10); //char 10 = invio
-
 	//imposta sel in modo che sia esattamente l'elemento in inventario
 	for (int i=0; i<sel-1; i++){
 		if (!p->getInv(i).isAvailable())
@@ -174,7 +190,7 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 }
 
 void Controller::aumentaLivello(){
-	char msg[20][40], c;
+	char msg[20][40];
 	int sel=2;
 	sprintf (msg[0], "LIVELLO %d:", p->getLev()+1);
 	sprintf (msg[1], "Invio per selezionare");
@@ -182,25 +198,30 @@ void Controller::aumentaLivello(){
 	sprintf (msg[3], "Dexterity");
 	sprintf (msg[4], "Constitution");
 	sprintf (msg[5], "Luck");
-	d->disegnaPopUp(msg, sel, 5);
-	do{
-		c=tolower(getch());
-		//vado in su, a meno che non ci siano più elementi sopra
-		if (c==(char)KEY_UP && sel>2){
-			sel--;
-			d->disegnaPopUp(msg, sel, 5);
-		}
-		//vado in giù, a meno che non ci siano più elementi sotto
-		else if (c==(char)KEY_DOWN && sel<5){
-			sel++;
-			d->disegnaPopUp(msg, sel, 5);
-		}
-	}while(c!=(char)10); //char 10 = invio
+	sel=selPopUp(msg, sel, 5);
+	
 	p->levelup(sel-1);
 	//disegno sopra la pop-up
 	d->disegnaStanza(&stanza);
 	d->posizionaGiocatore(&stanza, p);
 	d->disegnaStat(p);
+	printMsg("Livello giocatore aumentato");
+}
+
+bool Controller::chiudiGioco(){
+	char msg[20][40];
+	int sel=2;
+	sprintf (msg[0], "ESCI");
+	sprintf (msg[1], "Vuoi uscire dal gioco?");
+	sprintf (msg[2], "SI");
+	sprintf (msg[3], "NO");
+	sel=selPopUp(msg, sel, 3);
+	
+	//disegno sopra la pop-up
+	d->disegnaStanza(&stanza);
+	d->posizionaGiocatore(&stanza, p);
+	return (sel==2);
+	
 }
 
 void Controller::gestisciInput(char c){
@@ -260,14 +281,16 @@ void Controller::gestisciInput(char c){
             int dir;
             if(isVicinoPorta(dir)){
                 this->cambiaStanza(dir);
-                char msg[100];
-                sprintf (msg, "Stanza cambiata");
-                d->disegnaMess(msg);
             }
-        break;
+            else{
+				printMsg("Non hai una porta vicina");
+			}
+		break;
         case((char)('x')):
-            endwin();
-            ended=true;
+			if (chiudiGioco()){
+				endwin();
+				ended=true;
+			}
         break;
         //COMPRARE DA VENDIORE  (B)
         case((char)('b')):
@@ -285,16 +308,28 @@ void Controller::gestisciInput(char c){
         break;
         //CAMBIA ARMA           (L)
         case((char)('l')):
-        scegliArma(1);
-        break;
+			if (thereisArma()){
+				scegliArma(1);
+				printMsg("Arma cambiata");
+			}
+			else{
+				printMsg("Non hai armi nell'inventario");
+			}
+			break;
         //SCARTA ARMA           (S)
         case((char)('s')):
-        scegliArma(0);
+			if (thereisArma()){
+				scegliArma(0);
+				char msg[50];
+				sprintf (msg, "Arma scartata");
+				d->disegnaMess(msg);
+			}
+			else{
+				char msg[50];
+				sprintf (msg, "Non hai armi nell'inventario");
+				d->disegnaMess(msg);
+			}
         break;
-		//AUMENTA LIVELLO
-		case ((char)('i')):
-		aumentaLivello();
-		break;
         //HELP                  (H)
         case((char)('h')):
         scriviIstruzioni();
@@ -319,6 +354,14 @@ void Controller::gestisciInput(char c){
     }
 }
 
+bool Controller::thereisArma(){
+	bool cond=false;
+	for (int i=0; i<MAX_ITEM; i++){
+		if (p->getInv(i).isAvailable())
+			cond=true;
+	}
+	return cond;
+}
 
 bool Controller::isVicinoPorta(int &dir){
 		int x=p->getPosX();
@@ -340,15 +383,11 @@ bool Controller::controllaMovimento(int posX, int posY){
 
 	//puoi spostarti solo se la posizione è libera
     if(m[posY][posX]==-1) {
-		char msg[100];
-		sprintf (msg, "Spostamento effettuato");
-		d->disegnaMess(msg);
+		printMsg("Spostamento effettuato");
 		valido=true;
     }
     else{
-        char msg[100];
-        sprintf (msg, "Spostamento negato");
-        d->disegnaMess(msg);
+		printMsg("Spostamento negato");
     }
     return valido;
 }
@@ -358,7 +397,7 @@ bool Controller::hasGameEnded()
     return ended;
 }
 
-void Controller::printDebugMsg(const char* s)
+void Controller::printMsg(const char* s)
 {
     char msg[100];
     sprintf(msg, s);
