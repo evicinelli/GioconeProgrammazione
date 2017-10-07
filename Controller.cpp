@@ -13,19 +13,28 @@ Controller::Controller(GestoreLivelli gl, Giocatore* player){
 void Controller::vaiSu(){
 	d->liberaPosizione(&stanza, p->getPosY(), p->getPosX());
 	p->setPosY(p->getPosY()-1);
-
+	d->posizionaGiocatore(&stanza, p);
+	d->disegnaStat(p);
 }
 void Controller::vaiGiu(){
 	d->liberaPosizione(&stanza, p->getPosY(), p->getPosX());
 	p->setPosY(p->getPosY()+1);
+	d->posizionaGiocatore(&stanza, p);
+	d->disegnaStat(p);
+
 }
 void Controller::vaiDx(){
 	d->liberaPosizione(&stanza, p->getPosY(), p->getPosX());
 	p->setPosX(p->getPosX()+1);
+	d->posizionaGiocatore(&stanza, p);
+	d->disegnaStat(p);
+
 }
 void Controller::vaiSx(){
 	d->liberaPosizione(&stanza, p->getPosY(), p->getPosX());
-	p->setPosX(p->getPosX()-1);
+	p->setPosX(p->getPosX()-1);	
+	d->posizionaGiocatore(&stanza, p);
+	d->disegnaStat(p);
 }
 
 int Controller::selPopUp(char msg[20][40], int sel, int nStringhe){
@@ -139,7 +148,7 @@ void Controller::apriBaule(int dir){
 	x=p->getPosX();
 	y=p->getPosY();
 	
-	Forziere* b =  stanza.getBaule();
+	Forziere* b =  new Forziere(gestore.getLivello());
 	//viene messo nell'inventario l'oggetto
 	p->setInv(libInventario(), b->getInterno());
 	
@@ -255,46 +264,35 @@ void Controller::gestisciInput(char c){
 
         //MOVIMENTO IN ALTO
         case ((char)KEY_UP):
-            if (controllaMovimento(p->getPosX(), p->getPosY()-1)==true && p->actMuovi()){
-                    this->vaiSu();
-                    d->posizionaGiocatore(&stanza, p);
-                    d->disegnaStat(p);
-            }
+            if (controllaMovimento(p->getPosX(), p->getPosY()-1)==true && p->actMuovi())
+				this->vaiSu();
         break;
 
         //MOVIMENTO IN BASSO
         case ((char)KEY_DOWN):
-            if (controllaMovimento(p->getPosX(), p->getPosY()+1)==true && p->actMuovi()){
-                    this->vaiGiu();
-                    d->posizionaGiocatore(&stanza, p);
-                    d->disegnaStat(p);
-            }
+            if (controllaMovimento(p->getPosX(), p->getPosY()+1)==true && p->actMuovi())
+				this->vaiGiu();
         break;
 
         //MOVIMENTO A DESTRA
         case ((char)KEY_RIGHT):
-            if (controllaMovimento(p->getPosX()+1, p->getPosY())==true && p->actMuovi()){
+            if (controllaMovimento(p->getPosX()+1, p->getPosY())==true && p->actMuovi())
 				this->vaiDx();
-				d->posizionaGiocatore(&stanza, p);
-				d->disegnaStat(p);
-            }
         break;
 
         //MOVIMENTO A SINISTRA
         case ((char)KEY_LEFT):
-            if (controllaMovimento(p->getPosX()-1, p->getPosY())==true && p->actMuovi()){
+            if (controllaMovimento(p->getPosX()-1, p->getPosY())==true && p->actMuovi())
 				this->vaiSx();
-				d->posizionaGiocatore(&stanza, p);
-				d->disegnaStat(p);
-            }
         break;
-        //APRIRE PORTA
+        //APRIRE PORTA (A)
         case ((char)('a')):
             if(isVicino(4, dir))
                 this->cambiaStanza(dir);
             else
 				printMsg("Non hai una porta vicina");
 		break;
+		//CHIUDI GIOCO (X)
         case((char)('x')):
 			if (chiudiGioco()){
 				endwin();
@@ -366,9 +364,8 @@ void Controller::gestisciInput(char c){
         break;
 
         default:
-            char msg[100];
-            sprintf (msg, "Clicca un pulsante riconosciuto");
-            d->disegnaMess(msg);
+            printMsg("Clicca un pulsante riconosciuto");
+		break;
     }
 }
 

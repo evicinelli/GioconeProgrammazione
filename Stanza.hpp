@@ -19,7 +19,6 @@ protected:
     int nMaxMostri;
     int nRealMostri;
     int nMaxBauli;
-    int nRealBauli;
     int nMaxVenditori;
     int nMaxMuri;
     int porte[4];
@@ -28,7 +27,6 @@ protected:
     int id;
     int libero; //mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri 
     Mostro* monsters[6]; /* Riferimenti ai mostri della stanza */
-    Forziere* bauli[2]; 
 public:
 
     //crea la stanza
@@ -75,9 +73,6 @@ public:
 
 	//ritorna l'i-esimo mostro
     Mostro* getMonster(int i);
-    
-    //ritorna un baule nella stanza
-    Forziere* getBaule();
 
 	//ritorna quanti mostri ci sono nella stanza
     int getHowManyMonsters();

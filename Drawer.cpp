@@ -242,7 +242,7 @@ void Drawer::disegnaEquip(Giocatore* g){
 			mvwprintw(win, 10+i,1, g->getInv(i).getNome().c_str());
 	}
 
-	mvwprintw(win, 10+MAX_ITEM,1, "Pozioni: %d", g->getPot());
+	mvwprintw(win, 11+MAX_ITEM,1, "Pozioni: %d", g->getPot());
 	wrefresh(win);
 }
 
