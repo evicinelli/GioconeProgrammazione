@@ -10,7 +10,7 @@ Arma::Arma(int lev, std::string type)
     int n=0;
     if (type=="spada")
     {
-        mindanno=4+(int)(2.1*lev);
+        mindanno=5+(int)(2.1*lev);
         n=8;
         strMult=0.75;
         dexMult=0.75;
@@ -19,7 +19,7 @@ Arma::Arma(int lev, std::string type)
     }
     else if (type=="mazza")
     {
-        mindanno=4+(int)(3.5*lev);
+        mindanno=7+(int)(3.5*lev);
         n=5;
         strMult=1.25;
         dexMult=0.05;
@@ -37,7 +37,7 @@ Arma::Arma(int lev, std::string type)
     }
     int r=(int)rand()%n;
     char buf[3], buf2[4];
-    maxdanno=mindanno+(3*r);
+    maxdanno=mindanno+(int)(lev*r+0.75*r);
     sprintf(buf,"%d",mindanno);
     sprintf(buf2,"%d",maxdanno);
     nome=type+": "+buf+"-"+buf2;

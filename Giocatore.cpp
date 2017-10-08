@@ -2,16 +2,16 @@
 
 Giocatore::Giocatore()
 {
-    str=5;
-    dex=5;
-    con=8;
-    luck=3;
+    str=8;
+    dex=8;
+    con=10;
+    luck=5;
     hpmax=con*20;
     hp=hpmax;
     act=AZIONE;
     oro=0;
     exp=0;
-    nextLevExp=200;
+    nextLevExp=80;
     lev=1;
     pot=2;
     equip=Arma(0,"spada");
@@ -79,7 +79,7 @@ void Giocatore::levelup(int stat)
     nextLevExp=nextLevExp*lev;
 }
 
-void Giocatore::cambioArma(int pos)                         //da debuggare, devo provarla bene
+void Giocatore::cambioArma(int pos)
 {
     if (inventario[pos].isAvailable())
     {
@@ -105,8 +105,8 @@ int Giocatore::usaPozione()
         hp+=recuperato;
         if (hp>hpmax)
 		{
-            recuperato=hpmax-(hp-recuperato);
-            hp=hpmax;
+			recuperato=hpmax-(hp-recuperato);
+			hp=hpmax;
 		}
     }
     return recuperato;

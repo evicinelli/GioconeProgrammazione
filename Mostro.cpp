@@ -9,33 +9,33 @@ Mostro::Mostro(int level, std::string race)
 	if (race=="bandito")
 	{
 		id='R';
+		n=0.75*((double)rand()/RAND_MAX)+1;
+		str=(int)(lev+n*lev);
 		n=1.5*((double)rand()/RAND_MAX)+1;
-		str=(int)(2*lev+n*lev);
+		dex=(int)(lev+n*lev);
 		n=1.5*((double)rand()/RAND_MAX)+1;
-		dex=(int)(2*lev+n*lev);
-		n=1.5*((double)rand()/RAND_MAX)+1;
-		con=(int)(2*lev+n*lev);
+		con=(int)(1.1*lev+n*lev);
 	}
 	else if (race=="orco")
 	{
 		id='O';
 		n=((double)rand()/RAND_MAX)+1;
-		str=(int)(3*lev+n*lev);
+		str=(int)(1.2*lev+n*lev);
 		n=((double)rand()/RAND_MAX)+1;
 		dex=(int)(lev+n*lev);
 		n=2*((double)rand()/RAND_MAX)+1;
-		con=(int)(4*lev+n*lev);
+		con=(int)(1.5*lev+n*lev);
 
 	}
 	else if (race=="troll")
 	{
 		id='T';
 		n=2*((double)rand()/RAND_MAX)+1;
-		str=(int)(5*lev+n*lev);
+		str=(int)(1.5*lev+n*lev);
 		n=0.3*((double)rand()/RAND_MAX)+1;
 		dex=(int)(0.5*lev+n*lev);
 		n=5*((double)rand()/RAND_MAX)+1;
-		con=(int)(5*lev+n*lev);
+		con=(int)(2*lev+n*lev);
 
 	}
 	razza=race;

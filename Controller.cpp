@@ -421,6 +421,7 @@ void Controller::gestisciInput(char c){
 						{
 							selected->morte(p);
 							scriviMorteMostro(selected,danno);
+							d->disegnaEquip(p);
 						}
 						d->disegnaStat(p);
 						d->disegnaStanza(&stanza);
@@ -647,8 +648,8 @@ void Controller::init()
 }
 
 void Controller::gioca(){
-
-	//if (p->getExp()>p->getNextExp())
+	while (p->getExp()>=p->getNextExp())
+		aumentaLivello();
 	d->disegnaStat(p);
 	char c=tolower(getch());
 	gestisciInput(c);

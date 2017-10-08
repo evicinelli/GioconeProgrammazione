@@ -2,7 +2,6 @@
 # define MOSTRO_HPP
 # include "Giocatore.hpp"
 # define AGGRO 2 /* range di aggressività del mostro */
-# define SCAN_RANGE 3 /* Range entro il quale il mostro segue il giocatore */
 
 class Mostro : public Personaggio
 {
