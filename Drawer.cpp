@@ -106,8 +106,7 @@ void Drawer::disegnaStanza(Stanza* s){
 						else
 						{
 							waddch(win, ' ');
-							m[i][j]=-1;
-							s->setMatrice(m);
+							s->setSpot(i,j,-1);
 						}
 					}
 					break;

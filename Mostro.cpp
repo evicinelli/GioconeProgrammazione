@@ -141,7 +141,6 @@ int Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 	int result=0;
 	if (this->needToAttack(g) && (act - 4) >= 0) {
 		result=attacca(g);			//in caso di attacco restituisce il danno inflitto come valore di ritorno
-		//act -= 4;
 		// printf("Grrr!!!!\n");
 	} else {
 		if (this->needToChase(g)) {
