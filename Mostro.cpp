@@ -161,20 +161,19 @@ bool Mostro::isAlive()
 	return alive;
 }
 
-/* Se il giocatore si trova in un quadrato AGGRO x AGGRO intorno al mostro, allora il
- * mostro attacca */
+/* Se il giocatore si trova vicino al mostro, allora il mostro attacca */
 bool Mostro::needToAttack(Giocatore* g)
 {
-	return (abs(g->getPosX() - this->getPosX()) < AGGRO) &&
-		   (abs(g->getPosY() - this->getPosY()) < AGGRO);
+	return (abs(g->getPosX() - this->getPosX()) <=1) &&
+		   (abs(g->getPosY() - this->getPosY()) <=1);
 }
 
-/* Se il giocatore si trova in un quadrato SCAN_RANGE x SCAN_RANGE intorno al mostro,
+/* Se il giocatore si trova in un quadrato AGGRO x AGGRO intorno al mostro,
  * allora il mostro insegue il giocatore */
 bool Mostro::needToChase(Giocatore* g)
 {
-	 return (abs(g->getPosX() - this->getPosX()) < SCAN_RANGE) &&
-			(abs(g->getPosY() - this->getPosY()) < SCAN_RANGE);
+	 return (abs(g->getPosX() - this->getPosX()) < AGGRO) &&
+			(abs(g->getPosY() - this->getPosY()) < AGGRO);
 }
 
 bool Mostro::isChasing()
