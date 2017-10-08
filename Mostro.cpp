@@ -5,7 +5,6 @@ Mostro::Mostro(int level, std::string race)
 	alive = true;
 	act=AZIONE;
 	lev=level;
-	srand(time(0));
 	double n;               //fattore casuale nelle statistiche del mostro
 	if (race=="bandito")
 	{

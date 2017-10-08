@@ -96,10 +96,19 @@ void Drawer::disegnaStanza(Stanza* s){
 					wattroff(win, COLOR_PAIR(9));
 					break;
 				case(1): //MOSTRO
-                    wattron(win, COLOR_PAIR(2));
-					waddch(win, s->getMonster(monstercount)->getId());          //scrivo una lettera diversa a seconda del tipo di mostro (R=bandito, O=orco, T=troll)
-					monstercount++;
-					wattroff(win, COLOR_PAIR(2));
+					if(s->getMonster(monstercount)->isAlive())
+					{
+						wattron(win, COLOR_PAIR(2));
+						waddch(win, s->getMonster(monstercount)->getId());          //scrivo una lettera diversa a seconda del tipo di mostro (R=bandito, O=orco, T=troll)
+						monstercount++;
+						wattroff(win, COLOR_PAIR(2));
+					}
+					else
+					{
+						waddch(win, ' ');
+						m[i][j]=-1;
+						s->setMatrice(m);
+					}
 					break;
 				case(2): //VENDITORE
                     wattron(win, COLOR_PAIR(3));
@@ -298,7 +307,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	this->win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
 	this->win4 = creaWin(6, 2*MAXDIM+50, centery+MAXDIM/2+2, centerx-(MAXDIM+24));
 	this->win5 = creaWin(7+MAXDIM, 24, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
-	this->win6 = creaWin(16, 36, centery-8, centerx-18);
+	this->win6 = creaWin(18, 36, centery-8, centerx-18);
 
 
 	//disegno finestre

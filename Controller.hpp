@@ -82,8 +82,14 @@ class Controller
 		//dice al drawer di disegnare le struzioni
 		void scriviIstruzioni();
 
+		//comunica quando un mostro è stato ucciso
+		void scriviMorteMostro(Mostro* m, int danno);
+
 		//scrive nei messaggi le statistiche del mostro selezionato
 		void scriviInfoMostro(Mostro* m);
+
+		//crea un popup con le informazioni sul mostro
+		void scriviInfoMostroAvanzate(Mostro* m);
 
 		//dice al drawer di disegnare le armi
 		void scegliArma(bool opt);

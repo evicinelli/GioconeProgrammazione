@@ -185,8 +185,9 @@ void Controller::scriviIstruzioni(){
 	sprintf (ins[8], "K: Attacca mostro ");
 	sprintf (ins[9], "O: Apri baule ");
 	sprintf (ins[10], "P: Usa pozione ");
-	sprintf (ins[11], "Z: Passa il turno (dopo almeno un'azione)");
-	d->disegnaPopUp(ins, -1, 10);
+	sprintf (ins[11], "I: Informazioni sul mostro");
+	sprintf (ins[12], "Z: Passa il turno");
+	d->disegnaPopUp(ins, -1, 12);
 	//si chiude quando si preme h
 	do{
 		c=tolower(getch());
@@ -208,9 +209,48 @@ void Controller::scriviInfoMostro(Mostro* m)
     strcat(info,"/");
     sprintf(buf,"%d",m->getHpmax());
     strcat(info,buf);
-    strcat(info,"; ARMA: ");
-	strcat(info,m->getEquip().getNome().c_str());
     d->disegnaMess(info);
+}
+
+void Controller::scriviInfoMostroAvanzate(Mostro* m)
+{
+    char ins[20][40], c, buf[20];
+	sprintf (ins[0], "INFO MOSTRO: ");
+	sprintf (ins[1], "i per riprendere");
+	sprintf (ins[2], "RAZZA: ");
+	strcat	(ins[2], m->getRazza().c_str());
+
+	sprintf (ins[3], "LIVELLO: ");
+	sprintf (buf,"%d",m->getLev());
+	strcat	(ins[3], buf);
+
+	sprintf (ins[4],"HP: ");
+    sprintf (buf,"%d",m->getHp());
+    strcat	(ins[4],buf);
+    strcat	(ins[4],"/");
+    sprintf (buf,"%d",m->getHpmax());
+    strcat	(ins[4],buf);
+
+	sprintf (ins[5], "ARMA: ");
+	strcat	(ins[5], m->getEquip().getNome().c_str());
+
+	sprintf (ins[6], "STR: ");
+	sprintf (buf,"%d",m->getStr());
+	strcat	(ins[6],buf);
+
+	sprintf (ins[7], "DEX: ");
+	sprintf (buf,"%d",m->getDex());
+	strcat	(ins[7],buf);
+
+	d->disegnaPopUp(ins, -1, 7);
+	//si chiude quando si preme h
+	do{
+		c=tolower(getch());
+	}while(c!='i');
+	//disegno sopra la finestra pop up
+	d->disegnaStanza(&stanza);
+	d->posizionaGiocatore(&stanza, p);
+
 }
 
 void Controller::scriviInfoAttacco(Mostro* m, int danno, bool ricevuto)
@@ -238,6 +278,18 @@ void Controller::scriviInfoAttacco(Mostro* m, int danno, bool ricevuto)
 		strcat(info,m->getRazza().c_str());
 	}
 	d->disegnaMess(info);
+}
+
+void Controller::scriviMorteMostro(Mostro* m, int danno)
+{
+	char info[100];
+	char buf[20];
+	strcpy(info,"Hai inflitto ");
+    sprintf(buf,"%d",danno);
+    strcat(info,buf);
+    strcat(info," danni e hai ucciso ");
+    strcat(info, m->getRazza().c_str());
+    d->disegnaMess(info);
 }
 
 void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
@@ -362,8 +414,16 @@ void Controller::gestisciInput(char c){
 				if (distX<=1 && distY<=1 && !(distX==1 && distY==1))
 				{
 					int danno=p->attacca(selected);
-					scriviInfoAttacco(selected,danno,true);
+					if (selected->getHp()>0)
+						scriviInfoAttacco(selected,danno,true);
+					else
+					{
+						selected->morte(p);
+						scriviMorteMostro(selected,danno);
+					}
 					d->disegnaStat(p);
+					d->disegnaStanza(&stanza);
+					d->posizionaGiocatore(&stanza,p);
 				}
 			}
         break;
@@ -414,6 +474,20 @@ void Controller::gestisciInput(char c){
         case((char)('h')):
         scriviIstruzioni();
         break;
+        //INFORMAZIONI AVANZATE SUL MOSTRO (I)
+        case((char)('i')):
+        	if (selected!=NULL)
+			{
+				if (selected->isAlive()==true)
+				{
+					scriviInfoMostroAvanzate(selected);
+				}
+				else
+					printMsg("Il mostro selezionato è morto");
+			}
+			else
+				printMsg("Nessun mostro selezionato");
+		break;
 		//PASSA IL TURNO		(Z)
 		case((char)('z')):
 			char msg[100];
@@ -421,11 +495,10 @@ void Controller::gestisciInput(char c){
 			{
 
 				p->setAct(0);
-				sprintf(msg,"Turno passato");
+				printMsg("Turno passato");
 			}
 			else
-				sprintf(msg,"Devi compiere almeno un'azione per poter passare");
-			d->disegnaMess(msg);
+				printMsg("Devi compiere almeno un'azione per poter passare");
 		break;
 		//se la finestra viene ridimensionata
         case ((char)KEY_RESIZE):
