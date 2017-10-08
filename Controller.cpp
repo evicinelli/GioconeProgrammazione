@@ -402,11 +402,11 @@ void Controller::gestisciInput(char c){
         break;
         //COMPRARE DA VENDIORE  (B)
         case((char)('b')):
-			p->attacca(selected);
+
         break;
         //ATTACCARE MOSTRO      (K)
         case((char)('k')):
-        	if (selected!=NULL)
+        	if (selected!=NULL && selected->isAlive())
 			{
 				int distX=abs(selected->getPosX()-p->getPosX());
 				int distY=abs(selected->getPosY()-p->getPosY());
@@ -587,18 +587,7 @@ bool Controller::controllaMovimento(int posX, int posY){
     else if(m[posY][posX]==1)
 	{
 		//cerca il mostro a partire dalla posizione nella stanza
-
-		int i;
-		bool flag=false;
-		for (i=0;i<stanza.getHowManyMonsters() && !flag;i++)
-		{
-			if (stanza.getMonster(i)->getPosX()==posX && stanza.getMonster(i)->getPosY()==posY)
-			{
-
-				selected=stanza.getMonster(i);
-				flag=true;
-			}
-		}
+		selected=stanza.getMonsterByCoord(posX,posY);
 		scriviInfoMostro(selected);
 	}
     else{
@@ -648,6 +637,7 @@ void Controller::init()
 }
 
 void Controller::gioca(){
+
 	while (p->getExp()>=p->getNextExp())
 		aumentaLivello();
 	d->disegnaStat(p);

@@ -14,7 +14,7 @@ Giocatore::Giocatore()
     nextLevExp=80;
     lev=1;
     pot=2;
-    equip=Arma(0,"spada");
+    equip=Arma(1,"spada");
 }
 
 int Giocatore::getOro()

@@ -453,6 +453,19 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	//this->stampaMatrice(this->matrice);
 }
 
+Mostro* Stanza::getMonsterByCoord(int x, int y)
+{
+		int i;
+		bool flag=false;
+		for (i=0;i<getHowManyMonsters() && !flag;i++)
+		{
+			if (getMonster(i)->getPosX()==x && getMonster(i)->getPosY()==y)
+			{
+				flag=true;
+			}
+		}
+		return getMonster(i-1);
+}
 
 Mostro* Stanza::getMonster(int i)
 {
