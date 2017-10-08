@@ -201,12 +201,14 @@ void Controller::scriviInfoMostro(Mostro* m)
 	char buf[20];
     strcpy(info,"RAZZA: ");
     strcat(info,m->getRazza().c_str());
-    strcat(info,"; DANNI: ");
-    sprintf(buf,"%d",m->getEquip().getMin());
+    strcat(info,"; HP: ");
+    sprintf(buf,"%d",m->getHp());
     strcat(info,buf);
-    strcat(info,"-");
-    sprintf(buf,"%d",m->getEquip().getMax());
+    strcat(info,"/");
+    sprintf(buf,"%d",m->getHpmax());
     strcat(info,buf);
+    strcat(info,"; ARMA: ");
+	strcat(info,m->getEquip().getNome().c_str());
     d->disegnaMess(info);
 }
 
@@ -330,7 +332,16 @@ void Controller::gestisciInput(char c){
         break;
         //ATTACCARE MOSTRO      (K)
         case((char)('k')):
-
+        	if (selected!=NULL)
+			{
+				int distX=abs(selected->getPosX()-p->getPosX());
+				int distY=abs(selected->getPosY()-p->getPosY());
+				if (distX<=1 && distY<=1 && !(distX==1 && distY==1))
+				{
+					int d=p->attacca(selected);
+					scriviInfoAttacco(selected,d,true);
+				}
+			}
         break;
         //APRIRE BAULE          (O)
         case((char)('o')):

@@ -133,14 +133,16 @@ int Personaggio::getAct()
 {
     return act;
 }
-void Personaggio::attacca(Personaggio *p)
+int Personaggio::attacca(Personaggio *p)
 {
     srand(time(0));
+	int dannoTot=-1;
     if(actAttacca())
     {
         int dannoArma=(int)((equip.getMin()+equip.getMax())/(1+(double)rand()/RAND_MAX));
-        int dannoTot=dannoArma+(equip.getStrMult()*str)+(equip.getDexMult()*dex);
+        dannoTot=dannoArma+(equip.getStrMult()*str)+(equip.getDexMult()*dex);
         int currHp=p->getHp();
         p->setHp(currHp-dannoTot);
     }
+    return dannoTot;
 }
