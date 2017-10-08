@@ -156,7 +156,6 @@ void Controller::apriBaule(int dir){
 	Forziere* b =  new Forziere(gestore.getLivello());
 	//viene messo nell'inventario l'oggetto
 	p->setInv(libInventario(), b->getInterno());
-
 	//impostate le coordinate del baule
 	if (dir==0) y--;
 	else if (dir==1) y++;
@@ -413,25 +412,35 @@ void Controller::gestisciInput(char c){
 				int distY=abs(selected->getPosY()-p->getPosY());
 				if (distX<=1 && distY<=1 && !(distX==1 && distY==1))
 				{
-					int danno=p->attacca(selected);
-					if (selected->getHp()>0)
-						scriviInfoAttacco(selected,danno,true);
-					else
+					if (p->getAct()>=4)
 					{
-						selected->morte(p);
-						scriviMorteMostro(selected,danno);
+						int danno=p->attacca(selected);
+						if (selected->getHp()>0)
+							scriviInfoAttacco(selected,danno,true);
+						else
+						{
+							selected->morte(p);
+							scriviMorteMostro(selected,danno);
+						}
+						d->disegnaStat(p);
+						d->disegnaStanza(&stanza);
+						d->posizionaGiocatore(&stanza,p);
 					}
-					d->disegnaStat(p);
-					d->disegnaStanza(&stanza);
-					d->posizionaGiocatore(&stanza,p);
+					else
+						printMsg("Non hai abbastanza punti azione (minimo 4)");
 				}
 			}
         break;
         //APRIRE BAULE          (O)
         case((char)('o')):
 			if (isVicino(3, dir) && (libInventario()!=-1)){
-				apriBaule(dir);
-				printMsg("Aperto baule");
+				if(p->actAttacca())
+				{
+					apriBaule(dir);
+					printMsg("Aperto baule");
+				}
+				else
+					printMsg("Non hai abbastanza punti azione (minimo 2)");
 			}
 			else if (libInventario()==-1)
 				printMsg("Hai l'inventario pieno");
@@ -442,9 +451,25 @@ void Controller::gestisciInput(char c){
 
         //USA POZIONE           (P)
         case((char)('p')):
-                p->usaPozione();
-                d->disegnaStat(p);
-                d->disegnaEquip(p);
+				if(p->getAct()>0)		//questa condizione non dovrebbe mai essere falsa (con act=0 non si può giocare); tenuta per debug
+				{
+					int use=p->usaPozione();
+					if(use>=0)
+					{
+						d->disegnaStat(p);
+						d->disegnaEquip(p);
+						char info[100],buf[20];
+						strcpy(info,"Pozione bevuta. HP recuperati: ");
+						sprintf(buf,"%d",use);
+						strcat(info,buf);
+						d->disegnaMess(info);
+
+					}
+					else
+						printMsg("Non hai pozioni nell'inventario");
+				}
+				else
+					printMsg("Non hai abbastanza punti azione (minimo 1)");
         break;
         //CAMBIA ARMA           (L)
         case((char)('l')):
@@ -460,14 +485,10 @@ void Controller::gestisciInput(char c){
         case((char)('s')):
 			if (thereisArma()){
 				scegliArma(0);
-				char msg[50];
-				sprintf (msg, "Arma scartata");
-				d->disegnaMess(msg);
+				printMsg("Arma scartata");
 			}
 			else{
-				char msg[50];
-				sprintf (msg, "Non hai armi nell'inventario");
-				d->disegnaMess(msg);
+				printMsg("Non hai armi nell'inventario");
 			}
         break;
         //HELP                  (H)

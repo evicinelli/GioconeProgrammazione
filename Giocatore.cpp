@@ -53,10 +53,7 @@ void Giocatore::addOro(int o)
 void Giocatore::addExp(int e)
 {
     exp+=e;
-    if (exp>=nextLevExp)
-        levelup(5);                     //da collegare con la schermata di levelup per l'input, non completo
 }
-//da implementare la gestione dell'inventario e il metodo di equipaggiamento arma
 
 void Giocatore::levelup(int stat)
 {
@@ -97,15 +94,22 @@ void Giocatore::scartaArma(int pos)
     inventario[pos].scarta();
 }
 
-void Giocatore::usaPozione()
+int Giocatore::usaPozione()
 {
+    int recuperato=-1;
     if (pot>0)
     {
         pot--;
-        hp+=(20+5*lev);
+        act--;
+        recuperato=(20+5*lev);
+        hp+=recuperato;
         if (hp>hpmax)
+		{
+            recuperato=hpmax-(hp-recuperato);
             hp=hpmax;
+		}
     }
+    return recuperato;
 }
 
 void morte()
