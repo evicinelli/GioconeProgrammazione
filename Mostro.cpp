@@ -135,18 +135,20 @@ void Mostro::morte(Giocatore *g)
 	alive = false;
 }
 
-void Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
+int Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 {
 	int targetX = g->getPosX();
 	int targetY = g->getPosY();
+	int result=0;
 	if (this->needToAttack(g) && (act - 4) >= 0) {
-		attacca(g);
-		act -= 4;
+		result=attacca(g);			//in caso di attacco restituisce il danno inflitto come valore di ritorno
+		//act -= 4;
 		// printf("Grrr!!!!\n");
 	} else {
 		if (this->needToChase(g)) {
 			chasing = true;
 			insegui(targetX, targetY, m, dimensione);
+			result=1;
 			// printf("Trovato!\n");
 		} else {
 			muovi(targetX, targetY, m, dimensione);
@@ -154,6 +156,7 @@ void Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 		}
 		act -= 1;
 	}
+	return result;
 }
 
 bool Mostro::isAlive()

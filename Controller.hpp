@@ -35,6 +35,9 @@ class Controller
 		//metodo per scrivere messaggi nella finestra
 		void printMsg(const char* s);
 
+		//scrive il resoconto dell'attacco nei messaggi; ricevuto è true se il giocatore ha attaccato il mostro, false altrimenti
+		void scriviInfoAttacco(Mostro* m, int danno, bool ricevuto);
+
 		//Restituisce il puntatore della stanza
 		Stanza* getCurrentRoom();
 
@@ -81,9 +84,6 @@ class Controller
 
 		//scrive nei messaggi le statistiche del mostro selezionato
 		void scriviInfoMostro(Mostro* m);
-
-		//scrive il resoconto dell'attacco nei messaggi; ricevuto è true se il giocatore ha attaccato il mostro, false altrimenti
-		void scriviInfoAttacco(Mostro* m, int danno, bool ricevuto);
 
 		//dice al drawer di disegnare le armi
 		void scegliArma(bool opt);

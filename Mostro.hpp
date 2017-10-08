@@ -19,7 +19,7 @@ class Mostro : public Personaggio
 		std::string getRazza();
         bool isAlive();
         bool isChasing();
-        void takeAction(Giocatore* g, int matrix[24][24], int dim);
+        int takeAction(Giocatore* g, int matrix[24][24], int dim);		//restituisce un valore diverso a seconda dell'azione intrapresa
         void morte(Giocatore *g);    //metodo chiamato quando g uccide il mostro
 
     private:

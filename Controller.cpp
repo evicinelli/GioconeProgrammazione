@@ -185,6 +185,7 @@ void Controller::scriviIstruzioni(){
 	sprintf (ins[8], "K: Attacca mostro ");
 	sprintf (ins[9], "O: Apri baule ");
 	sprintf (ins[10], "P: Usa pozione ");
+	sprintf (ins[11], "Z: Passa il turno (dopo almeno un'azione)");
 	d->disegnaPopUp(ins, -1, 10);
 	//si chiude quando si preme h
 	do{
@@ -214,7 +215,29 @@ void Controller::scriviInfoMostro(Mostro* m)
 
 void Controller::scriviInfoAttacco(Mostro* m, int danno, bool ricevuto)
 {
-
+	char info[100];
+	char buf[20];
+	if (ricevuto==true)
+	{
+        strcpy(info,"Hai inflitto ");
+        sprintf(buf,"%d",danno);
+        strcat(info,buf);
+        strcat(info," danni. HP: ");
+		sprintf(buf,"%d",m->getHp());
+		strcat(info,buf);
+		strcat(info,"/");
+		sprintf(buf,"%d",m->getHpmax());
+		strcat(info,buf);
+	}
+	else
+	{
+		strcpy(info,"Hai ricevuto ");
+        sprintf(buf,"%d",danno);
+        strcat(info,buf);
+        strcat(info," danni da ");
+		strcat(info,m->getRazza().c_str());
+	}
+	d->disegnaMess(info);
 }
 
 void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
@@ -338,8 +361,9 @@ void Controller::gestisciInput(char c){
 				int distY=abs(selected->getPosY()-p->getPosY());
 				if (distX<=1 && distY<=1 && !(distX==1 && distY==1))
 				{
-					int d=p->attacca(selected);
-					scriviInfoAttacco(selected,d,true);
+					int danno=p->attacca(selected);
+					scriviInfoAttacco(selected,danno,true);
+					d->disegnaStat(p);
 				}
 			}
         break;
@@ -390,7 +414,20 @@ void Controller::gestisciInput(char c){
         case((char)('h')):
         scriviIstruzioni();
         break;
+		//PASSA IL TURNO		(Z)
+		case((char)('z')):
+			char msg[100];
+			if (p->getAct()<5)
+			{
 
+				p->setAct(0);
+				sprintf(msg,"Turno passato");
+			}
+			else
+				sprintf(msg,"Devi compiere almeno un'azione per poter passare");
+			d->disegnaMess(msg);
+		break;
+		//se la finestra viene ridimensionata
         case ((char)KEY_RESIZE):
             cout<<"Resized; ";
             //endwin();

@@ -20,6 +20,7 @@ void GestoreTurni::play()
             ctrl->gioca();
         } else {
             Mostro* m;
+            int action=0;
             int mCounter = ctrl->getCurrentRoom()->getHowManyMonsters();
             int mat[24][24];
             int oX = -1;
@@ -32,7 +33,18 @@ void GestoreTurni::play()
                         oX = m->getPosX();
                         oY = m->getPosY();
                         ctrl->getCurrentRoom()->getMatrice(mat);
-                        m->takeAction(player, mat, ctrl->getCurrentRoom()->getDimensione());
+                        action=m->takeAction(player, mat, ctrl->getCurrentRoom()->getDimensione());
+                        switch (action)
+						{
+							case 0:
+								break;
+							case 1:
+								break;
+							default:
+								ctrl->scriviInfoAttacco(m,action,false);
+
+
+						}
                         ctrl->updateMonsterCoordinates(oY, oX, m, m->isChasing());
                         usleep(100000);
                     }
