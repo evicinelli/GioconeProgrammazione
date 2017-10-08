@@ -37,16 +37,16 @@ void Controller::vaiDx(){
 }
 void Controller::vaiSx(){
 	d->liberaPosizione(&stanza, p->getPosY(), p->getPosX());
-	p->setPosX(p->getPosX()-1);	
+	p->setPosX(p->getPosX()-1);
 	d->posizionaGiocatore(&stanza, p);
 	d->disegnaStat(p);
 }
 
 int Controller::selPopUp(char msg[20][40], int sel, int nStringhe){
-	
+
 	char c;
 	d->disegnaPopUp(msg, sel, nStringhe);
-	
+
 	do{
 		c=tolower(getch());
 		//vado in su, a meno che non ci siano più elementi sopra
@@ -65,7 +65,7 @@ int Controller::selPopUp(char msg[20][40], int sel, int nStringhe){
 }
 
 void Controller::cambiaStanza(int direzione){
-	
+
 	Livello* l=gestore.getLevelById(gestore.getLivello());
 	int coll[4];
 	int oldColl[4], inizio=0;
@@ -84,7 +84,7 @@ void Controller::cambiaStanza(int direzione){
 			gestore.creaLivello(gestore.getLivello() + 1);
 			l=gestore.getLevelById(gestore.getLivello());
 			stanza=l->getStanza(0);
-			
+
 			//comunicazione passaggio di livello
 			printMsg("Passato al livello successivo");
 		}
@@ -93,7 +93,7 @@ void Controller::cambiaStanza(int direzione){
 			gestore.passaLivPrec();
 			l=gestore.getLevelById(gestore.getLivello());
 			stanza=l->getStanza(l->getNStanze()-1);
-			
+
 			//comunicazione passaggio di livello
 			printMsg("Passato al livello precedente");
 		}
@@ -104,7 +104,7 @@ void Controller::cambiaStanza(int direzione){
 		else if (direzione==1) stanza=l->vaiSud(stanza.getId());
 		else if (direzione==2) stanza=l->vaiOvest(stanza.getId());
 		else stanza=l->vaiEst(stanza.getId());
-		
+
 		//comunicazione passaggio di livello
 		printMsg("Stanza cambiata");
 	}
@@ -152,11 +152,11 @@ void Controller::apriBaule(int dir){
 	int y, x; //coordinate baule
 	x=p->getPosX();
 	y=p->getPosY();
-	
+
 	Forziere* b =  new Forziere(gestore.getLivello());
 	//viene messo nell'inventario l'oggetto
 	p->setInv(libInventario(), b->getInterno());
-	
+
 	//impostate le coordinate del baule
 	if (dir==0) y--;
 	else if (dir==1) y++;
@@ -168,7 +168,7 @@ void Controller::apriBaule(int dir){
 	d->disegnaEquip(p);
 	d->disegnaStanza(&stanza);
 	d->posizionaGiocatore(&stanza, p);
-	
+
 }
 
 void Controller::scriviIstruzioni(){
@@ -195,6 +195,26 @@ void Controller::scriviIstruzioni(){
 	d->posizionaGiocatore(&stanza, p);
 }
 
+void Controller::scriviInfoMostro(Mostro* m)
+{
+	char info[100];
+	char buf[20];
+    strcpy(info,"RAZZA: ");
+    strcat(info,m->getRazza().c_str());
+    strcat(info,"; DANNI: ");
+    sprintf(buf,"%d",m->getEquip().getMin());
+    strcat(info,buf);
+    strcat(info,"-");
+    sprintf(buf,"%d",m->getEquip().getMax());
+    strcat(info,buf);
+    d->disegnaMess(info);
+}
+
+void Controller::scriviInfoAttacco(Mostro* m, int danno, bool ricevuto)
+{
+
+}
+
 void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	char msg[20][40];
 	int sel=2, nStringhe=1; //inizia da 2 perchè msg[0] e msg[1] non devono essere selezionati
@@ -209,7 +229,7 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 		}
 	}
 	sel=selPopUp(msg, sel, nStringhe);
-	
+
 	//imposta sel in modo che sia esattamente l'elemento in inventario
 	for (int i=0; i<sel-1; i++){
 		if (!p->getInv(i).isAvailable())
@@ -236,7 +256,7 @@ void Controller::aumentaLivello(){
 	sprintf (msg[4], "Constitution");
 	sprintf (msg[5], "Luck");
 	sel=selPopUp(msg, sel, 5);
-	
+
 	p->levelup(sel-1);
 	//disegno sopra la pop-up
 	d->disegnaStanza(&stanza);
@@ -253,16 +273,16 @@ bool Controller::chiudiGioco(){
 	sprintf (msg[2], "SI");
 	sprintf (msg[3], "NO");
 	sel=selPopUp(msg, sel, 3);
-	
+
 	//disegno sopra la pop-up
 	d->disegnaStanza(&stanza);
 	d->posizionaGiocatore(&stanza, p);
 	return (sel==2);
-	
+
 }
 
 void Controller::gestisciInput(char c){
-	
+
     int dir; //direzione nella quale sono gli oggetti
     keypad(stdscr, true);
     switch(c){
@@ -306,10 +326,11 @@ void Controller::gestisciInput(char c){
         break;
         //COMPRARE DA VENDIORE  (B)
         case((char)('b')):
-			
+			p->attacca(selected);
         break;
         //ATTACCARE MOSTRO      (K)
         case((char)('k')):
+
         break;
         //APRIRE BAULE          (O)
         case((char)('o')):
@@ -326,6 +347,9 @@ void Controller::gestisciInput(char c){
 
         //USA POZIONE           (P)
         case((char)('p')):
+                p->usaPozione();
+                d->disegnaStat(p);
+                d->disegnaEquip(p);
         break;
         //CAMBIA ARMA           (L)
         case((char)('l')):
@@ -417,6 +441,23 @@ bool Controller::controllaMovimento(int posX, int posY){
 		printMsg("Spostamento effettuato");
 		valido=true;
     }
+    else if(m[posY][posX]==1)
+	{
+		//cerca il mostro a partire dalla posizione nella stanza
+
+		int i;
+		bool flag=false;
+		for (i=0;i<stanza.getHowManyMonsters() && !flag;i++)
+		{
+			if (stanza.getMonster(i)->getPosX()==posX && stanza.getMonster(i)->getPosY()==posY)
+			{
+
+				selected=stanza.getMonster(i);
+				flag=true;
+			}
+		}
+		scriviInfoMostro(selected);
+	}
     else{
 		printMsg("Spostamento negato");
     }
@@ -447,7 +488,7 @@ void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m, bool is
 	stanza.setSpot(oldY, oldX, -1);
 	d->liberaPosizione(&stanza, oldY, oldX);
 	//printf("fatto pulizia\n");
-	
+
 	// Metto il mostro nella sua nuova posizione
 	stanza.setSpot(m->getPosY(), m->getPosX(), 1);
 	d->posizionaMostro(&stanza, m);
@@ -465,6 +506,8 @@ void Controller::init()
 
 void Controller::gioca(){
 
+	//if (p->getExp()>p->getNextExp())
+	d->disegnaStat(p);
 	char c=tolower(getch());
 	gestisciInput(c);
 	usleep(30000);

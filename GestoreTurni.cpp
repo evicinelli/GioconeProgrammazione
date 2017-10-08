@@ -43,6 +43,10 @@ void GestoreTurni::play()
             for (int i = 0; i < mCounter; ++i) {
                 ctrl->getCurrentRoom()->getMonster(i)->setAct(5);
             }
+
+            //scarta gli input precedenti, in modo da evitare la memorizzazione dei tasti premuti durante il turno del mostro
+            flushinp();
+
         }
 
         if (player->getHp() <= 0)

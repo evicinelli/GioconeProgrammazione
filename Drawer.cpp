@@ -72,7 +72,7 @@ void Drawer::disegnaStanza(Stanza* s){
 	int dim=s->getDimensione(); //dimensione stanza
 	int m[MAXDIM][MAXDIM]; //matrice stanza
 	double inizio; //prima riga e colonna per iniziare a disegnare la stanza
-
+    int monstercount=0;
 
 	clearWin(win);
 	wattron(win, COLOR_PAIR(1));
@@ -91,13 +91,14 @@ void Drawer::disegnaStanza(Stanza* s){
 			switch(m[i][j])
 			{
 				case(0): //MURO
-                    wattron(win, COLOR_PAIR(9));
+					wattron(win, COLOR_PAIR(9));
 					wprintw(win, "  ");
 					wattroff(win, COLOR_PAIR(9));
 					break;
 				case(1): //MOSTRO
                     wattron(win, COLOR_PAIR(2));
-					waddch(win, 'M');
+					waddch(win, s->getMonster(monstercount)->getId());          //scrivo una lettera diversa a seconda del tipo di mostro (R=bandito, O=orco, T=troll)
+					monstercount++;
 					wattroff(win, COLOR_PAIR(2));
 					break;
 				case(2): //VENDITORE
@@ -324,9 +325,10 @@ void Drawer::posizionaMostro(Stanza* s, Mostro* m)
 	//conversione coordinate giocatore con quelle grafiche
 	posy=(int)inizio+1+m->getPosY();
 	posx=(int)(2*(inizio+m->getPosX()))+1;
-
+	char buf[3];
+	buf[0]=m->getId(); buf[1]=' '; buf[2]='\0';             //in questo modo stampo sia l'id del mostro, sia lo spazio
 	wattron(win, COLOR_PAIR(2));
-	mvwprintw(win, posy, posx,"M "); //deve occupare 2 px
+	mvwprintw(win, posy, posx, buf); //deve occupare 2 px
 	wattroff(win, COLOR_PAIR(2));
 	wrefresh(win);
 }

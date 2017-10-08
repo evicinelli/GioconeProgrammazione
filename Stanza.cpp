@@ -12,12 +12,12 @@ Stanza::Stanza ()
     this->nMaxMuri=0;
     this->visited=false;
     //inzialmente non ci sono porte
-    for (int i=0; i<4; i++) 
+    for (int i=0; i<4; i++)
 		this->porte[i]=-1;
-	
-	
-	
-	
+
+
+
+
 
 }
 
@@ -88,7 +88,7 @@ void Stanza::setId(int n){
 }
 
 int Stanza::getId(){
-	return id; 
+	return id;
 }
 
 void Stanza::getMatrice(int m[MAXDIM][MAXDIM])
@@ -155,24 +155,24 @@ int Stanza::getPorta(int n)
 {
 	if (collegamento[n] != -1)
 		return porte[n];
-	else 
+	else
 		return -1;
 }
 
 void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0->1
 {
-	/* Il metodo crea una via casuale tra due porte delle 4 porte 
+	/* Il metodo crea una via casuale tra due porte delle 4 porte
 	 * Per generare questa via ci sarà un immaginario cursore che si può muovere in tre diverse direzioni:
-	 * tutte fuorchè quella opposta a quella appena percorsa (inoltre non si potrà muovere nella direzione 
+	 * tutte fuorchè quella opposta a quella appena percorsa (inoltre non si potrà muovere nella direzione
 	 * che lo riporterebbe vicino alla porta di partenza). Terminerà quando giungerà allo stesso lato della
-	 * porta di arrivo. 
-	 */ 
-	 
+	 * porta di arrivo.
+	 */
+
 	//posx e posy sono le coordinate del mio immaginario cursore
 	//prec mi indica la direzione verso la quale il cursore si è precedentemente spostato
-    int prec, posx, posy, arrivox, arrivoy, direzione; 
+    int prec, posx, posy, arrivox, arrivoy, direzione;
     prec=7;//valore nullo 7-4=3>+-2
-    
+
     //setto le variabili a seconda del tipo di collegamento
     if (!type)
     {
@@ -190,18 +190,18 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
         libero=arrivox;
     }
     matrice[posy][posx]=-3;
-    
+
     //continua finchè non si arriva al lato opposto
     while (((posx != dimensione-2) && !type) || ((posy != dimensione-2) && type))
     {
-		//la direzione deve essere giusta, cioè non deve essere opposta alla precedente, 
+		//la direzione deve essere giusta, cioè non deve essere opposta alla precedente,
 		//in più non deve essere W se vado verso E e non N se vado verso S
         do
         {
             direzione=rand()%4+1;
         }
         while((prec-direzione)==2 || (prec-direzione)==-2 || (direzione-type)==3);
-        
+
         //se riesco mi sposto nella direzione
         if (direzione==1 && posx<dimensione-2)
         {
@@ -227,11 +227,11 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
     }
     //il punto di arrivo fa parte della strada
     matrice[arrivoy][arrivox]=-3;
-    
+
     /* Una volta arrivato al lato giusto devo arrivare fino alla porta
      * che si troverà lungo il medesimo lato
      */
-     
+
     //faccio in modo che la pos sia < dell'arrivo (indipendentemente dal lato)
     if (arrivoy<posy)  //type=1 non entra
     {
@@ -260,14 +260,14 @@ void Stanza::inserisciVia()
     int partenza[2], arrivo[2];
     //partenza e arrivo contengono la coordinata variabile della porta di partenza e d arrivo
     for (int i=0; i<=2; i+=2)
-    {	
+    {
 		//se la porta esiste bene, altrimenti me la invento
         if (existPorta(i)) partenza[i/2]=getPorta(i);
         else partenza[i/2]=rand()%(dimensione-2)+1;
 
         if (existPorta(i+1)) arrivo[i/2]=getPorta(i+1);
         else arrivo[i/2]=rand()%(dimensione-2)+1;
-        
+
         link(partenza[i/2], arrivo[i/2], (i==0));
     }
 }
@@ -321,8 +321,20 @@ void Stanza::mettiMostri(int livello){
 				int den=(170-MAXDIM)+dimensione;
 				int r=rand()%den;
 				if (r==0){
-					matrice[i][j]=1;
-                    monsters[mCounter] = new Mostro(10, "bandito");
+                    int razza=(int)rand()%3;
+                    matrice[i][j]=1;
+                    switch (razza)
+                    {
+						case 0:
+							monsters[mCounter] = new Mostro(livello, "bandito");
+							break;
+						case 1:
+							monsters[mCounter] = new Mostro(livello, "orco");
+							break;
+						case 2:
+							monsters[mCounter] = new Mostro(livello, "troll");
+							break;
+                    }
                     monsters[mCounter]->setPosX(j);
                     monsters[mCounter]->setPosY(i);
                     printf("%d - %p\n", mCounter, monsters[mCounter]);
@@ -423,10 +435,10 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
         4 -> porta : le posizioni delle porte (numero di porte è in base al numero di collegamenti) vengono scelte in base al lato dove sono
                      presenti i collegamenti, in qualsiasi riquadro del lato corrispondente
     */
-    
+
     this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
     inizializzaMatrice(this->matrice);
-    
+
 	mettiMuriContorno();
 	mettiPorte(coll);
 	inserisciVia();

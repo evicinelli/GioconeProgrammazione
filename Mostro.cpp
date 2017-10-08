@@ -9,7 +9,7 @@ Mostro::Mostro(int level, std::string race)
 	double n;               //fattore casuale nelle statistiche del mostro
 	if (race=="bandito")
 	{
-		id='B';
+		id='R';
 		n=1.5*((double)rand()/RAND_MAX)+1;
 		str=(int)(2*lev+n*lev);
 		n=1.5*((double)rand()/RAND_MAX)+1;
@@ -39,6 +39,7 @@ Mostro::Mostro(int level, std::string race)
 		con=(int)(5*lev+n*lev);
 
 	}
+	razza=race;
 	luck=0;
 	exp=0;
 	hpmax=20*con;
@@ -63,6 +64,11 @@ char Mostro::getId()
 	return id;
 }
 
+std::string Mostro::getRazza()
+{
+	return razza;
+}
+
 void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 {
 	int x = this->getPosX();
@@ -78,7 +84,7 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 		//do {
 			direzione = rand() % 4;
 		//} while ((abs(direzione - oldDirezione) == 1) /* && iter < 200 */);
-		
+
 		switch( direzione ) {
 			case 0:	/* BASSO */
 				++incY;
@@ -142,7 +148,7 @@ void Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 			chasing = true;
 			insegui(targetX, targetY, m, dimensione);
 			// printf("Trovato!\n");
-		} else { 
+		} else {
 			muovi(targetX, targetY, m, dimensione);
 			// printf("Dove sei?\n");
 		}
@@ -159,16 +165,16 @@ bool Mostro::isAlive()
  * mostro attacca */
 bool Mostro::needToAttack(Giocatore* g)
 {
-	return (abs(g->getPosX() - this->getPosX()) < AGGRO) && 
-		   (abs(g->getPosY() - this->getPosY()) < AGGRO); 
+	return (abs(g->getPosX() - this->getPosX()) < AGGRO) &&
+		   (abs(g->getPosY() - this->getPosY()) < AGGRO);
 }
 
 /* Se il giocatore si trova in un quadrato SCAN_RANGE x SCAN_RANGE intorno al mostro,
  * allora il mostro insegue il giocatore */
 bool Mostro::needToChase(Giocatore* g)
 {
-	 return (abs(g->getPosX() - this->getPosX()) < SCAN_RANGE) && 
-			(abs(g->getPosY() - this->getPosY()) < SCAN_RANGE); 
+	 return (abs(g->getPosX() - this->getPosX()) < SCAN_RANGE) &&
+			(abs(g->getPosY() - this->getPosY()) < SCAN_RANGE);
 }
 
 bool Mostro::isChasing()

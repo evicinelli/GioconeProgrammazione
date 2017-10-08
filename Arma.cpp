@@ -7,7 +7,7 @@ Arma::Arma()
 Arma::Arma(int lev, std::string type)
 {
     //srand(time(0));
-    int n;
+    int n=0;
     if (type=="spada")
     {
         mindanno=4+(int)(2.1*lev);

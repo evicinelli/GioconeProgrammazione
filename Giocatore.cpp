@@ -13,6 +13,7 @@ Giocatore::Giocatore()
     exp=0;
     nextLevExp=200;
     lev=1;
+    pot=2;
     equip=Arma(0,"spada");
 }
 
@@ -102,6 +103,8 @@ void Giocatore::usaPozione()
     {
         pot--;
         hp+=(20+5*lev);
+        if (hp>hpmax)
+            hp=hpmax;
     }
 }
 
