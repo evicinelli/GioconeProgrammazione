@@ -536,8 +536,9 @@ void Controller::gestisciInput(char c){
 		break;
 		//se la finestra viene ridimensionata
         case ((char)KEY_RESIZE):
+			clear();
+			refresh();
 			d->disegna(p, gestore.getLevelById(gestore.getLivello()), stanza);
-            refresh();
         break;
 
         default:

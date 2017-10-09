@@ -300,7 +300,7 @@ void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){
 
 void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 
-	resize_term(37, 150);
+	//resize_term(37, 150);
 
     int centerx, centery, x, y; //coordinate centro terminale
     curs_set(0); //cursore invisibile
