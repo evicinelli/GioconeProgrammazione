@@ -480,10 +480,8 @@ void Controller::gestisciInput(char c){
 				}
 				else
 					printMsg("Non hai abbastanza punti azione (minimo 1)");
-                p->usaPozione();
                 d->disegnaStat(p);
                 d->disegnaEquip(p);
-                printMsg("Usata pozione");
         break;
         //CAMBIA ARMA           (L)
         case((char)('l')):
