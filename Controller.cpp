@@ -436,7 +436,7 @@ void Controller::gestisciInput(char c){
         //APRIRE BAULE          (O)
         case((char)('o')):
 			if (isVicino(3, dir) && (libInventario()!=-1)){
-				if(p->actAttacca())
+				if(p->actApri())
 				{
 					apriBaule(dir);
 					printMsg("Aperto baule");

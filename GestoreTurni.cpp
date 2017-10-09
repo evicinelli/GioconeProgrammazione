@@ -37,13 +37,13 @@ void GestoreTurni::play()
                         switch (action)
 						{
 							case 0:
+								//il mostro diventa di colore verde/blu
 								break;
 							case 1:
+								//il mostro diventa rosso perché ha visto il giocatore e lo insegue
 								break;
 							default:
 								ctrl->scriviInfoAttacco(m,action,false);
-
-
 						}
                         ctrl->updateMonsterCoordinates(oY, oX, m, m->isChasing());
                         usleep(100000);
