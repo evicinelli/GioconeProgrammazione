@@ -184,15 +184,15 @@ void Controller::scriviIstruzioni(){
 	sprintf (ins[1], "h per riprendere");
 	sprintf (ins[2], "X: Esci dal gioco");
 	sprintf (ins[3], "A: Apri porta ");
-	sprintf (ins[4], "Tasti direzionali: Movimento ");
+	sprintf (ins[4], "Tasti direzionali: Movimento (1 pa)");
 	sprintf (ins[5], "L: Cambia arma ");
 	sprintf (ins[6], "S: Scarta arma ");
 	sprintf (ins[7], "B: Compra da venditore ");
-	sprintf (ins[8], "K: Attacca mostro ");
-	sprintf (ins[9], "O: Apri baule ");
-	sprintf (ins[10], "P: Usa pozione ");
+	sprintf (ins[8], "K: Attacca mostro (4 pa)");
+	sprintf (ins[9], "O: Apri baule (2 pa)");
+	sprintf (ins[10], "P: Usa pozione (1 pa)");
 	sprintf (ins[11], "I: Informazioni sul mostro");
-	sprintf (ins[12], "Z: Passa il turno");
+	sprintf (ins[12], "Z: Passa il turno ");
 	d->disegnaPopUp(ins, -1, 12);
 	//si chiude quando si preme h
 	do{
@@ -302,7 +302,8 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	char msg[20][40];
 	int sel=2, nStringhe=1; //inizia da 2 perchè msg[0] e msg[1] non devono essere selezionati
 	sprintf (msg[0], "ARMA:");
-	sprintf (msg[1], "Invio per selezionare");
+	if (opt) sprintf (msg[1], "Scegli l'arma da cambiare");
+	else sprintf (msg[1], "Scegli l'arma da scartare");
 
 	//conta quante stringhe ci sono
 	for (int i=0; i<MAX_ITEM; i++){
@@ -333,7 +334,7 @@ void Controller::aumentaLivello(){
 	char msg[20][40];
 	int sel=2;
 	sprintf (msg[0], "LIVELLO %d:", p->getLev()+1);
-	sprintf (msg[1], "Invio per selezionare");
+	sprintf (msg[1], "Cosa vuoi migliorare? (Invio)");
 	sprintf (msg[2], "Strength");
 	sprintf (msg[3], "Dexterity");
 	sprintf (msg[4], "Constitution");
@@ -524,7 +525,6 @@ void Controller::gestisciInput(char c){
 		break;
 		//PASSA IL TURNO		(Z)
 		case((char)('z')):
-			char msg[100];
 			if (p->getAct()<5)
 			{
 
@@ -537,14 +537,17 @@ void Controller::gestisciInput(char c){
 		//se la finestra viene ridimensionata
         case ((char)KEY_RESIZE):
             cout<<"Resized; ";
-            //endwin();
             //refresh();
             //clear();
+            
+			resize_term(37, 150);
+            d->disegnaLiv(gestore.getLevelById(gestore.getLivello()), gestore.getLivello());
             d->disegnaStanza(stanza);
             d->posizionaGiocatore(stanza, p);
             d->disegnaStat(p);
             d->disegnaEquip(p);
-            d->disegnaLiv(gestore.getLevelById(gestore.getLivello()), gestore.getLivello());
+            printMsg("Ripristinate dimensioni del terminale");
+            refresh();
         break;
 
         default:
@@ -645,7 +648,7 @@ void Controller::init()
 	noecho();
 	refresh();
 	start_color();
-    d->disegna(p, gestore.getInizio(), stanza);
+	d->disegna(p, gestore.getInizio(), stanza);
 }
 
 void Controller::gioca(){
