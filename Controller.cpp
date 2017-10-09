@@ -144,7 +144,7 @@ void Controller::cambiaStanza(int direzione){
 	//DISEGNO
 	d->disegnaStanza(stanza);
 	l->visitStanza(stanza->getId());
-	d->disegnaLiv(l, gestore.getLivello());
+	d->disegnaLiv(l);
 	d->posizionaGiocatore(stanza, p);
 }
 
@@ -529,17 +529,7 @@ void Controller::gestisciInput(char c){
 		break;
 		//se la finestra viene ridimensionata
         case ((char)KEY_RESIZE):
-            cout<<"Resized; ";
-            //refresh();
-            //clear();
-            
-			resize_term(37, 150);
-            d->disegnaLiv(gestore.getLevelById(gestore.getLivello()), gestore.getLivello());
-            d->disegnaStanza(stanza);
-            d->posizionaGiocatore(stanza, p);
-            d->disegnaStat(p);
-            d->disegnaEquip(p);
-            printMsg("Ripristinate dimensioni del terminale");
+			d->disegna(p, gestore.getLevelById(gestore.getLivello()), stanza);
             refresh();
         break;
 

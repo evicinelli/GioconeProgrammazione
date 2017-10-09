@@ -11,7 +11,7 @@ class Livello
 protected:
     /** numero di stanze del livello*/
     int nStanze;
-
+    
     /** vettore contenente puntatori alle stanze del livello */
     Stanza* vettStanze;
 

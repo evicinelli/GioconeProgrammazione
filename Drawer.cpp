@@ -196,11 +196,12 @@ void Drawer::disegnaStat(Giocatore* p){
 
 void Drawer::disegnaMess(char msg[100]){
         WINDOW* win=win2;
+        int centerx=getmaxx(win)/2;
 
 		clearWin(win);
 
         wattron(win, COLOR_PAIR(1));
-        mvwprintw(win, 1, 20, "%s", "MESSAGGI:");
+        mvwprintw(win, 1, centerx-4, "%s", "MESSAGGI:");
         wattroff(win, COLOR_PAIR(1));
 
 		//viene scritto il messaggio
@@ -211,14 +212,14 @@ void Drawer::disegnaMess(char msg[100]){
 
 }
 
-void Drawer::disegnaLiv(Livello* l, int nLiv){
+void Drawer::disegnaLiv(Livello* l){
 
 	WINDOW* win=win4;
 	int centerx=getmaxx(win)/2;
 
 	clearWin(win);
     wattron(win, COLOR_PAIR(1));
-    mvwprintw(win, 1, centerx-5,"LIVELLO %d", nLiv);
+    mvwprintw(win, 1, centerx-5,"LIVELLO %d",  l->getNStanze());
     wattroff(win, COLOR_PAIR(1));
 
 	wmove(win, 3, 2);
@@ -308,7 +309,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	this->win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
 	this->win4 = creaWin(6, 2*MAXDIM+50, centery+MAXDIM/2+2, centerx-(MAXDIM+24));
 	this->win5 = creaWin(7+MAXDIM, 24, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
-	this->win6 = creaWin(18, 38, centery-8, centerx-19);
+	this->win6 = creaWin(18, 38, centery-8, centerx-18);
 
 
 	//disegno finestre
@@ -316,7 +317,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	disegnaStanza(s);
 	disegnaStat(g);
 	disegnaEquip(g);
-	disegnaLiv(l, 1);
+	disegnaLiv(l);
 	g->setPosX(s->getLibero());
 	g->setPosY(s->getDimensione()-2);
 	posizionaGiocatore(s, g);

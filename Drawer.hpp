@@ -24,7 +24,7 @@ class Drawer{
 		//disegna la stanza nell'apposita finestra
 		void disegnaStanza(Stanza* s);
 
-		//disegno iniziale
+		//disegna tutto
 		void disegna(Giocatore* g, Livello* l, Stanza* s);
 
 		//disegna le statisctiche del personaggio nell'apposita finestra
@@ -34,7 +34,7 @@ class Drawer{
 		void disegnaEquip(Giocatore* g);
 
 		//scrive le stanze già visitate nel livello nell'apposita finestra
-		void disegnaLiv(Livello* l, int nLiv);
+		void disegnaLiv(Livello* l);
 
 		//scrive il messaggio, dato in input, nell'apposita finestra
 		void disegnaMess(char msg[100]);

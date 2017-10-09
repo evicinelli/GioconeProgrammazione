@@ -4,7 +4,7 @@
 Livello::Livello (int n){
     //inizializza il numero di stanze del livello
 	nStanze=n;
-
+	
 	//alloca il vettore delle stanze cha avrà dimensione pari al numero delle stanze+2 perchè nell'indice nStanze ci sarà l'ultima stanza del livello precedente e nell'indice nStanze+1 ci sarà il
     //puntatore alla prima stanza del livello successivo
     vettStanze= new Stanza [nStanze+2];
