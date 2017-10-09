@@ -18,10 +18,18 @@ void Drawer::clearWin(WINDOW* win){
 	wclear(win);
 	box(win, 0 , 0);
 }
-void Drawer::quit()
+void Drawer::quitVictory()
 {
-
+	endwin();
 }
+
+
+void Drawer::quitDefeat()
+{
+	endwin();
+}
+
+
 void Drawer::setColor(){
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, COLOR_CYAN, COLOR_BLACK);

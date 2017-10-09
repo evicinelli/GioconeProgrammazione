@@ -1,6 +1,9 @@
 # include "GestoreTurni.hpp"
 # include <stdio.h>
 # define MONSTERS 6
+# define LEV_VICTORY 100
+# define GOLD_VICTORY 100000
+
 
 GestoreTurni::GestoreTurni()
 {
@@ -62,10 +65,15 @@ void GestoreTurni::play()
         }
 
         if (player->getHp() <= 0)
+		{
             defeat = true;
-        if (defeat) {
-            ctrl->endGame();
-        }
+            ctrl->endGame(0);
+		}
+        if (player->getLev()>=LEV_VICTORY || player->getOro()>=GOLD_VICTORY)
+		{
+			victory = true;
+			ctrl->endGame(1);
+		}
     }
 }
 
