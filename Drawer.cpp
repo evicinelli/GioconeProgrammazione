@@ -97,7 +97,7 @@ void Drawer::disegnaStanza(Stanza* s){
 				case(1): //MOSTRO
 					{
 						Mostro* mon=s->getMonsterByCoord(j,i);
-						if(mon->isAlive())
+						if(mon!=NULL && mon->isAlive())
 						{
 							wattron(win, COLOR_PAIR(2));
 							waddch(win, mon->getId());          //scrivo una lettera diversa a seconda del tipo di mostro (R=bandito, O=orco, T=troll)

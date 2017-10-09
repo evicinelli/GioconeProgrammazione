@@ -464,7 +464,10 @@ Mostro* Stanza::getMonsterByCoord(int x, int y)
 				flag=true;
 			}
 		}
-		return getMonster(i-1);
+		if (flag==true)
+			return getMonster(i-1);
+		else
+			return NULL;
 }
 
 Mostro* Stanza::getMonster(int i)
