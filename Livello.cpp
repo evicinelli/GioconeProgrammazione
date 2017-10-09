@@ -80,35 +80,35 @@ int Livello::getNStanze(){
 	return this->nStanze;
 }
 
-Stanza Livello::vaiNord(int id){
+Stanza* Livello::vaiNord(int id){
     //collegamento relativo all'id
 	Collegamento el=vettColl[id];
 	//get delle direzioni usando all'array di appoggio
 	int a[4];
 	el.getDirezioni(a);
 	//ritorno della stanza avente id pari a quello contenuto nell'elemento a indice zero (perchè 0 -> Nord) dell'array delle direzioni
-	return getStanza(a[0]);
+	return getPointerToStanza(a[0]);
 }
 
-Stanza Livello::vaiSud(int id){
+Stanza* Livello::vaiSud(int id){
 	Collegamento el=vettColl[id];
 	int a[4];
 	el.getDirezioni(a);
-	return getStanza(a[1]);
+	return getPointerToStanza(a[1]);
 }
 
-Stanza Livello::vaiOvest(int id){
+Stanza* Livello::vaiOvest(int id){
 	Collegamento el=vettColl[id];
 	int a[4];
 	el.getDirezioni(a);
-	return getStanza(a[2]);
+	return getPointerToStanza(a[2]);
 }
 
-Stanza Livello::vaiEst(int id){
+Stanza* Livello::vaiEst(int id){
 	Collegamento el=vettColl[id];
 	int a[4];
 	el.getDirezioni(a);
-	return getStanza(a[3]);
+	return getPointerToStanza(a[3]);
 }
 
 void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){

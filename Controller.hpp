@@ -13,7 +13,7 @@ class Controller
 		GestoreLivelli gestore;
 		Giocatore* p;
 		Drawer* d;
-		Stanza stanza;
+		Stanza* stanza;
 		Mostro* selected;
 		bool ended;
 

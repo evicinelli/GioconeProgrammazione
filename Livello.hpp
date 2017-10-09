@@ -70,22 +70,22 @@ public:
     /**
     Metodo che restituisce la stanza a nord della stanza corrente salvata nell'intero passato come parametro in id
     */
-    Stanza vaiNord(int id);
+    Stanza* vaiNord(int id);
 
     /**
     Metodo che restituisce la stanza a sud della stanza corrente salvata nell'intero passato come parametro in id
     */
-    Stanza vaiSud(int id);
+    Stanza* vaiSud(int id);
 
     /**
     Metodo che restituisce la stanza a ovest della stanza corrente salvata nell'intero passato come parametro in id
     */
-    Stanza vaiOvest(int id);
+    Stanza* vaiOvest(int id);
 
     /**
     Metodo che restituisce la stanza a est della stanza corrente salvata nell'intero passato come parametro in id
     */
-    Stanza vaiEst(int id);
+    Stanza* vaiEst(int id);
 
     /**
     Ritorna il numero delle stanze del livello
