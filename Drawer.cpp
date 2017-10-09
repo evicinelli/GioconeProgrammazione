@@ -205,7 +205,8 @@ void Drawer::disegnaMess(char msg[100]){
 
 		//viene scritto il messaggio
         mvwprintw(win, 2, 1, "%s", msg);
-
+        mvwprintw(win, 3, 1, "h per le istruzioni", msg);
+		
         wrefresh(win);
 
 }
@@ -290,15 +291,15 @@ void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){
 
 void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 
+	resize_term(37, 150);
 
-	struct winsize w;
-    int centerx, centery; //coordinate centro terminale
+    int centerx, centery, x, y; //coordinate centro terminale
     curs_set(0); //cursore invisibile
 
     //viene rilevato il centro del terminale
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-	centery=w.ws_row/2-1;
-	centerx=w.ws_col/2-1;
+	getmaxyx(stdscr, y, x);
+	centery=y/2-1;
+	centerx=x/2-1;
 
 	//creazione finestre
 	setColor();
@@ -307,7 +308,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	this->win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
 	this->win4 = creaWin(6, 2*MAXDIM+50, centery+MAXDIM/2+2, centerx-(MAXDIM+24));
 	this->win5 = creaWin(7+MAXDIM, 24, centery-(MAXDIM/2+5), centerx+MAXDIM+2);
-	this->win6 = creaWin(18, 36, centery-8, centerx-18);
+	this->win6 = creaWin(18, 38, centery-8, centerx-19);
 
 
 	//disegno finestre
