@@ -48,7 +48,7 @@ class Controller
 		bool isVicino(int value, int &dir);
 
 		// Operazioni per concludere il gioco
-		void endGame();
+		void endGame(int v);
 
 	private:
 

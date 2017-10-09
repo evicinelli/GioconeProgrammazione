@@ -17,6 +17,7 @@ class Drawer{
 		WINDOW *win4; //Finestra livello
 		WINDOW *win5; //Finestra equipaggiamento
 		WINDOW *win6; //Finestra pop up
+		WINDOW *win7;  //Finestra di fine gioco
 	public:
 
 		Drawer();
@@ -51,8 +52,11 @@ class Drawer{
 		//disegna i mostri con le nuove posizioni nella stanza
 		void posizionaMostro(Stanza* s, Mostro* m);
 
-		// Schermata finale
-		void quit();
+		// Schermata di vittoria
+		void quitVictory();
+
+		//Schermata di sconfitta
+		void quitDefeat();
 
 	private:
 		//date dimensioni e coordinate in input, viene creata e visualizzata la finestra

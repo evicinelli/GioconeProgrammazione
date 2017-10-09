@@ -10,9 +10,16 @@ Controller::Controller(GestoreLivelli gl, Giocatore* player){
 	ended=false;
 }
 
-void Controller::endGame(){
-	ended = true;
-	d->quit();
+void Controller::endGame(int v){
+	ended=true;
+	if (v==0)
+	{
+		d->quitDefeat();
+	}
+	if (v==1)
+	{
+		d->quitVictory();
+	}
 }
 
 void Controller::vaiSu(){
