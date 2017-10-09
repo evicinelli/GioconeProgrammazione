@@ -132,8 +132,12 @@ void Stanza::mettiPorte(int coll[4])
     //Porte random
     for (int i=0; i<4; i++)
     {
-        if (coll[i]!=-1)
-            porte[i]=rand()%(dimensione-3)+2;
+        if (coll[i]!=-1){
+			if (i!=3)
+				porte[i]=rand()%(dimensione-3)+2;
+			else
+				porte[i]=rand()%(dimensione-4)+2;
+		}
     }
     //la porta solo se il collegamento nella direzione è != -1
     if (coll[0]!=-1) matrice[0][porte[0]]=4;
