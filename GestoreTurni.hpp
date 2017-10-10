@@ -3,7 +3,9 @@
 #include "GestoreLivelli.hpp"
 #include "Controller.hpp"
 #include <string.h>
-
+# define MONSTERS 6
+# define LEV_VICTORY 100
+# define GOLD_VICTORY 100000
 
 class GestoreTurni
 {

@@ -329,7 +329,30 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	}
 	//a seconda di opt cambio o scarto l'arma
 	if (sel >= 2){
-		if (opt) p->cambioArma(sel-2);
+		if (opt)
+		{
+			int res=p->cambioArma(sel-2);
+			char mes[100],buf[20];
+			switch (res)
+			{
+				case 0:
+					printMsg ("Arma cambiata");
+				break;
+				case 1:
+					strcpy(mes,"Forza insufficiente, richiesta ");
+					sprintf(buf,"%d",p->getInv(sel-2).getStrMin());
+					strcat(mes,buf);
+					d->disegnaMess(mes);
+				break;
+				case 2:
+					strcpy(mes,"Destrezza insufficiente, richiesta ");
+					sprintf(buf,"%d",p->getInv(sel-2).getDexMin());
+					strcat(mes,buf);
+					d->disegnaMess(mes);
+				break;
+			}
+
+		}
 		else p->scartaArma(sel-2);
 	}
 	//disegno sopra la pop-up
@@ -343,10 +366,10 @@ void Controller::aumentaLivello(){
 	int sel=2;
 	sprintf (msg[0], "LIVELLO %d:", p->getLev()+1);
 	sprintf (msg[1], "Cosa vuoi migliorare? (Invio)");
-	sprintf (msg[2], "Strength");
-	sprintf (msg[3], "Dexterity");
-	sprintf (msg[4], "Constitution");
-	sprintf (msg[5], "Luck");
+	sprintf (msg[2], "Forza");
+	sprintf (msg[3], "Destrezza");
+	sprintf (msg[4], "Costituzione");
+	sprintf (msg[5], "Fortuna");
 	sel=selPopUp(msg, sel, 5);
 
 	p->levelup(sel-1);
@@ -495,7 +518,6 @@ void Controller::gestisciInput(char c){
         case((char)('l')):
 			if (thereisArma()){
 				scegliArma(1);
-				printMsg("Arma cambiata");
 			}
 			else{
 				printMsg("Non hai armi nell'inventario");

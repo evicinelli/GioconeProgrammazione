@@ -60,17 +60,17 @@ void Giocatore::levelup(int stat)
     switch(stat)
     {
     case 1:
-        str++;
+        str+=2;
         break;
     case 2:
-        dex++;
+        dex+=2;
         break;
     case 3:
-        con++;
+        con+=2;
         hpmax+=20;
         break;
     case 4:
-        luck++;
+        luck+=2;
         break;
     }
     hp=hpmax;
@@ -79,14 +79,27 @@ void Giocatore::levelup(int stat)
     nextLevExp=nextLevExp*lev;
 }
 
-void Giocatore::cambioArma(int pos)
+int Giocatore::cambioArma(int pos)
 {
+    int cambiato=-1;
     if (inventario[pos].isAvailable())
     {
-        Arma temp=equip;
-        equip=inventario[pos];
-        inventario[pos]=temp;
+        if (inventario[pos].getStrMin()<=str)
+		{
+			if(inventario[pos].getDexMin()<=dex)
+			{
+				cambiato=0;
+				Arma temp=equip;
+				equip=inventario[pos];
+				inventario[pos]=temp;
+			}
+			else
+				cambiato=2;
+		}
+		else
+			cambiato=1;
     }
+	return cambiato;
 }
 
 void Giocatore::scartaArma(int pos)

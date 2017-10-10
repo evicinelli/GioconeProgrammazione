@@ -14,8 +14,8 @@ Arma::Arma(int lev, std::string type)
         n=8;
         strMult=0.75;
         dexMult=0.75;
-        strMin=2*lev;
-        dexMin=2*lev;
+        strMin=(int)(0.8*lev)+4;
+        dexMin=(int)(0.8*lev)+4;
     }
     else if (type=="mazza")
     {
@@ -23,7 +23,7 @@ Arma::Arma(int lev, std::string type)
         n=5;
         strMult=1.25;
         dexMult=0.05;
-        strMin=4*lev;
+        strMin=(int)(1.3*lev)+6;
         dexMin=0;
     }
     else if (type=="pugnale")
@@ -33,7 +33,7 @@ Arma::Arma(int lev, std::string type)
         strMult=0.05;
         dexMult=1.25;
         strMin=0;
-        dexMin=4*lev;
+        dexMin=(int)(1.3*lev)+6;
     }
     int r=(int)rand()%n;
     char buf[3], buf2[4];
@@ -43,6 +43,7 @@ Arma::Arma(int lev, std::string type)
     nome=type+": "+buf+"-"+buf2;
     disponibile=true;
     droprate=30;
+    prezzo=20+(int)(lev*7.5)+(int)(maxdanno*0.05+mindanno*0.05);
 
 }
 int Arma::getMin()

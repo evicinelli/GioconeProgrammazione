@@ -1,8 +1,5 @@
 # include "GestoreTurni.hpp"
 # include <stdio.h>
-# define MONSTERS 6
-# define LEV_VICTORY 100
-# define GOLD_VICTORY 100000
 
 
 GestoreTurni::GestoreTurni()
