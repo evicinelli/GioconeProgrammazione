@@ -97,9 +97,6 @@ class Controller
 		//dice se c'è un arma nell'inventario
 		bool thereisArma();
 
-		//restituisce la prima posizione libera di inventario, -1 se è piena
-		int libInventario();
-
 		//viene chiesta la conferma della chiusura del gioco
 		bool chiudiGioco();
 

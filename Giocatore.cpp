@@ -94,6 +94,19 @@ void Giocatore::scartaArma(int pos)
     inventario[pos].scarta();
 }
 
+
+int Giocatore::libInventario(){
+	int pos=-1;
+	int i=0;
+	while ((pos==-1) && (i<MAX_ITEM)){
+		if (!getInv(i).isAvailable())
+			pos=i;
+		i++;
+	}
+	return pos;
+}
+
+
 int Giocatore::usaPozione()
 {
     int recuperato=-1;

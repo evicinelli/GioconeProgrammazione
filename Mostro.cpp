@@ -118,17 +118,10 @@ void Mostro::morte(Giocatore *g)
 	int expGain=lev*30+g->getLuck()*5;
 	g->addOro(gold);
 	g->addExp(expGain);
-	if (prob<=drop)                         //da controllare il funzionamento nel gioco reale
+	if (prob<=drop)
 	{
-		int i=0;
-		while (g->getInv(i).isAvailable())
-		{
-			i++;
-		}
-		if (i<MAX_ITEM)
-		{
-			g->setInv(i,equip);
-		}
+		if (g->libInventario()!=-1)
+			g->setInv(g->libInventario(),equip);
 	}
 
 	alive = false;
@@ -141,16 +134,13 @@ int Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 	int result=0;
 	if (this->needToAttack(g) && (act - 4) >= 0) {
 		result=attacca(g);			//in caso di attacco restituisce il danno inflitto come valore di ritorno
-		// printf("Grrr!!!!\n");
 	} else {
 		if (this->needToChase(g)) {
 			chasing = true;
 			insegui(targetX, targetY, m, dimensione);
 			result=1;
-			// printf("Trovato!\n");
 		} else {
 			muovi(targetX, targetY, m, dimensione);
-			// printf("Dove sei?\n");
 		}
 		act -= 1;
 	}

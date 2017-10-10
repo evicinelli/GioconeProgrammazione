@@ -14,7 +14,7 @@ public:
     Venditore(int level);
     void riempi(int a, int lev);
     Arma getVendita(int n);
-    void vendi(Giocatore g, int n);
+    int vendi(Giocatore* g, int n);				//metodo di vendita che usa libInventario(); analogamente a quest'ultimo metodo, ritorna -1 se l'inventario è pieno
 
 };
 

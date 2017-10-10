@@ -25,6 +25,7 @@ class Giocatore : public Personaggio
         void levelup(int stat);             //metodo da chiamare quando passa di livello il giocatore; "stat" viene passato da tastiera quando compare la schermata di passaggio di livello
         void cambioArma(int pos);           //scambia l'arma equipaggiata con una nell'inventario
         void scartaArma(int pos);           //scarta una delle armi nell'inventario
+        int libInventario();				//restituisce la prima posizione libera di inventario, -1 se è piena
         int usaPozione();					//usa una pozione e ritorna il numero di hp recuperati
         void morte();                       //metodo forse non necessario; dovrebbe chiamare la schermata di sconfitta
 

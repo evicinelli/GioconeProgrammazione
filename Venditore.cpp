@@ -38,22 +38,18 @@ Arma Venditore::getVendita(int n)
     return vendita[n];
 }
 
-void Venditore::vendi(Giocatore g, int n)
+int Venditore::vendi(Giocatore* g, int n)
 {
-    int gold=g.getOro();
+    int gold=g->getOro();
+    int pos=g->libInventario();
     if (n>=0 && n<=2)
     {
         if (gold>vendita[n].getPrezzo() && vendita[n].isAvailable())
         {
-            int i=0;
-            while (g.getInv(i).isAvailable())     //controllo che ci sia uno slot libero nell'inventario (se l'arma è disponibile lo slot è occupato)
-            {
-                i++;
-            }
-            if (i<MAX_ITEM)
-            {
-                g.setInv(i,vendita[n]);
-                g.setOro(gold-vendita[n].getPrezzo());
+			if (pos!=-1)
+			{
+                g->setInv(pos,vendita[n]);
+                g->setOro(gold-vendita[n].getPrezzo());
                 vendita[n].scarta();
             }
 
@@ -63,8 +59,9 @@ void Venditore::vendi(Giocatore g, int n)
     {
         if (gold>costopot)
         {
-            g.addPot();
-            g.setOro(gold-costopot);
+            g->addPot();
+            g->setOro(gold-costopot);
         }
     }
+    return pos;
 }

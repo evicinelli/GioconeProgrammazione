@@ -162,7 +162,7 @@ void Controller::apriBaule(int dir){
 
 	Forziere* b =  new Forziere(gestore.getLivello());
 	//viene messo nell'inventario l'oggetto
-	p->setInv(libInventario(), b->getInterno());
+	p->setInv(p->libInventario(), b->getInterno());
 	//impostate le coordinate del baule
 	if (dir==0) y--;
 	else if (dir==1) y++;
@@ -443,7 +443,7 @@ void Controller::gestisciInput(char c){
         break;
         //APRIRE BAULE          (O)
         case((char)('o')):
-			if (isVicino(3, dir) && (libInventario()!=-1)){
+			if (isVicino(3, dir) && (p->libInventario()!=-1)){
 				if(p->actApri())
 				{
 					apriBaule(dir);
@@ -452,7 +452,7 @@ void Controller::gestisciInput(char c){
 				else
 					printMsg("Non hai abbastanza punti azione (minimo 2)");
 			}
-			else if (libInventario()==-1)
+			else if (p->libInventario()==-1)
 				printMsg("Hai l'inventario pieno");
 			else
 				printMsg("Non sei vicino a un baule");
@@ -552,17 +552,6 @@ bool Controller::thereisArma(){
 			cond=true;
 	}
 	return cond;
-}
-
-int Controller::libInventario(){
-	int pos=-1;
-	int i=0;
-	while ((pos==-1) && (i<MAX_ITEM)){
-		if (!p->getInv(i).isAvailable())
-			pos=i;
-		i++;
-	}
-	return pos;
 }
 
 bool Controller::isVicino(int value, int &dir){
