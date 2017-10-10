@@ -361,6 +361,66 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	d->disegnaEquip(p);
 }
 
+void Controller::compraDaVend(Venditore* v){
+	char msg[20][40], costo[15];
+	int sel=2, nStringhe=1;
+	sprintf (msg[0], "VENDITORE");
+	sprintf (msg[1], "Cosa vuoi comprare? (Invio)");
+	//conta quante stringhe ci sono
+	for (int i=0; i<MAX_ITEM; i++){
+		if (v->getVendita(i).isAvailable()){
+			sprintf (msg[nStringhe+1], v->getVendita(i).getNome().c_str());
+			sprintf (costo, "\t\t%d oro", v->getVendita(i).getPrezzo());
+			strcat (msg[nStringhe+1], costo);
+			nStringhe++;
+		}
+	}
+	if (v->getPozioni()){
+		sprintf (msg[nStringhe+1], "Pozione");
+		sprintf (costo, "\t\t%d oro", v->getCostoPot());
+		strcat (msg[nStringhe+1], costo);
+		nStringhe++;
+	}
+	sel=selPopUp(msg, sel, nStringhe);
+	//imposta sel in modo che sia esattamente l'elemento in inventario
+	for (int i=0; i<sel-1 && i<3; i++){
+		if (!v->getVendita(i).isAvailable())
+			sel++;
+	}
+	sel-=2;
+	
+	//se puoi compra oggetto
+	if (sel >= 0 && sel<=3){
+		if (sel!=3){
+				if (p->getOro() >= v->getVendita(sel).getPrezzo()){
+					int pos=v->vendi(p, sel);
+					if (pos==-1)
+						printMsg("Hai l'inventario pieno");
+				}
+		}
+		else{
+			if(p->getOro() >= v->getCostoPot())
+				v->vendi(p, sel);
+			else
+				printMsg("Non hai abbastanza oro");
+		}
+	}
+	//se non ha più niente sparisce
+	bool isVuoto=true;
+	for (int i=0; i<3; i++){
+		if (v->getVendita(i).isAvailable())
+			isVuoto=false;
+	}
+	isVuoto=(isVuoto && !v->getPozioni());
+	if (isVuoto)
+		stanza->setSpot(v->getPosY(), v->getPosX(), -1);
+	//disegno sopra la pop-up
+	d->disegnaStanza(stanza);
+	d->disegnaStat(p);
+	d->posizionaGiocatore(stanza, p);
+	d->disegnaEquip(p);
+	
+}
 void Controller::aumentaLivello(){
 	char msg[20][40];
 	int sel=2;
@@ -441,17 +501,29 @@ void Controller::gestisciInput(char c){
         break;
         //COMPRARE DA VENDIORE  (B)
         case((char)('b')):
-
+			if (isVicino(2, dir)){
+				int x, y;
+				x=p->getPosX();
+				y=p->getPosY();
+				if (dir==0) y--;
+				else if (dir==1) y++;
+				else if (dir==2) x--;
+				else if (dir==3) x++;
+				Venditore* v = stanza->getVenditoreByPos(y, x);
+				compraDaVend(v);
+			}
+			else{
+				printMsg("Non sei vicino a un venditore");
+			}
         break;
         //ATTACCARE MOSTRO      (K)
         case((char)('k')):
         	if (selected!=NULL && selected->isAlive())
 			{
-				/*int distX=abs(selected->getPosX()-p->getPosX());
+				int distX=abs(selected->getPosX()-p->getPosX());
 				int distY=abs(selected->getPosY()-p->getPosY());
 				if (distX<=1 && distY<=1 && !(distX==1 && distY==1))
-				{*/
-				if (isVicino(1, dir)){
+				{
 					if (p->getAct()>=4)
 					{
 						int danno=p->attacca(selected);

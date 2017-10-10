@@ -7,6 +7,7 @@ Arma::Arma()
 Arma::Arma(int lev, std::string type)
 {
     //srand(time(0));
+    prezzo=0;
     int n=0;
     if (type=="spada")
     {

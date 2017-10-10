@@ -2,7 +2,7 @@
 #include <time.h>       /* time */
 #include <iostream>
 #include "Mostro.hpp"
-#include "Forziere.hpp"
+#include "Venditore.hpp"
 #define MAXDIM 24
 #define MINDIM 20
 using namespace std;
@@ -27,6 +27,7 @@ protected:
     int id;
     int libero; //mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri
     Mostro* monsters[6]; /* Riferimenti ai mostri della stanza */
+    Venditore* v[2];
 public:
 
     //crea la stanza
@@ -46,7 +47,7 @@ public:
 
 	//stampa la matrice della stanza a caratteri
     void stampaMatrice (int m[MAXDIM][MAXDIM]);
-
+	
 	//riempie il parametro con la matrice della stanza
     void getMatrice(int m[MAXDIM][MAXDIM]);
 
@@ -58,7 +59,10 @@ public:
 
     //data la direzione ritorna l'id della a cui è collegata
     int getColl(int n);
-
+    
+    //dato l'id ritorna il venditore
+	Venditore* getVenditoreByPos(int y, int x);
+	
     //imposta l'id della stanza
     void setId(int n);
 
@@ -108,6 +112,9 @@ private:
 	//segna come posti liberi (-1) tutti  quelli raggiungibili
     void riempiMuri(int x, int y);
 
+	//true se in x e y c'è un venditore circondato da muri
+	bool isVendBloccato(int y, int x);
+	
 	//trasforma i -2 (punti interni) in 0 (muri)
     void trasformaInterni();
 
@@ -128,6 +135,8 @@ private:
 
     //Trasforma tutti i -3 (strada dovuta a liberaPorte) a -1 (vuoto)
     void normalizza();
+    
+    
 };
 
 

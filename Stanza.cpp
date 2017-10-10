@@ -14,11 +14,6 @@ Stanza::Stanza ()
     //inzialmente non ci sono porte
     for (int i=0; i<4; i++)
 		this->porte[i]=-1;
-
-
-
-
-
 }
 
 int Stanza::getDimensione(){
@@ -32,6 +27,16 @@ bool Stanza::isVisited(){
 }
 int Stanza::getLibero(){
 	return libero;
+}
+Venditore* Stanza::getVenditoreByPos(int y, int x){
+	Venditore* tmp; 
+	
+	for (int i=0; i<(2-nMaxVenditori); i++){
+		if (v[i]->getPosX()==x && v[i]->getPosY()==y){
+			tmp=v[i];
+		}
+	}
+	return tmp;
 }
 int buildWall(double p)
 {
@@ -294,14 +299,25 @@ void Stanza::mettiMuri()
 void Stanza::riempiMuri(int x, int y)
 {
 	//se posso andarci allora imposto a -1
-    if (matrice[y][x]==-2 || matrice[y][x]==-3)
+	if (matrice[y][x]==-2 || matrice[y][x]==-3)
     {
-        matrice[y][x]=-1;
+		matrice[y][x]=-1;
         riempiMuri(x+1,y);
         riempiMuri(x-1,y);
         riempiMuri(x,y+1);
         riempiMuri(x,y-1);
     }
+}
+
+bool Stanza::isVendBloccato(int y, int x){
+	bool cond=false;
+	if (matrice[y][x]==2){
+		cond= ((matrice[y-1][x]==0 || matrice[y-1][x]==-2) && 
+				(matrice[y+1][x]==0 || matrice[y+1][x]==-2) &&
+				(matrice[y][x+1]==0 || matrice[y][x+1]==-2) &&
+				(matrice[y][x-1]==0 || matrice[y][x-1]==-2));
+	}
+	return cond;
 }
 
 void Stanza::trasformaInterni()
@@ -310,7 +326,7 @@ void Stanza::trasformaInterni()
     {
         for (int j=1; j<dimensione-1; j++)
         {
-            if (matrice[i][j]==-2)
+            if (matrice[i][j]==-2 || isVendBloccato(i, j))
                 matrice[i][j]=0;
         }
     }
@@ -385,15 +401,18 @@ void Stanza::mettiBauli(int livello)
 }
 
 void Stanza::mettiVenditori(int livello){
-
+	int nVend=0;
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxVenditori>0; j++){
-			if (matrice[i][j]==-1){
+			if (matrice[i][j]==-2 && matrice[i-1][j-1]!=2 && matrice[i-1][j+1]!=2 && 
+				matrice[i][j-2]!=2 && matrice[i][j-1]!=2 && matrice[i-1][j]!=2 && matrice[i-2][j]!=2){
 				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
-				int den=2500/((livello/20.0)+2);
+				int den=10;//2000/((livello/20.0)+2);
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=2;
+					v[nVend]=new Venditore(livello, i, j);
+					nVend++;
 					nMaxVenditori--;
 				}
 			}
@@ -440,6 +459,7 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
                      presenti i collegamenti, in qualsiasi riquadro del lato corrispondente
     */
 
+	
     this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
     inizializzaMatrice(this->matrice);
 
@@ -447,16 +467,14 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
 	mettiPorte(coll);
 	inserisciVia();
 	mettiMuri();
+    mettiVenditori(nLiv); //i venditori non possono stare sulla via
     riempiMuri(libero, dimensione-2);
     trasformaInterni();
 	liberaPorte();
     mettiMostri(nLiv);
     mettiBauli(nLiv);
-    mettiVenditori(nLiv);
     normalizza();
-	//this->stampaMatrice(this->matrice);
 }
-
 Mostro* Stanza::getMonsterByCoord(int x, int y)
 {
 		int i;

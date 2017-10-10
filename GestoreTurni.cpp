@@ -22,7 +22,7 @@ void GestoreTurni::play()
             Mostro* m;
             int action=0;
             int mCounter = ctrl->getCurrentRoom()->getHowManyMonsters();
-            int mat[24][24];
+            int mat[MAXDIM][MAXDIM];
             int oX = -1;
             int oY = -1;
 

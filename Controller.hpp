@@ -2,6 +2,7 @@
 #include "Giocatore.hpp"
 #include "Drawer.hpp"
 #include "Mostro.hpp"
+#include "Forziere.hpp"
 #include <unistd.h>
 #include <string.h>
 
@@ -78,6 +79,12 @@ class Controller
 
 		//apre il baule
 		void apriBaule(int dir);
+		
+		//data la posizione individua quanti venditori ci sono prima di quella posizione
+		int getIdVenditore(int y, int x);
+		
+		//dice al drawer di fare la lista degli oggetti e compra il selezionato
+		void compraDaVend(Venditore* v);
 
 		//dice al drawer di disegnare le struzioni
 		void scriviIstruzioni();

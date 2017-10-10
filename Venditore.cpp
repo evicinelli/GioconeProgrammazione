@@ -3,10 +3,12 @@
 Venditore::Venditore()
 {
 }
-Venditore::Venditore(int level)
+Venditore::Venditore(int level, int y, int x)
 {
+	posx=x;
+	posy=y;
     costopot=50+(int)(0.5*level);
-    srand(time(0));
+    //srand(time(0));
     riempi(0,level);
     riempi(1,level);
     riempi(2,level);
@@ -44,24 +46,46 @@ int Venditore::vendi(Giocatore* g, int n)
     int pos=g->libInventario();
     if (n>=0 && n<=2)
     {
-        if (gold>vendita[n].getPrezzo() && vendita[n].isAvailable())
+        if (gold>=vendita[n].getPrezzo() && vendita[n].isAvailable())
         {
+
 			if (pos!=-1)
 			{
                 g->setInv(pos,vendita[n]);
                 g->setOro(gold-vendita[n].getPrezzo());
                 vendita[n].scarta();
-            }
+			}
 
         }
     }
     else if (n==3)
     {
-        if (gold>costopot)
+        if (gold>=costopot)
         {
             g->addPot();
             g->setOro(gold-costopot);
+            pozioni=false;
         }
     }
     return pos;
+}
+
+bool Venditore::getPozioni()
+{
+	return pozioni;
+}
+
+int Venditore::getCostoPot()
+{
+	return costopot;
+}
+
+int Venditore::getPosX()
+{
+	return posx;
+}
+
+int Venditore::getPosY()
+{
+	return posy;
 }
