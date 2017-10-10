@@ -20,13 +20,31 @@ void Drawer::clearWin(WINDOW* win){
 }
 void Drawer::quitVictory()
 {
-	endwin();
+	int centerx, centery, x, y;
+	getmaxyx(stdscr, y, x);
+	centery=y/2-1;
+	centerx=x/2-1;
+	this->win7 = creaWin(y, x , 0, 0);
+	wattron(win7,COLOR_PAIR(10));
+	mvwprintw(win7,centery,centerx,"HAI VINTO!");
+	mvwprintw(win7,centery+4,centerx-7,"Premi ESC o X per uscire");
+	wattroff(win7,COLOR_PAIR(10));
+	wrefresh(win7);
 }
 
 
 void Drawer::quitDefeat()
 {
-	endwin();
+	int centerx, centery, x, y;
+	getmaxyx(stdscr, y, x);
+	centery=y/2-1;
+	centerx=x/2-1;
+	this->win7 = creaWin(y, x , 0, 0);
+	wattron(win7,COLOR_PAIR(10));
+	mvwprintw(win7,centery,centerx,"GAME OVER");
+	mvwprintw(win7,centery+4,centerx-7,"Premi ESC o X per uscire");
+	wattroff(win7,COLOR_PAIR(10));
+	wrefresh(win7);
 }
 
 
@@ -40,6 +58,7 @@ void Drawer::setColor(){
     init_pair(7, COLOR_BLACK, COLOR_BLACK);
     init_pair(8, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(9, COLOR_BLACK, COLOR_WHITE);
+	init_pair(10, COLOR_WHITE, COLOR_BLACK);
 
 }
 void Drawer::liberaPosizione(Stanza* s, int y, int x){
@@ -215,7 +234,7 @@ void Drawer::disegnaMess(char msg[100]){
 		//viene scritto il messaggio
         mvwprintw(win, 2, 1, "%s", msg);
         mvwprintw(win, 3, 1, "h per le istruzioni", msg);
-		
+
         wrefresh(win);
 
 }

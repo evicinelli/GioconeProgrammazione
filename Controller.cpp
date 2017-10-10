@@ -12,6 +12,7 @@ Controller::Controller(GestoreLivelli gl, Giocatore* player){
 
 void Controller::endGame(int v){
 	ended=true;
+	int c=' ';
 	if (v==0)
 	{
 		d->quitDefeat();
@@ -20,6 +21,13 @@ void Controller::endGame(int v){
 	{
 		d->quitVictory();
 	}
+
+	while(c!=(char)'x' && c!=27)
+	{
+		c=tolower(getch());
+	}
+	endwin();
+
 }
 
 void Controller::vaiSu(){
