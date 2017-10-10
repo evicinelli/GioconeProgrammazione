@@ -7,7 +7,9 @@
 class GestoreLivelli
 {
 protected:
-
+    /**
+    Struttura che contiene la lista dei livelli del gioco.
+    */
     struct lista
     {
         Livello* l;
@@ -15,46 +17,69 @@ protected:
     };
     typedef lista* ptr_listaLiv;
 
+    /**Testa della lista */
     ptr_listaLiv head;
+    /**Livello corrente cioè quello in cui il giocatore si trova*/
     int livCorrente;
+    /**Massimo livello in cui il giocatore si è trovato */
     int maxLiv;
+    /**Oggetto di generatore livelli */
     GeneratoreLivelli generatore;
 
 public:
+
+    public:
+
+    /**
+    Costruttore della classe crea un oggetto di classe GeneratoreLivelli, inizializza il
+    puntatore alla testa della lista a null, crea il primo livello, inizializza livello corrente e livello
+    massimo a uno.
+
+    */
     GestoreLivelli();
 
-    /** incrementa di uno il livello corrente*/
+    /** Metodo che incrementa di uno il livello corrente*/
     void passaLivSucc();
 
-    /** decrementa di uno il livello corrente*/
+    /** Metodo che decrementa di uno il livello corrente*/
     void passaLivPrec();
 
-    /** Aggiungi livello in coda alla lista dei livelli */
+    /** Metodo che aggiunge livello in coda alla lista dei livelli */
     void aggiungiLivello(Livello *l);
 
     /**
-    	-chiama il costruttore di livello
-    	-chiama metodo popolaLivello di GeneratoreLivelli passando il puntatore al livello
-    	-aggiungi il livello in coda alla lista dei livelli di GestoreLivelli
-    	-cambia il livello corrente
+    Metodo che per prima cosa crea un livello avente il numero di stanze pari al numero passato come parametro al metodo,
+    in seguito utilizzando il generatore di livelli viene popolato il livello,
+    viene aggiunto tale livello alla lista di gestoreLivelli, viene richiamato passaLivSucc che aggiorna la variabile livCorrente,
+    infine se il livello appena creato non è il primo viene collegato il livello corrente a quello precedente attraverso il metodo di GeneratoreLivelli.
     */
     Livello* creaLivello(int n);
 
-    // Stampa la lista dei livelli
-  //  void dumpLevelList();
-
-    // Ritorna il massimo numero di livelli
-    int getLevN();
-
-	int getLivello();
-
-	Livello* getInizio();
     /**
-    Ritorna livello a partire da id
+    Metodo privato che ricerca nella lista un livello con un determinato id e lo restituisce.
     */
     Livello* getLevelById(int id);
 
+    /**
+    Metodo getter che ritorna maxLiv
+    */
+    int getLevN();
+
+    /**
+    Metodo getter che ritorna livello corrente
+    */
+	int getLivello();
+
+	/**
+	Metodo che restituisce il primo livello cioè il livello contenuto nel primo elemento della lista, quindi quello puntato da head
+	*/
+	Livello* getInizio();
+
+	/**
+	Metodo di stampa utilizzato solo a fini di debug.
+	*/
     void stampaCollegamentiLivelli();
+
 
 };
 

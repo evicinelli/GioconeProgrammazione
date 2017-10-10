@@ -6,10 +6,15 @@ GeneratoreLivelli::GeneratoreLivelli(){
 
 
 void GeneratoreLivelli:: inizializzaVettColl(Livello* l){
+    // variabile per scorrere collegamenti
     int i;
+    //collegamento appoggio
     Collegamento* c;
+    //scorriamo collegamenti
     for(i=0; i<l->getNStanze(); i++){
+        //inizializziamo a -1 tutto
         c= new Collegamento(i);
+        //settiamo id del collegamento
         l->setCollegamento(i,c);
 
     }
@@ -17,12 +22,7 @@ void GeneratoreLivelli:: inizializzaVettColl(Livello* l){
 
 
 void GeneratoreLivelli::riempiVettStanze(Livello* l){
-    /*
-     A questo punto per ogni stanza tranne le ultime due del vettore va richiamato il metodo che riempe le stanze
-     per fare in modo di mettere le porte anche per il passaggio di livello prendiamo il vettore delle stanze del livello
-     e passiamo al metodo riempi matrice tale vettore con -2 nelle posizioni del cambio di livello e il numero del livello
-    */
-
+    //scorro le stanze del livello creando le mappe
     for(int i=0; i<l->getNStanze(); i++){
         l->setMatriceStanza(i);
     }
@@ -31,7 +31,7 @@ void GeneratoreLivelli::riempiVettStanze(Livello* l){
 void GeneratoreLivelli::controllaAvail(bool avail[4],Livello* l){
     int a[4];
     int neg;
-    //scorro le stanze
+    //scorro i
     for(int i=0; i<l->getNStanze(); i++){
         neg=0;
         l->getAdiacenze(i,a);
@@ -103,7 +103,6 @@ void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){
 
     // Primo giro dei collegamenti
     for (int i = 0; i < stanze - 1; ++i){
-        //for (int i = 0; i < stanze; ++i){ cout<<avail[i]; }cout<<endl;
         // Scelgo la stanza
         do{
             a = rand() % stanze;
@@ -116,18 +115,13 @@ void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){
         p = a;
     }
 
-    // Abbiamo collegato tra loro tutte le stanze. Si
-    // rigenera il vettore delle disponibilità e poi...
 
     /**SECONDA PARTE*/
     //controlla adiacenze delle stanze e toglie le stanze piene per evitare di collegarle
     controllaAvail(avail,l);
 
-    //printf("_____________________________________________________________\n");
-
     // Si collegano un'altra volta le stanze per garantire
     // dei doppi collegamenti
-
     for (int i = 0; i < maxLink - stanze + 1; ++i){
         p = rand() % stanze; //inizializziamo p
         a = rand() % stanze; //inizializziamo a
@@ -153,19 +147,14 @@ void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){
         //setto a false la stanza da cui sono arrivata per toglierla dalle stanze accessibili
         avail[a]=false;
 
-        //controlla adiacenze delle stanze e toglie le stanze piene per evitare di collegarle e in più
+        //controlla adiacenze delle stanze e toglie le stanze piene per evitare di collegarle
         controllaAvail2(avail,l);
     }
 }
 
 
 void GeneratoreLivelli::link(int da, int a, Livello* l){
-
-    /**
-    	NOTA: IL CONTROLLO SU STANZA DI PARTENZA E STANZA FINALE VA BENE BISOGNA AGGIUNGERE IL FATTO CHE SE
-    	COLLEGAMENTO NELLA DIREZIONE SCELTA E' PARI A -1 POSSO COLLEGARE ALTRIMENTI DEVO SCEGLIERE
-    	UN'ALTRA DIREZIONE CON IL RANDOM
-    */
+    //prendo il numero di stanze da 0 a nStanze-1
     int stanze = l -> getNStanze() - 1;
 
     // direzione di arrivo da -> a
@@ -174,7 +163,7 @@ void GeneratoreLivelli::link(int da, int a, Livello* l){
     // direzione di partenza a -> da
     int dP = rand() % 4;
 
-
+    //array di appoggio per le direzioni
     int dirDa[4];
     int dirA[4];
 
@@ -182,7 +171,7 @@ void GeneratoreLivelli::link(int da, int a, Livello* l){
     l->getAdiacenze(da, dirDa);
     l->getAdiacenze(a, dirA);
 
-    /** controlliamo nessuna direzione proibita nel collegamento da/a la prima e l'ultima stanza*/
+    /** Controlliamo nessuna direzione proibita nel collegamento da/a la prima e l'ultima stanza*/
 
     // se in da c'è l'ultima stanza e in dA c'è la direzione NORD (0) allora viene ricalcolato il random
     if(da == stanze&& dA==0){
@@ -210,7 +199,7 @@ void GeneratoreLivelli::link(int da, int a, Livello* l){
         }
     }
 
-    /** controlliamo che la direzione scelta per le due stanze sia libera (cioè settata a -1) */
+    /** Controlliamo che la direzione scelta per le due stanze sia libera (cioè settata a -1) */
 
     //se la direzione è occupata dA => faccio controllo che ne restituisce una giusta
     if(dirDa[dA]!=-1){
@@ -223,7 +212,6 @@ void GeneratoreLivelli::link(int da, int a, Livello* l){
     }
 
     //adesso che sono sicura che le direzioni siano libere collego le due stanze
-    //printf("\t%d:%d -> %d:%d\n",da, dA , a, dP );
     l->collegaStanza(da,a,dA);
     l->collegaStanza(a,da,dP);
 
@@ -277,34 +265,39 @@ void GeneratoreLivelli::stampaCollegamenti(Livello* l){
 void GeneratoreLivelli::popolaLivello (Livello* l){
 
     int maxLink = 0;
+    //inizializza i collegamenti
     inizializzaVettColl(l);
-    //stampaCollegamenti(l);
 
+    //scelta del massimo dei collegamenti possibili
     int stanze = l->getNStanze();
     if (stanze != 1){
-        float hard = .3;  //meglio come costante
+        float hard = .3;
         maxLink = stanze + (int)(hard * stanze);
     }
-    //printf("\tmLink: %d \t stanze: %d \n", maxLink, stanze );
 
-
+    //scelta dei collegamenti
     riempiVettCollegamenti(l, maxLink);
+    //riempimento delle stanze
     riempiVettStanze(l);
 
 }
 
-// ultima di precedente va collegata a nord alla prima di corrente
+
 
 void GeneratoreLivelli::collegaLivelloPrec(Livello* corrente, Livello* precedente){
 
-    cout<<"LIVELLO CORRENTE:"<<corrente->getNStanze()<<endl<<"LIVELLO PRECEDENTE:"<<precedente->getNStanze()<<endl<<endl;
-
+    //all'indice nStanze del vettore delle stanze del livello corrente viene messa l'ultima stanza (quella all'indice nStanze-1) del livello precedente
     corrente->setStanza(corrente->getNStanze(),precedente->getPointerToStanza(precedente->getNStanze()-1));
 
+    //all'indice nStanze+1 del vettore delle stanze del livello precedente viene messa la prima stanza (quella all'indice zero) del livello corrente
     precedente->setStanza(precedente->getNStanze()+1,corrente->getPointerToStanza(0));
 
+    //la prima stanza del livello corrente viene collegata in direzione sud al livello precedente quindi: stanza partenza è la stanza zero e la stanza di
+    //arrivo è quella all'indice nStanze (che è l'ultima stanza del livello precedente) e la direzione è 1
     corrente->collegaStanza(0,corrente->getNStanze(),1);
 
+    //l'ultima stanza del livello successivo viene collegata al livello corrente in direzione nord quindi: stanza di partenza è l'ultima del livello precedente
+    //e la stanza di arrivo è la prima del livello successivo (nel nostro caso si chiama corrente) la direzione è 0
     precedente->collegaStanza(precedente->getNStanze()-1, precedente->getNStanze()+1,0);
 
 }
