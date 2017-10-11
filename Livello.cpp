@@ -4,7 +4,7 @@
 Livello::Livello (int n){
     //inizializza il numero di stanze del livello
 	nStanze=n;
-	
+
 	//alloca il vettore delle stanze cha avrà dimensione pari al numero delle stanze+2 perchè nell'indice nStanze ci sarà l'ultima stanza del livello precedente e nell'indice nStanze+1 ci sarà il
     //puntatore alla prima stanza del livello successivo
     vettStanze= new Stanza [nStanze+2];
@@ -86,7 +86,7 @@ Stanza* Livello::vaiNord(int id){
 	//get delle direzioni usando all'array di appoggio
 	int a[4];
 	el.getDirezioni(a);
-	//ritorno della stanza avente id pari a quello contenuto nell'elemento a indice zero (perchè 0 -> Nord) dell'array delle direzioni
+	//ritorno del puntatore alla stanza avente id pari a quello contenuto nell'elemento a indice zero (perchè 0 -> Nord) dell'array delle direzioni
 	return getPointerToStanza(a[0]);
 }
 

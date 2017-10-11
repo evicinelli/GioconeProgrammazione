@@ -27,6 +27,9 @@ class Controller
 		//iterazione che viene ripetuta ogni turno, aspetta il tasto in input
 		void gioca();
 
+		//animazione degli attacchi: true sse il giocatore attacca il mostro
+		void animaAttacchi(Mostro* m, bool isPlayer);
+		
 		//apre la finestra dell'aumento di livello
 		void aumentaLivello();
 

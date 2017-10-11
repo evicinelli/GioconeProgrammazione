@@ -1,4 +1,7 @@
 # include "Mostro.hpp"
+# include "Utils.cpp"
+# include <queue>
+# define IFTY 580
 
 Mostro::Mostro(int level, std::string race)
 {
@@ -13,7 +16,7 @@ Mostro::Mostro(int level, std::string race)
 		str=(int)(lev+n*lev);
 		n=1.5*((double)rand()/RAND_MAX)+1;
 		dex=(int)(lev+n*lev);
-		n=1.5*((double)rand()/RAND_MAX)+1;
+		n=0.5*((double)rand()/RAND_MAX)+1;
 		con=(int)(1.1*lev+n*lev);
 	}
 	else if (race=="orco")
@@ -23,7 +26,7 @@ Mostro::Mostro(int level, std::string race)
 		str=(int)(1.2*lev+n*lev);
 		n=((double)rand()/RAND_MAX)+1;
 		dex=(int)(lev+n*lev);
-		n=2*((double)rand()/RAND_MAX)+1;
+		n=1.1*((double)rand()/RAND_MAX)+1;
 		con=(int)(1.5*lev+n*lev);
 
 	}
@@ -34,7 +37,7 @@ Mostro::Mostro(int level, std::string race)
 		str=(int)(1.5*lev+n*lev);
 		n=0.3*((double)rand()/RAND_MAX)+1;
 		dex=(int)(0.5*lev+n*lev);
-		n=5*((double)rand()/RAND_MAX)+1;
+		n=1.5*((double)rand()/RAND_MAX)+1;
 		con=(int)(2*lev+n*lev);
 
 	}
@@ -80,10 +83,7 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 	do {
 		incX = 0;
 		incY = 0;
-		//do {
-			direzione = rand() % 4;
-		//} while ((abs(direzione - oldDirezione) == 1) /* && iter < 200 */);
-
+		direzione = rand() % 4;
 		switch( direzione ) {
 			case 0:	/* BASSO */
 				++incY;
@@ -107,7 +107,29 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 
 void Mostro::insegui(int targetX, int targetY, int matrix[24][24], int dimensione)
 {
+	int direzione = rand() % 2;
+	int nx = 0;
+	int ny = 0;
 
+	if (getPosX() != targetX && getPosY() != targetY) {
+		if (direzione == 0) {
+			nx = this->getPosX() + ((targetX - getPosX()) / abs(targetX - getPosX()));
+		}
+
+		if (direzione == 1) {
+			ny = this->getPosY() + ((targetY - getPosY()) / abs(targetY - getPosY()));
+		}
+	} else if (getPosX() == targetX && getPosY() != targetY) {
+			ny = this->getPosY() + ((targetY - getPosY()) / abs(targetY - getPosY()));
+
+	} else if (getPosX() != targetX && getPosY() == targetY){
+			nx = this->getPosX() + ((targetX - getPosX()) / abs(targetX - getPosX()));
+	}
+
+	if (matrix[ny][nx] == -1) {
+		this->setPosX(nx);
+		this->setPosY(ny);
+	}
 }
 
 void Mostro::morte(Giocatore *g)
@@ -115,7 +137,7 @@ void Mostro::morte(Giocatore *g)
 	double prob=100*((double)rand()/RAND_MAX);
 	int gold=lev*15+(int)(g->getLuck()*3.5);
 	double drop=equip.getDropRate()+(0.2*g->getLuck());
-	int expGain=lev*30+g->getLuck()*5;
+	int expGain=lev*30+g->getLuck()*8+(con+dex+str)*2;
 	g->addOro(gold);
 	g->addExp(expGain);
 	if (prob<=drop)
@@ -132,14 +154,19 @@ int Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 	int targetX = g->getPosX();
 	int targetY = g->getPosY();
 	int result=0;
+
+
 	if (this->needToAttack(g) && (act - 4) >= 0) {
+		chasing = false;
 		result=attacca(g);			//in caso di attacco restituisce il danno inflitto come valore di ritorno
 	} else {
 		if (this->needToChase(g)) {
+			this->buildDMap(g->getPosX(), g->getPosY(), m);
 			chasing = true;
 			insegui(targetX, targetY, m, dimensione);
 			result=1;
 		} else {
+			chasing = false;
 			muovi(targetX, targetY, m, dimensione);
 		}
 		act -= 1;
@@ -156,7 +183,8 @@ bool Mostro::isAlive()
 bool Mostro::needToAttack(Giocatore* g)
 {
 	return (abs(g->getPosX() - this->getPosX()) <=1) &&
-		   (abs(g->getPosY() - this->getPosY()) <=1);
+		   (abs(g->getPosY() - this->getPosY()) <=1) &&
+		   !(abs(g->getPosY() - this->getPosY()) ==1 && abs(g->getPosX() - this->getPosX()) ==1);
 }
 
 /* Se il giocatore si trova in un quadrato AGGRO x AGGRO intorno al mostro,
@@ -170,4 +198,13 @@ bool Mostro::needToChase(Giocatore* g)
 bool Mostro::isChasing()
 {
 	return chasing;
+}
+
+void Mostro::buildDMap(int tx, int ty, int m[24][24])
+{
+	std::queue<int> myq;
+	int d[VIEW_RANGE * VIEW_RANGE];
+	for (int i = 0; i < VIEW_RANGE * VIEW_RANGE; ++i) {
+		d[i] = -1;
+	}
 }

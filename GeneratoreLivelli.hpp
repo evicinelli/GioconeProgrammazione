@@ -47,6 +47,11 @@ private:
     */
     void controllaAvail2 (bool avail[4],Livello* l);
 
+    /**
+    Metodo cheinizializza i collegamenti del livello settando tutte le adiacenze a -1 e settando il campo id.
+    */
+    void inizializzaVettColl(Livello* l);
+
 
 public:
     /**
@@ -64,10 +69,7 @@ public:
     */
     void stampaCollegamenti(Livello* l);
 
-    /**
-    Metodo cheinizializza i collegamenti del livello settando tutte le adiacenze a -1 e settando il campo id.
-    */
-    void inizializzaVettColl(Livello* l);
+
 
     /**
     Metodo che si occupa di collegare i vari livelli del gioco, il livello corrente dopo esser stato popolato viene

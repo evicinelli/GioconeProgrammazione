@@ -2,19 +2,19 @@
 
 Giocatore::Giocatore()
 {
-    str=8;
-    dex=8;
-    con=10;
-    luck=5;
-    hpmax=con*20;
-    hp=hpmax;
-    act=AZIONE;
-    oro=0;
-    exp=0;
-    nextLevExp=80;
-    lev=1;
-    pot=2;
-    equip=Arma(1,"spada");
+	str=8;
+	dex=8;
+	con=10;
+	luck=5;
+	hpmax=con*20;
+	hp=hpmax;
+	act=AZIONE;
+	oro=0;
+	exp=0;
+	lev=1;
+	nextLevExp=80;
+	pot=5;
+	equip=Arma(1,"spada");
 }
 
 int Giocatore::getOro()

@@ -11,7 +11,7 @@ class Livello
 protected:
     /** numero di stanze del livello*/
     int nStanze;
-    
+
     /** vettore contenente puntatori alle stanze del livello */
     Stanza* vettStanze;
 
@@ -45,7 +45,7 @@ public:
     void setMatriceStanza(int id);
 
     /**
-     Metodo che restituisce il puntatore alla stanza in base all'intero passato come parametro
+     Metodo che restituisce la stanza in base all'intero passato come parametro
     */
     Stanza getStanza(int id);
 
@@ -68,22 +68,22 @@ public:
 
 
     /**
-    Metodo che restituisce la stanza a nord della stanza corrente salvata nell'intero passato come parametro in id
+    Metodo che restituisce il puntatore alla stanza a nord della stanza corrente salvata nell'intero passato come parametro in id
     */
     Stanza* vaiNord(int id);
 
     /**
-    Metodo che restituisce la stanza a sud della stanza corrente salvata nell'intero passato come parametro in id
+    Metodo che restituisce il puntatore alla stanza a sud della stanza corrente salvata nell'intero passato come parametro in id
     */
     Stanza* vaiSud(int id);
 
     /**
-    Metodo che restituisce la stanza a ovest della stanza corrente salvata nell'intero passato come parametro in id
+    Metodo che restituisce  il puntatore alla stanza a ovest della stanza corrente salvata nell'intero passato come parametro in id
     */
     Stanza* vaiOvest(int id);
 
     /**
-    Metodo che restituisce la stanza a est della stanza corrente salvata nell'intero passato come parametro in id
+    Metodo che restituisce  il puntatore alla stanza a est della stanza corrente salvata nell'intero passato come parametro in id
     */
     Stanza* vaiEst(int id);
 

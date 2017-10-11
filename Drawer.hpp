@@ -11,13 +11,14 @@ using namespace std;
 
 class Drawer{
 	protected:
+		WINDOW *win0; //Finestra iniziale
 		WINDOW *win1; //Finestra statistiche
 		WINDOW *win2; //Finestra messaggi
 		WINDOW *win3; //Finestra stanza
 		WINDOW *win4; //Finestra livello
 		WINDOW *win5; //Finestra equipaggiamento
 		WINDOW *win6; //Finestra pop up
-		WINDOW *win7;  //Finestra di fine gioco
+		WINDOW *win7; //Finestra di fine gioco
 	public:
 
 		Drawer();
@@ -47,10 +48,10 @@ class Drawer{
 		void liberaPosizione(Stanza* s, int y, int x);
 
 		//aggiorna la posizione del giocatore nella stanza
-		void posizionaGiocatore(Stanza* s, Giocatore* g);
+		void posizionaGiocatore(Stanza* s, Giocatore* g, bool isAttacked);
 
 		//disegna i mostri con le nuove posizioni nella stanza
-		void posizionaMostro(Stanza* s, Mostro* m);
+		void posizionaMostro(Stanza* s, Mostro* m, bool chasing, bool isAttacked);
 
 		// Schermata di vittoria
 		void quitVictory();

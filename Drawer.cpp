@@ -55,10 +55,11 @@ void Drawer::setColor(){
 	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(5, COLOR_WHITE, COLOR_BLUE);
 	init_pair(6, COLOR_RED, COLOR_YELLOW);
-    init_pair(7, COLOR_BLACK, COLOR_BLACK);
-    init_pair(8, COLOR_YELLOW, COLOR_BLACK);
+    	init_pair(7, COLOR_BLACK, COLOR_BLACK);
+    	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(9, COLOR_BLACK, COLOR_WHITE);
-	init_pair(10, COLOR_WHITE, COLOR_BLACK);
+	init_pair(10, COLOR_WHITE, COLOR_RED);
+
 
 }
 void Drawer::liberaPosizione(Stanza* s, int y, int x){
@@ -77,7 +78,7 @@ void Drawer::liberaPosizione(Stanza* s, int y, int x){
 	wattroff(win, COLOR_PAIR(7));
 	wrefresh(win);
 }
-void Drawer::posizionaGiocatore(Stanza* s, Giocatore* g){
+void Drawer::posizionaGiocatore(Stanza* s, Giocatore* g, bool isAttacked){
 	WINDOW* win=win3;
 	int posx, posy;
 	double inizio=(MAXDIM-s->getDimensione())/2.0;
@@ -87,7 +88,8 @@ void Drawer::posizionaGiocatore(Stanza* s, Giocatore* g){
 	posx=(int)(2*(inizio+g->getPosX()))+1;
 
     wattron(win, COLOR_PAIR(6));
-    mvwprintw(win, posy, posx,"@ "); //deve occupare 2 px
+    if (!isAttacked) mvwprintw(win, posy, posx,"@ "); //deve occupare 2 px
+    if (isAttacked) mvwprintw(win, posy, posx,"X ");
 	wattroff(win, COLOR_PAIR(6));
 	wrefresh(win);
 }
@@ -347,14 +349,14 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	disegnaLiv(l);
 	g->setPosX(s->getLibero());
 	g->setPosY(s->getDimensione()-2);
-	posizionaGiocatore(s, g);
+	posizionaGiocatore(s, g, false);
 	char msg[100];
 	sprintf (msg, "Iniziamo il gioco, clicca un pulsante (no x) ");
     disegnaMess(msg);
 
 }
 
-void Drawer::posizionaMostro(Stanza* s, Mostro* m)
+void Drawer::posizionaMostro(Stanza* s, Mostro* m, bool chasing, bool isAttacked)
 {
 	WINDOW* win=win3;
 	int posx, posy;
@@ -365,8 +367,15 @@ void Drawer::posizionaMostro(Stanza* s, Mostro* m)
 	posx=(int)(2*(inizio+m->getPosX()))+1;
 	char buf[3];
 	buf[0]=m->getId(); buf[1]=' '; buf[2]='\0';             //in questo modo stampo sia l'id del mostro, sia lo spazio
-	wattron(win, COLOR_PAIR(2));
-	mvwprintw(win, posy, posx, buf); //deve occupare 2 px
-	wattroff(win, COLOR_PAIR(2));
+	if (isAttacked) buf[0]='X';
+	if (chasing) {
+		wattron(win, COLOR_PAIR(10));
+		mvwprintw(win, posy, posx, buf); //deve occupare 2 px
+		wattroff(win, COLOR_PAIR(10));
+	} else {
+		wattron(win, COLOR_PAIR(2));
+		mvwprintw(win, posy, posx, buf); //deve occupare 2 px
+		wattroff(win, COLOR_PAIR(2));
+	}
 	wrefresh(win);
 }
