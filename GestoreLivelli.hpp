@@ -26,7 +26,12 @@ protected:
     /**Oggetto di generatore livelli */
     GeneratoreLivelli generatore;
 
-public:
+
+    private:
+
+    /** Metodo che aggiunge livello in coda alla lista dei livelli */
+    void aggiungiLivello(Livello *l);
+
 
     public:
 
@@ -43,9 +48,6 @@ public:
 
     /** Metodo che decrementa di uno il livello corrente*/
     void passaLivPrec();
-
-    /** Metodo che aggiunge livello in coda alla lista dei livelli */
-    void aggiungiLivello(Livello *l);
 
     /**
     Metodo che per prima cosa crea un livello avente il numero di stanze pari al numero passato come parametro al metodo,
