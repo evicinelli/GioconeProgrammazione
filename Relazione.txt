@@ -1,0 +1,11 @@
+-Suddivisione:
+Stefano Bucciarelli:
+Giulia Giusti: Livello, Collegamento, Generatore Livelli, Gestore Livelli.
+Matteo Trentin:
+Emanuele Viccinelli:
+
+-Spiegazione regole del gioco: --> Matteo
+
+-Implementazione turni: --> Vicci
+
+-Grafica: --> Buccia
