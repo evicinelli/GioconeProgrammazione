@@ -16,7 +16,7 @@ Mostro::Mostro(int level, std::string race)
 		str=(int)(lev+n*lev);
 		n=1.5*((double)rand()/RAND_MAX)+1;
 		dex=(int)(lev+n*lev);
-		n=1.5*((double)rand()/RAND_MAX)+1;
+		n=0.5*((double)rand()/RAND_MAX)+1;
 		con=(int)(1.1*lev+n*lev);
 	}
 	else if (race=="orco")
@@ -26,7 +26,7 @@ Mostro::Mostro(int level, std::string race)
 		str=(int)(1.2*lev+n*lev);
 		n=((double)rand()/RAND_MAX)+1;
 		dex=(int)(lev+n*lev);
-		n=2*((double)rand()/RAND_MAX)+1;
+		n=1.1*((double)rand()/RAND_MAX)+1;
 		con=(int)(1.5*lev+n*lev);
 
 	}
@@ -37,7 +37,7 @@ Mostro::Mostro(int level, std::string race)
 		str=(int)(1.5*lev+n*lev);
 		n=0.3*((double)rand()/RAND_MAX)+1;
 		dex=(int)(0.5*lev+n*lev);
-		n=5*((double)rand()/RAND_MAX)+1;
+		n=1.5*((double)rand()/RAND_MAX)+1;
 		con=(int)(2*lev+n*lev);
 
 	}
@@ -124,7 +124,7 @@ void Mostro::insegui(int targetX, int targetY, int matrix[24][24], int dimension
 
 	} else if (getPosX() != targetX && getPosY() == targetY){
 			nx = this->getPosX() + ((targetX - getPosX()) / abs(targetX - getPosX()));
-	} 
+	}
 
 	if (matrix[ny][nx] == -1) {
 		this->setPosX(nx);
@@ -137,7 +137,7 @@ void Mostro::morte(Giocatore *g)
 	double prob=100*((double)rand()/RAND_MAX);
 	int gold=lev*15+(int)(g->getLuck()*3.5);
 	double drop=equip.getDropRate()+(0.2*g->getLuck());
-	int expGain=lev*30+g->getLuck()*5;
+	int expGain=lev*30+g->getLuck()*8+(con+dex+str)*2;
 	g->addOro(gold);
 	g->addExp(expGain);
 	if (prob<=drop)
@@ -145,7 +145,7 @@ void Mostro::morte(Giocatore *g)
 		if (g->libInventario()!=-1)
 			g->setInv(g->libInventario(),equip);
 	}
-	
+
 	alive = false;
 }
 
@@ -183,7 +183,8 @@ bool Mostro::isAlive()
 bool Mostro::needToAttack(Giocatore* g)
 {
 	return (abs(g->getPosX() - this->getPosX()) <=1) &&
-		   (abs(g->getPosY() - this->getPosY()) <=1);
+		   (abs(g->getPosY() - this->getPosY()) <=1) &&
+		   !(abs(g->getPosY() - this->getPosY()) ==1 && abs(g->getPosX() - this->getPosX()) ==1);
 }
 
 /* Se il giocatore si trova in un quadrato AGGRO x AGGRO intorno al mostro,

@@ -11,13 +11,14 @@ using namespace std;
 
 class Drawer{
 	protected:
+		WINDOW *win0; //Finestra iniziale
 		WINDOW *win1; //Finestra statistiche
 		WINDOW *win2; //Finestra messaggi
 		WINDOW *win3; //Finestra stanza
 		WINDOW *win4; //Finestra livello
 		WINDOW *win5; //Finestra equipaggiamento
 		WINDOW *win6; //Finestra pop up
-		WINDOW *win7;  //Finestra di fine gioco
+		WINDOW *win7; //Finestra di fine gioco
 	public:
 
 		Drawer();

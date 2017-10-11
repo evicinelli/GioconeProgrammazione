@@ -42,7 +42,7 @@ Arma::Arma(int lev, std::string type)
     nome=type+": "+buf+"-"+buf2;
     disponibile=true;
     droprate=30;
-    prezzo=20+(int)(lev*7.5)+(int)(maxdanno*0.05+mindanno*0.05);
+    prezzo=20+(int)(lev*5)+(int)(maxdanno*0.6+mindanno*0.6);
 
 }
 int Arma::getMin()

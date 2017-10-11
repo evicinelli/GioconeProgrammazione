@@ -406,7 +406,7 @@ void Controller::compraDaVend(Venditore* v){
 			sel++;
 	}
 	sel-=2;
-	
+
 	//se puoi compra oggetto
 	if (sel >= 0 && sel<=3){
 		if (sel!=3){
@@ -417,7 +417,7 @@ void Controller::compraDaVend(Venditore* v){
 				}
 				else
 					printMsg("Non hai abbastanza oro");
-				
+
 		}
 		else{
 			if(p->getOro() >= v->getCostoPot())
@@ -440,7 +440,7 @@ void Controller::compraDaVend(Venditore* v){
 	d->disegnaStat(p);
 	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaEquip(p);
-	
+
 }
 void Controller::aumentaLivello(){
 	char msg[20][40];
