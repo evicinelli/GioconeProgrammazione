@@ -12,6 +12,7 @@ using namespace std;
 class Drawer{
 	protected:
 		WINDOW *win0; //Finestra iniziale
+		WINDOW *win01;//Finestra di informazioni sulla classe
 		WINDOW *win1; //Finestra statistiche
 		WINDOW *win2; //Finestra messaggi
 		WINDOW *win3; //Finestra stanza
@@ -22,6 +23,9 @@ class Drawer{
 	public:
 
 		Drawer();
+
+		//disegna la schermata iniziale con selezione della classe
+		void disegnaInizio(int sel);
 
 		//disegna la stanza nell'apposita finestra
 		void disegnaStanza(Stanza* s);

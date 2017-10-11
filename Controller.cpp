@@ -30,6 +30,28 @@ void Controller::endGame(int v){
 
 }
 
+int Controller::selClasse()
+{
+	char c;
+	int sel=2;
+	d->disegnaInizio(sel);
+
+	do{
+		c=tolower(getch());
+		if (c==(char)KEY_UP && sel>2){
+			sel--;
+			d->disegnaInizio(sel);
+		}
+		else if (c==(char)KEY_DOWN && sel<MAX_CLASSES+1){
+			sel++;
+			d->disegnaInizio(sel);
+		}
+	}while(c!=(char)10);
+
+	flushinp();
+	return sel-2;
+}
+
 void Controller::animaAttacchi(Mostro* m, bool isPlayer){
 		if (isPlayer){
 			d->posizionaMostro(stanza, m, false, true);
@@ -480,7 +502,6 @@ bool Controller::chiudiGioco(){
 void Controller::gestisciInput(char c){
 
     int dir; //direzione nella quale sono gli oggetti
-    keypad(stdscr, true);
     switch(c){
 
         //MOVIMENTO IN ALTO
@@ -751,6 +772,8 @@ void Controller::init()
 	noecho();
 	refresh();
 	start_color();
+	keypad(stdscr, true);
+	p->classChosen(selClasse());
 	d->disegna(p, gestore.getInizio(), stanza);
 }
 

@@ -14,6 +14,62 @@ WINDOW* Drawer::creaWin(int height, int width, int starty, int startx){
 	return win;
 }
 
+void Drawer::disegnaInizio(int sel)
+{
+	int centerx, centery, x, y;
+
+	setColor();
+	curs_set(0); //cursore invisibile
+
+	getmaxyx(stdscr, y, x);
+	centery=y/2-1;
+	centerx=x/2-1;
+	int startx, starty, xtot, ytot;
+	ytot=13+MAXDIM;
+	xtot=50+2*MAXDIM;
+	starty=centery-(MAXDIM/2+5);
+	startx=centerx-(MAXDIM+24);
+	this->win0 = creaWin(ytot-13,xtot,starty,startx);
+	this->win01= creaWin(13,xtot,starty+MAXDIM,startx);
+	centerx=getmaxx(win0)/2;
+    clearWin(win0);
+	wmove(win0, 2, centerx-12);
+	char msg[MAX_CLASSES+2][30];
+	char desc[MAX_CLASSES][300];
+	sprintf(desc[0], "Attributi bilanciati. Inizia con 5 pozioni.");
+	sprintf(desc[1], "Alti valori di forza e costituzione, poca destrezza e fortuna. Inizia con 5 pozioni.");
+	sprintf(desc[2], "Alti valori di destrezza e fortuna, poca forza e costituzione. Inizia con 7 pozioni.");
+	sprintf(msg[0],"Seleziona classe iniziale");
+	sprintf(msg[1],"INVIO per selezionare");
+	sprintf(msg[2],"Guerriero");
+	sprintf(msg[3],"Barbaro");
+	sprintf(msg[4],"Ladro");
+
+	wattron(win0, COLOR_PAIR(1));
+	wprintw(win0, "%s", msg[0]); //titolo
+	wattroff(win0, COLOR_PAIR(1));
+	wmove(win0, 6, centerx-10);
+	wprintw(win0, "%s", msg[1]); //consegna
+
+	for (int i=2; i<MAX_CLASSES+2; i++){
+		wmove(win0, 8+i*2, centerx-6);
+		wmove(win01, 2, 2);
+		//se è selezionato è giallo
+		if (i==sel){
+			wattron(win0, COLOR_PAIR(8));
+			wprintw(win0, "%s", msg[i]);
+			wattroff(win0, COLOR_PAIR(8));
+			wprintw(win01, "%s", desc[i-2]);
+		}
+		else{
+			wprintw(win0, "%s", msg[i]);
+		}
+	}
+	wrefresh(win0);
+	wrefresh(win01);
+}
+
+
 void Drawer::clearWin(WINDOW* win){
 	wclear(win);
 	box(win, 0 , 0);
@@ -24,10 +80,17 @@ void Drawer::quitVictory()
 	getmaxyx(stdscr, y, x);
 	centery=y/2-1;
 	centerx=x/2-1;
-	this->win7 = creaWin(y, x , 0, 0);
+
+	int startx, starty, xtot, ytot;
+	ytot=13+MAXDIM;
+	xtot=50+2*MAXDIM;
+	starty=centery-(MAXDIM/2+5);
+	startx=centerx-(MAXDIM+24);
+	this->win7 = creaWin(ytot,xtot,starty,startx);
+
 	wattron(win7,COLOR_PAIR(10));
-	mvwprintw(win7,centery,centerx,"HAI VINTO!");
-	mvwprintw(win7,centery+4,centerx-7,"Premi ESC o X per uscire");
+	mvwprintw(win7,centery-2,centerx-5,"HAI VINTO!");
+	mvwprintw(win7,centery+2,centerx-12,"Premi ESC o X per uscire");
 	wattroff(win7,COLOR_PAIR(10));
 	wrefresh(win7);
 }
@@ -39,10 +102,19 @@ void Drawer::quitDefeat()
 	getmaxyx(stdscr, y, x);
 	centery=y/2-1;
 	centerx=x/2-1;
-	this->win7 = creaWin(y, x , 0, 0);
+
+	int startx, starty, xtot, ytot;
+	ytot=13+MAXDIM;
+	xtot=50+2*MAXDIM;
+	starty=centery-(MAXDIM/2+5);
+	startx=centerx-(MAXDIM+24);
+	this->win7 = creaWin(ytot,xtot,starty,startx);
+
 	wattron(win7,COLOR_PAIR(10));
-	mvwprintw(win7,centery,centerx,"GAME OVER");
-	mvwprintw(win7,centery+4,centerx-7,"Premi ESC o X per uscire");
+	centerx=getmaxx(win7)/2;
+	centery=getmaxy(win7)/2;
+	mvwprintw(win7,centery-2,centerx-5,"GAME OVER");
+	mvwprintw(win7,centery+2,centerx-12,"Premi ESC o X per uscire");
 	wattroff(win7,COLOR_PAIR(10));
 	wrefresh(win7);
 }
@@ -324,7 +396,6 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	//resize_term(37, 150);
 
     int centerx, centery, x, y; //coordinate centro terminale
-    curs_set(0); //cursore invisibile
 
     //viene rilevato il centro del terminale
 	getmaxyx(stdscr, y, x);
@@ -332,7 +403,6 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	centerx=x/2-1;
 
 	//creazione finestre
-	setColor();
 	this->win1 = creaWin(7+MAXDIM, 24, centery-(MAXDIM/2+5), centerx-(MAXDIM+24));
 	this->win2 = creaWin(5, 2*MAXDIM+2 , centery-(MAXDIM/2+5), centerx-MAXDIM);
 	this->win3 = creaWin(MAXDIM+2, MAXDIM*2+2 , centery-MAXDIM/2, centerx-MAXDIM);
@@ -351,7 +421,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	g->setPosY(s->getDimensione()-2);
 	posizionaGiocatore(s, g, false);
 	char msg[100];
-	sprintf (msg, "Iniziamo il gioco, clicca un pulsante (no x) ");
+	sprintf (msg, "Iniziamo il gioco, clicca un pulsante");
     disegnaMess(msg);
 
 }

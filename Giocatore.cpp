@@ -2,19 +2,45 @@
 
 Giocatore::Giocatore()
 {
-	str=8;
-	dex=8;
-	con=10;
-	luck=5;
 	lev=1;
-	hpmax=40*lev+con*20;
-	hp=hpmax;
 	act=AZIONE;
 	oro=0;
 	exp=0;
 	nextLevExp=80;
-	pot=5;
-	equip=Arma(1,"spada");
+}
+
+void Giocatore::classChosen(int sel)
+{
+	switch(sel)
+	{
+		case 0:
+			str=10;
+			dex=10;
+			con=12;
+			luck=8;
+			pot=5;
+			equip=Arma(1,"spada");
+		break;
+		case 1:
+			str=14;
+			dex=4;
+			con=16;
+			luck=2;
+			pot=5;
+			equip=Arma(1,"mazza");
+		break;
+		case 2:
+			str=4;
+			dex=18;
+			con=8;
+			luck=14;
+			pot=7;
+			equip=Arma(1,"pugnale");
+		break;
+
+	}
+	hpmax=40*lev+con*20;
+	hp=hpmax;
 }
 
 int Giocatore::getOro()

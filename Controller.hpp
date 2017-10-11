@@ -24,12 +24,15 @@ class Controller
 		//Istruzioni che permetteranno al drawer di disegnare
        	void init();
 
+		//chiede al giocatore con che classe vuole iniziare a giocare
+		int selClasse();
+
 		//iterazione che viene ripetuta ogni turno, aspetta il tasto in input
 		void gioca();
 
 		//animazione degli attacchi: true sse il giocatore attacca il mostro
 		void animaAttacchi(Mostro* m, bool isPlayer);
-		
+
 		//apre la finestra dell'aumento di livello
 		void aumentaLivello();
 
@@ -82,10 +85,10 @@ class Controller
 
 		//apre il baule
 		void apriBaule(int dir);
-		
+
 		//data la posizione individua quanti venditori ci sono prima di quella posizione
 		int getIdVenditore(int y, int x);
-		
+
 		//dice al drawer di fare la lista degli oggetti e compra il selezionato
 		void compraDaVend(Venditore* v);
 
