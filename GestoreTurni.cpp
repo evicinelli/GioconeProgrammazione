@@ -44,7 +44,9 @@ void GestoreTurni::play()
 								//il mostro diventa rosso perché ha visto il giocatore e lo insegue
 								break;
 							default:
+								ctrl->animaAttacchi(m, false);
 								ctrl->scriviInfoAttacco(m,action,false);
+								break;
 						}
                         ctrl->updateMonsterCoordinates(oY, oX, m, m->isChasing());
                         usleep(100000);

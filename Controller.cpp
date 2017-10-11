@@ -30,30 +30,43 @@ void Controller::endGame(int v){
 
 }
 
+void Controller::animaAttacchi(Mostro* m, bool isPlayer){
+		if (isPlayer){
+			d->posizionaMostro(stanza, m, true, true);
+			usleep(200000);
+			d->posizionaMostro(stanza, m, true, false);
+		}
+		else{
+			d->posizionaGiocatore(stanza, p, true);
+			usleep(200000);
+			d->posizionaGiocatore(stanza, p, false);
+		}
+}
+
 void Controller::vaiSu(){
 	d->liberaPosizione(stanza, p->getPosY(), p->getPosX());
 	p->setPosY(p->getPosY()-1);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaStat(p);
 }
 void Controller::vaiGiu(){
 	d->liberaPosizione(stanza, p->getPosY(), p->getPosX());
 	p->setPosY(p->getPosY()+1);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaStat(p);
 
 }
 void Controller::vaiDx(){
 	d->liberaPosizione(stanza, p->getPosY(), p->getPosX());
 	p->setPosX(p->getPosX()+1);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaStat(p);
 
 }
 void Controller::vaiSx(){
 	d->liberaPosizione(stanza, p->getPosY(), p->getPosX());
 	p->setPosX(p->getPosX()-1);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaStat(p);
 }
 
@@ -160,7 +173,7 @@ void Controller::cambiaStanza(int direzione){
 	d->disegnaStanza(stanza);
 	l->visitStanza(stanza->getId());
 	d->disegnaLiv(l);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 }
 
 void Controller::apriBaule(int dir){
@@ -181,7 +194,7 @@ void Controller::apriBaule(int dir){
 	d->liberaPosizione(stanza, y, x);
 	d->disegnaEquip(p);
 	d->disegnaStanza(stanza);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 
 }
 
@@ -208,7 +221,7 @@ void Controller::scriviIstruzioni(){
 	}while(c!='h');
 	//disegno sopra la finestra pop up
 	d->disegnaStanza(stanza);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 }
 
 void Controller::scriviInfoMostro(Mostro* m)
@@ -263,7 +276,7 @@ void Controller::scriviInfoMostroAvanzate(Mostro* m)
 	}while(c!='i');
 	//disegno sopra la finestra pop up
 	d->disegnaStanza(stanza);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 
 }
 
@@ -320,15 +333,18 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 			nStringhe++;
 		}
 	}
+	sprintf (msg[nStringhe+1], "ESCI");
+	nStringhe++;
 	sel=selPopUp(msg, sel, nStringhe);
 
+	//ESCI è selezionato se sel=MAX_ITEM+2
 	//imposta sel in modo che sia esattamente l'elemento in inventario
-	for (int i=0; i<sel-1; i++){
+	for (int i=0; i<sel-1 && i<MAX_ITEM; i++){
 		if (!p->getInv(i).isAvailable())
 			sel++;
 	}
 	//a seconda di opt cambio o scarto l'arma
-	if (sel >= 2){
+	if (sel >= 2 && sel < 2+MAX_ITEM){
 		if (opt)
 		{
 			int res=p->cambioArma(sel-2);
@@ -357,7 +373,7 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	}
 	//disegno sopra la pop-up
 	d->disegnaStanza(stanza);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaEquip(p);
 }
 
@@ -381,6 +397,8 @@ void Controller::compraDaVend(Venditore* v){
 		strcat (msg[nStringhe+1], costo);
 		nStringhe++;
 	}
+	sprintf (msg[nStringhe+1], "ESCI");
+	nStringhe++;
 	sel=selPopUp(msg, sel, nStringhe);
 	//imposta sel in modo che sia esattamente l'elemento in inventario
 	for (int i=0; i<sel-1 && i<3; i++){
@@ -397,6 +415,9 @@ void Controller::compraDaVend(Venditore* v){
 					if (pos==-1)
 						printMsg("Hai l'inventario pieno");
 				}
+				else
+					printMsg("Non hai abbastanza oro");
+				
 		}
 		else{
 			if(p->getOro() >= v->getCostoPot())
@@ -417,7 +438,7 @@ void Controller::compraDaVend(Venditore* v){
 	//disegno sopra la pop-up
 	d->disegnaStanza(stanza);
 	d->disegnaStat(p);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaEquip(p);
 	
 }
@@ -435,7 +456,7 @@ void Controller::aumentaLivello(){
 	p->levelup(sel-1);
 	//disegno sopra la pop-up
 	d->disegnaStanza(stanza);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaStat(p);
 	printMsg("Livello giocatore aumentato");
 }
@@ -451,7 +472,7 @@ bool Controller::chiudiGioco(){
 
 	//disegno sopra la pop-up
 	d->disegnaStanza(stanza);
-	d->posizionaGiocatore(stanza, p);
+	d->posizionaGiocatore(stanza, p, false);
 	return (sel==2);
 
 }
@@ -526,18 +547,20 @@ void Controller::gestisciInput(char c){
 				{
 					if (p->getAct()>=4)
 					{
+						animaAttacchi(selected, true);
 						int danno=p->attacca(selected);
 						if (selected->getHp()>0)
 							scriviInfoAttacco(selected,danno,true);
 						else
 						{
+							stanza->setSpot(selected->getPosY(), selected->getPosX(), -1);
 							selected->morte(p);
 							scriviMorteMostro(selected,danno);
 							d->disegnaEquip(p);
 						}
 						d->disegnaStat(p);
 						d->disegnaStanza(stanza);
-						d->posizionaGiocatore(stanza,p);
+						d->posizionaGiocatore(stanza,p, false);
 					}
 					else
 						printMsg("Non hai abbastanza punti azione (minimo 4)");
@@ -718,7 +741,7 @@ void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m, bool is
 
 	// Metto il mostro nella sua nuova posizione
 	stanza->setSpot(m->getPosY(), m->getPosX(), 1);
-	d->posizionaMostro(stanza, m, isChasing);
+	d->posizionaMostro(stanza, m, isChasing, false);
 }
 
 void Controller::init()

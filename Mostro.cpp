@@ -145,7 +145,7 @@ void Mostro::morte(Giocatore *g)
 		if (g->libInventario()!=-1)
 			g->setInv(g->libInventario(),equip);
 	}
-
+	
 	alive = false;
 }
 
