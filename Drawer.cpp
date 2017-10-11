@@ -55,8 +55,8 @@ void Drawer::setColor(){
 	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(5, COLOR_WHITE, COLOR_BLUE);
 	init_pair(6, COLOR_RED, COLOR_YELLOW);
-    	init_pair(7, COLOR_BLACK, COLOR_BLACK);
-    	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(7, COLOR_BLACK, COLOR_BLACK);
+	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(9, COLOR_BLACK, COLOR_WHITE);
 	init_pair(10, COLOR_WHITE, COLOR_RED);
 

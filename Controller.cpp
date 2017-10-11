@@ -32,9 +32,9 @@ void Controller::endGame(int v){
 
 void Controller::animaAttacchi(Mostro* m, bool isPlayer){
 		if (isPlayer){
-			d->posizionaMostro(stanza, m, true, true);
+			d->posizionaMostro(stanza, m, false, true);
 			usleep(200000);
-			d->posizionaMostro(stanza, m, true, false);
+			d->posizionaMostro(stanza, m, false, false);
 		}
 		else{
 			d->posizionaGiocatore(stanza, p, true);
