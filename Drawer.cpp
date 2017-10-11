@@ -55,10 +55,11 @@ void Drawer::setColor(){
 	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(5, COLOR_WHITE, COLOR_BLUE);
 	init_pair(6, COLOR_RED, COLOR_YELLOW);
-    init_pair(7, COLOR_BLACK, COLOR_BLACK);
-    init_pair(8, COLOR_YELLOW, COLOR_BLACK);
+    	init_pair(7, COLOR_BLACK, COLOR_BLACK);
+    	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(9, COLOR_BLACK, COLOR_WHITE);
-	init_pair(10, COLOR_WHITE, COLOR_BLACK);
+	init_pair(10, COLOR_WHITE, COLOR_RED);
+
 
 }
 void Drawer::liberaPosizione(Stanza* s, int y, int x){
@@ -354,7 +355,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 
 }
 
-void Drawer::posizionaMostro(Stanza* s, Mostro* m)
+void Drawer::posizionaMostro(Stanza* s, Mostro* m, bool chasing)
 {
 	WINDOW* win=win3;
 	int posx, posy;
@@ -365,8 +366,14 @@ void Drawer::posizionaMostro(Stanza* s, Mostro* m)
 	posx=(int)(2*(inizio+m->getPosX()))+1;
 	char buf[3];
 	buf[0]=m->getId(); buf[1]=' '; buf[2]='\0';             //in questo modo stampo sia l'id del mostro, sia lo spazio
-	wattron(win, COLOR_PAIR(2));
-	mvwprintw(win, posy, posx, buf); //deve occupare 2 px
-	wattroff(win, COLOR_PAIR(2));
+	if (chasing) {
+		wattron(win, COLOR_PAIR(10));
+		mvwprintw(win, posy, posx, buf); //deve occupare 2 px
+		wattroff(win, COLOR_PAIR(10));
+	} else {
+		wattron(win, COLOR_PAIR(2));
+		mvwprintw(win, posy, posx, buf); //deve occupare 2 px
+		wattroff(win, COLOR_PAIR(2));
+	}
 	wrefresh(win);
 }

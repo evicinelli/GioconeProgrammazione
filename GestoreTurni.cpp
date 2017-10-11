@@ -40,6 +40,7 @@ void GestoreTurni::play()
 								//il mostro diventa di colore verde/blu
 								break;
 							case 1:
+								//usleep(100000);
 								//il mostro diventa rosso perché ha visto il giocatore e lo insegue
 								break;
 							default:

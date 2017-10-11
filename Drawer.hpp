@@ -50,7 +50,7 @@ class Drawer{
 		void posizionaGiocatore(Stanza* s, Giocatore* g);
 
 		//disegna i mostri con le nuove posizioni nella stanza
-		void posizionaMostro(Stanza* s, Mostro* m);
+		void posizionaMostro(Stanza* s, Mostro* m, bool isChasingPlayer);
 
 		// Schermata di vittoria
 		void quitVictory();

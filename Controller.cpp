@@ -718,7 +718,7 @@ void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m, bool is
 
 	// Metto il mostro nella sua nuova posizione
 	stanza->setSpot(m->getPosY(), m->getPosX(), 1);
-	d->posizionaMostro(stanza, m);
+	d->posizionaMostro(stanza, m, isChasing);
 }
 
 void Controller::init()

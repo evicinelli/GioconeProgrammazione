@@ -1,4 +1,7 @@
 # include "Mostro.hpp"
+# include "Utils.cpp"
+# include <queue>
+# define IFTY 580
 
 Mostro::Mostro(int level, std::string race)
 {
@@ -80,10 +83,7 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 	do {
 		incX = 0;
 		incY = 0;
-		//do {
-			direzione = rand() % 4;
-		//} while ((abs(direzione - oldDirezione) == 1) /* && iter < 200 */);
-
+		direzione = rand() % 4;
 		switch( direzione ) {
 			case 0:	/* BASSO */
 				++incY;
@@ -107,7 +107,29 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 
 void Mostro::insegui(int targetX, int targetY, int matrix[24][24], int dimensione)
 {
+	int direzione = rand() % 2;
+	int nx = 0;
+	int ny = 0;
 
+	if (getPosX() != targetX && getPosY() != targetY) {
+		if (direzione == 0) {
+			nx = this->getPosX() + ((targetX - getPosX()) / abs(targetX - getPosX()));
+		}
+
+		if (direzione == 1) {
+			ny = this->getPosY() + ((targetY - getPosY()) / abs(targetY - getPosY()));
+		}
+	} else if (getPosX() == targetX && getPosY() != targetY) {
+			ny = this->getPosY() + ((targetY - getPosY()) / abs(targetY - getPosY()));
+
+	} else if (getPosX() != targetX && getPosY() == targetY){
+			nx = this->getPosX() + ((targetX - getPosX()) / abs(targetX - getPosX()));
+	} 
+
+	if (matrix[ny][nx] == -1) {
+		this->setPosX(nx);
+		this->setPosY(ny);
+	}
 }
 
 void Mostro::morte(Giocatore *g)
@@ -132,14 +154,19 @@ int Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 	int targetX = g->getPosX();
 	int targetY = g->getPosY();
 	int result=0;
+
+
 	if (this->needToAttack(g) && (act - 4) >= 0) {
+		chasing = false;
 		result=attacca(g);			//in caso di attacco restituisce il danno inflitto come valore di ritorno
 	} else {
 		if (this->needToChase(g)) {
+			this->buildDMap(g->getPosX(), g->getPosY(), m);
 			chasing = true;
 			insegui(targetX, targetY, m, dimensione);
 			result=1;
 		} else {
+			chasing = false;
 			muovi(targetX, targetY, m, dimensione);
 		}
 		act -= 1;
@@ -170,4 +197,13 @@ bool Mostro::needToChase(Giocatore* g)
 bool Mostro::isChasing()
 {
 	return chasing;
+}
+
+void Mostro::buildDMap(int tx, int ty, int m[24][24])
+{
+	std::queue<int> myq;
+	int d[VIEW_RANGE * VIEW_RANGE];
+	for (int i = 0; i < VIEW_RANGE * VIEW_RANGE; ++i) {
+		d[i] = -1;
+	}
 }
