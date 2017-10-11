@@ -27,7 +27,6 @@ class Giocatore : public Personaggio
         void scartaArma(int pos);           //scarta una delle armi nell'inventario
         int libInventario();				//restituisce la prima posizione libera di inventario, -1 se è piena
         int usaPozione();					//usa una pozione e ritorna il numero di hp recuperati
-        void morte();                       //metodo forse non necessario; dovrebbe chiamare la schermata di sconfitta
 
 
 };

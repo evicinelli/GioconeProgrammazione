@@ -6,12 +6,12 @@ Giocatore::Giocatore()
 	dex=8;
 	con=10;
 	luck=5;
-	hpmax=con*20;
+	lev=1;
+	hpmax=40*lev+con*20;
 	hp=hpmax;
 	act=AZIONE;
 	oro=0;
 	exp=0;
-	lev=1;
 	nextLevExp=80;
 	pot=5;
 	equip=Arma(1,"spada");
@@ -73,6 +73,7 @@ void Giocatore::levelup(int stat)
         luck+=2;
         break;
     }
+    hpmax+=40;
     hp=hpmax;
     lev++;
     exp=exp-nextLevExp;
@@ -136,9 +137,4 @@ int Giocatore::usaPozione()
 		}
     }
     return recuperato;
-}
-
-void morte()
-{
-
 }
