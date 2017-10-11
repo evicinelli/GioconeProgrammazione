@@ -102,10 +102,8 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 	this->setPosY(y + incY);
 }
 
-void Mostro::insegui(int targetX, int targetY, int matrix[24][24], int dimensione)
+void Mostro::insegui(int matrix[24][24], int dimensione)
 {
-	FILE *f = fopen("log.log", "a");
-
 	spot* mSpot = new spot;
 	mSpot->c = this->getPosX(); mSpot->r = this->getPosY(); mSpot->val = dmap[mSpot->r][mSpot->c];
 
@@ -119,14 +117,6 @@ void Mostro::insegui(int targetX, int targetY, int matrix[24][24], int dimension
 
 	this->setPosY(move_to->r);
 	this->setPosX(move_to->c);
-
-<<<<<<< Updated upstream
-	} else if (getPosX() != targetX && getPosY() == targetY){
-			nx = this->getPosX() + ((targetX - getPosX()) / abs(targetX - getPosX()));
-	}
-=======
->>>>>>> Stashed changes
-
 }
 
 void Mostro::morte(Giocatore *g)
@@ -159,7 +149,7 @@ int Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 	} else {
 		if (this->needToChase(g)) {
 			chasing = true;
-			insegui(targetX, targetY, m, dimensione);
+			insegui(m, dimensione);
 			result=1;
 		} else {
 			chasing = false;

@@ -22,7 +22,7 @@ class Mostro : public Personaggio
         bool alive;         /* il mostro è vivo? */
         bool chasing;       /* Il mostro sta inseguendo? */
         void muovi(int targetX, int targetY, int matrix[24][24], int dimensione);
-        void insegui(int targetX, int targetY, int matrix[24][24], int dimensione);
+        void insegui(int matrix[24][24], int dimensione);
    
     public:
         Mostro(int lev, std::string race);
