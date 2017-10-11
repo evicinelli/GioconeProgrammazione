@@ -746,12 +746,16 @@ void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m, bool is
 
 void Controller::init()
 {
-    initscr();
+   	initscr();
 	raw();
 	noecho();
 	refresh();
 	start_color();
 	d->disegna(p, gestore.getInizio(), stanza);
+	Mostro* m = new Mostro(100, "bandito");
+	int ma[24][24];
+	stanza->getMatrice(ma);
+	m->buildDMap(1, stanza->getDimensione() - 2, ma, stanza->getDimensione());
 }
 
 void Controller::gioca(){

@@ -39,3 +39,5 @@ bin/
 
 #Diagramma
 *.dia
+
+*.log

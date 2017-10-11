@@ -34,8 +34,7 @@ void GestoreTurni::play()
                         oY = m->getPosY();
                         ctrl->getCurrentRoom()->getMatrice(mat);
                         action=m->takeAction(player, mat, ctrl->getCurrentRoom()->getDimensione());
-                        switch (action)
-						{
+                        switch (action) {
 							case 0:
 								//il mostro diventa di colore verde/blu
 								break;
