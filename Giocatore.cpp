@@ -67,7 +67,7 @@ void Giocatore::levelup(int stat)
         break;
     case 3:
         con+=2;
-        hpmax+=20;
+        hpmax+=40;
         break;
     case 4:
         luck+=2;
