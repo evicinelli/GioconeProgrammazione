@@ -134,7 +134,11 @@ void Giocatore::scartaArma(int pos)
     inventario[pos].scarta();
 }
 
-
+void Giocatore::vendiArma(int pos)
+{
+	oro+=inventario[pos].getPrezzo();
+	inventario[pos].scarta();
+}
 int Giocatore::libInventario(){
 	int pos=-1;
 	int i=0;
@@ -163,4 +167,10 @@ int Giocatore::usaPozione()
 		}
     }
     return recuperato;
+}
+
+void Giocatore::vendiPot(int prezzo)
+{
+	oro+=prezzo;
+	pot--;
 }

@@ -89,6 +89,9 @@ class Controller
 		//data la posizione individua quanti venditori ci sono prima di quella posizione
 		int getIdVenditore(int y, int x);
 
+		//dice al drawer di fare la lista degli oggetti e vende il selezionato al venditore
+		void vendiVenditore(Venditore* v);
+		
 		//dice al drawer di fare la lista degli oggetti e compra il selezionato
 		void compraDaVend(Venditore* v);
 

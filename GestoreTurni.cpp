@@ -50,9 +50,9 @@ void GestoreTurni::play()
                         ctrl->updateMonsterCoordinates(oY, oX, m, m->isChasing());
                         usleep(100000);
                     }
+					ctrl->updateMonsterCoordinates(oY, oX, m, false);
                 }
             }
-
             player->setAct(5);
             for (int i = 0; i < mCounter; ++i) {
                 ctrl->getCurrentRoom()->getMonster(i)->setAct(5);

@@ -144,7 +144,7 @@ int Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)
 	this->buildDMap(g->getPosX(), g->getPosY(), m, dimensione);
 
 	if (this->needToAttack(g) && (act - 4) >= 0) {
-		chasing = true; //lo coloriamo anche quando attacca
+		chasing = false; 				//lo coloriamo anche quando attacca
 		result=attacca(g);			//in caso di attacco restituisce il danno inflitto come valore di ritorno
 	} else {
 		if (this->needToChase(g)) {

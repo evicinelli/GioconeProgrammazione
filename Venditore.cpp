@@ -64,7 +64,6 @@ int Venditore::vendi(Giocatore* g, int n)
         {
             g->addPot();
             g->setOro(gold-costopot);
-            pozioni=false;
         }
     }
     return pos;

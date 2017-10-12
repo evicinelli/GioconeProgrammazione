@@ -55,12 +55,12 @@ int Controller::selClasse()
 void Controller::animaAttacchi(Mostro* m, bool isPlayer){
 		if (isPlayer){
 			d->posizionaMostro(stanza, m, false, true);
-			usleep(200000);
+			usleep(250000);
 			d->posizionaMostro(stanza, m, false, false);
 		}
 		else{
 			d->posizionaGiocatore(stanza, p, true);
-			usleep(200000);
+			usleep(250000);
 			d->posizionaGiocatore(stanza, p, false);
 		}
 }
@@ -355,7 +355,7 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 			nStringhe++;
 		}
 	}
-	sprintf (msg[nStringhe+1], "ESCI");
+	sprintf (msg[nStringhe+1], "esci");
 	nStringhe++;
 	sel=selPopUp(msg, sel, nStringhe);
 
@@ -398,7 +398,59 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	d->posizionaGiocatore(stanza, p, false);
 	d->disegnaEquip(p);
 }
+void Controller::vendiVenditore(Venditore* v){
+	char msg[20][40], costo[15];
+	int sel=2, nStringhe=1;
+	bool havePot;
+	sprintf (msg[0], "VENDITORE");
+	sprintf (msg[1], "Cosa vuoi vendere? (Invio)");
+	//conta quante stringhe ci sono
+	for (int i=0; i<MAX_ITEM; i++){
+		if ( p->getInv(i).isAvailable()){
+			sprintf (msg[nStringhe+1], p->getInv(i).getNome().c_str());
+			sprintf (costo, "\t\t%d oro",  p->getInv(i).getPrezzo());
+			strcat (msg[nStringhe+1], costo);
+			nStringhe++;
+		}
+	}
+	havePot=(p->getPot()>0);
+	if (havePot){
+		sprintf (msg[nStringhe+1], "pozione");
+		sprintf (costo, "\t\t%d oro", v->getCostoPot());
+		strcat (msg[nStringhe+1], costo);
+		nStringhe++;
+	}
+	sprintf (msg[nStringhe+1], "compra"); nStringhe++;
+	sprintf (msg[nStringhe+1], "esci"); nStringhe++;
+	sel=selPopUp(msg, sel, nStringhe);
+	//imposta sel in modo che sia esattamente l'elemento in inventario
+	for (int i=0; i<sel-1 && i<MAX_ITEM; i++){
+		if (!p->getInv(i).isAvailable())
+			sel++;
+	}
+	sel-=2;
 
+	//se puoi vendi oggetto
+	if (sel >= 0 && sel<=MAX_ITEM){
+		if (sel!=MAX_ITEM){
+			p->vendiArma(sel);
+			printMsg("Arma venduta");
+		}
+		else if (havePot){
+			p->vendiPot(v->getCostoPot());
+			printMsg("Pozione venduta");
+		}
+	}
+	d->disegnaStat(p);
+	d->disegnaEquip(p);
+	if (sel==(MAX_ITEM+2-!havePot)){ //esci
+		//disegno sopra la pop-up
+		d->disegnaStanza(stanza);
+		d->posizionaGiocatore(stanza, p, false);
+	}
+	else compraDaVend(v);
+	
+}
 void Controller::compraDaVend(Venditore* v){
 	char msg[20][40], costo[15];
 	int sel=2, nStringhe=1;
@@ -414,13 +466,13 @@ void Controller::compraDaVend(Venditore* v){
 		}
 	}
 	if (v->getPozioni()){
-		sprintf (msg[nStringhe+1], "Pozione");
+		sprintf (msg[nStringhe+1], "pozione");
 		sprintf (costo, "\t\t%d oro", v->getCostoPot());
 		strcat (msg[nStringhe+1], costo);
 		nStringhe++;
 	}
-	sprintf (msg[nStringhe+1], "ESCI");
-	nStringhe++;
+	sprintf (msg[nStringhe+1], "vendi"); nStringhe++;
+	sprintf (msg[nStringhe+1], "esci"); nStringhe++;
 	sel=selPopUp(msg, sel, nStringhe);
 	//imposta sel in modo che sia esattamente l'elemento in inventario
 	for (int i=0; i<sel-1 && i<3; i++){
@@ -441,12 +493,15 @@ void Controller::compraDaVend(Venditore* v){
 					printMsg("Non hai abbastanza oro");
 
 		}
-		else{
+		else if (v->getPozioni()){
 			if(p->getOro() >= v->getCostoPot())
 				v->vendi(p, sel);
 			else
 				printMsg("Non hai abbastanza oro");
 		}
+	}
+	if (sel == (3+v->getPozioni())){
+		vendiVenditore(v);
 	}
 	//se non ha più niente sparisce
 	bool isVuoto=true;
@@ -568,7 +623,6 @@ void Controller::gestisciInput(char c){
 				{
 					if (p->getAct()>=4)
 					{
-						animaAttacchi(selected, true);
 						int danno=p->attacca(selected);
 						if (selected->getHp()>0)
 							scriviInfoAttacco(selected,danno,true);
@@ -579,6 +633,7 @@ void Controller::gestisciInput(char c){
 							scriviMorteMostro(selected,danno);
 							d->disegnaEquip(p);
 						}
+						animaAttacchi(selected, true);
 						d->disegnaStat(p);
 						d->disegnaStanza(stanza);
 						d->posizionaGiocatore(stanza,p, false);
