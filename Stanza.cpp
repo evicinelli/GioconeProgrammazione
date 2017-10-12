@@ -407,7 +407,7 @@ void Stanza::mettiVenditori(int livello){
 			if (matrice[i][j]==-2 && matrice[i-1][j-1]!=2 && matrice[i-1][j+1]!=2 && 
 				matrice[i][j-2]!=2 && matrice[i][j-1]!=2 && matrice[i-1][j]!=2 && matrice[i-2][j]!=2){
 				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
-				int den=20;//1500/((livello/20.0)+2);
+				int den=1500/((livello/20.0)+2);
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=2;

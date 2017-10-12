@@ -22,9 +22,14 @@ void Controller::endGame(int v){
 		d->quitVictory();
 	}
 
-	while(c!=(char)'x' && c!=27)
+	while(c!=(char)'x' && c!=27 && c!=(char)KEY_RESIZE)
 	{
 		c=tolower(getch());
+	}
+	if (c==(char)KEY_RESIZE) {
+		clear();
+		refresh();
+		endGame(v);
 	}
 	endwin();
 
@@ -46,7 +51,13 @@ int Controller::selClasse()
 			sel++;
 			d->disegnaInizio(sel);
 		}
-	}while(c!=(char)10);
+	}while(c!=(char)10 && c!=(char)KEY_RESIZE); //char 10 = invio
+	
+	if (c==(char)KEY_RESIZE) {
+		clear();
+		refresh();
+		sel=selClasse()+2;
+	}
 
 	flushinp();
 	return sel-2;
@@ -109,7 +120,13 @@ int Controller::selPopUp(char msg[20][40], int sel, int nStringhe){
 			sel++;
 			d->disegnaPopUp(msg, sel, nStringhe);
 		}
-	}while(c!=(char)10); //char 10 = invio
+	}while(c!=(char)10 && c!=(char)KEY_RESIZE); //char 10 = invio
+	if (c==(char)KEY_RESIZE) {
+		clear();
+		refresh();
+		d->disegna(p, gestore.getLevelById(gestore.getLivello()), stanza);
+		sel=selPopUp(msg, sel, nStringhe); //spartano, ma efficace (penso)
+	}
 
 	return sel;
 }
@@ -240,7 +257,14 @@ void Controller::scriviIstruzioni(){
 	//si chiude quando si preme h
 	do{
 		c=tolower(getch());
-	}while(c!='h');
+	}while(c!='h' && c!=(char)KEY_RESIZE); //char 10 = invio
+	
+	if (c==(char)KEY_RESIZE) {
+		clear();
+		refresh();
+		d->disegna(p, gestore.getLevelById(gestore.getLivello()), stanza);
+		scriviIstruzioni();
+	}
 	//disegno sopra la finestra pop up
 	d->disegnaStanza(stanza);
 	d->posizionaGiocatore(stanza, p, false);
@@ -295,7 +319,14 @@ void Controller::scriviInfoMostroAvanzate(Mostro* m)
 	//si chiude quando si preme h
 	do{
 		c=tolower(getch());
-	}while(c!='i');
+	}while(c!='i'&& c!=(char)KEY_RESIZE); //char 10 = invio
+	
+	if (c==(char)KEY_RESIZE) {
+		clear();
+		refresh();
+		d->disegna(p, gestore.getLevelById(gestore.getLivello()), stanza);
+		scriviInfoMostroAvanzate(m);
+	}
 	//disegno sopra la finestra pop up
 	d->disegnaStanza(stanza);
 	d->posizionaGiocatore(stanza, p, false);
@@ -503,15 +534,6 @@ void Controller::compraDaVend(Venditore* v){
 	if (sel == (3+v->getPozioni())){
 		vendiVenditore(v);
 	}
-	//se non ha più niente sparisce
-	bool isVuoto=true;
-	for (int i=0; i<3; i++){
-		if (v->getVendita(i).isAvailable())
-			isVuoto=false;
-	}
-	isVuoto=(isVuoto && !v->getPozioni());
-	if (isVuoto)
-		stanza->setSpot(v->getPosY(), v->getPosX(), -1);
 	//disegno sopra la pop-up
 	d->disegnaStanza(stanza);
 	d->disegnaStat(p);
