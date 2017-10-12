@@ -1,10 +1,23 @@
 -Suddivisione:
 Stefano Bucciarelli:
 Giulia Giusti: Livello, Collegamento, Generatore Livelli, Gestore Livelli.
-Matteo Trentin:
+Matteo Trentin: Regole del gioco, tipi di mostri, statistiche del giocatore, metodi per attacco e morte dei personaggi, armi, associazione degli input alle azioni compiute
 Emanuele Viccinelli:
 
--Spiegazione regole del gioco: --> Matteo
+-Spiegazione regole del gioco: 
+
+Il gioco consiste nell'esplorazione di vari livelli, composti da un numero crescente di stanze, che possono contenere nemici, muri, forzieri e venditori. La forza dei nemici, e di conseguenza la difficoltà del gioco, cresce in proporzione al livello in cui ci si trova.
+I parametri del giocatore, così come quelli dei nemici, sono espressi sotto forma di quattro statistiche (forza, destrezza,costituzione, fortuna) e influenzano vari aspetti del gioco; forza e destrezza vengono utilizzate nel calcolo dei danni e nell'interazione con le armi, la costituzione aumenta i punti vita del personaggio e la fortuna aumenta l'oro e l'esperienza ricevuti, così come i danni inflitti e la possibilità che un nemico lasci cadere l'arma che sta utilizzando quando viene sconfitto.
+Ad ogni turno il giocatore ha a disposizione 5 punti azione, da spendere muovendosi, attaccando, aprendo forzieri o bevendo pozioni; allo stesso modo anche i nemici hanno altrettanti punti azione, ma si limitano a muoversi o attaccare. Esistono anche azioni di gioco che non consumano questi punti, come il cambiare o scartare un'arma, l'aprire una porta e il comprare o vendere oggetti a un venditore.
+Il metodo di attacco è il medesimo sia per il giocatore che per i nemici, così come il calcolo dei danni e le tipologie di armi disponibili; queste hanno parametri diversi a seconda del tipo (ne esistono tre), di un fattore casuale e del livello, per allinearsi con l'incremento di difficoltà man mano che il gioco procede; i parametri delle armi sono il danno minimo, il danno massimo, le statistiche minime richieste per utilizzarle, i moltiplicatori di danno relativi a forza e destrezza e il prezzo.
+Similmente alle armi anche i nemici possono essere di tre tipi diversi, ai quali corrispondono diversi intervalli di statistiche, le quali sono generate casualmente e quindi con la possibilità di essere differenti per ogni nemico presente nel livello, anche nel caso di nemici dello stesso tipo; sulla mappa i nemici sono rappresentati con una lettera diversa a seconda del tipo; una volta sconfitto un nemico dà al giocatore una certa quantità di oro ed esperienza, e viene rimosso dal gioco anche sulla matrice sottostante (venendo sostituito dal valore corrispondente a uno spazio vuoto).
+I venditori sono una classe a parte e possiedono solo un inventario composto di un numero prefissato di armi, che il giocatore può comprare in cambio di oro; viceversa anche il venditore può comprare armi dal giocatore. I forzieri generano un'arma casuale nel momento in cui vengono aperti (ovvero nel momento in cui il giocatore non ha l'inventario pieno e utilizza il comando per aprirli) e poi scompaiono.
+Il giocatore ha inoltre la possibilità di avanzare di livello una volta accumulata una certa quantità di esperienza (ottenuta sconfiggendo nemici), e conseguentemente migliorare una delle sue statistiche.
+Nel corso del turno è possibile compiere anche azioni che non modificano la situazione di gioco attuale, come il visualizzare una schermata di istruzioni, impostare un nemico adiacente come nuovo nemico selezionato o ottenere informazioni più dettagliate su quest'ultimo.
+È inoltre presente la possibilità di saltare il turno, a condizione di aver compiuto almeno un'azione all'interno di esso.
+Il gioco termina con la sconfitta del giocatore, ovvero quando i suoi punti vita scendono a 0, o con la sua vittoria, che può essere conseguita raggiungendo un certo livello di esperienza o una certa quantità di oro (rispettivamente 100 e 100.000, segnati come LEV_VICTORY e GOLD_VICTORY nel codice).
+
+
 
 -Implementazione turni: --> Vicci
 
