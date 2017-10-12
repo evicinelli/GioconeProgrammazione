@@ -432,24 +432,16 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 void Controller::vendiVenditore(Venditore* v){
 	char msg[20][40], costo[15];
 	int sel=2, nStringhe=1;
-	bool havePot;
 	sprintf (msg[0], "VENDITORE");
 	sprintf (msg[1], "Cosa vuoi vendere? (Invio)");
 	//conta quante stringhe ci sono
 	for (int i=0; i<MAX_ITEM; i++){
 		if ( p->getInv(i).isAvailable()){
 			sprintf (msg[nStringhe+1], p->getInv(i).getNome().c_str());
-			sprintf (costo, "\t\t%d oro",  p->getInv(i).getPrezzo());
+			sprintf (costo, "\t%d oro",  p->getInv(i).getPrezzo());
 			strcat (msg[nStringhe+1], costo);
 			nStringhe++;
 		}
-	}
-	havePot=(p->getPot()>0);
-	if (havePot){
-		sprintf (msg[nStringhe+1], "pozione");
-		sprintf (costo, "\t\t%d oro", v->getCostoPot());
-		strcat (msg[nStringhe+1], costo);
-		nStringhe++;
 	}
 	sprintf (msg[nStringhe+1], "compra"); nStringhe++;
 	sprintf (msg[nStringhe+1], "esci"); nStringhe++;
@@ -462,19 +454,15 @@ void Controller::vendiVenditore(Venditore* v){
 	sel-=2;
 
 	//se puoi vendi oggetto
-	if (sel >= 0 && sel<=MAX_ITEM){
+	if (sel >= 0 && sel<MAX_ITEM){
 		if (sel!=MAX_ITEM){
 			p->vendiArma(sel);
 			printMsg("Arma venduta");
 		}
-		else if (havePot){
-			p->vendiPot(v->getCostoPot());
-			printMsg("Pozione venduta");
-		}
 	}
 	d->disegnaStat(p);
 	d->disegnaEquip(p);
-	if (sel==(MAX_ITEM+2-!havePot)){ //esci
+	if (sel==(MAX_ITEM+1)){ //esci
 		//disegno sopra la pop-up
 		d->disegnaStanza(stanza);
 		d->posizionaGiocatore(stanza, p, false);
@@ -491,14 +479,14 @@ void Controller::compraDaVend(Venditore* v){
 	for (int i=0; i<MAX_ITEM; i++){
 		if (v->getVendita(i).isAvailable()){
 			sprintf (msg[nStringhe+1], v->getVendita(i).getNome().c_str());
-			sprintf (costo, "\t\t%d oro", v->getVendita(i).getPrezzo());
+			sprintf (costo, "\t%d oro", v->getVendita(i).getPrezzo());
 			strcat (msg[nStringhe+1], costo);
 			nStringhe++;
 		}
 	}
 	if (v->getPozioni()){
 		sprintf (msg[nStringhe+1], "pozione");
-		sprintf (costo, "\t\t%d oro", v->getCostoPot());
+		sprintf (costo, "\t%d oro", v->getCostoPot());
 		strcat (msg[nStringhe+1], costo);
 		nStringhe++;
 	}

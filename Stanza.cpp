@@ -338,7 +338,7 @@ void Stanza::mettiMostri(int livello){
 		for(int j=0; j<(dimensione-1) && nMaxMostri>0; j++){
 			if (matrice[i][j]==-1){
 				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
-				int den=(170-MAXDIM)+dimensione;
+				int den=(150-MAXDIM)+dimensione;
 				int r=rand()%den;
 				if (r==0){
                     int razza=(int)rand()%3;
@@ -407,7 +407,7 @@ void Stanza::mettiVenditori(int livello){
 			if (matrice[i][j]==-2 && matrice[i-1][j-1]!=2 && matrice[i-1][j+1]!=2 &&
 				matrice[i][j-2]!=2 && matrice[i][j-1]!=2 && matrice[i-1][j]!=2 && matrice[i-2][j]!=2){
 				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
-				int den=1500/((livello/20.0)+2);
+				int den=1400/((livello/20.0)+2);
 				int r=rand()%den;
 				if (r==0){
 					matrice[i][j]=2;

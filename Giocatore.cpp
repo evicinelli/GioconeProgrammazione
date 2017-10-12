@@ -168,9 +168,3 @@ int Giocatore::usaPozione()
     }
     return recuperato;
 }
-
-void Giocatore::vendiPot(int prezzo)
-{
-	oro+=prezzo;
-	pot--;
-}

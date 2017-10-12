@@ -1,8 +1,8 @@
 -Suddivisione:
-Stefano Bucciarelli:
+Stefano Bucciarelli: Controller, Riempimento Stanze, Grafica
 Giulia Giusti: Livello, Collegamento, Generatore Livelli, Gestore Livelli.
-Matteo Trentin:
-Emanuele Viccinelli:
+Matteo Trentin: 
+Emanuele Vicinelli:Movimento e IA mostri, Gestore turni, Inserimento muri
 
 -Spiegazione regole del gioco: --> Matteo
 

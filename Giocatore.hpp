@@ -30,7 +30,6 @@ class Giocatore : public Personaggio
 		void vendiArma(int pos);			//vende una delle armi a un venditore
         int libInventario();				//restituisce la prima posizione libera di inventario, -1 se è piena
         int usaPozione();					//usa una pozione e ritorna il numero di hp recuperati
-        void vendiPot(int prezzo);			//vendi la pozione al venditore
 
 };
 

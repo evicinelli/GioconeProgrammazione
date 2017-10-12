@@ -88,7 +88,7 @@ void Drawer::quitVictory()
 	startx=centerx-(MAXDIM+24);
 	this->win7 = creaWin(ytot,xtot,starty,startx);
 
-	wattron(win7,COLOR_PAIR(10));
+	wattron(win7,	(10));
 	mvwprintw(win7,centery-2,centerx-5,"HAI VINTO!");
 	mvwprintw(win7,centery+2,centerx-12,"Premi ESC o X per uscire");
 	wattroff(win7,COLOR_PAIR(10));
@@ -392,9 +392,7 @@ void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){
 }
 
 void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
-
-	//resize_term(37, 150);
-
+	
     int centerx, centery, x, y; //coordinate centro terminale
 
     //viene rilevato il centro del terminale
@@ -436,7 +434,7 @@ void Drawer::posizionaMostro(Stanza* s, Mostro* m, bool chasing, bool isAttacked
 	posy=(int)inizio+1+m->getPosY();
 	posx=(int)(2*(inizio+m->getPosX()))+1;
 	char buf[3];
-	buf[0]=m->getId(); buf[1]=' '; buf[2]='\0';             //in questo modo stampo sia l'id del mostro, sia lo spazio
+	buf[0]=m->getId(); buf[1]=' '; buf[2]='\0'; //in questo modo stampo sia l'id del mostro, sia lo spazio
 	if (isAttacked) buf[0]='X';
 	if (chasing) {
 		wattron(win, COLOR_PAIR(10));
