@@ -29,8 +29,8 @@ int Stanza::getLibero(){
 	return libero;
 }
 Venditore* Stanza::getVenditoreByPos(int y, int x){
-	Venditore* tmp; 
-	
+	Venditore* tmp;
+
 	for (int i=0; i<(2-nMaxVenditori); i++){
 		if (v[i]->getPosX()==x && v[i]->getPosY()==y){
 			tmp=v[i];
@@ -312,7 +312,7 @@ void Stanza::riempiMuri(int x, int y)
 bool Stanza::isVendBloccato(int y, int x){
 	bool cond=false;
 	if (matrice[y][x]==2){
-		cond= ((matrice[y-1][x]==0 || matrice[y-1][x]==-2) && 
+		cond= ((matrice[y-1][x]==0 || matrice[y-1][x]==-2) &&
 				(matrice[y+1][x]==0 || matrice[y+1][x]==-2) &&
 				(matrice[y][x+1]==0 || matrice[y][x+1]==-2) &&
 				(matrice[y][x-1]==0 || matrice[y][x-1]==-2));
@@ -404,7 +404,7 @@ void Stanza::mettiVenditori(int livello){
 	int nVend=0;
 	for(int i=0; i<(dimensione-1); i++){
 		for(int j=0; j<(dimensione-1) && nMaxVenditori>0; j++){
-			if (matrice[i][j]==-2 && matrice[i-1][j-1]!=2 && matrice[i-1][j+1]!=2 && 
+			if (matrice[i][j]==-2 && matrice[i-1][j-1]!=2 && matrice[i-1][j+1]!=2 &&
 				matrice[i][j-2]!=2 && matrice[i][j-1]!=2 && matrice[i-1][j]!=2 && matrice[i-2][j]!=2){
 				//denominatore dellla funzione di probabilità che appaia un mostro in una casella
 				int den=1500/((livello/20.0)+2);
@@ -459,7 +459,7 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
                      presenti i collegamenti, in qualsiasi riquadro del lato corrispondente
     */
 
-	
+
     this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
     inizializzaMatrice(this->matrice);
 
@@ -481,7 +481,7 @@ Mostro* Stanza::getMonsterByCoord(int x, int y)
 		bool flag=false;
 		for (i=0;i<getHowManyMonsters() && !flag;i++)
 		{
-			if (getMonster(i)->getPosX()==x && getMonster(i)->getPosY()==y)
+			if (getMonster(i)->getPosX()==x && getMonster(i)->getPosY()==y && getMonster(i)->isAlive()==true)
 			{
 				flag=true;
 			}

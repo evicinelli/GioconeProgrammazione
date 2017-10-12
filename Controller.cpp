@@ -52,7 +52,7 @@ int Controller::selClasse()
 			d->disegnaInizio(sel);
 		}
 	}while(c!=(char)10 && c!=(char)KEY_RESIZE); //char 10 = invio
-	
+
 	if (c==(char)KEY_RESIZE) {
 		clear();
 		refresh();
@@ -258,7 +258,7 @@ void Controller::scriviIstruzioni(){
 	do{
 		c=tolower(getch());
 	}while(c!='h' && c!=(char)KEY_RESIZE); //char 10 = invio
-	
+
 	if (c==(char)KEY_RESIZE) {
 		clear();
 		refresh();
@@ -320,7 +320,7 @@ void Controller::scriviInfoMostroAvanzate(Mostro* m)
 	do{
 		c=tolower(getch());
 	}while(c!='i'&& c!=(char)KEY_RESIZE); //char 10 = invio
-	
+
 	if (c==(char)KEY_RESIZE) {
 		clear();
 		refresh();
@@ -480,7 +480,7 @@ void Controller::vendiVenditore(Venditore* v){
 		d->posizionaGiocatore(stanza, p, false);
 	}
 	else compraDaVend(v);
-	
+
 }
 void Controller::compraDaVend(Venditore* v){
 	char msg[20][40], costo[15];

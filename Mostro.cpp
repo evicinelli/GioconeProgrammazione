@@ -77,6 +77,7 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 	int direzione = 0;	/* Direzione in cui devo muovermi */
 	int oldDirezione = 0;	/* Ultima direzione in cui mi sono mosso */
 	int incX, incY;		/* Incrementi di posizione */
+	int counter = 0;	/* Massimo numero di tentativi per trovare una posizione casuale accettabile; evita che il mostro blocchi il gioco nel caso in cui sia circondato da altri mostri */
 
 	do {
 		incX = 0;
@@ -97,9 +98,12 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 				break;
 		}
 		oldDirezione = direzione;
-	} while(m[y + incY][x + incX] != -1 || ((x + incX) == tx && (y + incY) == ty) || ((x + incX) > dimensione) || ((y + incY) > dimensione));
-	this->setPosX(x + incX);
-	this->setPosY(y + incY);
+		counter++;
+	} while((m[y + incY][x + incX] != -1 || ((x + incX) == tx && (y + incY) == ty) || ((x + incX) > dimensione) || ((y + incY) > dimensione)) && counter<500);
+	if (counter<500) {
+		this->setPosX(x + incX);
+		this->setPosY(y + incY);
+	}
 }
 
 void Mostro::insegui(int matrix[24][24], int dimensione)
@@ -191,7 +195,7 @@ void Mostro::buildDMap(int tx, int ty, int m[24][24], int dim)
 
 	/* FILE *f = fopen("log.log", "a"); */
 	std::queue<int> myq;
-	
+
 	for (int i = 0; i < 24 * 24; ++i) {
 		d[i] = IFTY;
 	}
