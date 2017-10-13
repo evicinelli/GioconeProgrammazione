@@ -1,10 +1,10 @@
--Suddivisione:
-Stefano Bucciarelli: Controller, Riempimento Stanze, Grafica
-Giulia Giusti: Livello, Collegamento, Generatore Livelli, Gestore Livelli.
-Emanuele Vicinelli:Movimento e IA mostri, Gestore turni, Inserimento muri
-Matteo Trentin: Regole del gioco, tipi di mostri, statistiche del giocatore, metodi per attacco e morte dei personaggi, armi, associazione degli input alle azioni compiute
+# Suddivisione:
++ Stefano Bucciarelli: Controller, Riempimento Stanze, Grafica
++ Giulia Giusti: Livello, Collegamento, Generatore Livelli, Gestore Livelli.
++ Emanuele Vicinelli:Movimento e IA mostri, Gestore turni, Inserimento muri
++ Matteo Trentin: Regole del gioco, tipi di mostri, statistiche del giocatore, metodi per attacco e morte dei personaggi, armi, associazione degli input alle azioni compiute
 
--Spiegazione regole del gioco: 
+### Spiegazione regole del gioco: 
 
 Il gioco consiste nell'esplorazione di vari livelli, composti da un numero crescente di stanze, che possono contenere nemici, muri, forzieri e venditori. La forza dei nemici, e di conseguenza la difficoltà del gioco, cresce in proporzione al livello in cui ci si trova.
 I parametri del giocatore, così come quelli dei nemici, sono espressi sotto forma di quattro statistiche (forza, destrezza,costituzione, fortuna) e influenzano vari aspetti del gioco; forza e destrezza vengono utilizzate nel calcolo dei danni e nell'interazione con le armi, la costituzione aumenta i punti vita del personaggio e la fortuna aumenta l'oro e l'esperienza ricevuti, così come i danni inflitti e la possibilità che un nemico lasci cadere l'arma che sta utilizzando quando viene sconfitto.
@@ -19,6 +19,34 @@ Il gioco termina con la sconfitta del giocatore, ovvero quando i suoi punti vita
 
 
 
--Implementazione turni: --> Vicci
+### Implementazione turni:
+Il gioco, nel suo livello più esterno, consiste in un solo oggetto, che si occupa della gestione dei
+turni. Alla creazione dell'oggetto vengono inizializzati al suo interno anche tutti gli oggetti
+accessori di cui il gioco ha bisogno per funzionare: il controller (che si preoccupa di gestire
+l'input e chiamare i metodi per disegnare il gioco), il giocatore, e il gestore dei livelli (che
+crea i vari livelli e gestisce il passaggio dall'uno all'altro). Successivamente a questo viene
+chiamato il metodo play(), che è il ciclo principale del gioco. Fino a che si verificano le
+condizioni che servono per proseguire il gioco (ovvero il giocatore non è stato nè sconfitto, nè ha
+vinto) si alternano la sequenza di metodi necessaria a far giocare il giocatore o il mostro. Si
+passa dal turno del giocatore a quello del mostro nel momento in cui il primo ha esaurito i suoi
+punzi azione (cosa che viene controllata all'inizio di ogni iterazione del ciclo principale).
+Simmetricamente, succede altrettanto nel turno del mostro.
 
--Grafica: --> Buccia
+### Mostri: il movimento
+Quando il turno passa ai mostri, ognuno di questi compie esattamente le stesse azioni. Per prima
+cosa viene creata internamente al mostro una rappresentazione della matrice della stanza, che in
+ogni casella ha un numero che simboleggia il numero di passi necessari per raggiungere il giocatore
+da quella casella. Possono verificarsi poi tre situazioni distinte:
+1. Il giocatore si trova nel range entro il quale il mostro ecide di inseguirlo (trovando la strada verso di lui seguendo la mappa che raprresenta la stanza),
+2. Il mostro si trova davanti al giocatore stesso (nel qual caso lo attacca direttamente) 
+3. Il mostro si trova lontano dal giocatore. In questo caso, si muove a caso in una delle quattro
+direzioni concesse
+
+### Generazione dei muri
+L'idea usata per generare i muri è semplicemente quella di partire dalla posizione di uno spot della
+matrice (del tipo <x,y>), e manipolarlo in modo tale da ottenere un rumore che oscilla tra 0 e 2.
+Nel caso il rumore venga maggiore o uguale a 1.2 per una particolare casella, quella verrà candidata
+ad essere muro. Successivamente tutte le caselle irraggiungibili verranno trasformate in muri.
+
+
+### Grafica: --> Buccia
