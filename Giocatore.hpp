@@ -1,7 +1,7 @@
 #ifndef GIOCATORE_HPP_INCLUDED
 #define GIOCATORE_HPP_INCLUDED
 #define MAX_ITEM 3
-#define MAX_CLASSES 3
+#define MAX_CLASSES 4
 #include "Personaggio.hpp"
 #include "Giocatore.hpp"
 
