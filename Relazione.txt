@@ -1,5 +1,5 @@
 -Suddivisione:
-Stefano Bucciarelli: Controller, Riempimento Stanze, Grafica
+Stefano Bucciarelli: Controller, Gestione input,  Riempimento Stanze, Grafica 
 Giulia Giusti: Livello, Collegamento, Generatore Livelli, Gestore Livelli.
 Emanuele Vicinelli:Movimento e IA mostri, Gestore turni, Inserimento muri
 Matteo Trentin: Regole del gioco, tipi di mostri, statistiche del giocatore, metodi per attacco e morte dei personaggi, armi, associazione degli input alle azioni compiute
