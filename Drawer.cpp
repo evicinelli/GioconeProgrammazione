@@ -7,6 +7,15 @@ Drawer::Drawer(){
 
 }
 
+void Drawer::preparaScr(){
+	initscr();
+	raw();
+	noecho();
+	refresh();
+	start_color();
+	keypad(stdscr, true);	
+}
+
 WINDOW* Drawer::creaWin(int height, int width, int starty, int startx){
 	WINDOW* win = newwin(height, width, starty, startx);
 	box(win, 0 , 0);
@@ -415,8 +424,8 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	disegnaStat(g);
 	disegnaEquip(g);
 	disegnaLiv(l);
-	g->setPosX(s->getLibero());
-	g->setPosY(s->getDimensione()-2);
+	/*g->setPosX(s->getLibero());
+	g->setPosY(s->getDimensione()-2);*/
 	posizionaGiocatore(s, g, false);
 	char msg[100];
 	sprintf (msg, "Iniziamo il gioco, clicca un pulsante");
