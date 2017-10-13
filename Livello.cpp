@@ -134,9 +134,11 @@ void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){
 Stanza* Livello::getPointerToStanza(int id){
     return &(vettStanze[id]);
 }
+
 void Livello::visitStanza(int id){
 	vettStanze[id].visit();
 }
+
 Collegamento* Livello:: getVettColl(){
     return this->vettColl;
 };

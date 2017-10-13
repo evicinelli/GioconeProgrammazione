@@ -832,12 +832,7 @@ void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m, bool is
 
 void Controller::init()
 {
-   	initscr();
-	raw();
-	noecho();
-	refresh();
-	start_color();
-	keypad(stdscr, true);
+	d->preparaScr();
 	p->classChosen(selClasse());
 	d->disegna(p, gestore.getInizio(), stanza);
 }

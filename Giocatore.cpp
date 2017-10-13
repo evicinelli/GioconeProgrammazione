@@ -22,9 +22,9 @@ void Giocatore::classChosen(int sel)
 			equip=Arma(1,"spada");
 		break;
 		case 1:
-			str=14;
+			str=16;
 			dex=4;
-			con=16;
+			con=18;
 			luck=2;
 			pot=5;
 			equip=Arma(1,"mazza");
@@ -36,6 +36,41 @@ void Giocatore::classChosen(int sel)
 			luck=14;
 			pot=7;
 			equip=Arma(1,"pugnale");
+		break;
+		case 3:
+		{
+			str=4;
+			dex=4;
+			con=4;
+			luck=2;
+			pot=2;
+			int total=39;
+			int attr;
+			while (total>0)
+			{
+				attr=(int)rand()%5;
+				switch(attr)
+				{
+					case 0: str++;
+					break;
+					case 1: dex++;
+					break;
+					case 2: con++;
+					break;
+					case 3: luck++;
+					break;
+					case 4: pot++;
+					break;
+				}
+				total--;
+			}
+			if (attr>2)
+				equip=Arma(1,"mazza");
+			else if (attr<2)
+				equip=Arma(1,"pugnale");
+			else
+				equip=Arma(1,"spada");
+		}
 		break;
 
 	}
@@ -103,7 +138,7 @@ void Giocatore::levelup(int stat)
     hp=hpmax;
     lev++;
     exp=exp-nextLevExp;
-    nextLevExp=nextLevExp*lev;
+    nextLevExp=80+(int)(nextLevExp*lev*0.5);
 }
 
 int Giocatore::cambioArma(int pos)

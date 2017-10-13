@@ -139,10 +139,10 @@ int Personaggio::attacca(Personaggio *p)
 	int dannoTot=-1;
     if(actAttacca())
     {
-        int dannoArma=(int) (equip.getMin()+									//danno minimo inflitto
-							(equip.getMax()-equip.getMin())						//danno massimo aggiuntivo inflitto (max-min)
-							*((double)rand()/RAND_MAX));						//fattore casuale di danno inflitto
-        dannoTot=dannoArma+(equip.getStrMult()*str)+(equip.getDexMult()*dex);	//applicazione dei moltiplicatori di forza e destrezza
+        int dannoArma=(int) (equip.getMin()+																	//danno minimo inflitto
+							(equip.getMax()-equip.getMin())														//danno massimo aggiuntivo inflitto (max-min)
+							*((double)rand()/RAND_MAX));														//fattore casuale di danno inflitto
+        dannoTot=dannoArma+(int)(equip.getStrMult()*str)+(int)(equip.getDexMult()*dex)+(int)(luck*0.4);			//applicazione dei moltiplicatori di forza e destrezza, insieme alla fortuna
         int currHp=p->getHp();
         p->setHp(currHp-dannoTot);
     }

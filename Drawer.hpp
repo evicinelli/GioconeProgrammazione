@@ -24,6 +24,9 @@ class Drawer{
 
 		Drawer();
 
+		//chiama le funzioni di libreria necessarie per disegnare
+		void preparaScr();
+		
 		//disegna la schermata iniziale con selezione della classe
 		void disegnaInizio(int sel);
 

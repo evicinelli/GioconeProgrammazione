@@ -53,9 +53,9 @@ void GestoreTurni::play()
 					ctrl->updateMonsterCoordinates(oY, oX, m, false);
                 }
             }
-            player->setAct(5);
+            player->setAct(AZIONE);
             for (int i = 0; i < mCounter; ++i) {
-                ctrl->getCurrentRoom()->getMonster(i)->setAct(5);
+                ctrl->getCurrentRoom()->getMonster(i)->setAct(AZIONE);
             }
 
             //scarta gli input precedenti, in modo da evitare la memorizzazione dei tasti premuti durante il turno del mostro

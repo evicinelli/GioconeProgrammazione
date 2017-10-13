@@ -7,6 +7,15 @@ Drawer::Drawer(){
 
 }
 
+void Drawer::preparaScr(){
+	initscr();
+	raw();
+	noecho();
+	refresh();
+	start_color();
+	keypad(stdscr, true);
+}
+
 WINDOW* Drawer::creaWin(int height, int width, int starty, int startx){
 	WINDOW* win = newwin(height, width, starty, startx);
 	box(win, 0 , 0);
@@ -39,11 +48,13 @@ void Drawer::disegnaInizio(int sel)
 	sprintf(desc[0], "Attributi bilanciati. Inizia con 5 pozioni.");
 	sprintf(desc[1], "Alti valori di forza e costituzione, poca destrezza e fortuna. Inizia con 5 pozioni.");
 	sprintf(desc[2], "Alti valori di destrezza e fortuna, poca forza e costituzione. Inizia con 7 pozioni.");
+	sprintf(desc[3], "Attributi generati casualmente. Inizia con almeno 2 pozioni.");
 	sprintf(msg[0],"Seleziona classe iniziale");
 	sprintf(msg[1],"INVIO per selezionare");
 	sprintf(msg[2],"Guerriero");
 	sprintf(msg[3],"Barbaro");
 	sprintf(msg[4],"Ladro");
+	sprintf(msg[5],"Avventuriero");
 
 	wattron(win0, COLOR_PAIR(1));
 	wprintw(win0, "%s", msg[0]); //titolo
@@ -52,7 +63,7 @@ void Drawer::disegnaInizio(int sel)
 	wprintw(win0, "%s", msg[1]); //consegna
 
 	for (int i=2; i<MAX_CLASSES+2; i++){
-		wmove(win0, 8+i*2, centerx-6);
+		wmove(win0, 6+i*2, centerx-6);
 		wmove(win01, 2, 2);
 		//se è selezionato è giallo
 		if (i==sel){
@@ -392,7 +403,7 @@ void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){
 }
 
 void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
-	
+
     int centerx, centery, x, y; //coordinate centro terminale
 
     //viene rilevato il centro del terminale
@@ -415,8 +426,8 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	disegnaStat(g);
 	disegnaEquip(g);
 	disegnaLiv(l);
-	g->setPosX(s->getLibero());
-	g->setPosY(s->getDimensione()-2);
+	/*g->setPosX(s->getLibero());
+	g->setPosY(s->getDimensione()-2);*/
 	posizionaGiocatore(s, g, false);
 	char msg[100];
 	sprintf (msg, "Iniziamo il gioco, clicca un pulsante");

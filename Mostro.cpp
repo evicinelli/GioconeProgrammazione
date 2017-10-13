@@ -128,7 +128,7 @@ void Mostro::morte(Giocatore *g)
 	double prob=100*((double)rand()/RAND_MAX);
 	int gold=lev*15+(int)(g->getLuck()*3.5);
 	double drop=equip.getDropRate()+(0.2*g->getLuck());
-	int expGain=lev*30+g->getLuck()*8+(con+dex+str)*2;
+	int expGain=(20+lev*60+(con+dex+str)*2)*(int)(1+g->getLuck()*0.15);
 	g->addOro(gold);
 	g->addExp(expGain);
 	if (prob<=drop)
