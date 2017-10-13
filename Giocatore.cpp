@@ -103,7 +103,7 @@ void Giocatore::levelup(int stat)
     hp=hpmax;
     lev++;
     exp=exp-nextLevExp;
-    nextLevExp=nextLevExp*lev;
+    nextLevExp=80+(int)(nextLevExp*lev*0.5);
 }
 
 int Giocatore::cambioArma(int pos)
