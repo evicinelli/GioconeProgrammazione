@@ -8,7 +8,6 @@ Venditore::Venditore(int level, int y, int x)
 	posx=x;
 	posy=y;
     costopot=30+(int)(0.5*level);
-    //srand(time(0));
     riempi(0,level);
     riempi(1,level);
     riempi(2,level);

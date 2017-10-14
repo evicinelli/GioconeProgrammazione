@@ -13,7 +13,7 @@ void Giocatore::classChosen(int sel)
 {
 	switch(sel)
 	{
-		case 0:
+		case 0:						//Guerriero
 			str=10;
 			dex=10;
 			con=12;
@@ -21,7 +21,7 @@ void Giocatore::classChosen(int sel)
 			pot=5;
 			equip=Arma(1,"spada");
 		break;
-		case 1:
+		case 1:						//Barbaro
 			str=16;
 			dex=4;
 			con=18;
@@ -29,7 +29,7 @@ void Giocatore::classChosen(int sel)
 			pot=5;
 			equip=Arma(1,"mazza");
 		break;
-		case 2:
+		case 2:						//Ladro
 			str=4;
 			dex=18;
 			con=8;
@@ -37,7 +37,7 @@ void Giocatore::classChosen(int sel)
 			pot=7;
 			equip=Arma(1,"pugnale");
 		break;
-		case 3:
+		case 3:						//Avventuriero
 		{
 			str=4;
 			dex=4;

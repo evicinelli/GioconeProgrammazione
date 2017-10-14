@@ -22,7 +22,7 @@ void Controller::endGame(int v){
 		d->quitVictory();
 	}
 
-	while(c!=(char)'x' && c!=27 && c!=(char)KEY_RESIZE)
+	while(c!=(char)'x' && c!=27 && c!=(char)KEY_RESIZE)		//char 27 = ESC
 	{
 		c=tolower(getch());
 	}
@@ -669,7 +669,6 @@ void Controller::gestisciInput(char c){
 			else
 				printMsg("Non sei vicino a un baule");
         break;
-        //RACCOGLIERE OGGETTI LASCIATI DAL MOSTRO
 
         //USA POZIONE           (P)
         case((char)('p')):

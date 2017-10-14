@@ -2,6 +2,8 @@
 # include <queue>
 # define IFTY 580
 
+//a seconda della razza si ha un diverso range di attributi, che crescono comunque con il livello
+
 Mostro::Mostro(int level, std::string race)
 {
 	alive = true;
@@ -11,7 +13,7 @@ Mostro::Mostro(int level, std::string race)
 	if (race=="bandito")
 	{
 		id='R';
-		n=0.75*((double)rand()/RAND_MAX)+1;
+		n=0.75*((double)rand()/RAND_MAX)+1;		// n = 0.75*(valore casuale da 0 a 1)+1
 		str=(int)(lev+n*lev);
 		n=1.5*((double)rand()/RAND_MAX)+1;
 		dex=(int)(lev+n*lev);
@@ -78,12 +80,12 @@ void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)
 	int oldDirezione = 0;	/* Ultima direzione in cui mi sono mosso */
 	int incX, incY;		/* Incrementi di posizione */
 	int counter = 0;	/* Massimo numero di tentativi per trovare una posizione casuale accettabile; evita che il mostro blocchi il gioco nel caso in cui sia circondato da altri mostri */
-	
+
 	/* Scelgo una direzione, calcolo l'incremento lungo quella direzione e poi setto la
 	 * posizione. Ripeto tutto fino a che:
 	 * 1) Capito su una posizione che non sia strada
 	 * 2) Capito sul giocatore
-	 * 3) Capito fuori dalla matrice 
+	 * 3) Capito fuori dalla matrice
 	 * 4) Il numero delle iterazioni < 500 (evita ciclo infinito se il mostro si trova bloccato in
 	 * tutte e 4 le direzioni)*/
 	do {
@@ -128,7 +130,7 @@ void Mostro::insegui(int matrix[24][24], int dimensione)
 	/* Decido lo spot minimoi (con valore minimo, ovvero il più conveniente) tra quelli che circondano il mostro e quello su cui si trova il
 	 * mostro stesso */
 	spot* move_to = _min(min(up, down, left, right), mSpot);
-	
+
 	/* Mi sposto in quello spot */
 	this->setPosY(move_to->r);
 	this->setPosX(move_to->c);
@@ -205,7 +207,7 @@ bool Mostro::isChasing()
 }
 
 
-/* Costruisce la mappa di Dijkstra a partire dal giocatore. Vedere 
+/* Costruisce la mappa di Dijkstra a partire dal giocatore. Vedere
 http://www.roguebasin.com/index.php?title=Dijkstra_Maps_Visualized  per dettagli sulle mappe.
 L'idea è quella di costruire una coda e un array delle distanze. Si inizializza l'array a INFINITY,
 e si mette in coda la casella di partenza (quella dove si trova il giocatore). La sua distanza
@@ -217,7 +219,7 @@ void Mostro::buildDMap(int tx, int ty, int m[24][24], int dim)
 {
 
 	std::queue<int> myq;
-	
+
 	/* Inizializzo a IFTY il vettore. IFTY > MAXDIM*MAXDIM, perchè siamo sicuri che nessuna
 	 * casella sarà distante più di MAXDIM^2 dalla casella origine */
 	for (int i = 0; i < 24 * 24; ++i) {

@@ -4,6 +4,8 @@ Arma::Arma()
 {
     disponibile=false;
 }
+
+// generazione casuale degli attributi dell'arma; si ha una separazione (possibile) maggiore tra danno minimo e massimo nei diversi tipi di arma (nell'ordine, pugnali>spade>mazze)
 Arma::Arma(int lev, std::string type)
 {
     int n=0;
