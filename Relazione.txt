@@ -32,4 +32,13 @@ L'idea usata per generare i muri è semplicemente quella di partire dalla posizi
 matrice (del tipo <x,y>), e manipolarlo in modo tale da ottenere un rumore che oscilla tra 0 e 2. Nel caso il rumore venga maggiore o uguale a 1.2 per una particolare casella, quella verrà candidata ad essere muro. Successivamente tutte le caselle irraggiungibili verranno trasformate in muri.
 
 
-### Grafica: --> Buccia
+
+### Riempimento Stanza
+Quando viene popolato il livello, vengono create e riempite le stanze di tale livello. Queste sono stanze quadrate che possono contenere muri, mostri, bauli, venditori e porte. Come prima cosa durante il riempimento, viene settata randomicamente la dimensione della stanza, che rientra in un range già stabilito, successivamente si procede con il posizionamento degli oggetti e dei personaggi. 
+Anche gli oggetti sono casualmente disposti, infatti ognuno di essi ha una sua caratteristica funzione di probabilità, che in base ad alcuni parametri (ad esempio il livello corrente o la dimensione della stanza) stabilisce con quanta facilità esso si potrà trovare trovare in una posizione della stanza. 
+Inoltre bisogna tenere conto di alcuni accorgimenti, in primo luogo bisogna che in ogni stanza tutte le porte siano raggiungibili dal giocatore. Quindi viene creata una strada (sempre casuale) che riesca a collegare tutte le porte della stanza, nella quale muri e venditori non possono essere messi, evitando così di bloccare il percorso del giocatore. Una volta riempita la stanza questa via non sarà riconoscibile all'utente, ma gli permetterà di proseguire il gioco raggiungendo (ipoteticamente) qualunque stanza lui desideri.
+Bisogna anche evitare che si creino linee chiuse di muri, questo perchè all'interno potrebbero apparire oggetti o personaggi che il giocatore non riuscirebbe mai a raggiungere. Per fare ciò vengono contrassegnate le caselle che il giocatore può raggiungere nella stanza, e tutte le altre, che saranno appunto le caselle interne ai muri, verranno trasformate in muri.
+
+### Controller
+Il controller è l'oggetto che fa da intermediaro tra il drawer (l'oggetto che si preoccupa della grafica) e le strutture dati che determinano la dinamica del gioco. Inoltre il controller è l'oggetto che gestisce l'input, quindi colui che riceve direttamente le istruzioni dall'utente. Il suo funzionamento è il seguente: si mette in ascolto e appena l'utente compie un'azione (preme un tasto) lui la riconosce, la interpreta, effettua i necessari cambiamenti agli oggetti con i quali interagisce e poi comanda al drawer di rappresentare la modifica appena compiuta.
+Esempio: Se l'utente preme 'K', il controller riconosce che è il comando per l'attacco, quindi prima controlla se l'utente ha selezionato un mostro vicino e se ha abbastanza punti azione, poi riduce l'hp del mostro e i punti azione del giocatore, poi dice al Drawer di rappresentare graficamente l'animazione e il messaggio dell'attacco avvenuto. 
