@@ -357,7 +357,6 @@ void Stanza::mettiMostri(int livello){
                     }
                     monsters[mCounter]->setPosX(j);
                     monsters[mCounter]->setPosY(i);
-                    printf("%d - %p\n", mCounter, monsters[mCounter]);
 					nMaxMostri--;
                     mCounter++;
 				}
