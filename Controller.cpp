@@ -382,7 +382,7 @@ void Controller::scegliArma(bool opt){ //opt=1 cambio arma, opt=0 scarta arma
 	//conta quante stringhe ci sono
 	for (int i=0; i<MAX_ITEM; i++){
 		if (p->getInv(i).isAvailable()){
-			sprintf (msg[nStringhe+1], p->getInv(i).getNome().c_str());
+			sprintf (msg[nStringhe+1], "%s",p->getInv(i).getNome().c_str());
 			nStringhe++;
 		}
 	}
@@ -437,7 +437,7 @@ void Controller::vendiVenditore(Venditore* v){
 	//conta quante stringhe ci sono
 	for (int i=0; i<MAX_ITEM; i++){
 		if ( p->getInv(i).isAvailable()){
-			sprintf (msg[nStringhe+1], p->getInv(i).getNome().c_str());
+			sprintf (msg[nStringhe+1],"%s", p->getInv(i).getNome().c_str());
 			sprintf (costo, "\t%d oro",  p->getInv(i).getPrezzo());
 			strcat (msg[nStringhe+1], costo);
 			nStringhe++;
@@ -478,7 +478,7 @@ void Controller::compraDaVend(Venditore* v){
 	//conta quante stringhe ci sono
 	for (int i=0; i<MAX_ITEM; i++){
 		if (v->getVendita(i).isAvailable()){
-			sprintf (msg[nStringhe+1], v->getVendita(i).getNome().c_str());
+			sprintf (msg[nStringhe+1], "%s",v->getVendita(i).getNome().c_str());
 			sprintf (costo, "\t%d oro", v->getVendita(i).getPrezzo());
 			strcat (msg[nStringhe+1], costo);
 			nStringhe++;
@@ -807,7 +807,7 @@ bool Controller::hasGameEnded()
 void Controller::printMsg(const char* s)
 {
     char msg[100];
-    sprintf(msg, s);
+    sprintf(msg, "%s", s);
     d->disegnaMess(msg);
 }
 
