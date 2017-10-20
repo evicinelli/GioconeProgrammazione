@@ -1,4 +1,4 @@
-#include "Stanza.hpp"
+#include "../modules/Stanza.hpp"
 #include "Livello.hpp"
 #include "Collegamento.hpp"
 #include <iostream>

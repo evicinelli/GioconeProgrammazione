@@ -1,10 +1,10 @@
 #include <iostream>
 #include <ncurses.h>
-#include "Stanza.hpp"
-#include "Giocatore.hpp"
-#include "Arma.hpp"
-#include "Livello.hpp"
-#include "Mostro.hpp"
+#include "../modules/Stanza.hpp"
+#include "../modules/Giocatore.hpp"
+#include "../modules/Arma.hpp"
+#include "../model/Livello.hpp"
+#include "../modules/Mostro.hpp"
 #include <string>
 
 using namespace std;

@@ -1,4 +1,4 @@
-#include "Stanza.hpp"
+#include "../modules/Stanza.hpp"
 #include "Collegamento.hpp"
 #include <stdlib.h> //per malloc
 #include <iostream>

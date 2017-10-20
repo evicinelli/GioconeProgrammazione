@@ -1,8 +1,8 @@
-#include "GestoreLivelli.hpp"
-#include "Giocatore.hpp"
-#include "Drawer.hpp"
-#include "Mostro.hpp"
-#include "Forziere.hpp"
+#include "../model/GestoreLivelli.hpp"
+#include "../modules/Giocatore.hpp"
+#include "../view/Drawer.hpp"
+#include "../modules/Mostro.hpp"
+#include "../modules/Forziere.hpp"
 #include <unistd.h>
 #include <string.h>
 

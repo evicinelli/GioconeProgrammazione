@@ -1,7 +1,7 @@
 #include <time.h>       /* time */
 #include "GeneratoreLivelli.hpp"
 #include "GestoreLivelli.hpp"
-#include "Controller.hpp"
+#include "../controller/Controller.hpp"
 #include <string.h>
 # define MONSTERS 6
 # define LEV_VICTORY 100

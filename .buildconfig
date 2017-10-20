@@ -1,8 +1,0 @@
-[default]
-name=Default
-device=local
-runtime=host
-config-opts=
-prefix=
-app-id=
-default=true

@@ -1,5 +1,5 @@
 # include "Stanza.hpp"
-# include "NoiseGenerator.hpp"
+# include "../utils/NoiseGenerator.hpp"
 # define WALL_TRESHOLD 1.2
 
 Stanza::Stanza ()
