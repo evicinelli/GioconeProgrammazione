@@ -459,20 +459,91 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
     */
 
 
-    this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
-    inizializzaMatrice(this->matrice);
+	int r = rand()%5000;
+	if (r==42){
+		this->dimensione=MAXDIM;
+    		inizializzaMatrice(this->matrice);
+		mettiMuriContorno();
+		mettiPorte(coll);
+		vaiBoban(nLiv);
+	}
+	else{
+	    	this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
+    		inizializzaMatrice(this->matrice);
 
-	mettiMuriContorno();
-	mettiPorte(coll);
-	inserisciVia();
-	mettiMuri();
-    mettiVenditori(nLiv); //i venditori non possono stare sulla via
-    riempiMuri(libero, dimensione-2);
-    trasformaInterni();
-	liberaPorte();
-    mettiMostri(nLiv);
-    mettiBauli(nLiv);
-    normalizza();
+		mettiMuriContorno();
+		mettiPorte(coll);
+		inserisciVia();
+		mettiMuri();
+		mettiVenditori(nLiv); //i venditori non possono stare sulla via
+		riempiMuri(libero, dimensione-2);
+		trasformaInterni();
+		liberaPorte();
+		mettiMostri(nLiv);
+		mettiBauli(nLiv);
+		normalizza();
+	}
+}
+void Stanza::vaiBoban(int livello){
+	int center=dimensione/2;
+	libero=1;
+	riempiMuri(libero, dimensione-2);
+	int riga=center-8;
+	for (int i=0; i<5; i++) this->matrice[riga][center-2+i]=3;
+	riga++;
+	for (int i=0; i<9; i++) this->matrice[riga][center-4+i]=3;
+	riga++;
+	for (int i=0; i<11; i++) this->matrice[riga][center-5+i]=3;
+	riga++;
+	for (int i=0; i<13; i++) this->matrice[riga][center-6+i]=3;
+	riga++;
+	for (int i=0; i<15; i++) this->matrice[riga][center-7+i]=3;
+	riga++;
+	for (int i=0; i<15; i++) this->matrice[riga][center-7+i]=3;
+	this->matrice[riga][center]=-1;
+	this->matrice[riga][center-2]=-1;
+	this->matrice[riga][center+2]=-1;
+	riga++;
+	for (int i=0; i<15; i++) this->matrice[riga][center-7+i]=3;
+	this->matrice[riga][center-1]=-1;
+	this->matrice[riga][center+1]=-1;
+	this->matrice[riga][center-2]=-1;
+	this->matrice[riga][center+2]=-1;
+	riga++;
+	for (int i=0; i<15; i++) this->matrice[riga][center-7+i]=3;
+	this->matrice[riga][center-1]=-1;
+	this->matrice[riga][center+1]=-1;
+	riga++;
+	for (int i=0; i<13; i++) this->matrice[riga][center-6+i]=3;
+	this->matrice[riga][center-1]=-1;
+	this->matrice[riga][center+1]=-1;
+	riga++;
+	for (int i=0; i<11; i++) this->matrice[riga][center-5+i]=3;
+	this->matrice[riga][center-1]=-1;
+	this->matrice[riga][center+1]=-1;
+	riga++;
+	for (int i=0; i<9; i++) this->matrice[riga][center-4+i]=3;
+	riga++;
+	for (int i=0; i<7; i++) this->matrice[riga][center-3+i]=3;
+	riga++;
+	for (int i=0; i<5; i++) this->matrice[riga][center-2+i]=3;
+	this->matrice[riga][center-1]=-1;
+	this->matrice[riga][center]=-1;
+	this->matrice[riga][center+1]=-1;
+	riga++;
+	for (int i=0; i<5; i++) this->matrice[riga][center-2+i]=3;
+	riga++;
+	for (int i=0; i<5; i++) this->matrice[riga][center-2+i]=3;
+	this->matrice[riga][center-1]=-1;
+	this->matrice[riga][center]=-1;
+	this->matrice[riga][center+1]=-1;
+	riga++;
+	for (int i=0; i<5; i++) this->matrice[riga][center-2+i]=3;
+	riga++;
+	this->matrice[riga][center]=2;
+	v[0]=new Venditore(livello, riga, center);
+	nMaxVenditori--;
+
 }
 Mostro* Stanza::getMonsterByCoord(int x, int y)
 {

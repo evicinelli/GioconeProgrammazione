@@ -114,7 +114,7 @@ private:
 
 	//true se in x e y c'è un venditore circondato da muri
 	bool isVendBloccato(int y, int x);
-	
+
 	//trasforma i -2 (punti interni) in 0 (muri)
     void trasformaInterni();
 
@@ -136,6 +136,8 @@ private:
     //Trasforma tutti i -3 (strada dovuta a liberaPorte) a -1 (vuoto)
     void normalizza();
     
+    //chissà cosa farà?
+    void vaiBoban(int livello);
     
 };
 
