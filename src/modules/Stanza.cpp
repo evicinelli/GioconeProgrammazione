@@ -9,9 +9,8 @@ Stanza::Stanza ()
     this->nMaxMostri=6;
     this->nMaxBauli=2;
     this->nMaxVenditori=2;
-    this->nMaxMuri=0;
     this->visited=false;
-    //inzialmente non ci sono porte
+    //inizialmente non ci sono porte
     for (int i=0; i<4; i++)
 		this->porte[i]=-1;
 }
@@ -212,22 +211,22 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
         while((prec-direzione)==2 || (prec-direzione)==-2 || (direzione-type)==3);
 
         //se riesco mi sposto nella direzione
-        if (direzione==1 && posx<dimensione-2)
+        if (direzione==1 && posx<dimensione-2) //EST
         {
             prec=direzione;
             posx++;
         }
-        else if (direzione==2 && posy<dimensione-2)
+        else if (direzione==2 && posy<dimensione-2) //SUD
         {
             prec=direzione;
             posy++;
         }
-        else if (direzione==3 && posx>1)
+        else if (direzione==3 && posx>1) //OVEST
         {
             prec=direzione;
             posx--;
         }
-        else if (direzione==4 && posy>1)
+        else if (direzione==4 && posy>1) //NORD
         {
             prec=direzione;
             posy--;
@@ -267,7 +266,7 @@ void Stanza::link(int partenza, int arrivo, bool type)  //type=0:2->3, type=1:0-
 void Stanza::inserisciVia()
 {
     int partenza[2], arrivo[2];
-    //partenza e arrivo contengono la coordinata variabile della porta di partenza e d arrivo
+    //partenza e arrivo contengono la coordinata variabile della porta di partenza e di arrivo
     for (int i=0; i<=2; i+=2)
     {
 		//se la porta esiste bene, altrimenti me la invento
@@ -458,19 +457,17 @@ void Stanza::riempiMatrice(int nLiv, int coll [4]){
                      presenti i collegamenti, in qualsiasi riquadro del lato corrispondente
     */
 
-
 	int r = rand()%5000;
 	if (r==42){
 		this->dimensione=MAXDIM;
-    		inizializzaMatrice(this->matrice);
+    	inizializzaMatrice(this->matrice);
 		mettiMuriContorno();
 		mettiPorte(coll);
 		vaiBoban(nLiv);
 	}
 	else{
-	    	this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
-    		inizializzaMatrice(this->matrice);
-
+		this->dimensione=rand()%(MAXDIM-MINDIM+1)+MINDIM;
+		inizializzaMatrice(this->matrice);
 		mettiMuriContorno();
 		mettiPorte(coll);
 		inserisciVia();

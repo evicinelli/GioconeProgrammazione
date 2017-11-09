@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 Drawer::Drawer(){
-
+	
 }
 
 void Drawer::preparaScr(){
@@ -142,8 +142,7 @@ void Drawer::setColor(){
 	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(9, COLOR_BLACK, COLOR_WHITE);
 	init_pair(10, COLOR_WHITE, COLOR_RED);
-
-
+	
 }
 void Drawer::liberaPosizione(Stanza* s, int y, int x){
 
@@ -426,12 +425,7 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	disegnaStat(g);
 	disegnaEquip(g);
 	disegnaLiv(l);
-	/*g->setPosX(s->getLibero());
-	g->setPosY(s->getDimensione()-2);*/
 	posizionaGiocatore(s, g, false);
-	char msg[100];
-	sprintf (msg, "Iniziamo il gioco, clicca un pulsante");
-    disegnaMess(msg);
 
 }
 

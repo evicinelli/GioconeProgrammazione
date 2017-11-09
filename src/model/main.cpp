@@ -10,5 +10,3 @@ int main()
 	gt.play();
 	return 0;
 }
-
-

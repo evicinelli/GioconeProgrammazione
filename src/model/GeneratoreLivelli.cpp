@@ -3,8 +3,6 @@ GeneratoreLivelli::GeneratoreLivelli(){
     srand(time(0));
 }
 
-
-
 void GeneratoreLivelli:: inizializzaVettColl(Livello* l){
     // variabile per scorrere collegamenti
     int i;
@@ -19,7 +17,6 @@ void GeneratoreLivelli:: inizializzaVettColl(Livello* l){
 
     }
 }
-
 
 void GeneratoreLivelli::riempiVettStanze(Livello* l){
     //scorro le stanze del livello creando le mappe

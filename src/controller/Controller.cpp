@@ -148,7 +148,10 @@ void Controller::cambiaStanza(int direzione){
 		oldId=-2;
 		//LIVELLO SUCCESSIVO
 		if ((stanza->getId()+1)==gestore.getLivello()){
-			gestore.creaLivello(gestore.getLivello() + 1);
+			if (gestore.getLevN() < gestore.getLivello() + 1)
+				gestore.creaLivello(gestore.getLivello() + 1);
+			else 
+				gestore.passaLivSucc();
 			l=gestore.getLevelById(gestore.getLivello());
 			stanza=l->getPointerToStanza(0);
 
@@ -834,10 +837,12 @@ void Controller::init()
 	d->preparaScr();
 	p->classChosen(selClasse());
 	d->disegna(p, gestore.getInizio(), stanza);
+	printMsg("Iniziamo il gioco, clicca un pulsante");
 }
 
-void Controller::gioca(){
 
+void Controller::gioca()
+{
 	while (p->getExp()>=p->getNextExp())
 		aumentaLivello();
 	d->disegnaStat(p);

@@ -20,7 +20,6 @@ protected:
     int nRealMostri;
     int nMaxBauli;
     int nMaxVenditori;
-    int nMaxMuri;
     int porte[4];
     int collegamento[4];
     bool visited;
