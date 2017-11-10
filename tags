@@ -4,78 +4,355 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-COLLEGAMENTO_HPP_INCLUDED	Collegamento.hpp	2;"	d
-Collegamento	Collegamento.cpp	/^Collegamento::Collegamento(){}$/;"	f	class:Collegamento
-Collegamento	Collegamento.cpp	/^Collegamento::Collegamento(int j){$/;"	f	class:Collegamento
-Collegamento	Collegamento.hpp	/^class Collegamento{$/;"	c
-GENERATORELIVELLI_HPP_INCLUDED	GeneratoreLivelli.hpp	11;"	d
-GESTORELIVELLI_HPP_INCLUDED	GestoreLivelli.hpp	5;"	d
-GeneratoreLivelli	GeneratoreLivelli.cpp	/^GeneratoreLivelli::GeneratoreLivelli(){$/;"	f	class:GeneratoreLivelli
-GeneratoreLivelli	GeneratoreLivelli.hpp	/^class GeneratoreLivelli{$/;"	c
-GestoreLivelli	GestoreLivelli.cpp	/^GestoreLivelli::GestoreLivelli() {$/;"	f	class:GestoreLivelli
-GestoreLivelli	GestoreLivelli.hpp	/^class GestoreLivelli{$/;"	c
-LIVELLO_HPP_INCLUDED	Livello.hpp	8;"	d
-Livello	Livello.cpp	/^Livello::Livello (int n){$/;"	f	class:Livello
-Livello	Livello.hpp	/^class Livello{$/;"	c
-STANZA_HPP_INCLUDED	Stanza.hpp	2;"	d
-Stanza	Stanza.cpp	/^Stanza::Stanza (){$/;"	f	class:Stanza
-Stanza	Stanza.cpp	/^Stanza::Stanza (int n){$/;"	f	class:Stanza
-Stanza	Stanza.hpp	/^class Stanza{$/;"	c
-aggiungiLivello	GestoreLivelli.cpp	/^void GestoreLivelli::aggiungiLivello(Livello* liv) {$/;"	f	class:GestoreLivelli
-collegaLivelloPrec	GeneratoreLivelli.cpp	/^    void GeneratoreLivelli::collegaLivelloPrec(Livello* corrente, Livello* precedente) {$/;"	f	class:GeneratoreLivelli
-collegaStanza	Livello.cpp	/^void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){$/;"	f	class:Livello
-controllaAvail	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::controllaAvail(bool avail[4],Livello* l){$/;"	f	class:GeneratoreLivelli
-controllaAvail2	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::controllaAvail2(bool avail[4],Livello* l){$/;"	f	class:GeneratoreLivelli
-controlloLink	GeneratoreLivelli.cpp	/^int GeneratoreLivelli::controlloLink(int s,int direzione,int dir[4], int stanze){$/;"	f	class:GeneratoreLivelli
-creaLivello	GestoreLivelli.cpp	/^Livello* GestoreLivelli::creaLivello(int n) {$/;"	f	class:GestoreLivelli
-direzioni	Collegamento.hpp	/^    int direzioni[4];$/;"	m	class:Collegamento
-dumpLevelList	GestoreLivelli.cpp	/^void GestoreLivelli::dumpLevelList(){$/;"	f	class:GestoreLivelli
-dumpRoomList	Livello.cpp	/^void Livello::dumpRoomList(){$/;"	f	class:Livello
-generatore	GestoreLivelli.hpp	/^	GeneratoreLivelli generatore;$/;"	m	class:GestoreLivelli
-getAdiacenze	Livello.cpp	/^void Livello::getAdiacenze(int id, int adiacenze [4]){$/;"	f	class:Livello
-getDirezioni	Collegamento.cpp	/^void Collegamento::getDirezioni(int a[4]){$/;"	f	class:Collegamento
-getId	Collegamento.cpp	/^int Collegamento::getId(){$/;"	f	class:Collegamento
-getLevN	GestoreLivelli.cpp	/^int GestoreLivelli::getLevN(){$/;"	f	class:GestoreLivelli
-getLevelById	GestoreLivelli.cpp	/^Livello* GestoreLivelli::getLevelById(int id) {$/;"	f	class:GestoreLivelli
-getNStanze	Livello.cpp	/^int Livello::getNStanze(){$/;"	f	class:Livello
-getPointerToStanza	Livello.cpp	/^Stanza* Livello::getPointerToStanza(int id){$/;"	f	class:Livello
-getS	Stanza.cpp	/^int Stanza::getS(){$/;"	f	class:Stanza
-getStanza	Livello.cpp	/^Stanza Livello::getStanza(int id){$/;"	f	class:Livello
-getVettColl	Livello.cpp	/^Collegamento* Livello:: getVettColl(){$/;"	f	class:Livello
-head	GestoreLivelli.hpp	/^	ptr_listaLiv head;$/;"	m	class:GestoreLivelli
-id	Collegamento.hpp	/^    int id;$/;"	m	class:Collegamento
-inizializzaVettColl	GeneratoreLivelli.cpp	/^void GeneratoreLivelli:: inizializzaVettColl(Livello* l){$/;"	f	class:GeneratoreLivelli
-isNull	Stanza.cpp	/^bool Stanza::isNull(){$/;"	f	class:Stanza
-l	GestoreLivelli.hpp	/^		Livello* l;$/;"	m	struct:GestoreLivelli::lista
-link	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::link(int da, int a, Livello* l){$/;"	f	class:GeneratoreLivelli
-lista	GestoreLivelli.hpp	/^	struct lista{$/;"	s	class:GestoreLivelli
-livCorrente	GestoreLivelli.hpp	/^	int livCorrente;$/;"	m	class:GestoreLivelli
-main	main.cpp	/^int main()$/;"	f
-maxLiv	GestoreLivelli.hpp	/^	int maxLiv;$/;"	m	class:GestoreLivelli
-nStanze	Livello.hpp	/^	int nStanze;$/;"	m	class:Livello
-next	GestoreLivelli.hpp	/^		lista* next;$/;"	m	struct:GestoreLivelli::lista
-passaLivPrec	GestoreLivelli.cpp	/^void GestoreLivelli::passaLivPrec() {$/;"	f	class:GestoreLivelli
-passaLivSucc	GestoreLivelli.cpp	/^void GestoreLivelli::passaLivSucc() {$/;"	f	class:GestoreLivelli
-popolaLivello	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::popolaLivello (Livello* l){$/;"	f	class:GeneratoreLivelli
-ptr_listaLiv	GestoreLivelli.hpp	/^	};typedef lista* ptr_listaLiv;$/;"	t	class:GestoreLivelli
-riempiVettCollegamenti	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){$/;"	f	class:GeneratoreLivelli
-riempiVettStanze	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::riempiVettStanze(Livello* l){$/;"	f	class:GeneratoreLivelli
-s	Stanza.hpp	/^	int s;$/;"	m	class:Stanza
-setAdiacenze	Livello.cpp	/^void Livello::setAdiacenze(int id, int a [4]) {$/;"	f	class:Livello
-setCollegamento	Livello.cpp	/^void Livello::setCollegamento(int id, Collegamento* c){$/;"	f	class:Livello
-setDirezioni	Collegamento.cpp	/^void Collegamento::setDirezioni(int a[4]){$/;"	f	class:Collegamento
-setEst	Collegamento.cpp	/^void Collegamento::setEst(int idArrivo){$/;"	f	class:Collegamento
-setId	Collegamento.cpp	/^void Collegamento::setId(int i){$/;"	f	class:Collegamento
-setNord	Collegamento.cpp	/^void Collegamento::setNord(int idArrivo){$/;"	f	class:Collegamento
-setOvest	Collegamento.cpp	/^void Collegamento::setOvest(int idArrivo){$/;"	f	class:Collegamento
-setS	Stanza.cpp	/^void Stanza::setS(int n){$/;"	f	class:Stanza
-setStanza	Livello.cpp	/^void Livello::setStanza(int id, Stanza* s){$/;"	f	class:Livello
-setSud	Collegamento.cpp	/^void Collegamento::setSud(int idArrivo){$/;"	f	class:Collegamento
-stampaCollegamenti	GeneratoreLivelli.cpp	/^void GeneratoreLivelli::stampaCollegamenti(Livello* l){$/;"	f	class:GeneratoreLivelli
-stampaCollegamentiLivelli	GestoreLivelli.cpp	/^void GestoreLivelli::stampaCollegamentiLivelli(){$/;"	f	class:GestoreLivelli
-vaiEst	Livello.cpp	/^Stanza Livello::vaiEst(int id){$/;"	f	class:Livello
-vaiNord	Livello.cpp	/^Stanza Livello::vaiNord(int id){$/;"	f	class:Livello
-vaiOvest	Livello.cpp	/^Stanza Livello::vaiOvest(int id){$/;"	f	class:Livello
-vaiSud	Livello.cpp	/^Stanza Livello::vaiSud(int id){$/;"	f	class:Livello
-vettColl	Livello.hpp	/^	Collegamento* vettColl;$/;"	m	class:Livello
-vettStanze	Livello.hpp	/^	Stanza* vettStanze;$/;"	m	class:Livello
+AGGRO	src/modules/Mostro.hpp	4;"	d
+ARMA_HPP_INCLUDED	src/modules/Arma.hpp	2;"	d
+AZIONE	src/modules/Personaggio.hpp	3;"	d
+Arma	src/modules/Arma.cpp	/^Arma::Arma()$/;"	f	class:Arma
+Arma	src/modules/Arma.cpp	/^Arma::Arma(int lev, std::string type)$/;"	f	class:Arma
+Arma	src/modules/Arma.hpp	/^class Arma$/;"	c
+COLLEGAMENTO_HPP_INCLUDED	src/model/Collegamento.hpp	2;"	d
+Collegamento	src/model/Collegamento.cpp	/^Collegamento::Collegamento(){}$/;"	f	class:Collegamento
+Collegamento	src/model/Collegamento.cpp	/^Collegamento::Collegamento(int j){$/;"	f	class:Collegamento
+Collegamento	src/model/Collegamento.hpp	/^class Collegamento{$/;"	c
+Controller	src/controller/Controller.cpp	/^Controller::Controller(GestoreLivelli gl, Giocatore* player){$/;"	f	class:Controller
+Controller	src/controller/Controller.hpp	/^class Controller$/;"	c
+Drawer	src/view/Drawer.cpp	/^Drawer::Drawer(){$/;"	f	class:Drawer
+Drawer	src/view/Drawer.hpp	/^class Drawer{$/;"	c
+FORZIERE_HPP_INCLUDED	src/modules/Forziere.hpp	2;"	d
+Forziere	src/modules/Forziere.cpp	/^Forziere::Forziere(int lev)$/;"	f	class:Forziere
+Forziere	src/modules/Forziere.hpp	/^class Forziere$/;"	c
+GENERATORELIVELLI_HPP_INCLUDED	src/model/GeneratoreLivelli.hpp	11;"	d
+GESTORELIVELLI_HPP_INCLUDED	src/model/GestoreLivelli.hpp	5;"	d
+GIOCATORE_HPP_INCLUDED	src/modules/Giocatore.hpp	2;"	d
+GOLD_VICTORY	src/model/GestoreTurni.hpp	8;"	d
+GeneratoreLivelli	src/model/GeneratoreLivelli.cpp	/^GeneratoreLivelli::GeneratoreLivelli(){$/;"	f	class:GeneratoreLivelli
+GeneratoreLivelli	src/model/GeneratoreLivelli.hpp	/^class GeneratoreLivelli$/;"	c
+GestoreLivelli	src/model/GestoreLivelli.cpp	/^GestoreLivelli::GestoreLivelli(){$/;"	f	class:GestoreLivelli
+GestoreLivelli	src/model/GestoreLivelli.hpp	/^class GestoreLivelli$/;"	c
+GestoreTurni	src/model/GestoreTurni.cpp	/^GestoreTurni::GestoreTurni()$/;"	f	class:GestoreTurni
+GestoreTurni	src/model/GestoreTurni.hpp	/^class GestoreTurni$/;"	c
+Giocatore	src/modules/Giocatore.cpp	/^Giocatore::Giocatore()$/;"	f	class:Giocatore
+Giocatore	src/modules/Giocatore.hpp	/^class Giocatore : public Personaggio$/;"	c
+IFTY	src/modules/Mostro.cpp	3;"	d	file:
+LEV_VICTORY	src/model/GestoreTurni.hpp	7;"	d
+LIVELLO_HPP_INCLUDED	src/model/Livello.hpp	8;"	d
+Livello	src/model/Livello.cpp	/^Livello::Livello (int n){$/;"	f	class:Livello
+Livello	src/model/Livello.hpp	/^class Livello$/;"	c
+MAXDIM	src/modules/Stanza.hpp	6;"	d
+MAX_CLASSES	src/modules/Giocatore.hpp	4;"	d
+MAX_ITEM	src/modules/Giocatore.hpp	3;"	d
+MINDIM	src/modules/Stanza.hpp	7;"	d
+MONSTERS	src/model/GestoreTurni.hpp	6;"	d
+MOSTRO_HPP	src/modules/Mostro.hpp	2;"	d
+Mostro	src/modules/Mostro.cpp	/^Mostro::Mostro(int level, std::string race)$/;"	f	class:Mostro
+Mostro	src/modules/Mostro.hpp	/^class Mostro : public Personaggio$/;"	c
+NOISEGENERATOR_HPP_INCLUDED	src/utils/NoiseGenerator.hpp	2;"	d
+PERSONAGGIO_HPP_INCLUDED	src/modules/Personaggio.hpp	2;"	d
+Personaggio	src/modules/Personaggio.cpp	/^Personaggio::Personaggio()$/;"	f	class:Personaggio
+Personaggio	src/modules/Personaggio.hpp	/^class Personaggio$/;"	c
+STANZA_HPP_INCLUDED	src/modules/Stanza.hpp	11;"	d
+Stanza	src/modules/Stanza.cpp	/^Stanza::Stanza ()$/;"	f	class:Stanza
+Stanza	src/modules/Stanza.hpp	/^class Stanza$/;"	c
+TARGET	Makefile	/^TARGET := $(shell find src\/ -name '*.*pp')$/;"	m
+VENDITORE_HPP_INCLUDED	src/modules/Venditore.hpp	2;"	d
+Venditore	src/modules/Venditore.cpp	/^Venditore::Venditore()$/;"	f	class:Venditore
+Venditore	src/modules/Venditore.cpp	/^Venditore::Venditore(int level, int y, int x)$/;"	f	class:Venditore
+Venditore	src/modules/Venditore.hpp	/^class Venditore$/;"	c
+WALL_TRESHOLD	src/modules/Stanza.cpp	3;"	d	file:
+_min	src/modules/Mostro.cpp	/^spot* Mostro::_min(spot* a, spot* b)$/;"	f	class:Mostro
+act	src/modules/Personaggio.hpp	/^        int lev, act, exp;                               \/\/livello, punti azione per turno, punti esperienza attuali$/;"	m	class:Personaggio
+actApri	src/modules/Personaggio.cpp	/^bool Personaggio::actApri()$/;"	f	class:Personaggio
+actAttacca	src/modules/Personaggio.cpp	/^bool Personaggio::actAttacca()$/;"	f	class:Personaggio
+actMuovi	src/modules/Personaggio.cpp	/^bool Personaggio::actMuovi()$/;"	f	class:Personaggio
+actUsa	src/modules/Personaggio.cpp	/^bool Personaggio::actUsa()$/;"	f	class:Personaggio
+actVend	src/modules/Personaggio.cpp	/^bool Personaggio::actVend()$/;"	f	class:Personaggio
+addExp	src/modules/Giocatore.cpp	/^void Giocatore::addExp(int e)$/;"	f	class:Giocatore
+addOro	src/modules/Giocatore.cpp	/^void Giocatore::addOro(int o)$/;"	f	class:Giocatore
+addPot	src/modules/Giocatore.cpp	/^void Giocatore::addPot()$/;"	f	class:Giocatore
+aggiungiLivello	src/model/GestoreLivelli.cpp	/^void GestoreLivelli::aggiungiLivello(Livello* liv){$/;"	f	class:GestoreLivelli
+alive	src/modules/Mostro.hpp	/^        bool alive;         \/* il mostro è vivo? *\/$/;"	m	class:Mostro
+animaAttacchi	src/controller/Controller.cpp	/^void Controller::animaAttacchi(Mostro* m, bool isPlayer){$/;"	f	class:Controller
+apriBaule	src/controller/Controller.cpp	/^void Controller::apriBaule(int dir){$/;"	f	class:Controller
+attacca	src/modules/Personaggio.cpp	/^int Personaggio::attacca(Personaggio *p)$/;"	f	class:Personaggio
+aumentaLivello	src/controller/Controller.cpp	/^void Controller::aumentaLivello(){$/;"	f	class:Controller
+buildDMap	src/modules/Mostro.cpp	/^void Mostro::buildDMap(int tx, int ty, int m[24][24], int dim)$/;"	f	class:Mostro
+buildWall	src/modules/Stanza.cpp	/^int buildWall(double p)$/;"	f
+c	src/modules/Mostro.hpp	/^    int c;$/;"	m	struct:spot
+cambiaStanza	src/controller/Controller.cpp	/^void Controller::cambiaStanza(int direzione){$/;"	f	class:Controller
+cambioArma	src/modules/Giocatore.cpp	/^int Giocatore::cambioArma(int pos)$/;"	f	class:Giocatore
+chasing	src/modules/Mostro.hpp	/^        bool chasing;       \/* Il mostro sta inseguendo? *\/$/;"	m	class:Mostro
+chiudiGioco	src/controller/Controller.cpp	/^bool Controller::chiudiGioco(){$/;"	f	class:Controller
+classChosen	src/modules/Giocatore.cpp	/^void Giocatore::classChosen(int sel)$/;"	f	class:Giocatore
+clearWin	src/view/Drawer.cpp	/^void Drawer::clearWin(WINDOW* win){$/;"	f	class:Drawer
+collegaLivelloPrec	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli::collegaLivelloPrec(Livello* corrente, Livello* precedente){$/;"	f	class:GeneratoreLivelli
+collegaStanza	src/model/Livello.cpp	/^void Livello::collegaStanza(int sPartenza, int sArrivo, int direz){$/;"	f	class:Livello
+collegamento	src/modules/Stanza.hpp	/^    int collegamento[4];$/;"	m	class:Stanza
+compraDaVend	src/controller/Controller.cpp	/^void Controller::compraDaVend(Venditore* v){$/;"	f	class:Controller
+con	src/modules/Personaggio.hpp	/^        int str, dex, con, luck, hp, hpmax;    \/\/forza, destrezza, costituzione, fortuna, punti vita, punti vita massimi$/;"	m	class:Personaggio
+controllaAvail	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli::controllaAvail(bool avail[4],Livello* l){$/;"	f	class:GeneratoreLivelli
+controllaAvail2	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli::controllaAvail2(bool avail[4],Livello* l){$/;"	f	class:GeneratoreLivelli
+controllaMovimento	src/controller/Controller.cpp	/^bool Controller::controllaMovimento(int posX, int posY){$/;"	f	class:Controller
+controlloLink	src/model/GeneratoreLivelli.cpp	/^int GeneratoreLivelli::controlloLink(int s,int direzione,int dir[4], int stanze){$/;"	f	class:GeneratoreLivelli
+costopot	src/modules/Venditore.hpp	/^    int costopot;$/;"	m	class:Venditore
+creaLivello	src/model/GestoreLivelli.cpp	/^Livello* GestoreLivelli::creaLivello(int n){$/;"	f	class:GestoreLivelli
+creaWin	src/view/Drawer.cpp	/^WINDOW* Drawer::creaWin(int height, int width, int starty, int startx){$/;"	f	class:Drawer
+ctrl	src/model/GestoreTurni.hpp	/^	Controller* ctrl;$/;"	m	class:GestoreTurni
+d	src/controller/Controller.hpp	/^		Drawer* d;$/;"	m	class:Controller
+d	src/modules/Mostro.hpp	/^        int d[24*24];$/;"	m	class:Mostro
+defeat	src/model/GestoreTurni.hpp	/^	bool victory, defeat;$/;"	m	class:GestoreTurni
+descreteNoise	src/utils/NoiseGenerator.hpp	/^double descreteNoise(int i, int j, int span, int seed)$/;"	f
+dex	src/modules/Personaggio.hpp	/^        int str, dex, con, luck, hp, hpmax;    \/\/forza, destrezza, costituzione, fortuna, punti vita, punti vita massimi$/;"	m	class:Personaggio
+dexMin	src/modules/Arma.hpp	/^    int strMin, dexMin;  \/\/forza e destrezza minime per usare l'arma$/;"	m	class:Arma
+dexMult	src/modules/Arma.hpp	/^    double dexMult;      \/\/moltiplicatore di destrezza (quanto influisce sul danno)$/;"	m	class:Arma
+dimensione	src/modules/Stanza.hpp	/^    int dimensione;$/;"	m	class:Stanza
+direzioni	src/model/Collegamento.hpp	/^    int direzioni[4];$/;"	m	class:Collegamento
+disegna	src/view/Drawer.cpp	/^void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){$/;"	f	class:Drawer
+disegnaEquip	src/view/Drawer.cpp	/^void Drawer::disegnaEquip(Giocatore* g){$/;"	f	class:Drawer
+disegnaInizio	src/view/Drawer.cpp	/^void Drawer::disegnaInizio(int sel)$/;"	f	class:Drawer
+disegnaLiv	src/view/Drawer.cpp	/^void Drawer::disegnaLiv(Livello* l){$/;"	f	class:Drawer
+disegnaMess	src/view/Drawer.cpp	/^void Drawer::disegnaMess(char msg[100]){$/;"	f	class:Drawer
+disegnaPopUp	src/view/Drawer.cpp	/^void Drawer::disegnaPopUp(char msg[20][40], int selected, int nStringhe){$/;"	f	class:Drawer
+disegnaStanza	src/view/Drawer.cpp	/^void Drawer::disegnaStanza(Stanza* s){$/;"	f	class:Drawer
+disegnaStat	src/view/Drawer.cpp	/^void Drawer::disegnaStat(Giocatore* p){$/;"	f	class:Drawer
+disponibile	src/modules/Arma.hpp	/^    bool disponibile;$/;"	m	class:Arma
+dmap	src/modules/Mostro.hpp	/^        int dmap[24][24];     \/* Mappa della conoscenza del mostro *\/$/;"	m	class:Mostro
+droprate	src/modules/Arma.hpp	/^    double droprate;     \/\/possibilità che venga lasciata come loot$/;"	m	class:Arma
+endGame	src/controller/Controller.cpp	/^void Controller::endGame(int v){$/;"	f	class:Controller
+ended	src/controller/Controller.hpp	/^		bool ended;$/;"	m	class:Controller
+equip	src/modules/Personaggio.hpp	/^        Arma equip;                     \/\/arma equipaggiata$/;"	m	class:Personaggio
+existPorta	src/modules/Stanza.cpp	/^bool Stanza::existPorta(int n)$/;"	f	class:Stanza
+exp	src/modules/Personaggio.hpp	/^        int lev, act, exp;                               \/\/livello, punti azione per turno, punti esperienza attuali$/;"	m	class:Personaggio
+generatore	src/model/GestoreLivelli.hpp	/^    GeneratoreLivelli generatore;$/;"	m	class:GestoreLivelli
+gestisciInput	src/controller/Controller.cpp	/^void Controller::gestisciInput(char c){$/;"	f	class:Controller
+gestore	src/controller/Controller.hpp	/^		GestoreLivelli gestore;$/;"	m	class:Controller
+gestoreLivelli	src/model/GestoreTurni.hpp	/^	GestoreLivelli gestoreLivelli;$/;"	m	class:GestoreTurni
+getAct	src/modules/Personaggio.cpp	/^int Personaggio::getAct()$/;"	f	class:Personaggio
+getAdiacenze	src/model/Livello.cpp	/^void Livello::getAdiacenze(int id, int adiacenze [4]){$/;"	f	class:Livello
+getC	src/modules/Mostro.cpp	/^int Mostro::getC(int a, int dim)$/;"	f	class:Mostro
+getColl	src/modules/Stanza.cpp	/^int Stanza::getColl(int n){$/;"	f	class:Stanza
+getCon	src/modules/Personaggio.cpp	/^int Personaggio::getCon()$/;"	f	class:Personaggio
+getCostoPot	src/modules/Venditore.cpp	/^int Venditore::getCostoPot()$/;"	f	class:Venditore
+getCurrentRoom	src/controller/Controller.cpp	/^Stanza* Controller::getCurrentRoom()$/;"	f	class:Controller
+getDex	src/modules/Personaggio.cpp	/^int Personaggio::getDex()$/;"	f	class:Personaggio
+getDexMin	src/modules/Arma.cpp	/^int Arma::getDexMin()$/;"	f	class:Arma
+getDexMult	src/modules/Arma.cpp	/^double Arma::getDexMult()$/;"	f	class:Arma
+getDimensione	src/modules/Stanza.cpp	/^int Stanza::getDimensione(){$/;"	f	class:Stanza
+getDirezioni	src/model/Collegamento.cpp	/^void Collegamento::getDirezioni(int a[4]){$/;"	f	class:Collegamento
+getDropRate	src/modules/Arma.cpp	/^double Arma::getDropRate()$/;"	f	class:Arma
+getEquip	src/modules/Personaggio.cpp	/^Arma Personaggio::getEquip()$/;"	f	class:Personaggio
+getExp	src/modules/Personaggio.cpp	/^int Personaggio::getExp()$/;"	f	class:Personaggio
+getHowManyMonsters	src/modules/Stanza.cpp	/^int Stanza::getHowManyMonsters()$/;"	f	class:Stanza
+getHp	src/modules/Personaggio.cpp	/^int Personaggio::getHp()$/;"	f	class:Personaggio
+getHpmax	src/modules/Personaggio.cpp	/^int Personaggio::getHpmax()$/;"	f	class:Personaggio
+getId	src/model/Collegamento.cpp	/^int Collegamento::getId(){$/;"	f	class:Collegamento
+getId	src/modules/Mostro.cpp	/^char Mostro::getId()$/;"	f	class:Mostro
+getId	src/modules/Stanza.cpp	/^int Stanza::getId(){$/;"	f	class:Stanza
+getInizio	src/model/GestoreLivelli.cpp	/^Livello* GestoreLivelli::getInizio(){$/;"	f	class:GestoreLivelli
+getInterno	src/modules/Forziere.cpp	/^Arma Forziere::getInterno()$/;"	f	class:Forziere
+getInv	src/modules/Giocatore.cpp	/^Arma Giocatore::getInv(int n)$/;"	f	class:Giocatore
+getLev	src/modules/Personaggio.cpp	/^int Personaggio::getLev()$/;"	f	class:Personaggio
+getLevN	src/model/GestoreLivelli.cpp	/^int GestoreLivelli::getLevN(){$/;"	f	class:GestoreLivelli
+getLevelById	src/model/GestoreLivelli.cpp	/^Livello* GestoreLivelli::getLevelById(int id){$/;"	f	class:GestoreLivelli
+getLibero	src/modules/Stanza.cpp	/^int Stanza::getLibero(){$/;"	f	class:Stanza
+getLivello	src/model/GestoreLivelli.cpp	/^int GestoreLivelli::getLivello(){$/;"	f	class:GestoreLivelli
+getLuck	src/modules/Personaggio.cpp	/^int Personaggio::getLuck()$/;"	f	class:Personaggio
+getMatrice	src/modules/Stanza.cpp	/^void Stanza::getMatrice(int m[MAXDIM][MAXDIM])$/;"	f	class:Stanza
+getMax	src/modules/Arma.cpp	/^int Arma::getMax()$/;"	f	class:Arma
+getMin	src/modules/Arma.cpp	/^int Arma::getMin()$/;"	f	class:Arma
+getMonster	src/modules/Stanza.cpp	/^Mostro* Stanza::getMonster(int i)$/;"	f	class:Stanza
+getMonsterByCoord	src/modules/Stanza.cpp	/^Mostro* Stanza::getMonsterByCoord(int x, int y)$/;"	f	class:Stanza
+getNStanze	src/model/Livello.cpp	/^int Livello::getNStanze(){$/;"	f	class:Livello
+getNextExp	src/modules/Giocatore.cpp	/^int Giocatore::getNextExp()$/;"	f	class:Giocatore
+getNome	src/modules/Arma.cpp	/^std::string Arma::getNome()$/;"	f	class:Arma
+getOro	src/modules/Giocatore.cpp	/^int Giocatore::getOro()$/;"	f	class:Giocatore
+getPointerToStanza	src/model/Livello.cpp	/^Stanza* Livello::getPointerToStanza(int id){$/;"	f	class:Livello
+getPorta	src/modules/Stanza.cpp	/^int Stanza::getPorta(int n)$/;"	f	class:Stanza
+getPosX	src/modules/Personaggio.cpp	/^int Personaggio::getPosX()$/;"	f	class:Personaggio
+getPosX	src/modules/Venditore.cpp	/^int Venditore::getPosX()$/;"	f	class:Venditore
+getPosY	src/modules/Personaggio.cpp	/^int Personaggio::getPosY()$/;"	f	class:Personaggio
+getPosY	src/modules/Venditore.cpp	/^int Venditore::getPosY()$/;"	f	class:Venditore
+getPot	src/modules/Giocatore.cpp	/^int Giocatore::getPot()$/;"	f	class:Giocatore
+getPozioni	src/modules/Venditore.cpp	/^bool Venditore::getPozioni()$/;"	f	class:Venditore
+getPrezzo	src/modules/Arma.cpp	/^int Arma::getPrezzo()$/;"	f	class:Arma
+getR	src/modules/Mostro.cpp	/^int Mostro::getR(int a, int dim)$/;"	f	class:Mostro
+getRazza	src/modules/Mostro.cpp	/^std::string Mostro::getRazza()$/;"	f	class:Mostro
+getSpot	src/modules/Stanza.cpp	/^int Stanza::getSpot(int i, int j)$/;"	f	class:Stanza
+getStanza	src/model/Livello.cpp	/^Stanza Livello::getStanza(int id){$/;"	f	class:Livello
+getStr	src/modules/Personaggio.cpp	/^int Personaggio::getStr()$/;"	f	class:Personaggio
+getStrMin	src/modules/Arma.cpp	/^int Arma::getStrMin()$/;"	f	class:Arma
+getStrMult	src/modules/Arma.cpp	/^double Arma::getStrMult()$/;"	f	class:Arma
+getVendita	src/modules/Venditore.cpp	/^Arma Venditore::getVendita(int n)$/;"	f	class:Venditore
+getVenditoreByPos	src/modules/Stanza.cpp	/^Venditore* Stanza::getVenditoreByPos(int y, int x){$/;"	f	class:Stanza
+getVettColl	src/model/Livello.cpp	/^Collegamento* Livello:: getVettColl(){$/;"	f	class:Livello
+gioca	src/controller/Controller.cpp	/^void Controller::gioca()$/;"	f	class:Controller
+hasGameEnded	src/controller/Controller.cpp	/^bool Controller::hasGameEnded()$/;"	f	class:Controller
+hash	src/modules/Mostro.cpp	/^int Mostro::hash(int r, int c, int dim)$/;"	f	class:Mostro
+head	src/model/GestoreLivelli.hpp	/^    ptr_listaLiv head;$/;"	m	class:GestoreLivelli
+hp	src/modules/Personaggio.hpp	/^        int str, dex, con, luck, hp, hpmax;    \/\/forza, destrezza, costituzione, fortuna, punti vita, punti vita massimi$/;"	m	class:Personaggio
+hpmax	src/modules/Personaggio.hpp	/^        int str, dex, con, luck, hp, hpmax;    \/\/forza, destrezza, costituzione, fortuna, punti vita, punti vita massimi$/;"	m	class:Personaggio
+id	src/model/Collegamento.hpp	/^    int id;$/;"	m	class:Collegamento
+id	src/modules/Mostro.hpp	/^        char id;            \/* Carattere del mostro sulla mappa *\/$/;"	m	class:Mostro
+id	src/modules/Stanza.hpp	/^    int id;$/;"	m	class:Stanza
+init	src/controller/Controller.cpp	/^void Controller::init()$/;"	f	class:Controller
+inizializzaMatrice	src/modules/Stanza.cpp	/^void Stanza:: inizializzaMatrice(int m[MAXDIM][MAXDIM])$/;"	f	class:Stanza
+inizializzaVettColl	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli:: inizializzaVettColl(Livello* l){$/;"	f	class:GeneratoreLivelli
+insegui	src/modules/Mostro.cpp	/^void Mostro::insegui(int matrix[24][24], int dimensione)$/;"	f	class:Mostro
+inserisciVia	src/modules/Stanza.cpp	/^void Stanza::inserisciVia()$/;"	f	class:Stanza
+integerNoise	src/utils/NoiseGenerator.hpp	/^double integerNoise(int a)$/;"	f
+interno	src/modules/Forziere.hpp	/^    Arma interno;  \/\/oggetto trovato all'interno del forziere$/;"	m	class:Forziere
+inventario	src/modules/Giocatore.hpp	/^        Arma inventario[MAX_ITEM];			\/\/armi trasportate ma non equipaggiate$/;"	m	class:Giocatore
+isAlive	src/modules/Mostro.cpp	/^bool Mostro::isAlive()$/;"	f	class:Mostro
+isAlreadyEnqueued	src/modules/Mostro.cpp	/^bool Mostro::isAlreadyEnqueued(int r, int c, int dim){$/;"	f	class:Mostro
+isAvailable	src/modules/Arma.cpp	/^bool Arma::isAvailable()$/;"	f	class:Arma
+isChasing	src/modules/Mostro.cpp	/^bool Mostro::isChasing()$/;"	f	class:Mostro
+isVendBloccato	src/modules/Stanza.cpp	/^bool Stanza::isVendBloccato(int y, int x){$/;"	f	class:Stanza
+isVicino	src/controller/Controller.cpp	/^bool Controller::isVicino(int value, int &dir){$/;"	f	class:Controller
+isVisited	src/modules/Stanza.cpp	/^bool Stanza::isVisited(){$/;"	f	class:Stanza
+l	src/model/GestoreLivelli.hpp	/^        Livello* l;$/;"	m	struct:GestoreLivelli::lista
+lev	src/modules/Personaggio.hpp	/^        int lev, act, exp;                               \/\/livello, punti azione per turno, punti esperienza attuali$/;"	m	class:Personaggio
+levelup	src/modules/Giocatore.cpp	/^void Giocatore::levelup(int stat)$/;"	f	class:Giocatore
+libInventario	src/modules/Giocatore.cpp	/^int Giocatore::libInventario(){$/;"	f	class:Giocatore
+liberaPorte	src/modules/Stanza.cpp	/^void Stanza::liberaPorte(){$/;"	f	class:Stanza
+liberaPosizione	src/view/Drawer.cpp	/^void Drawer::liberaPosizione(Stanza* s, int y, int x){$/;"	f	class:Drawer
+libero	src/modules/Stanza.hpp	/^    int libero; \/\/mi indica un punto libero nella prima colonna, nel quale sicuramente non ci sono muri$/;"	m	class:Stanza
+link	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli::link(int da, int a, Livello* l){$/;"	f	class:GeneratoreLivelli
+link	src/modules/Stanza.cpp	/^void Stanza::link(int partenza, int arrivo, bool type)  \/\/type=0:2->3, type=1:0->1$/;"	f	class:Stanza
+lista	src/model/GestoreLivelli.hpp	/^    struct lista$/;"	s	class:GestoreLivelli
+livCorrente	src/model/GestoreLivelli.hpp	/^    int livCorrente;$/;"	m	class:GestoreLivelli
+livello	src/modules/Arma.hpp	/^    int mindanno, maxdanno, livello, prezzo;$/;"	m	class:Arma
+luck	src/modules/Personaggio.hpp	/^        int str, dex, con, luck, hp, hpmax;    \/\/forza, destrezza, costituzione, fortuna, punti vita, punti vita massimi$/;"	m	class:Personaggio
+main	src/model/main.cpp	/^int main()$/;"	f
+matrice	src/modules/Stanza.hpp	/^    int matrice [MAXDIM][MAXDIM];$/;"	m	class:Stanza
+maxLiv	src/model/GestoreLivelli.hpp	/^    int maxLiv;$/;"	m	class:GestoreLivelli
+maxdanno	src/modules/Arma.hpp	/^    int mindanno, maxdanno, livello, prezzo;$/;"	m	class:Arma
+mettiBauli	src/modules/Stanza.cpp	/^void Stanza::mettiBauli(int livello)$/;"	f	class:Stanza
+mettiMostri	src/modules/Stanza.cpp	/^void Stanza::mettiMostri(int livello){$/;"	f	class:Stanza
+mettiMuri	src/modules/Stanza.cpp	/^void Stanza::mettiMuri()$/;"	f	class:Stanza
+mettiMuriContorno	src/modules/Stanza.cpp	/^void Stanza::mettiMuriContorno()$/;"	f	class:Stanza
+mettiPorte	src/modules/Stanza.cpp	/^void Stanza::mettiPorte(int coll[4])$/;"	f	class:Stanza
+mettiVenditori	src/modules/Stanza.cpp	/^void Stanza::mettiVenditori(int livello){$/;"	f	class:Stanza
+min	src/modules/Mostro.cpp	/^spot* Mostro::min(spot* a, spot* b, spot* c, spot* d)$/;"	f	class:Mostro
+mindanno	src/modules/Arma.hpp	/^    int mindanno, maxdanno, livello, prezzo;$/;"	m	class:Arma
+monsters	src/modules/Stanza.hpp	/^    Mostro* monsters[6]; \/* Riferimenti ai mostri della stanza *\/$/;"	m	class:Stanza
+morte	src/modules/Mostro.cpp	/^void Mostro::morte(Giocatore *g)$/;"	f	class:Mostro
+muovi	src/modules/Mostro.cpp	/^void Mostro::muovi(int tx, int ty, int m[24][24], int dimensione)$/;"	f	class:Mostro
+nMaxBauli	src/modules/Stanza.hpp	/^    int nMaxBauli;$/;"	m	class:Stanza
+nMaxMostri	src/modules/Stanza.hpp	/^    int nMaxMostri;$/;"	m	class:Stanza
+nMaxVenditori	src/modules/Stanza.hpp	/^    int nMaxVenditori;$/;"	m	class:Stanza
+nRealMostri	src/modules/Stanza.hpp	/^    int nRealMostri;$/;"	m	class:Stanza
+nStanze	src/model/Livello.hpp	/^    int nStanze;$/;"	m	class:Livello
+nVicini	src/modules/Stanza.cpp	/^int Stanza::nVicini(int x, int y)$/;"	f	class:Stanza
+needToAttack	src/modules/Mostro.cpp	/^bool Mostro::needToAttack(Giocatore* g)$/;"	f	class:Mostro
+needToChase	src/modules/Mostro.cpp	/^bool Mostro::needToChase(Giocatore* g)$/;"	f	class:Mostro
+next	src/model/GestoreLivelli.hpp	/^        lista* next;$/;"	m	struct:GestoreLivelli::lista
+nextLevExp	src/modules/Giocatore.hpp	/^        int nextLevExp;						\/\/esperienza per il livello successivo$/;"	m	class:Giocatore
+nome	src/modules/Arma.hpp	/^    std::string nome;$/;"	m	class:Arma
+normalizza	src/modules/Stanza.cpp	/^void Stanza::normalizza()$/;"	f	class:Stanza
+oro	src/modules/Giocatore.hpp	/^        int oro;							\/\/oro trasportato$/;"	m	class:Giocatore
+p	src/controller/Controller.hpp	/^		Giocatore* p;$/;"	m	class:Controller
+passaLivPrec	src/model/GestoreLivelli.cpp	/^void GestoreLivelli::passaLivPrec(){$/;"	f	class:GestoreLivelli
+passaLivSucc	src/model/GestoreLivelli.cpp	/^void GestoreLivelli::passaLivSucc(){$/;"	f	class:GestoreLivelli
+play	src/model/GestoreTurni.cpp	/^void GestoreTurni::play()$/;"	f	class:GestoreTurni
+player	src/model/GestoreTurni.hpp	/^	Giocatore* player;$/;"	m	class:GestoreTurni
+popolaLivello	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli::popolaLivello (Livello* l){$/;"	f	class:GeneratoreLivelli
+porte	src/modules/Stanza.hpp	/^    int porte[4];$/;"	m	class:Stanza
+posizionaGiocatore	src/view/Drawer.cpp	/^void Drawer::posizionaGiocatore(Stanza* s, Giocatore* g, bool isAttacked){$/;"	f	class:Drawer
+posizionaMostro	src/view/Drawer.cpp	/^void Drawer::posizionaMostro(Stanza* s, Mostro* m, bool chasing, bool isAttacked)$/;"	f	class:Drawer
+posx	src/modules/Personaggio.hpp	/^        int posx;$/;"	m	class:Personaggio
+posx	src/modules/Venditore.hpp	/^    int posx;$/;"	m	class:Venditore
+posy	src/modules/Personaggio.hpp	/^        int posy;$/;"	m	class:Personaggio
+posy	src/modules/Venditore.hpp	/^    int posy;$/;"	m	class:Venditore
+pot	src/modules/Giocatore.hpp	/^        int pot;							\/\/numero di pozioni trasportate$/;"	m	class:Giocatore
+pozioni	src/modules/Venditore.hpp	/^    bool pozioni;$/;"	m	class:Venditore
+preparaScr	src/view/Drawer.cpp	/^void Drawer::preparaScr(){$/;"	f	class:Drawer
+prezzo	src/modules/Arma.hpp	/^    int mindanno, maxdanno, livello, prezzo;$/;"	m	class:Arma
+printMsg	src/controller/Controller.cpp	/^void Controller::printMsg(const char* s)$/;"	f	class:Controller
+ptr_listaLiv	src/model/GestoreLivelli.hpp	/^    typedef lista* ptr_listaLiv;$/;"	t	class:GestoreLivelli
+quitDefeat	src/view/Drawer.cpp	/^void Drawer::quitDefeat()$/;"	f	class:Drawer
+quitVictory	src/view/Drawer.cpp	/^void Drawer::quitVictory()$/;"	f	class:Drawer
+r	src/modules/Mostro.hpp	/^    int r;$/;"	m	struct:spot
+razza	src/modules/Mostro.hpp	/^        std::string razza;  \/* razza *\/$/;"	m	class:Mostro
+riempi	src/modules/Venditore.cpp	/^void Venditore::riempi(int a, int lev)$/;"	f	class:Venditore
+riempiMatrice	src/modules/Stanza.cpp	/^void Stanza::riempiMatrice(int nLiv, int coll [4]){$/;"	f	class:Stanza
+riempiMuri	src/modules/Stanza.cpp	/^void Stanza::riempiMuri(int x, int y)$/;"	f	class:Stanza
+riempiVettCollegamenti	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli::riempiVettCollegamenti(Livello* l, int maxLink){$/;"	f	class:GeneratoreLivelli
+riempiVettStanze	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli::riempiVettStanze(Livello* l){$/;"	f	class:GeneratoreLivelli
+scarta	src/modules/Arma.cpp	/^void Arma::scarta()$/;"	f	class:Arma
+scartaArma	src/modules/Giocatore.cpp	/^void Giocatore::scartaArma(int pos)$/;"	f	class:Giocatore
+scegliArma	src/controller/Controller.cpp	/^void Controller::scegliArma(bool opt){ \/\/opt=1 cambio arma, opt=0 scarta arma$/;"	f	class:Controller
+scriviInfoAttacco	src/controller/Controller.cpp	/^void Controller::scriviInfoAttacco(Mostro* m, int danno, bool ricevuto)$/;"	f	class:Controller
+scriviInfoMostro	src/controller/Controller.cpp	/^void Controller::scriviInfoMostro(Mostro* m)$/;"	f	class:Controller
+scriviInfoMostroAvanzate	src/controller/Controller.cpp	/^void Controller::scriviInfoMostroAvanzate(Mostro* m)$/;"	f	class:Controller
+scriviIstruzioni	src/controller/Controller.cpp	/^void Controller::scriviIstruzioni(){$/;"	f	class:Controller
+scriviMorteMostro	src/controller/Controller.cpp	/^void Controller::scriviMorteMostro(Mostro* m, int danno)$/;"	f	class:Controller
+selClasse	src/controller/Controller.cpp	/^int Controller::selClasse()$/;"	f	class:Controller
+selPopUp	src/controller/Controller.cpp	/^int Controller::selPopUp(char msg[20][40], int sel, int nStringhe){$/;"	f	class:Controller
+selected	src/controller/Controller.hpp	/^		Mostro* selected;$/;"	m	class:Controller
+setAct	src/modules/Personaggio.cpp	/^void Personaggio::setAct(int x)$/;"	f	class:Personaggio
+setCollegamento	src/model/Livello.cpp	/^void Livello::setCollegamento(int id, Collegamento* c){$/;"	f	class:Livello
+setColor	src/view/Drawer.cpp	/^void Drawer::setColor(){$/;"	f	class:Drawer
+setCon	src/modules/Personaggio.cpp	/^void Personaggio::setCon(int x)$/;"	f	class:Personaggio
+setDex	src/modules/Personaggio.cpp	/^void Personaggio::setDex(int x)$/;"	f	class:Personaggio
+setDirezioni	src/model/Collegamento.cpp	/^void Collegamento::setDirezioni(int a[4]){$/;"	f	class:Collegamento
+setEquip	src/modules/Personaggio.cpp	/^void Personaggio::setEquip(Arma e)$/;"	f	class:Personaggio
+setEst	src/model/Collegamento.cpp	/^void Collegamento::setEst(int idArrivo){$/;"	f	class:Collegamento
+setHp	src/modules/Personaggio.cpp	/^void Personaggio::setHp(int x)$/;"	f	class:Personaggio
+setId	src/model/Collegamento.cpp	/^void Collegamento::setId(int i){$/;"	f	class:Collegamento
+setId	src/modules/Stanza.cpp	/^void Stanza::setId(int n){$/;"	f	class:Stanza
+setInv	src/modules/Giocatore.cpp	/^void Giocatore::setInv(int n, Arma a)$/;"	f	class:Giocatore
+setLuck	src/modules/Personaggio.cpp	/^void Personaggio::setLuck(int x)$/;"	f	class:Personaggio
+setMatrice	src/modules/Stanza.cpp	/^void Stanza::setMatrice(int m[MAXDIM][MAXDIM])$/;"	f	class:Stanza
+setMatriceStanza	src/model/Livello.cpp	/^void Livello::setMatriceStanza(int id){$/;"	f	class:Livello
+setNord	src/model/Collegamento.cpp	/^void Collegamento::setNord(int idArrivo){$/;"	f	class:Collegamento
+setOro	src/modules/Giocatore.cpp	/^void Giocatore::setOro(int o)$/;"	f	class:Giocatore
+setOvest	src/model/Collegamento.cpp	/^void Collegamento::setOvest(int idArrivo){$/;"	f	class:Collegamento
+setPosX	src/modules/Personaggio.cpp	/^void Personaggio::setPosX(int x)$/;"	f	class:Personaggio
+setPosY	src/modules/Personaggio.cpp	/^void Personaggio::setPosY(int y)$/;"	f	class:Personaggio
+setSpot	src/modules/Stanza.cpp	/^void Stanza::setSpot(int i, int j, int value)$/;"	f	class:Stanza
+setStanza	src/model/Livello.cpp	/^void Livello::setStanza(int id, Stanza* s){$/;"	f	class:Livello
+setStr	src/modules/Personaggio.cpp	/^void Personaggio::setStr(int x)$/;"	f	class:Personaggio
+setSud	src/model/Collegamento.cpp	/^void Collegamento::setSud(int idArrivo){$/;"	f	class:Collegamento
+spot	src/modules/Mostro.hpp	/^struct spot {$/;"	s
+stampaCollegamenti	src/model/GeneratoreLivelli.cpp	/^void GeneratoreLivelli::stampaCollegamenti(Livello* l){$/;"	f	class:GeneratoreLivelli
+stampaCollegamentiLivelli	src/model/GestoreLivelli.cpp	/^void GestoreLivelli::stampaCollegamentiLivelli(){$/;"	f	class:GestoreLivelli
+stampaMatrice	src/modules/Stanza.cpp	/^void Stanza:: stampaMatrice(int m[MAXDIM][MAXDIM])$/;"	f	class:Stanza
+stanza	src/controller/Controller.hpp	/^		Stanza* stanza;$/;"	m	class:Controller
+str	src/modules/Personaggio.hpp	/^        int str, dex, con, luck, hp, hpmax;    \/\/forza, destrezza, costituzione, fortuna, punti vita, punti vita massimi$/;"	m	class:Personaggio
+strMin	src/modules/Arma.hpp	/^    int strMin, dexMin;  \/\/forza e destrezza minime per usare l'arma$/;"	m	class:Arma
+strMult	src/modules/Arma.hpp	/^    double strMult;      \/\/moltiplicatore di forza     (quanto influisce sul danno)$/;"	m	class:Arma
+takeAction	src/modules/Mostro.cpp	/^int Mostro::takeAction(Giocatore* g, int m[24][24], int dimensione)$/;"	f	class:Mostro
+thereisArma	src/controller/Controller.cpp	/^bool Controller::thereisArma(){$/;"	f	class:Controller
+tipologia	src/modules/Arma.hpp	/^    std::string tipologia;$/;"	m	class:Arma
+trasformaInterni	src/modules/Stanza.cpp	/^void Stanza::trasformaInterni()$/;"	f	class:Stanza
+updateMonsterCoordinates	src/controller/Controller.cpp	/^void Controller::updateMonsterCoordinates(int oldY, int oldX, Mostro* m, bool isChasing)$/;"	f	class:Controller
+usaPozione	src/modules/Giocatore.cpp	/^int Giocatore::usaPozione()$/;"	f	class:Giocatore
+v	src/modules/Stanza.hpp	/^    Venditore* v[2];$/;"	m	class:Stanza
+vaiBoban	src/modules/Stanza.cpp	/^void Stanza::vaiBoban(int livello){$/;"	f	class:Stanza
+vaiDx	src/controller/Controller.cpp	/^void Controller::vaiDx(){$/;"	f	class:Controller
+vaiEst	src/model/Livello.cpp	/^Stanza* Livello::vaiEst(int id){$/;"	f	class:Livello
+vaiGiu	src/controller/Controller.cpp	/^void Controller::vaiGiu(){$/;"	f	class:Controller
+vaiNord	src/model/Livello.cpp	/^Stanza* Livello::vaiNord(int id){$/;"	f	class:Livello
+vaiOvest	src/model/Livello.cpp	/^Stanza* Livello::vaiOvest(int id){$/;"	f	class:Livello
+vaiSu	src/controller/Controller.cpp	/^void Controller::vaiSu(){$/;"	f	class:Controller
+vaiSud	src/model/Livello.cpp	/^Stanza* Livello::vaiSud(int id){$/;"	f	class:Livello
+vaiSx	src/controller/Controller.cpp	/^void Controller::vaiSx(){$/;"	f	class:Controller
+val	src/modules/Mostro.hpp	/^    int val;$/;"	m	struct:spot
+vendi	src/modules/Venditore.cpp	/^int Venditore::vendi(Giocatore* g, int n)$/;"	f	class:Venditore
+vendiArma	src/modules/Giocatore.cpp	/^void Giocatore::vendiArma(int pos)$/;"	f	class:Giocatore
+vendiVenditore	src/controller/Controller.cpp	/^void Controller::vendiVenditore(Venditore* v){$/;"	f	class:Controller
+vendita	src/modules/Venditore.hpp	/^    Arma vendita[3];$/;"	m	class:Venditore
+vettColl	src/model/Livello.hpp	/^    Collegamento* vettColl;$/;"	m	class:Livello
+vettStanze	src/model/Livello.hpp	/^    Stanza* vettStanze;$/;"	m	class:Livello
+victory	src/model/GestoreTurni.hpp	/^	bool victory, defeat;$/;"	m	class:GestoreTurni
+visit	src/modules/Stanza.cpp	/^void Stanza::visit(){$/;"	f	class:Stanza
+visitStanza	src/model/Livello.cpp	/^void Livello::visitStanza(int id){$/;"	f	class:Livello
+visited	src/modules/Stanza.hpp	/^    bool visited;$/;"	m	class:Stanza
+win0	src/view/Drawer.hpp	/^		WINDOW *win0; \/\/Finestra iniziale$/;"	m	class:Drawer
+win01	src/view/Drawer.hpp	/^		WINDOW *win01;\/\/Finestra di informazioni sulla classe$/;"	m	class:Drawer
+win1	src/view/Drawer.hpp	/^		WINDOW *win1; \/\/Finestra statistiche$/;"	m	class:Drawer
+win2	src/view/Drawer.hpp	/^		WINDOW *win2; \/\/Finestra messaggi$/;"	m	class:Drawer
+win3	src/view/Drawer.hpp	/^		WINDOW *win3; \/\/Finestra stanza$/;"	m	class:Drawer
+win4	src/view/Drawer.hpp	/^		WINDOW *win4; \/\/Finestra livello$/;"	m	class:Drawer
+win5	src/view/Drawer.hpp	/^		WINDOW *win5; \/\/Finestra equipaggiamento$/;"	m	class:Drawer
+win6	src/view/Drawer.hpp	/^		WINDOW *win6; \/\/Finestra pop up$/;"	m	class:Drawer
+win7	src/view/Drawer.hpp	/^		WINDOW *win7; \/\/Finestra di fine gioco$/;"	m	class:Drawer

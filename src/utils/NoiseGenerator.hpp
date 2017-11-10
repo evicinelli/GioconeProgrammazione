@@ -14,6 +14,7 @@ double integerNoise(int a)
  * verso destra o verso sinistra */
 double descreteNoise(int i, int j, int span, int seed)
 {
+    if (seed == 0) seed = rand() % INT_MAX;
     return integerNoise(seed + (span * i + j));
 }
 

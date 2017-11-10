@@ -33,18 +33,18 @@ void Personaggio::setAct(int x)
 }
 void Personaggio::setPosX(int x)
 {
-	posx=x;
+    posx=x;
 }
 void Personaggio::setPosY(int y)
 {
-	posy=y;
+    posy=y;
 }
 bool Personaggio::actMuovi()
 {
     if (act>=1)
     {
-        act-=1;
-        return true;
+	act-=1;
+	return true;
     }
     return false;
 }
@@ -52,8 +52,8 @@ bool Personaggio::actUsa()
 {
     if (act>=3)
     {
-        act-=3;
-        return true;
+	act-=3;
+	return true;
     }
     return false;
 }
@@ -61,8 +61,8 @@ bool Personaggio::actApri()
 {
     if (act>=2)
     {
-        act-=2;
-        return true;
+	act-=2;
+	return true;
     }
     return false;
 }
@@ -70,8 +70,8 @@ bool Personaggio::actVend()
 {
     if (act>=1)
     {
-        act-=1;
-        return true;
+	act-=1;
+	return true;
     }
     return false;
 }
@@ -79,19 +79,19 @@ bool Personaggio::actAttacca()
 {
     if (act>=4)
     {
-        act-=4;
-        return true;
+	act-=4;
+	return true;
     }
     return false;
 
 }
 int Personaggio::getPosX()
 {
-	return posx;
+    return posx;
 }
 int Personaggio::getPosY()
 {
-	return posy;
+    return posy;
 }
 int Personaggio::getStr()
 {
@@ -127,7 +127,7 @@ int Personaggio::getLev()
 }
 int Personaggio::getExp()
 {
-	return exp;
+    return exp;
 }
 int Personaggio::getAct()
 {
@@ -136,15 +136,15 @@ int Personaggio::getAct()
 int Personaggio::attacca(Personaggio *p)
 {
     srand(time(0));
-	int dannoTot=-1;
+    int dannoTot=-1;
     if(actAttacca())
     {
-        int dannoArma=(int) (equip.getMin()+																	//danno minimo inflitto
-							(equip.getMax()-equip.getMin())														//danno massimo aggiuntivo inflitto (max-min)
-							*((double)rand()/RAND_MAX));														//fattore casuale di danno inflitto
-        dannoTot=dannoArma+(int)(equip.getStrMult()*str)+(int)(equip.getDexMult()*dex)+(int)(luck*0.4);			//applicazione dei moltiplicatori di forza e destrezza, insieme alla fortuna
-        int currHp=p->getHp();
-        p->setHp(currHp-dannoTot);
+	int dannoArma=(int) (equip.getMin()+																	//danno minimo inflitto
+				(equip.getMax()-equip.getMin())														//danno massimo aggiuntivo inflitto (max-min)
+				*((double)rand()/RAND_MAX));														//fattore casuale di danno inflitto
+	dannoTot=dannoArma+(int)(equip.getStrMult()*str)+(int)(equip.getDexMult()*dex)+(int)(luck*0.4);			//applicazione dei moltiplicatori di forza e destrezza, insieme alla fortuna
+	int currHp=p->getHp();
+	p->setHp(currHp-dannoTot);
     }
     return dannoTot;
 }

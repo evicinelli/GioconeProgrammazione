@@ -13,7 +13,7 @@ private:
 	GestoreLivelli gestoreLivelli;
 	Giocatore* player;
 	Controller* ctrl;
-	bool victory,defeat;
+	bool victory, defeat;
 
 public:
 	GestoreTurni();	/* Inizializza i controller e i gestori */
