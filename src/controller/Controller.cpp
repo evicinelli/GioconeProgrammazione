@@ -738,7 +738,6 @@ void Controller::gestisciInput(char c){
 		case((char)('z')):
 			if (p->getAct()<5)
 			{
-
 				p->setAct(0);
 				printMsg("Turno passato");
 			}

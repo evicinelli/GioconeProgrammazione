@@ -426,6 +426,9 @@ void Drawer::disegna(Giocatore* g, Livello* l, Stanza* s){
 	disegnaEquip(g);
 	disegnaLiv(l);
 	posizionaGiocatore(s, g, false);
+	char msg[100];
+	sprintf(msg, " ");
+	disegnaMess(msg);
 
 }
 
