@@ -1,3 +1,5 @@
+# include <stdlib.h>
+# include <limits.h>
 #ifndef NOISEGENERATOR_HPP_INCLUDED
 #define NOISEGENERATOR_HPP_INCLUDED
 
